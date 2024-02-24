@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  @apply h-screen bg-gradient-to-tl from-yellow-100 via-cyan-500 to-lime-100
+}
+
+  @font-face {
+    font-family: 'rockabye';
+    src: url('../font/Rockabye-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  .font-rockabye {
+    font-family: 'rockabye', sans-serif;
+    font-weight: 400; /* Sesuaikan dengan berat font yang diinginkan */
+    font-style: normal;
+  }
+  .fredoka {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Pilih berat font yang sesuai */
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  }
+  
