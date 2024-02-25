@@ -7,9 +7,9 @@
   <div class="hidden md:block">
     <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
       <div>
-        <h1>Hi. I'm àldi </h1>
+        <h1>Hi. I'm <span class="text-warna1">àldi</span> </h1>
         <h1 class="">
-          A WebDev
+          A <span class="text-warna1">Web</span>Dev
           <img
             src="~/public/animasi/13.png"
             class="w-28 float-start"
@@ -21,7 +21,7 @@
             class="w-28 scale-x-[-1] float-end"
             alt=""
           />
-          MusicProduceR
+          <span class="text-warna1">Music</span>ProduceR
         </h1>
       </div>
     </div>
