@@ -1,11 +1,11 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mx-16 mt-8 mb-5">
+  <div class="grid grid-cols-1  md:grid-cols-3 gap-8 mx-8 md:mx-16 mt-8 mb-5">
     <a
-    :href="project.link"
-    target="_blank"
+      :href="project.link"
+      target="_blank"
       v-for="project in projects"
       :key="project.judul"
-      class="bg-[#f1f1e1] h-64 cursor-pointer hover:shadow-2xl shadow-lime-200 hover:scale-105 transition-all duration-500 ease-in-out glass  rounded-3xl"
+      class="bg-[#f1f1e1] h-64 cursor-pointer hover:shadow-2xl shadow-lime-200 hover:scale-105 transition-all duration-500 ease-in-out glass rounded-3xl"
     >
       <h1
         class="acorn500 text-warna1 font-bold text-md md:text-xl tracking-[0.5rem] text-end p-4"
@@ -25,12 +25,12 @@
           {{ tech }}
         </li>
       </ul>
-      <div class="overflow-y-auto max-h-36">
-          <img
-            class="w-full mx-auto mt-3 p-1 rounded-2xl border-2 border-lime-200"
-            :src="`/projects/${project.imgLink}`"
-            alt=""
-          />
+      <div class="overflow-y-auto max-h-32">
+        <img
+          class="w-full mx-auto mt-3 p-1 rounded-2xl border-2 border-lime-200"
+          :src="`/projects/${project.imgLink}`"
+          alt=""
+        />
       </div>
     </a>
   </div>
@@ -38,27 +38,27 @@
 <script setup>
 const projects = ref([
   {
-    id:1,
+    id: 1,
     judul: "Aldi Teori",
     deskripsi: "Aplikasi teori tentang tokoh dan peradaban",
     techs: ["Nuxt 3", "Tailwind CSS", "Daisy UI"],
-    link:"https://alditeori.vercel.app/",
+    link: "https://alditeori.vercel.app/",
     imgLink: "teori.png",
   },
   {
-    id:2,
+    id: 2,
     judul: "Terjemahan",
     deskripsi: "Aplikasi penerjamah bahasa indonesia - dayak",
     techs: ["Tailwind CSS", "Alpine JS", "Laravel", "Livewire"],
-    link:"https://terjemahan.klinikhappykids.com/",
+    link: "https://terjemahan.klinikhappykids.com/",
     imgLink: "terjemahan.png",
   },
   {
-    id:3,
+    id: 3,
     judul: "Cashflow",
     deskripsi: "Aplikasi sederhana mencatat cashflow anda",
     techs: ["Laravel", "Jquery", "Boostrap 5", "MySQL"],
-    link:"https://cashflow.klinikhappykids.com/cashflow/add",
+    link: "https://cashflow.klinikhappykids.com/cashflow/add",
     imgLink: "cashflow.png",
   },
 ]);
