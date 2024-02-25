@@ -11,7 +11,10 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        warna1: '#255BA6'
+        warna1: '#255BA6',
+        warnaHeading: '#f1f1e1',
+        warnaBiru: '#4A7CBF',
+        warnaHijau: '#EFC217'
       }
     },
   },
