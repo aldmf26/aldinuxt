@@ -4,19 +4,22 @@
 
 
 body {
-  @apply h-screen bg-gradient-to-tl from-yellow-100 via-cyan-500 to-lime-100
+  @apply bg-gradient-to-tl from-yellow-100 via-cyan-500 to-lime-100
 }
 
   @font-face {
-    font-family: 'rockabye';
-    src: url('../font/Rockabye-Regular.otf') format('opentype');
+    font-family: 'acorn';
+    src: url('../font/acorn/Acorn-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
-  .font-rockabye {
-    font-family: 'rockabye', sans-serif;
-    font-weight: 400; /* Sesuaikan dengan berat font yang diinginkan */
+  .acorn {
+    font-family: 'acorn', sans-serif;
+    font-weight: 700; /* Sesuaikan dengan berat font yang diinginkan */
     font-style: normal;
+    color: #f1f1e1;
+    line-height: 90px;
+    font-size: 80px;
   }
   .fredoka {
     font-family: "Fredoka", sans-serif;

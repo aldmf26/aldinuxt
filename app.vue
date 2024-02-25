@@ -1,6 +1,5 @@
 <template>
   <div class="fredoka text-center">
-    <Nav />
     <NuxtPage />
   </div>
 </template>

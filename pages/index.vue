@@ -1,112 +1,65 @@
 <style scoped>
 .inputAldi {
-  @apply rounded-full w-2/5 min-h-12 py-2 pl-9 pr-3 text-lime-200 bg-warna1 shadow-sm focus:outline-none focus:border-lime-200 focus:ring-lime-500 focus:ring-1 border-[#551A69] placeholder:italic placeholder:text-slate-400 mt-1 border;
+  @apply rounded-full w-full md:w-2/5 min-h-12 py-2 pl-9 pr-3 text-warna1 bg-[#f1f1e1] shadow-sm focus:outline-none focus:border-lime-400 focus:ring-lime-200 focus:ring-1 border-warna1 placeholder:italic placeholder:text-slate-400 border;
 }
 </style>
 
 <template>
+  <Nav />
+
   <!-- tampilan desktop -->
-  <div class="hidden lg:block">
-    <div class="flex justify-center items-center">
-      <img
-        src="~/public/animasi/13.png"
-        class="w-56 float-end"
-        alt=""
-        data-aos="fade-left"
-      />
-      <h1
-        class="font-rockabye text-warna1 text-7xl leading-[3.5rem] tracking-tighter text-center mt-16"
-      >
-        Hi. I'm
-        <span
-          class="bg-gradient-to-r from-cyan-200 via-cyan-100 to-yellow-200 text-transparent bg-clip-text"
-          >Aldi</span
-        >
-        <br />
-        <span
-          class="bg-gradient-to-r from-cyan-100 via-lime-100 to-yellow-200 text-transparent bg-clip-text"
-          >Welcome</span
-        >
-        To My
-        <span
-          class="bg-gradient-to-r from-cyan-200 via-cyan-100 to-yellow-200 text-transparent bg-clip-text"
-          >WORLD</span
-        >
-      </h1>
-      <img
-        src="~/public/animasi/3.png"
-        class="w-56 scale-x-[-1] float-end"
-        alt=""
-      />
+  <div class="hidden md:block">
+    <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
+      <div>
+        <h1 class="">
+          Hi. I'm àldi A WebDev
+          <img
+            src="~/public/animasi/13.png"
+            class="w-28 float-start"
+            alt=""
+            data-aos="fade-left"
+          />
+          <img
+            src="~/public/animasi/3.png"
+            class="w-28 scale-x-[-1] float-end"
+            alt=""
+          />
+          MusicProduceR
+        </h1>
+      </div>
     </div>
     <input type="text" class="inputAldi" placeholder="Search my projects ..." />
   </div>
 
-  <!-- tampilan hp -->
-  <div class="block lg:hidden">
-    <div class="flex">
-      <img
-        src="~/public/animasi/13.png"
-        class="w-32 h-24 float-end"
-        alt=""
-        data-aos="fade-left"
-      />
-      <h1
-        class="font-rockabye text-warna1 text-5xl tracking-tight text-center mt-10"
-      >
-        Hi. I'm
-        <span
-          class="bg-gradient-to-r from-cyan-200 via-cyan-100 to-yellow-200 text-transparent bg-clip-text"
-          >Aldi</span
-        >
-        <br />
-        <span
-          class="bg-gradient-to-r from-cyan-100 via-lime-100 to-yellow-200 text-transparent bg-clip-text"
-          >Welcome</span
-        >
-        To My
-        <span
-          class="bg-gradient-to-r from-cyan-200 via-cyan-100 to-yellow-200 text-transparent bg-clip-text"
-          >WORLD</span
-        >
-      </h1>
-      <img
-        src="~/public/animasi/3.png"
-        class="w-32 h-24 scale-x-[-1] float-end"
-        alt=""
-      />
+  <div class="block md:hidden">
+    <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
+      <div>
+        <h1 class="text-3xl">Hi. I'm àldi A WebDev MusicProduceR</h1>
+      </div>
     </div>
-
-    <input type="text" class="inputAldi" placeholder="Search my projects ..." />
+    <div class="flex justify-center items-center mt-[-52px]">
+      <div>
+        <img
+          src="~/public/animasi/13.png"
+          class="w-20 float-start"
+          alt=""
+          data-aos="fade-left"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          class="inputAldi"
+          placeholder="Search my projects ..."
+        />
+      </div>
+      <div>
+        <img
+          src="~/public/animasi/3.png"
+          class="w-20 scale-x-[-1] float-end"
+          alt=""
+        />
+      </div>
+    </div>
   </div>
-
-  <!-- content project -->
-  
-
-  <!-- <div class="grid grid-cols-3">
-    <div class="cursor-pointer bg-cyan-400 rounded-2xl h-64 m-5">
-      <p class="text-sm tracking-wide">
-        Aplikasi Web Terjemahan Bahasa Dayak - Indonesia
-      </p>
-      <h1 class="font-rockabye text-2xl">Terjemahan Dayak</h1>
-    </div>
-    <div class="cursor-pointer bg-cyan-400 rounded-2xl h-64 m-5">
-      <p class="text-sm tracking-wide">
-        Aplikasi Web Terjemahan Bahasa Dayak - Indonesia
-      </p>
-      <h1 class="font-rockabye text-2xl">Terjemahan Dayak</h1>
-    </div>
-    <div class="cursor-pointer bg-cyan-400 rounded-2xl h-64 m-5">
-      <p class="text-sm tracking-wide">
-        Aplikasi Web Terjemahan Bahasa Dayak - Indonesia
-      </p>
-      <h1 class="font-rockabye text-2xl">Terjemahan Dayak</h1>
-    </div>
-    <div class="cursor-pointer bg-cyan-400 rounded-2xl h-64 m-5">
-      <p class="text-sm tracking-wide">
-        Aplikasi Web Terjemahan Bahasa Dayak - Indonesia
-      </p>
-      <h1 class="font-rockabye text-2xl">Terjemahan Dayak</h1>
-    </div>
-  </div> -->
 </template>
