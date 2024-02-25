@@ -25,7 +25,7 @@
           {{ tech }}
         </li>
       </ul>
-      <div class="overflow-y-auto max-h-32">
+      <div class="overflow-y-auto max-h-36">
         <img
           class="w-full mx-auto mt-3 p-1 rounded-2xl border-2 border-lime-200"
           :src="`/projects/${project.imgLink}`"

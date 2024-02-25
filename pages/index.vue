@@ -1,8 +1,4 @@
 <template>
-  <Nav />
-  <Heading />
-  <Project/>
-  
+    <Heading />
+    <Project />
 </template>
-
-

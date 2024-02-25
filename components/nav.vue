@@ -8,14 +8,22 @@
 </style>
 
 <template>
-  <div class="text-warna1 flex text-md lg:text-lg justify-center lg:gap-x-8 mt-6">
-    <NuxtLink to="/" :class="{'navActive' : $route.name === 'index'}" class="p-3  navHover">Work <span class="p-0.5 rounded-lg border-2 border-lime-100">/</span></NuxtLink>
-    <div  class="p-3  navHover">About</div>
-    <div  class="p-3 navHover">Play</div>
-    <div  class="p-3 navHover">Notes</div>
-    <NuxtLink :class="{'navActive' : $route.name === 'contact'}" to="/contact" class="p-3 navHover">Contact</NuxtLink>
-</div>
-<slot />
+  <div
+    class="text-warna1 flex text-md lg:text-lg justify-center lg:gap-x-8 mt-6"
+  >
+    <NuxtLink
+      to="/"
+      :class="{ navActive: $route.name === 'index' }"
+      class="p-3 navHover"
+      >Work
+      <span class="p-0.5 rounded-lg border-2 border-lime-100">/</span></NuxtLink
+    >
+    <NuxtLink :class="{ navActive: $route.name === 'about' }" to="/about" class="p-3 navHover">About</NuxtLink>
+  </div>
+  <!-- <div class="grid grid-cols-2 gap-7">
+    <div>
+      <img src="~/public/animasi/2.png" class="w-28" alt="" />
+    </div>
+    <div></div>
+  </div> -->
 </template>
-
-
