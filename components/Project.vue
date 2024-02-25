@@ -5,7 +5,7 @@
       target="_blank"
       v-for="project in projects"
       :key="project.judul"
-      class="bg-[#f1f1e1] h-64 cursor-pointer hover:shadow-2xl shadow-lime-200 hover:scale-105 transition-all duration-500 ease-in-out glass rounded-3xl"
+      class="bg-[#f1f1e1] h-66 cursor-pointer hover:shadow-2xl shadow-lime-200 hover:scale-105 transition-all duration-500 ease-in-out glass rounded-3xl"
     >
       <h1
         class="acorn500 text-warna1 font-bold text-md md:text-xl tracking-[0.5rem] text-end p-4"
@@ -25,9 +25,9 @@
           {{ tech }}
         </li>
       </ul>
-      <div class="overflow-y-auto max-h-36">
+      <div class="overflow-y-auto max-h-36 mb-4">
         <img
-          class="w-full mx-auto mt-3 p-1 rounded-2xl border-2 border-lime-200"
+          class="w-full mx-auto mt-3   p-1 rounded-2xl border-2 border-lime-200"
           :src="`/projects/${project.imgLink}`"
           alt=""
         />
