@@ -31,8 +31,8 @@
   <div class="block md:hidden">
     <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
       <div>
-        <h1 class="text-4xl">Hi. I'm àldi </h1>
-        <h1 class="text-4xl">A WebDev MusicProduceR</h1>
+        <h1 class="text-4xl">Hi. I'm <span class="text-warna1">àldi</span> </h1>
+        <h1 class="text-4xl">A <span class="text-warna1">Web</span>Dev <span class="text-warna1">Music</span>ProduceR</h1>
       </div>
     </div>
     <div class="flex justify-center items-center mt-[-52px]">
