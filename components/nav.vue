@@ -9,7 +9,7 @@
 
 <template>
   <div
-    class="text-warna1 flex text-md lg:text-lg justify-center gap-x-5 lg:gap-x-8 mt-6"
+    class="text-warna1 flex text-md lg:text-lg justify-center gap-x-5 lg:gap-x-8 pt-6"
   >
     <NuxtLink
       to="/"
