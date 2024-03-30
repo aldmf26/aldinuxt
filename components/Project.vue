@@ -25,14 +25,14 @@
       </div>
     </a>
   </div>
-  <div class="grid grid-cols-2 md:grid-cols-3 gap-5 mx-8 md:mx-16 mt-3 mb-5">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mx-8 md:mx-16 mt-3 mb-5">
     <a
       :href="project.link"
       target="_blank"
       v-for="(project, index) in projects"
       :key="project.judul"
       class="h-90"
-      :class="[classCard, {'col-span-2 md:col-span-1' : index === 2}]"
+      :class="classCard"
     >
       <h1
         class="acorn500 text-warna1 font-bold text-lg md:text-xl tracking-[0.5rem] text-center md:text-end p-4"
