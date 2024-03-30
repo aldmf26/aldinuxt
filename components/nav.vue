@@ -15,7 +15,7 @@
       to="/"
       :class="{ navActive: $route.name === 'index' }"
       class="p-3 navHover"
-      >Work
+      >Web
       <span class="p-0.5 rounded-lg border-2 border-lime-100">/</span></NuxtLink
     >
     <NuxtLink :class="{ navActive: $route.name === 'about' }" to="/about" class="p-3 navHover">About</NuxtLink>
