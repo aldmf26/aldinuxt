@@ -1,7 +1,9 @@
 <template>
   <div class="fredoka text-center">
     <Nav />
+    
     <slot />
+  
     
     <div class="hidden md:flex justify-evenly mx-auto mt-20">
       <div class="">
@@ -45,7 +47,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="block md:hidden mt-16">
       <div class="flex gap-5 md:gap-20 justify-around">
         <div>
