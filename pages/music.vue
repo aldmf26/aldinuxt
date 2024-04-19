@@ -36,22 +36,22 @@ svg {
       </div>
     </section>
   </div>
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mb-36">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mt-[-50px] md:mt-0 mb-36">
     <div class="md:flex flex-col md:justify-between">
       <h5 class="text-2xl text-warnaHeading md:text-4xl">My Beats</h5>
       <div class="flex gap-5 pr-5">
-        <SvgBeats
+        <!-- <SvgBeats
           v-show="pageBeats > 5"
           @click="prevBeats()"
           transform="matrix(-1, 0, 0, 1, 0, 0)"
-        />
-        <ul class="mt-4 flex justify-items-center gap-1 md:gap-5">
+        /> -->
+        <ul class="mt-4 flex justify-items-center gap-2 md:gap-5">
           <span class="text-sm md:text-lg">Genre's : </span>
           <li
             v-for="(g, index) in genres"
             :key="index"
             :class="{ active: selectedGenre === g }"
-            class="bg-warnaHeading hover:bg-slate-200 cursor-pointer rounded-2xl p-1 md:p-2"
+            class="bg-warnaHeading hover:bg-slate-200 text-sm md:text-lg cursor-pointer rounded-2xl p-1 md:p-2"
             @click="filterByGenre(g)"
           >
             {{ g }}
@@ -92,7 +92,7 @@ svg {
     </div>
     
   </div>
-  <NavMusic/>
+  <NavMusic v-if="isMusicPlaying"/>
 </template>
 <script setup>
 const hoveredColumnIndex = ref(null);
