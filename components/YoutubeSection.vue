@@ -38,7 +38,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       <div class="" v-for="item in filteredType">
         <iframe
-        class="relative z-10 w-[301px] -[169px] rounded-t-3xl"
+        class="relative z-10 w-full md:w-[301px] -[169px] rounded-t-3xl"
           :src="`https://www.youtube.com/embed/${item.src}`"
           title="YouTube video player"
           frameborder="0"
@@ -48,8 +48,8 @@
         ></iframe>
         <div class="text-start bg-slate-800 text-warnaHeading rounded-b-xl p-2">
           <div class="flex justify-between items-center px-2">
-            <span class="md:text-lg">{{item.judul}}</span>
-            <span class="md:text-sm text-[#dbf57d]">{{item.bpm}} Bpm</span>
+            <span class="text-sm md:text-lg">{{item.judul}}</span>
+            <span class="text-xs md:text-sm text-[#dbf57d]">{{item.bpm}} Bpm</span>
           </div>
           
         </div>
