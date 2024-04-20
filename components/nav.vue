@@ -19,6 +19,7 @@
       <span class="p-0.5 rounded-lg border-2 border-lime-100">/</span></NuxtLink
     >
     <NuxtLink :class="{ navActive: $route.name === 'music' }" to="/music" class="p-3 navHover">Music</NuxtLink>
+    <!-- <NuxtLink :class="{ navActive: $route.name === 'belajar' }" to="/belajar" class="p-3 navHover">Belajar</NuxtLink> -->
   </div>
   <!-- <div class="grid grid-cols-2 gap-7">
     <div>
