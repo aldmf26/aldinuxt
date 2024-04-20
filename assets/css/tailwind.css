@@ -42,21 +42,7 @@ body {
   border: 1px solid #f1f1e1;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1e1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #255BA6;
-  border-radius: 5px;
-  border-width: 1px;
-}
 
 /* Handle on hover */
 

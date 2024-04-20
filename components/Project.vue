@@ -1,3 +1,20 @@
+<style>
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1e1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #255BA6;
+  border-radius: 5px;
+  border-width: 1px;
+}
+</style>
 <template>
   <div class="grid grid-rows-1 gap-5 mx-8 md:mx-16">
     <a target="_blank" href="https://ptagrikagatyaarum.com/" :class="classCard">
