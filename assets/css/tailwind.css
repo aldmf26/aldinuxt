@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body {
+  @apply bg-gradient-to-tl from-gray-800 via-cyan-500 to-gray-500;
+} */
 body {
   @apply bg-gradient-to-tl from-yellow-100 via-cyan-500 to-lime-100;
 }

@@ -42,54 +42,14 @@
     <h6 class="text-warnaHeading md:text-xl">
       <span class="p-2"></span>
     </h6>
-    <div class="grid place-items-center">
-      <div class="md:w-[970px] mx-4 md:mx-auto">
-        <div class="bg-warnaHeading p-10 shadow-sm rounded-3xl">
-          <h3 class="text-lg md:text-2xl font-medium text-gray-800">
-            FAQ tentang layanan ini
-          </h3>
 
-          <!-- What is term -->
-          <div @click="toggleAccordion(0)" class="rounded-lg transition">
-            <!-- header -->
-            <div
-              class="hover:bg-lime-100 accordion-header cursor-pointer transition flex space-x-5 px-1 md:px-5 items-center h-16"
-            >
-              <IconAccordion />
-              <h3>What is term?</h3>
-            </div>
-            <!-- Content -->
-            <div
-              :class="isOpen[0] ? 'max-h-28' : 'overflow-hidden max-h-0'"
-              class="accordion-content px-5 pt-0"
-            >
-              <p class="text-xs md:text-lg leading-6 pl-9 text-justify">
-                Our asked sex point her she seems. New plenty she horses parish
-                design you. Stuff sight equal of my woody. Him children bringing
-                goodness suitable she entirely put far daughter.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <FaqService />
+
+    <TestiService />
   </div>
 </template>
 <script setup>
 useHead({
   title: `Service - Aldi`,
 });
-
-const isOpen = ref([false, false, false]);
-
-// Fungsi untuk membalikkan status accordion sesuai dengan indeks yang diberikan
-const toggleAccordion = (index) => {
-  isOpen.value[index] = !isOpen.value[index];
-};
 </script>
-
-<style>
-.accordion-content {
-  transition: max-height 0.3s ease-out, padding 0.3s ease;
-}
-</style>
