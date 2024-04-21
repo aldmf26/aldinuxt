@@ -20,8 +20,10 @@
     <div
     class="shadow-2xl bg-slate-700 acorn md:flex p-2 flex-col md:justify-between rounded-xl"
   >
+  
     <h5 class="text-2xl md:text-4xl mt-3">My Youtube</h5>
-    <div class="flex gap-5 pr-5">
+    <div class=" flex gap-5 pr-5">
+      
       <ul class="p-3 flex justify-items-center gap-2 md:gap-5">
         <li
           v-for="(g, index) in typeSc"
@@ -33,9 +35,13 @@
           {{ g }}
         </li>
       </ul>
+      
     </div>
+
+    
     <div class="overflow-y-auto max-h-80 mb-4">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      
       <div class="" v-for="item in filteredType">
         <iframe
         class="relative z-10 w-full md:w-[301px] -[169px] rounded-t-3xl"

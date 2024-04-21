@@ -20,3 +20,8 @@ svg {
 
   </div>
 </template>
+<script setup>
+useHead({
+  title: `Music - Aldi`
+})
+</script>
