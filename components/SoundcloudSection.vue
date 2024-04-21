@@ -1,6 +1,6 @@
 <template>
     <div
-      class="shadow-2xl acorn bg-slate-800 md:flex p-2 flex-col md:justify-between mt-28 rounded-xl"
+      class="shadow-2xl acorn bg-slate-800 md:flex p-2 flex-col md:justify-between mt-10 md:mt-20 rounded-xl"
     >
       <h5 class="text-2xl md:text-4xl mt-3">My Soundcloud</h5>
       <div class="flex gap-5 pr-5">
@@ -16,6 +16,7 @@
           </li>
         </ul>
       </div>
+      <div class="overflow-y-auto max-h-80 mb-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
         <div class="" v-for="item in filteredType">
           <iframe
@@ -42,6 +43,7 @@
           ></div>
         </div>
       </div>
+    </div>
     </div>
 </template>
 
@@ -117,3 +119,21 @@ const filterByType = (type) => {
 };
 // -------
 </script>
+
+<style scoped>
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #334155;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbd6e5;
+  border-radius: 5px;
+  border-width: 1px;
+}
+</style>

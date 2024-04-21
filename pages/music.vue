@@ -12,12 +12,10 @@ svg {
 </style>
 
 <template>
-  <JumbotronMusic />
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mt-[-50px] md:mt-0 mb-36">
-    <YoutubeSection />
-    
-    <SoundcloudSection />
-
+  <JumbotronMusic v-motion-fade />
+  <div v-motion-slide-visible-bottom class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mt-[-50px] md:mt-0 mb-36">
+    <YoutubeSection v-motion-slide-visible-bottom />
+    <SoundcloudSection v-motion-slide-visible-bottom />
   </div>
 </template>
 <script setup>

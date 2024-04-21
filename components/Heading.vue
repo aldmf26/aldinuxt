@@ -4,6 +4,7 @@
 }
 </style>
 <template>
+  <div v-motion-fade>
   <div class="hidden md:block">
     <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
       <div>
@@ -60,4 +61,5 @@
       </div>
     </div>
   </div>
+</div>
 </template>

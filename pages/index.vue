@@ -1,6 +1,6 @@
 <template>
-    <Heading />
-    <Project />
+    <Heading  />
+    <Project v-motion-fade />
 </template>
 <script setup>
 useHead({

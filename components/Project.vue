@@ -16,8 +16,9 @@
 }
 </style>
 <template>
-  <div class="grid grid-rows-1 gap-5 mx-8 md:mx-16">
-    <a target="_blank" href="https://ptagrikagatyaarum.com/" :class="classCard">
+  <div v-motion-fade>
+  <div  class="grid grid-rows-1 gap-5 mx-8 md:mx-16">
+    <a  target="_blank" href="https://ptagrikagatyaarum.com/" :class="classCard">
       <div class="grid grid-cols-1 md:grid-cols-2">
         <div>
           <img
@@ -42,7 +43,7 @@
       </div>
     </a>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mx-8 md:mx-16 mt-3 mb-5">
+  <div  class="grid grid-cols-1 md:grid-cols-3 gap-5 mx-8 md:mx-16 mt-3 mb-5">
     <a
       :href="project.link"
       target="_blank"
@@ -105,6 +106,7 @@
       />
     </a>
   </div>
+</div>
 </template>
 <script setup>
 const classCard = ref(
