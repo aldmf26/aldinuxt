@@ -1,5 +1,5 @@
 <template>
-  <div class="acorn py-10">
+  <div v-motion-fade class="acorn py-10">
     <div class="">
       <span class="text-gray-800 md:hidden block pb-4 text-5xl">MÛsic </span>
     </div>

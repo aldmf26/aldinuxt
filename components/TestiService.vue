@@ -32,8 +32,14 @@
       </div>
     </div>
     <div class="grid grid-cols-1 py-1">
-      <div class="relative bg-amber-100 h-24 rounded-full">
-        Plan for the day
+      <div class="relative bg-gradient-to-tl from-amber-100 via-cyan-100 to-green-400 h-14 rounded-full">
+        <div class="flex items-center mx-2 justify-between gap-2">
+          <img src="~/public/aldi.png" class="w-14 p-2 rounded-full" alt="" />
+          
+          <span>M. Fahrizaldi/ ALdMF Beat</span>
+          <img src="~/public/logo.jpg" class="w-14 p-2 rounded-full" alt="" />
+         
+        </div>
       </div>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-1">
@@ -49,13 +55,15 @@
           <TestiList konten="Pics Art" />
         </div>
       </div>
-      <div class="relative overflow-hidden bg-green-400 h-56 rounded-bl-3xl rounded-t-3xl">
+      <div
+        class="relative overflow-hidden bg-green-400 h-56 rounded-bl-3xl rounded-t-3xl"
+      >
         <Garis />
         <span>Music Maker</span>
         <div class="mt-1 grid grid-row gap-1">
-            <TestiList konten="Trap Beat" />
-            <TestiList konten="Remix" />
-            <TestiList class="z-20" konten="EDM" />
+          <TestiList konten="Trap Beat" />
+          <TestiList konten="Remix" />
+          <TestiList class="z-20" konten="EDM" />
         </div>
         <img class="absolute top-28 z-10" src="~/public/rich.png" alt="" />
       </div>

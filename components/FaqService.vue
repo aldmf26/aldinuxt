@@ -15,7 +15,7 @@
               Untuk pembuatan website dan musik pelanggan harus mengirimkan referensi, agar yang mau dikerjakan lebih jelas. Projek akan dikerjakan jika pelanggan sudah deal dan membayar dp.
             </Accordion>
             
-            <Accordion title="Berapa lama waktu pengerjaannya ?">
+            <Accordion title="Waktu pengerjaannya ?">
               Untuk estimasi waktu pengerjaannya tergantung projek yang dibuat dan ditentukan oleh pelanggannya
             </Accordion>
             
