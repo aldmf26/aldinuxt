@@ -46,7 +46,7 @@
     <FaqService />
 
     <TestiService class="block md:hidden" />
-    <div class="py-6 w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="hidden md:block py-6 w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
       <div class=" grid grid-rows-3 grid-flow-col gap-2">
         <div
           class="acorn relative overflow-hidden row-span-3 bg-[#27283D] rounded-bl-3xl rounded-t-3xl h-72"
