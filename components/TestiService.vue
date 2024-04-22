@@ -24,10 +24,10 @@
         <div class="mt-1 grid grid-row gap-1">
           <TestiList konten="Laravel" />
           <TestiList konten="Livewire" />
-          <TestiList konten="Nuxt 3" />
-          <TestiList konten="Jquery" />
+          <TestiList konten="AlpineJS" />
           <TestiList konten="Tailwind" />
-          <TestiList konten="Bootstrap" />
+          <TestiList konten="Vue / Nuxt" />
+          <TestiList konten="MySQL" />
         </div>
       </div>
     </div>
