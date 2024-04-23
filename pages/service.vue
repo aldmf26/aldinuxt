@@ -158,9 +158,9 @@
           />
           
           <div class="acorn">
-            <span class="text-2xl  absolute font-medium left-4 bottom-6 text-gray-800 z-30">Ingat</span>
+            <span class="text-2xl  absolute font-medium left-4 bottom-6 text-gray-800 z-30">Ayoo !</span>
           </div>
-          <span class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800">Jangan lewatkan saya</span>
+          <span class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800">Buat Aplikasi</span>
         </div>
       </div>
 
