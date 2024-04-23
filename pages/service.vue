@@ -174,7 +174,7 @@
             class="w-64 absolute top-8 -left-16 "
             alt=""
           />
-          <TestiList2 class="ml-48 font-bold" v-for="item in tools" stroke="#1F2937" bg="bg-rose-100" :konten="item" />
+          <TestiList2 class="ml-48 font-medium" v-for="item in tools" stroke="#1F2937" bg="bg-rose-100" :konten="item" />
         </div>
         <div class="col-span-1 relative overflow-hidden bg-rose-200 rounded-3xl h-64">
           <img
