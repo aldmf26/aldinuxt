@@ -160,7 +160,7 @@
           <div class="acorn">
             <span class="text-2xl  absolute font-medium left-4 bottom-6 text-gray-800 z-30">Ayoo !</span>
           </div>
-          <span class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800">Buat Aplikasi</span>
+          <span class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800">Buat Aplikasi & Music</span>
         </div>
       </div>
 
@@ -182,7 +182,7 @@
             class="w-40 rounded-tr-3xl rounded-bl-3xl absolute -top-10 -right-3 z-10"
             alt=""
           />
-          <span class="text-md absolute left-4 bottom-14 text-gray-800 z-30">Anda tertarik membuat aplikasi web & music ?</span>
+          <span class="text-md absolute left-4 bottom-14 text-gray-800 z-30">Anda tertarik ?</span>
           <span class="text-3xl absolute left-4 bottom-5 text-gray-800 z-30">Pesan Sekarang</span>
         </div>
       </div>
