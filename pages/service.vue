@@ -1,12 +1,12 @@
 <template>
 <div
 v-motion
-:initial="{ opacity: 0, y: 100 }"
-    :enter="{ opacity: 1, y: 0, scale: 1 }"
+:initial="{ opacity: 0, x: 0 }"
+    :enter="{ opacity: 1, x: 300, scale: 1 }"
     :variants="{ custom: { scale: 2 } }"
     :hovered="{ 
     scale: 1.2, 
-    transition: { duration: 1800, delay: 600, ease: 'easeInOut' } 
+    transition: { duration: 1.5, delay: 600, ease: 'easeInOut' } 
   }"
     class="w-40 h-40 bg-green-500 flex items-center justify-center text-white font-bold"
     
