@@ -4,7 +4,10 @@ v-motion
 :initial="{ opacity: 0, y: 100 }"
     :enter="{ opacity: 1, y: 0, scale: 1 }"
     :variants="{ custom: { scale: 2 } }"
-    :hovered="{ scale: 1.2 }"
+    :hovered="{ 
+    scale: 1.2, 
+    transition: { duration: 0.5, ease: 'easeInOut' } 
+  }"
     :delay="200"
     :duration="1200"
     class="w-40 h-40 bg-green-500 flex items-center justify-center text-white font-bold"
