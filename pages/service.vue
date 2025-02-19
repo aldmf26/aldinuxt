@@ -1,8 +1,12 @@
 <template>
 <div
 v-motion
-:initial="{ scale: 1, rotate: 0 }"
-      :hover="{ scale: 1.2, rotate: 5, backgroundColor: '#ff0000'}"
+:initial="{ opacity: 0, y: 100 }"
+    :enter="{ opacity: 1, y: 0, scale: 1 }"
+    :variants="{ custom: { scale: 2 } }"
+    :hovered="{ scale: 1.2 }"
+    :delay="200"
+    :duration="1200"
     class="w-40 h-40 bg-green-500 flex items-center justify-center text-white font-bold"
     
   >
