@@ -1,4 +1,14 @@
 <template>
+<motion-div
+    class="w-40 h-40 bg-green-500 flex items-center justify-center text-white font-bold"
+    v-motion="{
+      initial: { scale: 1, rotate: 0 },
+      hover: { scale: 1.2, rotate: 5, backgroundColor: '#ff0000' }
+    }"
+  >
+    Hover Me
+  </motion-div>
+  
   <div v-motion-fade class="">
     <section class="py-1 md:py-10">
       <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 relative">
