@@ -142,7 +142,8 @@
           class="relative row-span-2 mt-3 bg-cyan-200 rounded-br-3xl rounded-t-3xl"
         >
           <img
-            v-motion-slide-visible-top :duration="600"
+            v-motion-slide-visible-top :delay="200"
+    :duration="1200"
             src="~/public/animasi/8.png"
             class="w-36 right-16 -top-2 absolute z-30"
             alt=""
