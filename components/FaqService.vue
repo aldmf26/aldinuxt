@@ -3,24 +3,24 @@
         <div class="md:w-[970px] mx-4 md:mx-auto">
           <div class="bg-warnaHeading p-10 shadow-sm rounded-3xl">
             <h3 class="text-lg md:text-2xl font-medium text-gray-800">
-              FAQ tentang layanan ini
+              FAQ about this service
             </h3>
   
-            <Accordion title="Apa saja yang bisa dibuat ?">
-              <IconAcc2> Web aplikasi </IconAcc2>
-              <IconAcc2>Musik semua genre</IconAcc2>
+            <Accordion title="What can be created?">
+              <IconAcc2> Web applications </IconAcc2>
+              <IconAcc2>Music in all genres</IconAcc2>
             </Accordion>
   
-            <Accordion title="Bagaimana cara kerjanya ?">
-              Untuk pembuatan website dan musik pelanggan harus mengirimkan referensi, agar yang mau dikerjakan lebih jelas. Projek akan dikerjakan jika pelanggan sudah deal dan membayar dp.
+            <Accordion title="How does it work?">
+              For website and music creation, customers must send references to make the project requirements clearer. The project will begin once the customer agrees to the terms and pays the down payment.
             </Accordion>
             
-            <Accordion title="Waktu pengerjaannya ?">
-              Untuk estimasi waktu pengerjaannya tergantung projek yang dibuat dan ditentukan oleh pelanggannya
+            <Accordion title="What's the turnaround time?">
+              The estimated completion time depends on the project scope and will be determined together with the customer.
             </Accordion>
             
-            <Accordion title="Bagaimana pembayarannya ?">
-              Untuk pembayaran bisa dilakukan secara transfer melalui bank dan e-wallet.
+            <Accordion title="What are the payment options?">
+              Payment can be made via bank transfer and e-wallet.
             </Accordion>
           
           </div>

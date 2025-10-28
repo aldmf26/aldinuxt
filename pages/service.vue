@@ -8,7 +8,7 @@
           <div class="grid overflow-hidden shadow-xl md:grid-cols-1 rounded-xl">
             <aside class="p-8 md:space-y-4 md:p-16">
               <div class="acorn">
-                <span class="text-gray-800 text-4xl md:text-7xl">Servicë </span>
+                <span class="text-gray-800 text-4xl md:text-7xl">Services </span>
               </div>
               <a
                 href="#"
@@ -30,9 +30,9 @@
                     alt=""
                     data-aos="fade-left"
                   />
-                  Bangun situs web unik dan hasilkan musik yang memukau!
-                  Ciptakan karya Anda sendiri dengan layanan saya. Hubungi
-                  sekarang!
+                  Build unique websites and create stunning music!
+                  Bring your vision to life with my services. Contact me
+                  now!
                 </span>
               </a>
             </aside>
@@ -69,7 +69,7 @@
         </div>
         <div class="acorn col-span-2 relative bg-teal-600 rounded-3xl">
           <span class="float-center align-top font-medium text-2xl">
-            Tech
+            Tech Stack
           </span>
           <div
             class="bg-pink-50 rounded-2xl -right-4 shadow-lg w-full top-10 absolute h-14"
@@ -161,9 +161,9 @@
           />
           
           <div class="acorn">
-            <span class="text-2xl  absolute font-medium left-4 bottom-6 text-gray-800 z-30">Ayoo !</span>
+            <span class="text-2xl  absolute font-medium left-4 bottom-6 text-gray-800 z-30">Let's Go!</span>
           </div>
-          <span class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800">Buat Aplikasi & Music</span>
+          <span class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800">Create Apps & Music</span>
         </div>
       </div>
 
@@ -185,8 +185,8 @@
             class="w-40 rounded-tr-3xl rounded-bl-3xl absolute -top-10 -right-3 z-10"
             alt=""
           />
-          <span class="text-md absolute left-4 bottom-14 text-gray-800 z-30">Anda tertarik ?</span>
-          <span class="text-3xl absolute left-4 bottom-5 text-gray-800 z-30">Pesan Sekarang</span>
+          <span class="text-md absolute left-4 bottom-14 text-gray-800 z-30">Interested?</span>
+          <span class="text-3xl absolute left-4 bottom-5 text-gray-800 z-30">Order Now</span>
         </div>
       </div>
     </div>
@@ -197,7 +197,7 @@ useHead({
   title: `Service - Aldi`,
 });
 
-const tools = ref(['FL Studio 20', 'Capcut', 'Canva', 'Filmora', 'OBS Studio', 'Pics Art'])
+const tools = ref(['FL Studio 20', 'Capcut', 'Canva', 'Filmora', 'OBS Studio'])
 </script>
 <style>
 img {

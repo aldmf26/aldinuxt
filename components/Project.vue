@@ -16,132 +16,170 @@
 }
 </style>
 <template>
-  <div v-motion-fade>
-  <div  class="grid grid-rows-1 gap-5 mx-8 md:mx-16">
-    <a  target="_blank" href="https://ptagrikagatyaarum.com/" :class="classCard">
-      <div class="grid grid-cols-1 md:grid-cols-2">
-        <div>
-          <img
-            class="h-44 md:h-72 w-full mt-3 p-1 rounded-2xl border-2 border-lime-200"
-            :src="`/projects/agrika.png`"
-            alt=""
-          />
-        </div>
-        <div class="text-start content-center">
-          <h1
-            class="acorn500 text-warna1 font-bold text-xl md:text-3xl tracking-[0.5rem] p-4"
-          >
-            Agrika Gatya Arum
-          </h1>
-          <p
-            class="text-sm md:text-lg tracking-[0.25px] md:tracking-[1.5px] mt-[-30px] p-4"
-          >
-            PT Agrika Gatya Arum adalah perusahaan bergerak dibidang ekspor
-            sarang burung walet.
-          </p>
-        </div>
-      </div>
-    </a>
-  </div>
-  <div  class="grid grid-cols-1 md:grid-cols-3 gap-5 mx-8 md:mx-16 mt-3 mb-5">
-    <a
-      :href="project.link"
-      target="_blank"
-      v-for="(project, index) in projects"
-      :key="project.judul"
-      class="h-90"
-      :class="classCard"
-    >
-      <h1
-        class="acorn500 text-warna1 font-bold text-lg md:text-xl tracking-[0.5rem] text-center md:text-end p-4"
-      >
-        {{ project.judul }}
-      </h1>
-      <p
-        class="text-center md:text-end text-xs tracking-[0.25px] md:tracking-[1.5px] mt-[-30px] p-4"
-      >
-        {{ project.deskripsi }}
-      </p>
-      <ul
-        class="text-xs tracking-wider grid grid-cols-2 justify-items-center md:flex md:justify-center gap-1"
-      >
-        <li class="flex items-center" v-for="tech in project.techs">
-          <div v-html="cekIcon"></div>
-          {{ tech }}
-        </li>
-      </ul>
-      <div class="overflow-y-auto max-h-36 mb-4">
-        <img
-          class="w-full mx-auto mt-3 p-1 rounded-2xl border-2 border-lime-200"
-          :src="`/projects/${project.imgLink}`"
-          alt=""
-        />
-      </div>
-    </a>
-  </div>
+  <div v-motion-fade class="py-8 md:py-16">
+    <!-- Hero Section Title -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <h2 class="acorn500 text-4xl md:text-6xl font-bold text-gray-800">Projects</h2>
+      <p class="text-lg md:text-xl text-gray-600">Crafted with passion and precision</p>
+    </div>
 
-  <div class="grid grid-cols-1 mx-8 md:mx-16 mt-3 mb-5" :class="classCard">
-    <a target="_blank" href="https://ptagafood.com/">
-      <h1
-        class="acorn500 text-warna1 font-bold text-xl md:text-3xl tracking-[0.5rem] p-4"
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <!-- Featured Project 1 - Agrika Gatya Arum -->
+      <a 
+        target="_blank" 
+        href="https://ptagrikagatyaarum.com/" 
+        :class="classCard"
+        class="block group"
       >
-        AgaFood
-      </h1>
-      <p class="text-sm md:text-lg tracking-[0.25px] md:tracking-[1.5px] mt-[-30px] p-4">
-        PT AgaFood adalah sebuah restoran Jepang (Takemori) dan Korea (Soondobu) yang terkenal di
-        banjarmasin.
-      </p>
-      <ul
-        class="text-xs md:text-lg tracking-wider grid grid-cols-2 justify-items-center md:flex md:justify-center gap-1"
+        <div class="grid md:grid-cols-2 gap-8 items-center p-8">
+          <div class="order-2 md:order-1">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-3 py-1 bg-lime-100 text-lime-700 text-xs font-semibold rounded-full">Featured</span>
+              <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">Export Business</span>
+            </div>
+            <h1 class="acorn500 text-start text-3xl md:text-4xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors">
+              Agrika Gatya Arum
+            </h1>
+            <p class="text-base text-start md:text-lg text-gray-600 leading-relaxed mb-6">
+              PT Agrika Gatya Arum is a leading company specializing in the export of premium bird's nest products.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg">Laravel</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg">MySQL</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg">Bootstrap</span>
+            </div>
+          </div>
+          <div class="order-1 md:order-2">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-300">
+              <img
+                class="w-full h-64 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                :src="`/projects/agrika.png`"
+                alt="Agrika Gatya Arum"
+              />
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Grid Projects -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a
+          :href="project.link"
+          target="_blank"
+          v-for="project in projects"
+          :key="project.judul"
+          :class="classCard"
+          class="block group h-full"
+        >
+          <div class="p-6 flex flex-col h-full">
+            <!-- Image -->
+            <!-- <div class="relative overflow-hidden rounded-xl mb-6 h-48">
+              <img
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                :src="`/projects/${project.imgLink}`"
+                alt=""
+              />
+            </div> -->
+            
+            <!-- Content -->
+            <div class="flex-grow">
+              <h3 class="acorn500 text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors">
+                {{ project.judul }}
+              </h3>
+              <p class="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
+                {{ project.deskripsi }}
+              </p>
+            </div>
+            
+            <!-- Tech Stack -->
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span 
+                v-for="tech in project.techs" 
+                :key="tech"
+                class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-lg"
+              >
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Featured Project 2 - AgaFood -->
+      <a 
+        target="_blank" 
+        href="https://ptagafood.com/"
+        :class="classCard"
+        class="block group"
       >
-        <li class="flex items-center" v-for="tech in projectResto">
-          <div v-html="cekIcon"></div>
-          {{ tech }}
-        </li>
-      </ul>
-      <img
-        class="w-full md:h-screen mx-auto aspect-w-16 aspect-h-9 mt-3 p-1 rounded-2xl border-2 border-lime-200"
-        :src="`/projects/resto1.png`"
-        alt=""
-      />
-    </a>
+        <div class="p-8">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="px-3 py-1 bg-lime-100 text-lime-700 text-xs font-semibold rounded-full">Featured</span>
+            <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full">Restaurant</span>
+          </div>
+          <h1 class="acorn500 text-3xl md:text-4xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors">
+            AgaFood
+          </h1>
+          <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 max-w-4xl">
+            PT AgaFood operates renowned Japanese (Takemori) and Korean (Soondobu) restaurants in Banjarmasin.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span 
+              v-for="tech in projectResto" 
+              :key="tech"
+              class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg"
+            >
+              {{ tech }}
+            </span>
+          </div>
+          <div class="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-300">
+            <img
+              class="w-full h-64 md:h-96 object-cover transform group-hover:scale-105 transition-transform duration-500"
+              :src="`/projects/resto1.png`"
+              alt="AgaFood Restaurant"
+            />
+          </div>
+        </div>
+      </a>
+
+    </div>
   </div>
-</div>
 </template>
+
 <script setup>
 const classCard = ref(
-  "bg-[#f1f1e1] cursor-pointer hover:shadow-2xl shadow-lime-200 hover:scale-105 transition-all duration-500 ease-in-out glass rounded-3xl"
+  "bg-white/80 backdrop-blur-sm cursor-pointer hover:shadow-2xl hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300 ease-out rounded-2xl border border-gray-100"
 );
+
 const projects = ref([
   {
     id: 1,
     judul: "Aldi Teori",
-    deskripsi: "Aplikasi teori tentang tokoh dan peradaban",
+    deskripsi: "A comprehensive theory application about historical figures and civilizations",
     techs: ["Nuxt 3", "Tailwind CSS", "Daisy UI"],
     link: "https://alditeori.vercel.app/",
     imgLink: "teori.png",
   },
   {
     id: 2,
-    judul: "Terjemahan",
-    deskripsi: "Aplikasi penerjamah bahasa indonesia - dayak",
+    judul: "Translation App",
+    deskripsi: "Indonesian-Dayak language translator application for cultural preservation",
     techs: ["Tailwind CSS", "Alpine JS", "Laravel", "Livewire"],
     link: "https://terjemahan.klinikhappykids.com/",
     imgLink: "terjemahan.png",
   },
   {
     id: 3,
-    judul: "Cashflow",
-    deskripsi: "Aplikasi sederhana mencatat cashflow anda",
-    techs: ["Laravel", "Jquery", "Boostrap 5", "MySQL"],
+    judul: "Cashflow Tracker",
+    deskripsi: "Simple and intuitive cashflow management application for personal finance",
+    techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
     link: "https://cashflow.klinikhappykids.com/cashflow/add",
     imgLink: "cashflow.png",
   },
 ]);
 
 const projectResto = ref([
-  'Laravel', 'Livewire', 'Jquery', 'Boostrap', 'Alpine JS'
+  'Laravel', 'Livewire', 'Jquery', 'Bootstrap', 'Alpine JS'
 ])
-const cekIcon =
-  '<img width="20" height="20" src="https://img.icons8.com/doodle/20/checkmark.png" alt="checkmark"/>';
 </script>
