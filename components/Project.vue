@@ -171,10 +171,10 @@ const projects = ref([
   },
   {
     id: 3,
-    judul: "Cashflow Tracker",
+    judul: "Catat Duit",
     deskripsi: "Simple and intuitive cashflow management application for personal finance",
     techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
-    link: "https://cashflow.klinikhappykids.com/cashflow/add",
+    link: "https://cashflow.klinikhappykids.com",
     imgLink: "cashflow.png",
   },
 ]);
