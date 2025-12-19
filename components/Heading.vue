@@ -5,13 +5,13 @@
 </style>
 <template>
   <div v-motion-fade>
-  <div class="hidden md:block">
-    <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
-      <div>
-        <h1>Hi. I'm <span class="text-warna1">àldi</span> </h1>
-        <h1 class="">
-          A <span class="text-warna1">Web</span>Dev
-          <img
+    <div class="hidden md:block">
+      <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
+        <div>
+          <h1>Hi. I'm <span class="text-warna1">𝒜ldi</span></h1>
+          <h1 class="">
+            α<span class="text-warna1">Web</span>Dev &
+            <!-- <img
             src="~/public/animasi/13.png"
             class="w-28 float-start"
             alt=""
@@ -21,45 +21,54 @@
             src="~/public/animasi/3.png"
             class="w-28 scale-x-[-1] float-end"
             alt=""
-          />
-          <span class="text-warna1">Music</span>ProduceR
-        </h1>
+          /> -->
+            <span class="text-warna1">Music</span>ProduceR
+          </h1>
+        </div>
       </div>
+      <input
+        type="text"
+        class="inputAldi"
+        placeholder="Search my projects ..."
+      />
     </div>
-    <input type="text" class="inputAldi" placeholder="Search my projects ..." />
-  </div>
-  <div class="block md:hidden">
-    <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
-      <div>
-        <h1 class="text-4xl">Hi. I'm <span class="text-warna1">àldi</span> </h1>
-        <h1 class="text-4xl">A <span class="text-warna1">Web</span>Dev <span class="text-warna1">Music</span>ProduceR</h1>
+    <div class="block md:hidden">
+      <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
+        <div>
+          <h1 class="text-4xl">
+            Hi. I'm <span class="text-warna1">àldi</span>
+          </h1>
+          <h1 class="text-4xl">
+            A <span class="text-warna1">Web</span>Dev
+            <span class="text-warna1">Music</span>ProduceR
+          </h1>
+        </div>
       </div>
-    </div>
 
-    <div class="flex justify-center items-center mt-[-52px]">
-      <div>
-        <img
-          src="~/public/animasi/13.png"
-          class="w-20 float-start"
-          alt=""
-          data-aos="fade-left"
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          class="inputAldi"
-          placeholder="Search my projects ..."
-        />
-      </div>
-      <div>
-        <img
-          src="~/public/animasi/3.png"
-          class="w-20 scale-x-[-1] float-end"
-          alt=""
-        />
+      <div class="flex justify-center items-center mt-[-52px]">
+        <div>
+          <img
+            src="~/public/animasi/13.png"
+            class="w-20 float-start"
+            alt=""
+            data-aos="fade-left"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            class="inputAldi"
+            placeholder="Search my projects ..."
+          />
+        </div>
+        <div>
+          <img
+            src="~/public/animasi/3.png"
+            class="w-20 scale-x-[-1] float-end"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
