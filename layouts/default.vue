@@ -110,12 +110,25 @@
   </div>
 </template>
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
 const scrollY = ref(0);
+
 const onScroll = () => {
   scrollY.value = window.scrollY;
 };
-window.addEventListener("scroll", onScroll);
+
 const backToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
+
+// ⬇️ HANYA JALAN DI CLIENT
+onMounted(() => {
+  window.addEventListener("scroll", onScroll);
+});
+
+// ⬇️ BERSIHKAN EVENT
+onUnmounted(() => {
+  window.removeEventListener("scroll", onScroll);
+});
 </script>
