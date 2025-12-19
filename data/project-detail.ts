@@ -51,7 +51,7 @@ export const projectsData = {
     subtitle: "Theory & History Application",
     description:
       "A comprehensive theory application about historical figures and civilizations. This platform serves as an educational resource for students and history enthusiasts to explore and learn about significant historical events, figures, and theories that shaped our world.",
-    techs: ["Nuxt 3", "Tailwind CSS", "Daisy UI"],
+    techs: ["Nuxt JS", "Tailwind CSS", "Daisy UI"],
     link: "https://alditeori.vercel.app/",
     year: "2024",
     role: "Full Stack Developer",
@@ -205,4 +205,83 @@ export const projectsData = {
       "Intuitive interface for efficient order processing",
     ],
   },
+  jenerymf: {
+  logoUrl: "/projects/jenerymf.png",
+  width: "150",
+  title: "JeneryMF Tools",
+  subtitle: "Body Measurement Calculator",
+  description:
+    "Body measurement tool for calculating body size based on pole diameter.",
+  techs: ["Nuxt JS", "Nuxt UI", "Supabase"],
+  link: "https://jenerym.vercel.app/",
+  year: "2024",
+  role: "Frontend Developer",
+  screenshots: [
+    {
+      image: "https://placehold.co/1200x800/e0f2fe/0284c7?text=JeneryMF+Calculator",
+      title: "Measurement Calculator",
+      description:
+        "Tool for calculating body size efficiently using pole diameter input.",
+    },
+  ],
+  features: [
+    "Accurate body size calculation",
+    "Modern UI using Nuxt UI",
+    "Fast performance with Supabase backend",
+    "Mobile-friendly responsive design",
+  ],
+},
+circle: {
+  logoUrl: "/projects/circle.png",
+  width: "120",
+  title: "Circle English Course",
+  subtitle: "Online English Learning Platform",
+  description:
+    "Online learning platform for English language learning in Muara Teweh, Central Kalimantan.",
+  techs: ["Laravel", "Livewire", "Bootstrap", "Alpine JS"],
+  link: "https://circleenglishcourse.com/",
+  year: "2024",
+  role: "Full Stack Developer",
+  screenshots: [
+    {
+      image: "https://placehold.co/1200x800/fef3c7/eab308?text=Circle+Dashboard",
+      title: "Student Dashboard",
+      description:
+        "Dashboard for managing courses, lessons, and student progress.",
+    },
+  ],
+  features: [
+    "Online class management",
+    "Student & teacher dashboard",
+    "Livewire-powered interactions",
+    "Mobile-friendly learning system",
+  ],
+},
+efw: {
+  logoUrl: "/projects/efw.png",
+  width: "120",
+  title: "English for Wetlands",
+  subtitle: "Wetlands Vocabulary Translator",
+  description:
+    "Indonesian to English translation application specifically for wetlands vocabulary.",
+  techs: ["Laravel", "Livewire", "Bootstrap", "Alpine JS"],
+  link: "https://englishforwetlands.web.id/",
+  year: "2024",
+  role: "Full Stack Developer",
+  screenshots: [
+    {
+      image: "https://placehold.co/1200x800/d1fae5/10b981?text=EFW+Translator",
+      title: "Wetlands Translator",
+      description:
+        "Specialized translator focusing on wetlands-related vocabulary.",
+    },
+  ],
+  features: [
+    "Wetlands-specific vocabulary",
+    "Real-time translation",
+    "Educational-focused UI",
+    "Optimized for researchers & students",
+  ],
+},
+
 } as const;

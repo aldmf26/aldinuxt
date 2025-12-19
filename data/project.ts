@@ -32,7 +32,7 @@ export const projects = [
     judul: "Aldi Teori",
     deskripsi:
       "A comprehensive theory application about historical figures and civilizations",
-    techs: ["Nuxt 3", "Tailwind CSS", "Daisy UI"],
+    techs: ["Nuxt JS", "Tailwind CSS", "Daisy UI"],
     link: "https://alditeori.vercel.app/",
   },
   {
@@ -59,7 +59,7 @@ export const projects = [
     detail: "circle",
     judul: "Circle English Course",
     deskripsi:
-      "Online learning platform for English language learning in Banjarmasin.",
+      "Online learning platform for English language learning in Muara Teweh, Central Kalimantan, Indonesia.",
     techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
     link: "https://circleenglishcourse.com/",
   },

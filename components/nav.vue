@@ -1,9 +1,9 @@
 <style>
 .navHover {
-  @apply hover:bg-lime-200 hover:rounded-full cursor-pointer;
+  @apply hover:bg-white/40 hover:rounded-full cursor-pointer;
 }
 .navActive {
-  @apply rounded-full  bg-lime-200;
+  @apply rounded-full  bg-white/40;
 }
 </style>
 

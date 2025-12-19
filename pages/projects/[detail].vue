@@ -24,15 +24,13 @@
 
       <!-- Project Header - Centered -->
       <div class="mb-16 text-center">
-        <h1 class="acorn500 text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-          <div v-if="project.title === 'AgaFood'">
+      <div v-if="project.title === 'AgaFood'">
             <img
               src="\public\projects\tkmr.png"
               class="inline"
               width="120"
               alt="Project Logo"
             />
-            {{ project.title }}
             <img
               src="\public\projects\sdb.png"
               class="inline"
@@ -41,14 +39,16 @@
             />
           </div>
           <div v-else>
-            <img
+      <img
               :src="project.logoUrl"
               class="inline"
               :width="project.width"
               alt="Project Logo"
             />
-            {{ project.title }}
           </div>
+          
+        <h1 class="acorn500 text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                      {{ project.title }}
         </h1>
         <p class="text-2xl text-gray-600 mb-6 max-w-2xl mx-auto">
           {{ project.subtitle }}
@@ -175,6 +175,10 @@ import { projectsData } from '~/data/project-detail'
 
 const route = useRoute()
 const projectDetail = route.params.detail as keyof typeof projectsData
+
+if (!projectsData[projectDetail]) {
+  throw createError({ statusCode: 404 })
+}
 
 const project = computed(() => {
   return projectsData[projectDetail] ?? projectsData.teory

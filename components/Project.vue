@@ -27,9 +27,9 @@
       </p>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div class="mw-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 relative">
       <!-- Grid Projects -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
         <NuxtLink
           :to="`/projects/${project.detail}`"
           v-for="project in projects"
@@ -62,11 +62,11 @@
             </div>
 
             <!-- Tech Stack -->
-            <div class="flex flex-wrap gap-2 mt-auto">
+            <div class="flex flex-wrap justify-center gap-2 mt-auto">
               <span
                 v-for="tech in project.techs"
                 :key="tech"
-                class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-lg"
+                class="text-center px-3 py-1 bg-slate-600 text-white text-xs rounded-lg"
               >
                 {{ tech }}
               </span>
@@ -81,6 +81,6 @@
 <script setup>
 import { projects } from "~/data/project";
 const classCard = ref(
-  "bg-white/80 backdrop-blur-sm cursor-pointer hover:shadow-2xl hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300 ease-out rounded-2xl border border-gray-100"
+  "bg-white/40 backdrop-blur-sm cursor-pointer hover:shadow-2xl hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300 ease-out rounded-2xl border border-gray-100"
 );
 </script>
