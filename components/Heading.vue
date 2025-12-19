@@ -36,16 +36,16 @@
       <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
         <div>
           <h1 class="text-4xl">
-            Hi. I'm <span class="text-warna1">àldi</span>
+            Hi. I'm <span class="text-warna1">𝒜ldi</span>
           </h1>
           <h1 class="text-4xl">
-            A <span class="text-warna1">Web</span>Dev
+            α <span class="text-warna1">Web</span>Dev &
             <span class="text-warna1">Music</span>ProduceR
           </h1>
         </div>
       </div>
 
-      <div class="flex justify-center items-center mt-[-52px]">
+      <div class="hidden flex justify-center items-center mt-[-52px]">
         <div>
           <img
             src="~/public/animasi/13.png"
