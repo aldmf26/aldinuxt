@@ -81,14 +81,26 @@
 
             <!-- Recommended Projects -->
             <div class="mw-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 relative">
+                <h3 class="acorn500 text-2xl font-bold text-gray-900 mb-4">
+                    Recommended Projects
+                </h3>
                 <!-- Grid Projects -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
                     <ProjectCard
-          v-for="project in recommendedProjects"
-          :key="project.judul"
-          :project="project"
-        />
+                    v-for="project in recommendedProjects"
+                    :key="project.judul"
+                    :project="project"
+                    />
                 </div>
+
+                <NuxtLink to="/" aria-label="Go back Home"
+                class="inline-flex mt-4 items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-12 group">
+                <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span class="text-sm font-medium">Back to Home</span>
+            </NuxtLink>
             </div>
         </div>
     </div>
