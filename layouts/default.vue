@@ -1,10 +1,9 @@
 <template>
   <div class="fredoka text-center">
     <Nav />
-    
+
     <slot />
-  
-    
+
     <div class="hidden md:flex justify-evenly mx-auto mt-20">
       <div class="">
         <img src="~/public/animasi/2.png" class="w-16" alt="" />
@@ -37,9 +36,9 @@
             <ul>
               <li class="mb-3">
                 <a
-                  href="https://wa.me/62895413111053?text=Aldi,aku%20butuh%20bantuan!"
-                  target="_blank"
-                  >Whatsapp</a
+                  href="mailto:aldimf26@gmail.com?subject=Aldi,aku%20butuh%20bantuan!"
+                >
+                  Email</a
                 >
               </li>
             </ul>
@@ -47,7 +46,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="block md:hidden mt-16">
       <div class="flex gap-5 md:gap-20 justify-around">
         <div>
@@ -76,19 +75,16 @@
           <ul>
             <li class="mb-3">
               <a
-                href="https://wa.me/62895413111053?text=Aldi,aku%20butuh%20bantuan!"
-                target="_blank"
-                >Whatsapp</a
+                href="mailto:aldimf26@gmail.com?subject=Aldi,aku%20butuh%20bantuan!"
+              >
+                Email</a
               >
             </li>
           </ul>
         </div>
       </div>
-      
-      
-      <h1 class="text-warna1">
-        © 2024 Fahrizãldi . Banjarmasin, Indonesia
-      </h1>
+
+      <h1 class="text-warna1">© 2024 Fahrizãldi . Banjarmasin, Indonesia</h1>
     </div>
   </div>
 </template>

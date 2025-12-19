@@ -13,13 +13,25 @@
   >
     <NuxtLink
       to="/"
-      :class="{ navActive: $route.name === 'index' }"
+      :class="{
+        navActive: $route.name === 'index' || $route.name === 'projects-detail',
+      }"
       class="p-3 navHover"
       >Web
       <span class="p-0.5 rounded-lg border-2 border-lime-100">/</span></NuxtLink
     >
-    <NuxtLink :class="{ navActive: $route.name === 'music' }" to="/music" class="p-3 navHover">Music</NuxtLink>
-    <NuxtLink :class="{ navActive: $route.name === 'service' }" to="/service" class="p-3 navHover">Service</NuxtLink>
+    <NuxtLink
+      :class="{ navActive: $route.name === 'music' }"
+      to="/music"
+      class="p-3 navHover"
+      >Music</NuxtLink
+    >
+    <NuxtLink
+      :class="{ navActive: $route.name === 'service' }"
+      to="/service"
+      class="p-3 navHover"
+      >Service</NuxtLink
+    >
     <!-- <NuxtLink :class="{ navActive: $route.name === 'belajar' }" to="/belajar" class="p-3 navHover">Belajar</NuxtLink> -->
   </div>
   <!-- <div class="grid grid-cols-2 gap-7">

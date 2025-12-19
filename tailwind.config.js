@@ -14,7 +14,7 @@ module.exports = {
         warna1: '#255BA6',
         warnaHeading: '#f1f1e1',
         warnaBiru: '#4A7CBF',
-        warnaHijau: '#EFC217'
+        warnaHijau: '#EFC217',
       }
     },
   },
