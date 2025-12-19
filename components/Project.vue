@@ -20,7 +20,7 @@
     <!-- Hero Section Title -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
       <h2 class="acorn500 text-4xl md:text-6xl font-bold text-gray-800">
-        Projects
+        My Projects
       </h2>
       <p class="text-lg md:text-xl text-gray-600">
         Crafted with passion and precision
@@ -28,65 +28,6 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-      <!-- Featured Project 1 - Agrika Gatya Arum -->
-      <!-- <a
-        target="_blank"
-        href="https://ptagrikagatyaarum.com/"
-        :class="classCard"
-        class="block group"
-      >
-        <div class="grid md:grid-cols-2 gap-8 items-center p-8">
-          <div class="order-2 md:order-1">
-            <div class="flex items-center gap-2 mb-4">
-              <span
-                class="px-3 py-1 bg-lime-100 text-lime-700 text-xs font-semibold rounded-full"
-                >Featured</span
-              >
-              <span
-                class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full"
-                >Export Business</span
-              >
-            </div>
-            <h1
-              class="acorn500 text-start text-3xl md:text-4xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors"
-            >
-              Agrika Gatya Arum
-            </h1>
-            <p
-              class="text-base text-start md:text-lg text-gray-600 leading-relaxed mb-6"
-            >
-              PT Agrika Gatya Arum is a leading company specializing in the
-              export of premium bird's nest products.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span
-                class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg"
-                >Laravel</span
-              >
-              <span
-                class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg"
-                >MySQL</span
-              >
-              <span
-                class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg"
-                >Bootstrap</span
-              >
-            </div>
-          </div>
-          <div class="order-1 md:order-2">
-            <div
-              class="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-300"
-            >
-              <img
-                class="w-full h-64 md:h-80 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                :src="`/projects/agrika.png`"
-                alt="Agrika Gatya Arum"
-              />
-            </div>
-          </div>
-        </div>
-      </a> -->
-
       <!-- Grid Projects -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <NuxtLink
@@ -133,56 +74,6 @@
           </div>
         </NuxtLink>
       </div>
-
-      <!-- Featured Project 2 - AgaFood -->
-      <!-- <a
-        target="_blank"
-        href="https://ptagafood.com/"
-        :class="classCard"
-        class="block group"
-      >
-        <div class="p-8">
-          <div class="flex items-center gap-2 mb-4">
-            <span
-              class="px-3 py-1 bg-lime-100 text-lime-700 text-xs font-semibold rounded-full"
-              >Featured</span
-            >
-            <span
-              class="px-3 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full"
-              >Restaurant</span
-            >
-          </div>
-          <h1
-            class="acorn500 text-3xl md:text-4xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors"
-          >
-            AgaFood
-          </h1>
-          <p
-            class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 max-w-4xl"
-          >
-            PT AgaFood operates renowned Japanese (Takemori) and Korean
-            (Soondobu) restaurants in Banjarmasin.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-6">
-            <span
-              v-for="tech in projectResto"
-              :key="tech"
-              class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-lg"
-            >
-              {{ tech }}
-            </span>
-          </div>
-          <div
-            class="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-300"
-          >
-            <img
-              class="w-full h-64 md:h-96 object-cover transform group-hover:scale-105 transition-transform duration-500"
-              :src="`/projects/resto1.png`"
-              alt="AgaFood Restaurant"
-            />
-          </div>
-        </div>
-      </a> -->
     </div>
   </div>
 </template>
@@ -198,11 +89,12 @@ const projects = ref([
     detail: "agrika",
     judul: "Agrika Gatya Arum",
     deskripsi:
-      "A simple and intuitive online shopping application for Agrika Gatya Arum",
+      "Landing page website for exporting Birdnest, a premium quality Indonesian coffee",
     techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
     link: "https://ptagrikagatyaarum.com/",
     imgLink: "agrika.png",
-  },  {
+  },
+  {
     id: 1,
     detail: "teory",
     judul: "Aldi Teori",
@@ -237,12 +129,11 @@ const projects = ref([
     detail: "resto",
     judul: "AgaFood",
     deskripsi:
-      "PT AgaFood operates renowned Japanese (Takemori) and Korean (Soondobu) restaurants in Banjarmasin.",
+      "POS Japanese (Takemori) and Korean (Soondobu) restaurants in Banjarmasin.",
     techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
     link: "https://ptagafood.com/",
     imgLink: "resto1.png",
   },
-
 ]);
 
 const projectResto = ref([

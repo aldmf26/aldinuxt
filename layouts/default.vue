@@ -87,4 +87,35 @@
       <h1 class="text-warna1">© 2024 Fahrizãldi . Banjarmasin, Indonesia</h1>
     </div>
   </div>
+
+  <div v-if="scrollY > 200" class="fixed bottom-0 right-0 p-5">
+    <button
+      class="bg-warna1 text-white font-bold py-2 px-4 rounded-full"
+      @click="backToTop"
+    >
+      <svg
+        class="h-6 w-6 transform rotate-180"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </button>
+  </div>
 </template>
+<script setup>
+const scrollY = ref(0);
+const onScroll = () => {
+  scrollY.value = window.scrollY;
+};
+window.addEventListener("scroll", onScroll);
+const backToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+</script>

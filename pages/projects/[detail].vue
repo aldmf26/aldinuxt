@@ -25,18 +25,45 @@
       <!-- Project Header - Centered -->
       <div class="mb-16 text-center">
         <h1 class="acorn500 text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-          <img
-            :src="project.logoUrl"
-            class="inline"
-            :width="project.width"
-            alt="Project Logo"
-          />
-          {{ project.title }}
+          <div v-if="project.title === 'AgaFood'">
+            <img
+              src="\public\projects\tkmr.png"
+              class="inline"
+              width="120"
+              alt="Project Logo"
+            />
+            {{ project.title }}
+            <img
+              src="\public\projects\sdb.png"
+              class="inline"
+              width="120"
+              alt="Project Logo"
+            />
+          </div>
+          <div v-else>
+            <img
+              :src="project.logoUrl"
+              class="inline"
+              :width="project.width"
+              alt="Project Logo"
+            />
+            {{ project.title }}
+          </div>
         </h1>
-        <p class="text-2xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        <p class="text-2xl text-gray-600 mb-6 max-w-2xl mx-auto">
           {{ project.subtitle }}
-        </p>
+          
+          <div class="flex flex-wrap gap-3 mt-2 justify-center">
+          <span
+            v-for="tech in project.techs"
+            :key="tech"
+            class="px-3 py-1 bg-slate-600 text-white text-xs rounded-lg"
+          >
+            {{ tech }}
+          </span>
 
+        </div>
+        </p>
         <!-- Visit Link -->
         <a
           v-if="project.link"
@@ -63,9 +90,10 @@
 
       <!-- Overview - Centered -->
       <section class="mb-16">
-        <h2 class="acorn500 text-3xl font-bold text-gray-900 mb-6 text-center">
+        <h2 class="acorn500 text-3xl font-bold text-gray-900 text-center">
           Overview
         </h2>
+
         <p
           class="text-gray-700 leading-relaxed text-xl text-center max-w-2xl mx-auto"
         >
@@ -73,21 +101,7 @@
         </p>
       </section>
 
-      <!-- Tech Stack - Centered -->
-      <section class="mb-20">
-        <h2 class="acorn500 text-3xl font-bold text-gray-900 mb-6 text-center">
-          Tech Stack
-        </h2>
-        <div class="flex flex-wrap gap-3 justify-center">
-          <span
-            v-for="tech in project.techs"
-            :key="tech"
-            class="px-5 py-2.5 bg-slate-800 text-white rounded-xl font-medium text-base"
-          >
-            {{ tech }}
-          </span>
-        </div>
-      </section>
+      
 
       <!-- Project Screenshots with Descriptions -->
       <section class="space-y-20 mb-20">
@@ -152,29 +166,6 @@
 
       <!-- Divider -->
       <div class="border-t border-gray-300 my-16"></div>
-
-      <!-- Back to Projects -->
-      <div class="text-center pb-8">
-        <NuxtLink
-          to="/"
-          class="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors text-lg"
-        >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          <span>Back to all projects</span>
-        </NuxtLink>
-      </div>
     </div>
   </div>
 </template>
@@ -185,6 +176,51 @@ const projectDetail = route.params.detail;
 
 // Data projects
 const projectsData = {
+  agrika: {
+    logoUrl: "https://sarang.ptagafood.com/assets/login/img/logo_agrika.png",
+    width: "120",
+    title: "Agrika Gatya Arum",
+    subtitle:
+      "Landing page website for exporting Birdnest, a premium quality Indonesian coffee",
+    description:
+      "Landing page website for exporting Birdnest, a premium quality Indonesian coffee",
+    techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
+    link: "https://ptagrikagatyaarum.com/",
+    imgLink: "agrika.png",
+    year: "2024",
+    role: "Full Stack Developer",
+    screenshots: [
+      {
+        image:
+          "https://placehold.co/1200x800/e0e7ff/6366f1?text=Agrika+Dashboard",
+        title: "Agrika Dashboard",
+        description:
+          "The main dashboard provides an intuitive overview of the company, featuring a timeline view that makes it easy to navigate through different eras and civilizations.",
+      },
+      {
+        image:
+          "https://placehold.co/1200x800/ddd6fe/9333ea?text=Coffee+Figures",
+        title: "Coffee Figures Database",
+        description:
+          "Comprehensive profiles of coffee figures throughout history, complete with biographical information, key achievements, and their impact on world events.",
+      },
+      {
+        image:
+          "https://placehold.co/1200x800/fce7f3/ec4899?text=Search+%26+Filter",
+        title: "Advanced Search & Filtering",
+        description:
+          "Powerful search capabilities allow users to quickly find specific coffee events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
+      },
+    ],
+    features: [
+      "Interactive timeline of coffee events with zoom and pan capabilities",
+      "Comprehensive database of coffee figures with detailed profiles",
+      "Advanced search and filter functionality for quick information access",
+      "Responsive design optimized for all devices from mobile to desktop",
+      "Fast performance powered by Laravel with server-side rendering",
+      "Clean and intuitive user interface designed for educational purposes",
+    ],
+  },
   teory: {
     logoUrl: "https://alditeori.vercel.app/_nuxt/man.5139a8dc.png",
     width: "70",
@@ -311,6 +347,39 @@ const projectsData = {
       "Category-based expense organization for better insights",
       "Secure data storage with MySQL ensuring data privacy",
       "Intuitive dashboard with real-time updates on financial status",
+    ],
+  },
+  resto: {
+    logoUrl: "https://ptagafood.com/assets/menu/img/Takemori.svg",
+    width: "120",
+    title: "AgaFood",
+    subtitle: "POS for Japanese & Korean Restaurants",
+    description:
+      "A comprehensive Point of Sales (POS) system designed specifically for Japanese (Takemori) and Korean (Soondobu) restaurants in Banjarmasin, providing a seamless and efficient ordering experience for customers and staff alike.",
+    techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
+    link: "https://ptagafood.com/",
+    year: "2024",
+    role: "Full Stack Developer",
+    screenshots: [
+      {
+        image: "https://placehold.co/1200x800/dbeafe/3b82f6?text=Order+Screen",
+        title: "Order Screen",
+        description:
+          "Effortlessly take orders with a user-friendly interface. The order screen displays menu items, prices, and quantities, allowing staff to quickly and accurately process orders.",
+      },
+      {
+        image: "https://placehold.co/1200x800/d1fae5/10b981?text=Order+History",
+        title: "Order History",
+        description:
+          "Easily view and manage previous orders with the order history feature. Filter orders by date, time, or customer to quickly identify trends and areas for improvement.",
+      },
+    ],
+    features: [
+      "Easy-to-use order screen with menu item management",
+      "Order history feature for tracking previous orders",
+      "Filter orders by date, time, or customer for analysis",
+      "Secure data storage with MySQL ensuring data privacy",
+      "Intuitive interface for efficient order processing",
     ],
   },
 };
