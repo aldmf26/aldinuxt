@@ -3,6 +3,7 @@ export const projects = [
     id: 0,
     detail: "agrika",
     judul: "Agrika Gatya Arum",
+    logoUrl: "https://sarang.ptagafood.com/assets/login/img/logo_agrika.png",
     deskripsi:
       "Landing page website for exporting Birdnest, a premium quality Indonesian coffee",
     techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
@@ -20,6 +21,8 @@ export const projects = [
   {
     id: 7,
     detail: "jenerymf",
+  logoUrl: "/projects/jenerymf.png",
+
     judul: "JeneryMF Tools",
     deskripsi:
       "Body measurement tool for calculating body size based on pole diameter.",
@@ -30,6 +33,7 @@ export const projects = [
     id: 1,
     detail: "teory",
     judul: "Aldi Teori",
+    logoUrl: "https://alditeori.vercel.app/_nuxt/man.5139a8dc.png",
     deskripsi:
       "A comprehensive theory application about historical figures and civilizations",
     techs: ["Nuxt JS", "Tailwind CSS", "Daisy UI"],
@@ -39,6 +43,8 @@ export const projects = [
     id: 2,
     detail: "translation",
     judul: "Translation App",
+    logoUrl: "https://terjemahan.klinikhappykids.com/img/logo.png",
+
     deskripsi:
       "Indonesian-Dayak language translator application for cultural preservation",
     techs: ["Tailwind CSS", "Alpine JS", "Laravel", "Livewire"],
@@ -48,6 +54,8 @@ export const projects = [
     id: 3,
     detail: "cashflow",
     judul: "Catat Duit",
+    logoUrl: "https://cashflow.klinikhappykids.com/img/logocash-tf.png",
+
     deskripsi:
       "Simple and intuitive cashflow management application for personal finance",
     techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
@@ -58,6 +66,8 @@ export const projects = [
     id: 5,
     detail: "circle",
     judul: "Circle English Course",
+  logoUrl: "/projects/circle.png",
+
     deskripsi:
       "Online learning platform for English language learning in Muara Teweh, Central Kalimantan, Indonesia.",
     techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
@@ -67,6 +77,8 @@ export const projects = [
     id: 6,
     detail: "efw",
     judul: "English for Wetlands",
+  logoUrl: "/projects/efw.png",
+
     deskripsi:
       "Indonesian to English translation application specifically for wetlands vocabulary.",
     techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
