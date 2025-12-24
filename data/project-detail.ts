@@ -1,7 +1,7 @@
 export const projectsData = {
   laporku: {
     logoUrl: "/projects/laporku.png",
-    width: "120",
+    width: "180",
     title: "Laporku",
     subtitle: "Financial companion app for small businesses",
     description: "Laporku helps small business owners understand their business performance without having to read complex reports.",
