@@ -3,10 +3,10 @@ export const projects = [
     id: 10,
     detail: "laporku",
     judul: "Laporku",
-  logoUrl: "/projects/laporku.png",
+    logoUrl: "/projects/laporku.png",
     deskripsi:
       "Laporku is a financial companion app for small businesses that helps owners understand their business performance without having to read complex reports.",
-        techs: ["Nuxt JS", "Nuxt UI", "Supabase"],
+    techs: ["Nuxt JS", "Nuxt UI", "Supabase"],
     link: "https://laporku.vercel.app/",
   },
   {
@@ -31,7 +31,7 @@ export const projects = [
   {
     id: 7,
     detail: "jenerymf",
-  logoUrl: "/projects/jenerymf.png",
+    logoUrl: "/projects/jenerymf.png",
 
     judul: "JeneryMF Tools",
     deskripsi:
@@ -71,28 +71,27 @@ export const projects = [
     techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
     link: "https://cashflow.klinikhappykids.com",
   },
-  
-{
+
+  {
     id: 5,
     detail: "circle",
     judul: "Circle English Course",
-  logoUrl: "/projects/circle.png",
+    logoUrl: "/projects/circle.png",
 
     deskripsi:
       "Online learning platform for English language learning in Muara Teweh, Central Kalimantan, Indonesia.",
     techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
     link: "https://circleenglishcourse.com/",
   },
-{
+  {
     id: 6,
     detail: "efw",
     judul: "English for Wetlands",
-  logoUrl: "/projects/efw.png",
+    logoUrl: "/projects/efw.png",
 
     deskripsi:
       "Indonesian to English translation application specifically for wetlands vocabulary.",
     techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
     link: "https://englishforwetlands.web.id/",
   },
-
 ] as const;
