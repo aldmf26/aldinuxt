@@ -3,10 +3,8 @@ export const projectsData = {
     logoUrl: "/projects/laporku.png",
     width: "120",
     title: "Laporku",
-    subtitle:
-      "Financial companion app for small businesses that helps owners understand their business performance without having to read complex reports.",
-    description:
-      "Laporku is a financial companion app for small businesses that helps owners understand their business performance without having to read complex reports.",
+    subtitle: "Financial companion app for small businesses",
+    description: "Laporku helps small business owners understand their business performance without having to read complex reports.",
       techs: ["Nuxt JS", "Nuxt UI", "Supabase"],
     link: "https://laporku.vercel.app/",
     year: "2025",
