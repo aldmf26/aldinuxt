@@ -1,4 +1,48 @@
 export const projectsData = {
+  laporku: {
+    logoUrl: "/projects/laporku.png",
+    width: "120",
+    title: "Laporku",
+    subtitle:
+      "Financial companion app for small businesses that helps owners understand their business performance without having to read complex reports.",
+    description:
+      "Laporku is a financial companion app for small businesses that helps owners understand their business performance without having to read complex reports.",
+      techs: ["Nuxt JS", "Nuxt UI", "Supabase"],
+    link: "https://laporku.vercel.app/",
+    year: "2025",
+    role: "Full Stack Developer",
+    screenshots: [
+      {
+        image:
+          "https://placehold.co/1200x800/e0e7ff/6366f1?text=Agrika+Dashboard",
+        title: "Agrika Dashboard",
+        description:
+          "The main dashboard provides an intuitive overview of the company, featuring a timeline view that makes it easy to navigate through different eras and civilizations.",
+      },
+      {
+        image:
+          "https://placehold.co/1200x800/ddd6fe/9333ea?text=Coffee+Figures",
+        title: "Coffee Figures Database",
+        description:
+          "Comprehensive profiles of coffee figures throughout history, complete with biographical information, key achievements, and their impact on world events.",
+      },
+      {
+        image:
+          "https://placehold.co/1200x800/fce7f3/ec4899?text=Search+%26+Filter",
+        title: "Advanced Search & Filtering",
+        description:
+          "Powerful search capabilities allow users to quickly find specific coffee events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
+      },
+    ],
+    features: [
+      "Interactive timeline of coffee events with zoom and pan capabilities",
+      "Comprehensive database of coffee figures with detailed profiles",
+      "Advanced search and filter functionality for quick information access",
+      "Responsive design optimized for all devices from mobile to desktop",
+      "Fast performance powered by Laravel with server-side rendering",
+      "Clean and intuitive user interface designed for educational purposes",
+    ],
+  },
   agrika: {
     logoUrl: "https://sarang.ptagafood.com/assets/login/img/logo_agrika.png",
     width: "120",

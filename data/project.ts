@@ -1,5 +1,15 @@
 export const projects = [
   {
+    id: 10,
+    detail: "laporku",
+    judul: "Laporku",
+  logoUrl: "/projects/laporku.png",
+    deskripsi:
+      "Laporku is a financial companion app for small businesses that helps owners understand their business performance without having to read complex reports.",
+        techs: ["Nuxt JS", "Nuxt UI", "Supabase"],
+    link: "https://laporku.vercel.app/",
+  },
+  {
     id: 0,
     detail: "agrika",
     judul: "Agrika Gatya Arum",
