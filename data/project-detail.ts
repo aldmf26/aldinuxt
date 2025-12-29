@@ -33,14 +33,6 @@ export const projectsData = {
           "Powerful search capabilities allow users to quickly find specific coffee events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
       },
     ],
-    features: [
-      "Interactive timeline of coffee events with zoom and pan capabilities",
-      "Comprehensive database of coffee figures with detailed profiles",
-      "Advanced search and filter functionality for quick information access",
-      "Responsive design optimized for all devices from mobile to desktop",
-      "Fast performance powered by Laravel with server-side rendering",
-      "Clean and intuitive user interface designed for educational purposes",
-    ],
   },
   agrika: {
     logoUrl: "/projects/logo_agrika.webp",
@@ -78,14 +70,6 @@ export const projectsData = {
           "Powerful search capabilities allow users to quickly find specific coffee events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
       },
     ],
-    features: [
-      "Interactive timeline of coffee events with zoom and pan capabilities",
-      "Comprehensive database of coffee figures with detailed profiles",
-      "Advanced search and filter functionality for quick information access",
-      "Responsive design optimized for all devices from mobile to desktop",
-      "Fast performance powered by Laravel with server-side rendering",
-      "Clean and intuitive user interface designed for educational purposes",
-    ],
   },
   teory: {
     logoUrl: "https://alditeori.vercel.app/_nuxt/man.5139a8dc.png",
@@ -121,14 +105,6 @@ export const projectsData = {
           "Powerful search capabilities allow users to quickly find specific historical events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
       },
     ],
-    features: [
-      "Interactive timeline of historical events with zoom and pan capabilities",
-      "Comprehensive database of historical figures with detailed profiles",
-      "Advanced search and filter functionality for quick information access",
-      "Responsive design optimized for all devices from mobile to desktop",
-      "Fast performance powered by Nuxt 3 with server-side rendering",
-      "Clean and intuitive user interface designed for educational purposes",
-    ],
   },
   translation: {
     logoUrl: "https://terjemahan.klinikhappykids.com/img/logo.png",
@@ -162,14 +138,6 @@ export const projectsData = {
         description:
           "Instant translation results powered by Livewire, providing immediate feedback as users type. The system learns from usage patterns to improve accuracy over time.",
       },
-    ],
-    features: [
-      "Bidirectional translation between Indonesian and Dayak languages",
-      "Real-time translation with Livewire for instant results",
-      "User-friendly interface built with Alpine JS for smooth interactions",
-      "Comprehensive word database with pronunciation and usage examples",
-      "Mobile-responsive design for learning on the go",
-      "Fast and accurate translations to support cultural preservation",
     ],
   },
   cashflow: {
@@ -206,14 +174,6 @@ export const projectsData = {
           "Interactive charts and graphs help visualize your spending patterns over time. Generate detailed reports to analyze your financial habits and make informed decisions.",
       },
     ],
-    features: [
-      "Easy income and expense tracking with category organization",
-      "Visual charts and reports for spending pattern analysis",
-      "Budget planning and monitoring with alerts for overspending",
-      "Category-based expense organization for better insights",
-      "Secure data storage with MySQL ensuring data privacy",
-      "Intuitive dashboard with real-time updates on financial status",
-    ],
   },
   resto: {
     logoUrl: "/projects/laporku.png",
@@ -240,13 +200,6 @@ export const projectsData = {
           "Easily view and manage previous orders with the order history feature. Filter orders by date, time, or customer to quickly identify trends and areas for improvement.",
       },
     ],
-    features: [
-      "Easy-to-use order screen with menu item management",
-      "Order history feature for tracking previous orders",
-      "Filter orders by date, time, or customer for analysis",
-      "Secure data storage with MySQL ensuring data privacy",
-      "Intuitive interface for efficient order processing",
-    ],
   },
   jenerymf: {
     logoUrl: "/projects/jenerymf.png",
@@ -267,12 +220,6 @@ export const projectsData = {
         description:
           "Tool for calculating body size efficiently using pole diameter input.",
       },
-    ],
-    features: [
-      "Accurate body size calculation",
-      "Modern UI using Nuxt UI",
-      "Fast performance with Supabase backend",
-      "Mobile-friendly responsive design",
     ],
   },
   circle: {
@@ -295,12 +242,6 @@ export const projectsData = {
           "Dashboard for managing courses, lessons, and student progress.",
       },
     ],
-    features: [
-      "Online class management",
-      "Student & teacher dashboard",
-      "Livewire-powered interactions",
-      "Mobile-friendly learning system",
-    ],
   },
   efw: {
     logoUrl: "/projects/efw.png",
@@ -321,12 +262,6 @@ export const projectsData = {
         description:
           "Specialized translator focusing on wetlands-related vocabulary.",
       },
-    ],
-    features: [
-      "Wetlands-specific vocabulary",
-      "Real-time translation",
-      "Educational-focused UI",
-      "Optimized for researchers & students",
     ],
   },
 } as const;

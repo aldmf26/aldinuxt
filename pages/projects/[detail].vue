@@ -117,13 +117,10 @@ import { projectsData } from '~/data/project-detail'
 const route = useRoute()
 const router = useRouter()
 
-const goBack = () => {
-    if (window.history.length > 1) {
-        router.back()
-    } else {
-        router.push('/')
-    }
-}
+const goBack = () => window.history.length > 1 
+                        ? router.back() 
+                        : router.push('/')
+                        
 const projectDetail = route.params.detail as keyof typeof projectsData
 
 if (!projectsData[projectDetail]) {
