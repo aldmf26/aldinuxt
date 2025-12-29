@@ -43,7 +43,7 @@ export const projectsData = {
     ],
   },
   agrika: {
-    logoUrl: "https://sarang.ptagafood.com/assets/login/img/logo_agrika.png",
+    logoUrl: "/projects/logo_agrika.webp",
     width: "120",
     title: "Agrika Gatya Arum",
     subtitle:
@@ -51,7 +51,7 @@ export const projectsData = {
     description:
       "Landing page website for exporting Birdnest, a premium quality Indonesian coffee",
     techs: ["Laravel", "Jquery", "Bootstrap 5", "MySQL"],
-    link: "https://ptagrikagatyaarum.com/",
+    link: "",
     imgLink: "agrika.png",
     year: "2024",
     role: "Full Stack Developer",
@@ -216,14 +216,14 @@ export const projectsData = {
     ],
   },
   resto: {
-    logoUrl: "https://ptagafood.com/assets/menu/img/Takemori.svg",
+    logoUrl: "/projects/laporku.png",
     width: "120",
     title: "AgaFood",
     subtitle: "POS for Japanese & Korean Restaurants",
     description:
       "A comprehensive Point of Sales (POS) system designed specifically for Japanese (Takemori) and Korean (Soondobu) restaurants in Banjarmasin, providing a seamless and efficient ordering experience for customers and staff alike.",
     techs: ["Laravel", "Livewire", "Jquery", "Bootstrap", "Alpine JS"],
-    link: "https://ptagafood.com/",
+    link: "",
     year: "2024",
     role: "Full Stack Developer",
     screenshots: [
@@ -283,7 +283,7 @@ export const projectsData = {
     description:
       "Online learning platform for English language learning in Muara Teweh, Central Kalimantan.",
     techs: ["Laravel", "Livewire", "Bootstrap", "Alpine JS"],
-    link: "https://circleenglishcourse.com/",
+    link: "",
     year: "2024",
     role: "Full Stack Developer",
     screenshots: [
@@ -310,7 +310,7 @@ export const projectsData = {
     description:
       "Indonesian to English translation application specifically for wetlands vocabulary.",
     techs: ["Laravel", "Livewire", "Bootstrap", "Alpine JS"],
-    link: "https://englishforwetlands.web.id/",
+    link: "",
     year: "2024",
     role: "Full Stack Developer",
     screenshots: [

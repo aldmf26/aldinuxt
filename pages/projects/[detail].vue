@@ -36,7 +36,7 @@
                 </div>
                 </p>
                 <!-- Visit Link -->
-                <a v-if="project.link" :href="project.link" target="_blank"
+                <a v-if="project.link && project.link.trim() !== ''" :href="project.link" target="_blank"
                     class="inline-flex items-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-all hover:scale-105 group text-lg font-medium">
                     <span>Visit Project</span>
                     <svg class="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
@@ -45,6 +45,10 @@
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                 </a>
+
+                <p v-else class="text-center text-gray-600">
+                    Private Project
+                </p>
             </div>
 
             <!-- Overview - Centered -->
