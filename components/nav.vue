@@ -17,20 +17,20 @@
         navActive: $route.name === 'index' || $route.name === 'projects-detail',
       }"
       class="p-3 navHover"
-      >Web
-      <span class="p-0.5 rounded-lg border-2 border-lime-100">/</span></NuxtLink
-    >
+      >Web <img src="~/public/wired.gif" class="inline w-8" alt=""
+    /></NuxtLink>
     <NuxtLink
       :class="{ navActive: $route.name === 'music' }"
       to="/music"
       class="p-3 navHover"
-      >Music</NuxtLink
-    >
+      >Music<img src="~/public/music.gif" class="inline w-8" alt=""
+    /></NuxtLink>
     <NuxtLink
       :class="{ navActive: $route.name === 'service' }"
       to="/service"
       class="p-3 navHover"
-      >Service</NuxtLink
+      >Service<img src="~/public/cons.gif" class="inline w-8" alt=""
+    /></NuxtLink
     >
     <!-- <NuxtLink :class="{ navActive: $route.name === 'belajar' }" to="/belajar" class="p-3 navHover">Belajar</NuxtLink> -->
   </div>

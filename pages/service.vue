@@ -1,6 +1,4 @@
 <template>
-
-
   <div v-motion-fade class="">
     <section class="py-1 md:py-10">
       <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 relative">
@@ -8,7 +6,9 @@
           <div class="grid overflow-hidden shadow-xl md:grid-cols-1 rounded-xl">
             <aside class="p-8 md:space-y-4 md:p-16">
               <div class="acorn">
-                <span class="text-gray-800 text-4xl md:text-7xl">Services </span>
+                <span class="text-gray-800 text-4xl md:text-7xl"
+                  >Services
+                </span>
               </div>
               <a
                 href="#"
@@ -19,20 +19,19 @@
                   class="relative text-gray-800 text-sm md:text-xl md:px-4 py-2 md:mt-3 rounded-xl"
                 >
                   <img
-                    src="~/public/animasi/7.png"
-                    class="absolute w-28 md:w-36 -top-28 md:-top-36 md:bottom-20 -left-12"
+                    src="/animasi/7.png"
+                    class="absolute w-28 md:w-36 -top-28 md:-top-36 md:bottom-20 -left-12 floating"
                     alt=""
                     data-aos="fade-left"
                   />
                   <img
-                    src="~/public/animasi/9.png"
-                    class="absolute w-24 bottom-30 -right-20"
+                    src="/animasi/9.png"
+                    class="absolute w-24 bottom-30 -right-20 peek-anim"
                     alt=""
                     data-aos="fade-left"
                   />
-                  Build unique websites and create stunning music!
-                  Bring your vision to life with my services. Contact me
-                  now!
+                  Build unique websites and create stunning music! Bring your
+                  vision to life with my services. Contact me now!
                 </span>
               </a>
             </aside>
@@ -48,8 +47,10 @@
     <FaqService />
 
     <TestiService class="block md:hidden" />
-    <div class="hidden md:block py-6 w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
-      <div class=" grid grid-rows-3 grid-flow-col gap-2">
+    <div
+      class="hidden md:block py-6 w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8"
+    >
+      <div class="grid grid-rows-3 grid-flow-col gap-2">
         <div
           class="acorn relative overflow-hidden row-span-3 bg-[#27283D] rounded-bl-3xl rounded-t-3xl h-72"
         >
@@ -144,8 +145,9 @@
           class="relative row-span-2 mt-3 bg-cyan-200 rounded-br-3xl rounded-t-3xl"
         >
           <img
-            v-motion-slide-visible-top :delay="200"
-    :duration="1200"
+            v-motion-slide-visible-top
+            :delay="200"
+            :duration="1200"
             src="~/public/animasi/8.png"
             class="w-36 right-16 -top-2 absolute z-30"
             alt=""
@@ -154,39 +156,62 @@
         <div
           class="row-span-2 mt-5 shadow-xl bg-green-300 rounded-3xl relative"
         >
-        <img
+          <img
             src="~/public/script.png"
-            class="w-40 rounded-tr-3xl rounded-bl-3xl absolute -top-4 -right-3 "
+            class="w-40 rounded-tr-3xl rounded-bl-3xl absolute -top-4 -right-3"
             alt=""
           />
-          
+
           <div class="acorn">
-            <span class="text-2xl  absolute font-medium left-4 bottom-6 text-gray-800 z-30">Let's Go!</span>
+            <span
+              class="text-2xl absolute font-medium left-4 bottom-6 text-gray-800 z-30"
+              >Let's Go!</span
+            >
           </div>
-          <span class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800">Create Apps & Music</span>
+          <span
+            class="text-sm font-medium absolute z-30 left-4 bottom-1 text-gray-800"
+            >Create Apps & Music</span
+          >
         </div>
       </div>
 
       <div class="grid grid-cols-3 grid-flow-col gap-2 py-2">
-        <div class="col-span-2 bg-red-400 rounded-3xl z-10 relative overflow-hidden h-64">
+        <div
+          class="col-span-2 bg-red-400 rounded-3xl z-10 relative overflow-hidden h-64"
+        >
           <div class="acorn">
-            <span class="font-meidum text-3xl absolute left-4 top-3 text-warnaHeading z-30">My Tools</span>
+            <span
+              class="font-meidum text-3xl absolute left-4 top-3 text-warnaHeading z-30"
+              >My Tools</span
+            >
           </div>
           <img
             src="~/public/rich.png"
-            class="w-64 absolute top-8 -left-16 "
+            class="w-64 absolute top-8 -left-16"
             alt=""
           />
-          <TestiList2 class="ml-48 font-medium" v-for="item in tools" stroke="#1F2937" bg="bg-rose-100" :konten="item" />
+          <TestiList2
+            class="ml-48 font-medium"
+            v-for="item in tools"
+            stroke="#1F2937"
+            bg="bg-rose-100"
+            :konten="item"
+          />
         </div>
-        <div class="col-span-1 relative overflow-hidden bg-rose-200 rounded-3xl h-64">
+        <div
+          class="col-span-1 relative overflow-hidden bg-rose-200 rounded-3xl h-64"
+        >
           <img
             src="~/public/logo.jpg"
             class="w-40 rounded-tr-3xl rounded-bl-3xl absolute -top-10 -right-3 z-10"
             alt=""
           />
-          <span class="text-md absolute left-4 bottom-14 text-gray-800 z-30">Interested?</span>
-          <span class="text-3xl absolute left-4 bottom-5 text-gray-800 z-30">Order Now</span>
+          <span class="text-md absolute left-4 bottom-14 text-gray-800 z-30"
+            >Interested?</span
+          >
+          <span class="text-3xl absolute left-4 bottom-5 text-gray-800 z-30"
+            >Order Now</span
+          >
         </div>
       </div>
     </div>
@@ -197,10 +222,41 @@ useHead({
   title: `Service - Aldi`,
 });
 
-const tools = ref(['FL Studio 20', 'Capcut', 'Canva', 'Filmora', 'OBS Studio'])
+const tools = ref(["FL Studio 20", "Capcut", "Canva", "Filmora", "OBS Studio"]);
 </script>
 <style>
 img {
   image-rendering: optimizeQuality; /* Menggunakan teknik penghalusan untuk meningkatkan kualitas gambar */
+}
+
+@keyframes peek {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  20% {
+    transform: translateX(-40px) rotate(-2deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(-40px) rotate(2deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+
+.peek-anim {
+  animation: peek 5s ease-in-out infinite;
 }
 </style>
