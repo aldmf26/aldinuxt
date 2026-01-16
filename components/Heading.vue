@@ -46,11 +46,6 @@
           </h1>
         </div>
       </div>
-      <input
-        type="text"
-        class="inputAldi"
-        placeholder="Search my projects ..."
-      />
     </div>
     <div class="block md:hidden">
       <div class="flex w-1/2 justify-center mx-auto py-10 acorn text-warna1">
@@ -90,13 +85,6 @@
             class="w-20 float-start"
             alt=""
             data-aos="fade-left"
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            class="inputAldi"
-            placeholder="Search my projects ..."
           />
         </div>
         <div>
