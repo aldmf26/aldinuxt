@@ -1,8 +1,3 @@
-<style scoped>
-.inputAldi {
-  @apply rounded-full hidden w-full md:w-2/5 min-h-12 py-2 pl-5 pr-3 text-warna1 bg-[#f1f1e1] shadow-sm focus:outline-none focus:border-lime-400 focus:ring-lime-200 focus:ring-1 border-warna1 placeholder:italic placeholder:text-slate-400 border;
-}
-</style>
 <template>
   <div v-motion-fade>
     <div class="hidden md:block">
