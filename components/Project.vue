@@ -16,9 +16,14 @@
 }
 </style>
 <template>
-  <div v-motion-fade class="py-8 md:py-16">
+  <div class="mt-16 py-8 md:py-16">
     <!-- Hero Section Title -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <div
+      v-motion
+      :initial="{ opacity: 0, y: 50 }"
+      :visible="{ opacity: 1, y: 0, transition: { duration: 800 } }"
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12"
+    >
       <h2 class="acorn500 text-4xl md:text-6xl font-bold text-gray-800">
         My Projects
       </h2>
@@ -34,6 +39,17 @@
           v-for="project in projects"
           :key="project.judul"
           :project="project"
+          v-motion
+          :initial="{ opacity: 0, y: 60 }"
+          :visible="{
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 600,
+              delay: index * 100 + 200, // stagger: card ke-2 delay 100ms lebih, dst
+              ease: 'easeOut',
+            },
+          }"
         />
       </div>
     </div>

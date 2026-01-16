@@ -3,6 +3,7 @@
     :to="`/projects/${project.detail}`"
     :class="cardClass"
     class="block group h-full"
+    
   >
     <div class="p-6 flex flex-col h-full">
       <!-- Title -->
