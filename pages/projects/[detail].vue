@@ -24,15 +24,14 @@
                 <h1 class="acorn500 text-5xl md:text-6xl font-bold text-gray-900 mb-6">
                     {{ project.title }}
                 </h1>
-                <p class="text-2xl text-gray-600 mb-6 max-w-2xl mx-auto">
+                <p class="text-2xl md:text-3xl text-gray-600 max-w-4xl mx-auto mb-12">
                     {{ project.subtitle }}
 
                 <div class="flex flex-wrap gap-3 mt-2 justify-center">
                     <span v-for="tech in project.techs" :key="tech"
-                        class="px-3 py-1 bg-slate-600 text-white text-xs rounded-lg">
+                        class="px-3 py-1 bg-slate-600 text-sm text-white rounded-lg">
                         {{ tech }}
                     </span>
-
                 </div>
                 </p>
                 <!-- Visit Link -->
@@ -52,7 +51,7 @@
             </div>
 
             <!-- Overview - Centered -->
-            <section class="mb-16">
+            <!-- <section class="mb-16">
                 <h2 class="acorn500 text-3xl font-bold text-gray-900 text-center">
                     Overview
                 </h2>
@@ -60,18 +59,20 @@
                 <p class="text-gray-700 leading-relaxed text-xl text-center max-w-2xl mx-auto">
                     {{ project.description }}
                 </p>
-            </section>
+            </section> -->
 
 
 
             <!-- Project Screenshots with Descriptions -->
             <section class="space-y-20 mb-20">
-                <div v-for="(screenshot, index) in project.screenshots" :key="index" class="space-y-6">
-                    <div class="relative overflow-hidden rounded-2xl shadow-2xl bg-white">
+                <div v-motion
+        :initial="{ opacity: 0, y: 100 }"
+        :visible="{ opacity: 1, y: 0, transition: { duration: 800, delay: index * 150 } }" v-for="(screenshot, index) in project.screenshots" :key="index" class="space-y-6">
+                    <div class="relative -mx-6 md:-mx-12 lg:-mx-20 overflow-hidden rounded-3xl shadow-2xl">
                         <img :src="screenshot.image" :alt="screenshot.title" class="w-full h-auto object-cover" />
                     </div>
                     <div class="text-center max-w-2xl mx-auto">
-                        <h3 class="acorn500 text-2xl font-bold text-gray-900 mb-3">
+                        <h3 class="acorn500 text-3xl font-bold text-gray-900 mb-3">
                             {{ screenshot.title }}
                         </h3>
                         <p class="text-gray-600 leading-relaxed text-lg">
