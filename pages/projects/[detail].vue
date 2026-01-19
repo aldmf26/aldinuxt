@@ -71,7 +71,7 @@
     :visible="{ opacity: 1, y: 0, transition: { duration: 800, delay: index * 150 } }" 
     v-for="(screenshot, index) in project.screenshots" 
     :key="index" 
-    class="space-y-6"
+    class="space-y-6 mx-4 md:mx-0"
   >
     <div 
       class="relative -mx-6 md:-mx-12 lg:-mx-20 overflow-hidden rounded-3xl shadow-2xl cursor-pointer group"
@@ -80,7 +80,7 @@
       <img 
         :src="screenshot.image" 
         :alt="screenshot.title" 
-        class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 px-4 md:px-0" 
+        class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" 
       />
       <!-- Overlay hover effect -->
       <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
