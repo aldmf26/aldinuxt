@@ -50,24 +50,10 @@ export const projectsData = {
     screenshots: [
       {
         image:
-          "https://placehold.co/1200x800/e0e7ff/6366f1?text=Agrika+Dashboard",
-        title: "Agrika Dashboard",
+          "/detail/agrika/landing.png",
+        title: "Landing Page",
         description:
-          "The main dashboard provides an intuitive overview of the company, featuring a timeline view that makes it easy to navigate through different eras and civilizations.",
-      },
-      {
-        image:
-          "https://placehold.co/1200x800/ddd6fe/9333ea?text=Coffee+Figures",
-        title: "Coffee Figures Database",
-        description:
-          "Comprehensive profiles of coffee figures throughout history, complete with biographical information, key achievements, and their impact on world events.",
-      },
-      {
-        image:
-          "https://placehold.co/1200x800/fce7f3/ec4899?text=Search+%26+Filter",
-        title: "Advanced Search & Filtering",
-        description:
-          "Powerful search capabilities allow users to quickly find specific coffee events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
+          "Agrika specializes in exporting premium Indonesian bird’s nest, delivering authentic quality to global markets.",
       },
     ],
   },
@@ -84,25 +70,24 @@ export const projectsData = {
     role: "Full Stack Developer",
     screenshots: [
       {
+//         Aldi Teori
+// Pencarian umum di antara semua budaya untuk mendapatkan penjelasan atas pertanyaan paling mendasar mengenai Dunia ini.
+
+// Kata "teori" berasal dari kata "theoria" dalam bahasa Latin yang berarti "perenungan". Kata "theoria" sendiri berasal dari kata "thea" dalam bahasa Yunani yang berarti "cara atau hasil pandang".
+
+// Secara umum, teori merupakan analisis hubungan antara fakta yang satu dengan fakta yang lain pada sekumpulan fakta-fakta .
         image:
-          "https://placehold.co/1200x800/e0e7ff/6366f1?text=Theory+Dashboard",
-        title: "Interactive Dashboard",
+          "/detail/teory/landing.png",
+        title: "Home Page",
         description:
-          "The main dashboard provides an intuitive overview of historical periods, featuring a timeline view that makes it easy to navigate through different eras and civilizations.",
+          "Aldi Teori is a comprehensive theory application about historical figures and civilizations, serving as an educational resource for students and history enthusiasts.",
       },
       {
         image:
-          "https://placehold.co/1200x800/ddd6fe/9333ea?text=Historical+Figures",
-        title: "Historical Figures Database",
+          "/detail/teory/detail.png",
+        title: "Detail Page",
         description:
-          "Comprehensive profiles of influential figures throughout history, complete with biographical information, key achievements, and their impact on world events.",
-      },
-      {
-        image:
-          "https://placehold.co/1200x800/fce7f3/ec4899?text=Search+%26+Filter",
-        title: "Advanced Search & Filtering",
-        description:
-          "Powerful search capabilities allow users to quickly find specific historical events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
+          "Explore detailed information on historical events, figures, and theories with rich content including text, images, and references to enhance understanding.",
       },
     ],
   },
@@ -188,16 +173,22 @@ export const projectsData = {
     role: "Full Stack Developer",
     screenshots: [
       {
-        image: "https://placehold.co/1200x800/dbeafe/3b82f6?text=Order+Screen",
-        title: "Order Screen",
+        image: "/detail/resto/home.png",
+        title: "Landing Page",
         description:
-          "Effortlessly take orders with a user-friendly interface. The order screen displays menu items, prices, and quantities, allowing staff to quickly and accurately process orders.",
+          "The order screen provides an intuitive interface for staff to quickly take and manage customer orders, ensuring accuracy and efficiency in a fast-paced restaurant environment.",
       },
       {
-        image: "https://placehold.co/1200x800/d1fae5/10b981?text=Order+History",
-        title: "Order History",
+        image: "/detail/resto/landing.png",
+        title: "Detail Page",
         description:
-          "Easily view and manage previous orders with the order history feature. Filter orders by date, time, or customer to quickly identify trends and areas for improvement.",
+          "The detail page provides comprehensive information about each restaurant, including menu items, pricing, and location details.",
+      },
+      {
+        image: "/detail/resto/kasir.png",
+        title: "Admin Page",
+        description:
+        "The admin page allows restaurant owners to manage orders, menu items, and other restaurant details.",
       },
     ],
   },
@@ -215,10 +206,17 @@ export const projectsData = {
     screenshots: [
       {
         image:
-          "https://placehold.co/1200x800/e0f2fe/0284c7?text=JeneryMF+Calculator",
+          "/detail/jenerym/landing.png",
         title: "Measurement Calculator",
         description:
           "Tool for calculating body size efficiently using pole diameter input.",
+      },
+      {
+        image:
+          "/detail/jenerym/dashboard.png",
+        title: "Owner Dashboard",
+        description:
+          "Dashboard for owners to manage customer measurements and view history.",
       },
     ],
   },
