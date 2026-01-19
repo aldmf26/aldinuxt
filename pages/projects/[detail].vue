@@ -80,7 +80,7 @@
       <img 
         :src="screenshot.image" 
         :alt="screenshot.title" 
-        class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" 
+        class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 px-4 md:px-0" 
       />
       <!-- Overlay hover effect -->
       <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -134,7 +134,7 @@
         <img 
           :src="currentImage" 
           :alt="currentTitle" 
-          class="w-full h-auto max-h-[80vh] object-contain"
+          class="w-full h-auto max-h-[80vh] mx-10 object-contain"
         />
       </div>
 
