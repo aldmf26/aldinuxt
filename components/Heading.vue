@@ -11,7 +11,7 @@
               y: 0,
               transition: { duration: 800, delay: 200 },
             }"
-            class="text-6xl md:text-8xl xl:text-9xl leading-tight"
+            class="text-5xl md:text-7xl xl:text-8xl leading-tight"
           >
             Hi. I'm <span class="text-warna1">𝒜ldi</span>
           </h1>
@@ -23,9 +23,9 @@
               y: 0,
               transition: { duration: 800, delay: 500 },
             }"
-            class="text-6xl md:text-8xl xl:text-9xl leading-tight mt-4"
+            class="text-4xl md:text-5xl xl:text-6xl leading-tight mt-4"
           >
-            α<span class="text-warna1">Web</span>Dev &
+            I Build <span class="text-warna1">Websites</span> &
             <!-- <img
             src="~/public/animasi/13.png"
             class="w-28 float-start"
@@ -37,7 +37,7 @@
             class="w-28 scale-x-[-1] float-end"
             alt=""
           /> -->
-            <span class="text-warna1">Music</span>ProduceR
+            <span class="text-warna1">Produce</span> Music
           </h1>
         </div>
       </div>
@@ -53,7 +53,7 @@
               y: 0,
               transition: { duration: 800, delay: 200 },
             }"
-            class="text-5xl md:text-6xl leading-tight"
+            class="text-4xl md:text-5xl leading-tight"
           >
             Hi. I'm <span class="text-warna1">𝒜ldi</span>
           </h1>
@@ -65,10 +65,10 @@
               y: 0,
               transition: { duration: 800, delay: 500 },
             }"
-            class="text-5xl md:text-6xl leading-tight mt-2"
+            class="text-2xl md:text-5xl leading-tight mt-2"
           >
-            α <span class="text-warna1">Web</span>Dev &
-            <span class="text-warna1">Music</span>ProduceR
+            I Build<span class="text-warna1"> Websites</span> &
+            <span class="text-warna1">Produce</span> Music
           </h1>
         </div>
       </div>
