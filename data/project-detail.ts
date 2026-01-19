@@ -13,24 +13,24 @@ export const projectsData = {
     screenshots: [
       {
         image:
-          "https://placehold.co/1200x800/e0e7ff/6366f1?text=Agrika+Dashboard",
-        title: "Agrika Dashboard",
+          "/detail/laporku/landing.jpg",
+        title: "Landing Page",
         description:
-          "The main dashboard provides an intuitive overview of the company, featuring a timeline view that makes it easy to navigate through different eras and civilizations.",
+          "An engaging landing page that highlights the key features and benefits of Laporku, designed to attract and inform potential users about the application.",
       },
       {
         image:
-          "https://placehold.co/1200x800/ddd6fe/9333ea?text=Coffee+Figures",
-        title: "Coffee Figures Database",
+          "/detail/laporku/detail.png",
+        title: "Simple reports, smart tips, affordable plans — Laporku Online for UMKM success.",
         description:
-          "Comprehensive profiles of coffee figures throughout history, complete with biographical information, key achievements, and their impact on world events.",
+          "Laporku Online helps UMKM track weekly & monthly finances easily, with clear reports, smart tips, and affordable plans.",
       },
       {
         image:
-          "https://placehold.co/1200x800/fce7f3/ec4899?text=Search+%26+Filter",
-        title: "Advanced Search & Filtering",
+          "/detail/laporku/dashboard.png",
+        title: "Admin Dashboard",
         description:
-          "Powerful search capabilities allow users to quickly find specific coffee events, figures, or theories. Multiple filter options help narrow down results by era, region, or category.",
+          "The admin dashboard provides an intuitive overview of user activities, financial metrics, and system performance, enabling efficient management and monitoring of the Laporku application.",
       },
     ],
   },
