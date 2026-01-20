@@ -3,43 +3,43 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #fafafa;
+  --bg-color: #ffffff;
   --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --accent-color: #255BA6;
-  --accent-secondary: #EFC217;
+  --text-secondary: #4b5563;
+  --accent-color: #570df8;
+  --accent-secondary: #f000b8;
+}
+
+body.theme-light {
+  --bg-color: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent-color: #570df8;
+  --accent-secondary: #f000b8;
 }
 
 body.theme-dark {
-  --bg-color: #0E141B;
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --accent-color: #B8DBD9;
-  --accent-secondary: #588157;
+  --bg-color: #0d1117;
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --accent-color: #58a6ff;
+  --accent-secondary: #bc8cff;
 }
 
-body.theme-cream {
-  --bg-color: #E4E5DC;
-  --text-primary: #493432;
-  --text-secondary: #6b5a59;
-  --accent-color: #470FF4;
-  --accent-secondary: #D44D5C;
+body.theme-luxury {
+  --bg-color: #09090b;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent-color: #d4af37;
+  --accent-secondary: #1e1b4b;
 }
 
-body.theme-green {
-  --bg-color: #294936;
-  --text-primary: #F0F4EF;
-  --text-secondary: #B6C649;
-  --accent-color: #B6C649;
-  --accent-secondary: #F0F4EF;
-}
-
-body.theme-bright {
-  --bg-color: #ECECEA;
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --accent-color: #266DD3;
-  --accent-secondary: #FCA311;
+body.theme-synthwave {
+  --bg-color: #1a103d;
+  --text-primary: #f8fafc;
+  --text-secondary: #e879f9;
+  --accent-color: #f62d8f;
+  --accent-secondary: #209cee;
 }
 
 body {
