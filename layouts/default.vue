@@ -1,5 +1,8 @@
 <template>
-  <div class="min-h-screen bg-bg transition-colors duration-500 fredoka selection:bg-warna1 selection:text-bg">
+  <div class="min-h-screen bg-bg transition-colors duration-500 fredoka selection:bg-warna1 selection:text-bg relative overflow-hidden">
+    <!-- Editorial Noise Overlay -->
+    <div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.035] noise-overlay"></div>
+    
     <Nav />
 
     <main>
@@ -72,6 +75,24 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 <style>
 /* Global styles for smooth theme transition */
+.noise-overlay {
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  filter: contrast(150%) brightness(100%);
+}
+
+@keyframes noise {
+  0% { transform: translate(0,0) }
+  10% { transform: translate(-5%,-5%) }
+  20% { transform: translate(-10%,5%) }
+  32% { transform: translate(5%,-10%) }
+  45% { transform: translate(-5%,20%) }
+  58% { transform: translate(15%,-5%) }
+  70% { transform: translate(-15%,10%) }
+  82% { transform: translate(10%,5%) }
+  92% { transform: translate(5%,15%) }
+  100% { transform: translate(0,0) }
+}
+
 * {
   @apply transition-colors duration-300;
 }

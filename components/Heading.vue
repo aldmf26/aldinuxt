@@ -8,22 +8,35 @@
 
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col items-center text-center">
-        <div 
-          v-motion
-          :initial="{ opacity: 0, scale: 0.8, y: 30 }"
-          :enter="{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', damping: 20, stiffness: 100 } }"
-          class="relative mb-12"
-        >
-          <div class="w-32 h-32 md:w-40 md:h-40 bg-bg rounded-[2.5rem] shadow-2xl flex items-center justify-center rotate-3 hover:rotate-0 transition-all duration-500 border border-primary/10 cursor-pointer group">
-            <span class="text-6xl md:text-7xl font-black text-warna1 select-none group-hover:scale-110 transition-transform">A</span>
+        <div class="relative mb-12 group cursor-none">
+          <!-- Main Hero Image with Magnetic Effect -->
+          <div 
+            ref="magneticTarget"
+            class="relative w-48 h-48 md:w-64 md:h-64 mx-auto"
+          >
+            <!-- Animated Ring Background -->
+            <div class="absolute inset-[-10px] rounded-full border border-primary/10 animate-[spin_10s_linear_infinite]"></div>
+            <div class="absolute inset-[-20px] rounded-full border border-warna1/5 animate-[spin_15s_linear_infinite_reverse]"></div>
             
-            <!-- Floating Indicators -->
-            <div class="absolute -top-4 -right-4 w-14 h-14 bg-warnaHijau rounded-2xl shadow-lg flex items-center justify-center -rotate-12 animate-bounce">
-              <span class="text-2xl">🎹</span>
+            <!-- The Photo Container -->
+            <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-bg shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] z-10 bg-bg">
+              <img 
+                src="/rich.png" 
+                class="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-1000" 
+                alt="Aldi"
+              />
             </div>
-            <div class="absolute -bottom-2 -left-6 w-12 h-12 bg-warna1 rounded-2xl shadow-lg flex items-center justify-center rotate-12 animate-pulse">
-              <span class="text-xl">💻</span>
+
+            <!-- Floating GSAP Elements -->
+            <div class="magnetic-icon absolute -top-4 -right-4 w-16 h-16 bg-bg/80 backdrop-blur-xl border border-primary/10 rounded-2xl shadow-2xl flex items-center justify-center -rotate-12 z-20">
+              <span class="text-3xl">🎹</span>
             </div>
+            <div class="magnetic-icon absolute -bottom-6 -left-6 w-16 h-16 bg-bg/80 backdrop-blur-xl border border-primary/10 rounded-2xl shadow-2xl flex items-center justify-center rotate-12 z-20">
+              <span class="text-3xl">💻</span>
+            </div>
+
+            <!-- Glowing Aura -->
+            <div class="absolute inset-0 bg-warna1/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
           </div>
         </div>
 
@@ -76,7 +89,69 @@
 </template>
 
 <script setup>
-// No complex logic needed for the hero section yet
+import { gsap } from 'gsap'
+
+const magneticTarget = ref(null)
+
+onMounted(() => {
+  // Magnetic Effect
+  const target = magneticTarget.value
+  const icons = document.querySelectorAll('.magnetic-icon')
+  
+  const moveElement = (e) => {
+    const { clientX, clientY } = e
+    const { left, top, width, height } = target.getBoundingClientRect()
+    
+    // Calculate distance from center
+    const x = clientX - (left + width / 2)
+    const y = clientY - (top + height / 2)
+    
+    // Smooth magnetic move
+    gsap.to(target, {
+      x: x * 0.15,
+      y: y * 0.15,
+      rotateX: -y * 0.05,
+      rotateY: x * 0.05,
+      duration: 0.6,
+      ease: 'power2.out'
+    })
+
+    // Offset icons slightly differently for depth
+    icons.forEach((icon, i) => {
+      gsap.to(icon, {
+        x: x * (0.2 + i * 0.05),
+        y: y * (0.2 + i * 0.05),
+        duration: 0.8,
+        ease: 'power3.out'
+      })
+    })
+  }
+
+  const resetElement = () => {
+    gsap.to([target, ...icons], {
+      x: 0,
+      y: 0,
+      rotateX: 0,
+      rotateY: 0,
+      duration: 1,
+      ease: 'elastic.out(1, 0.3)'
+    })
+  }
+
+  window.addEventListener('mousemove', moveElement)
+  target.addEventListener('mouseleave', resetElement)
+
+  // Subtle Floating for Icons (GSAP is smoother than CSS)
+  icons.forEach((icon, i) => {
+    gsap.to(icon, {
+      y: '+=15',
+      duration: 2 + i,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    })
+  })
+})
 </script>
 
 <style scoped>
