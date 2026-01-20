@@ -51,14 +51,7 @@
       </div>
     </footer>
 
-    <!-- Back to Top -->
-    <button 
-      v-if="scrollY > 300"
-      @click="backToTop"
-      class="fixed bottom-8 right-8 w-14 h-14 bg-warna1 text-bg rounded-2xl shadow-2xl flex items-center justify-center hover:-translate-y-2 transition-all duration-300 z-50 group"
-    >
-      <svg class="w-6 h-6 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
-    </button>
+    
   </div>
 </template>
 
