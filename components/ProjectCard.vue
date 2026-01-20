@@ -15,19 +15,19 @@
 
     <div class="relative z-10 flex flex-col h-full mt-8 md:mt-12">
       <!-- Feature Visual Area (Cinematic) -->
-      <div class="mb-12 w-full aspect-video rounded-2xl bg-primary/[0.02] border border-primary/[0.05] overflow-hidden flex items-center justify-center p-12 md:p-16 group-hover:bg-primary/[0.04] transition-all duration-700 relative">
+      <div class="mb-12 w-full aspect-video rounded-3xl bg-primary/[0.02] border border-primary/[0.05] overflow-hidden flex items-center justify-center p-6 md:p-16 group-hover:bg-primary/[0.04] transition-all duration-700 relative">
         <!-- Floating Shine Layer -->
         <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         
-        <div v-if="project.judul === 'AgaFood'" class="flex gap-10 items-center flex-wrap justify-center relative z-10">
-          <img src="/projects/tkmr.png" class="h-16 md:h-24 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Takemori" />
-          <div class="w-px h-16 bg-primary/10"></div>
-          <img src="/projects/sdb.png" class="h-16 md:h-24 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Soondobu" />
+        <div v-if="project.judul === 'AgaFood'" class="flex gap-6 md:gap-10 items-center flex-wrap justify-center relative z-10 w-full">
+          <img src="/projects/tkmr.png" class="h-20 md:h-28 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Takemori" />
+          <div class="w-px h-12 md:h-16 bg-primary/10"></div>
+          <img src="/projects/sdb.png" class="h-20 md:h-28 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Soondobu" />
         </div>
         <img 
           v-else 
           :src="project.logoUrl" 
-          class="max-h-full max-w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] group-hover:scale-110 transition-transform duration-700 relative z-10" 
+          class="max-h-[85%] max-w-[85%] md:max-h-full md:max-w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] group-hover:scale-110 transition-transform duration-700 relative z-10" 
           :alt="project.judul" 
         />
       </div>
