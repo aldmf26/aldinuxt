@@ -1,191 +1,128 @@
 <template>
-    <div v-motion-fade class="min-h-screen py-8 md:py-16">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div v-motion-fade class="min-h-screen bg-bg transition-colors duration-500 pt-32 pb-24 selection:bg-warna1 selection:text-bg">
+        <div class="max-w-4xl mx-auto px-6">
             <!-- Back Button -->
             <button @click="goBack" aria-label="Go back"
-                class="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-12 group">
-                <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-                <span class="text-sm font-medium">Back</span>
+                class="inline-flex items-center gap-2 text-secondary hover:text-warna1 transition-all mb-16 group">
+                <div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-warna1 group-hover:text-bg transition-colors">
+                  <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none"
+                      stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </div>
+                <span class="text-sm font-black uppercase tracking-widest">Back</span>
             </button>
 
-            <!-- Project Header - Centered -->
-            <div class="mb-16 text-center">
-                <div v-if="project.title === 'AgaFood'">
-                    <img src="\public\projects\tkmr.png" class="inline" width="120" alt="Project Logo" />
-                    <img src="\public\projects\sdb.png" class="inline" width="120" alt="Project Logo" />
-                </div>
-                <div v-else>
-                    <img :src="project.logoUrl" class="inline" :width="project.width" alt="Project Logo" />
+            <!-- Project Identity Header -->
+            <div class="mb-20 text-center">
+                <div class="mb-12 flex justify-center gap-8 items-center flex-wrap">
+                    <template v-if="project.title === 'AgaFood'">
+                        <img src="/projects/tkmr.png" class="h-20 w-auto object-contain drop-shadow-xl" alt="Takemori Logo" />
+                        <div class="w-px h-12 bg-primary/10"></div>
+                        <img src="/projects/sdb.png" class="h-20 w-auto object-contain drop-shadow-xl" alt="Soondobu Logo" />
+                    </template>
+                    <img v-else :src="project.logoUrl" class="h-24 w-auto object-contain drop-shadow-2xl" alt="Project Logo" />
                 </div>
 
-                <h1 class="acorn500 text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                <h1 class="text-5xl md:text-8xl font-black text-primary acorn tracking-tighter mb-8 italic">
                     {{ project.title }}
                 </h1>
-                <p class="text-2xl md:text-3xl text-gray-600 max-w-4xl mx-auto mb-12">
+                
+                <p class="text-2xl md:text-3xl text-secondary font-medium leading-relaxed max-w-3xl mx-auto mb-12">
                     {{ project.subtitle }}
+                </p>
 
-                <div class="flex flex-wrap gap-3 mt-2 justify-center">
+                <div class="flex flex-wrap gap-2 justify-center mb-16">
                     <span v-for="tech in project.techs" :key="tech"
-                        class="px-3 py-1 bg-slate-600 text-sm text-white rounded-lg">
+                        class="px-5 py-2.5 bg-primary/[0.05] text-primary/70 text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
                         {{ tech }}
                     </span>
                 </div>
-                </p>
-                <!-- Visit Link -->
+
+                <!-- Action Link -->
                 <a v-if="project.link && project.link.trim() !== ''" :href="project.link" target="_blank"
-                    class="inline-flex items-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-all hover:scale-105 group text-lg font-medium">
-                    <span>Visit Project</span>
-                    <svg class="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                    class="inline-flex items-center gap-4 px-10 py-5 bg-warna1 text-bg rounded-2xl transition-all hover:scale-105 hover:-translate-y-1 shadow-2xl shadow-warna1/20 group font-black uppercase tracking-widest">
+                    <span>Visit Live Project</span>
+                    <svg class="w-6 h-6 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                 </a>
-
-                <p v-else class="text-center text-gray-600">
-                    Private Project
+                <p v-else class="text-secondary font-black uppercase tracking-[0.3em] opacity-40">
+                  Private Project
                 </p>
             </div>
 
-            <!-- Overview - Centered -->
-            <!-- <section class="mb-16">
-                <h2 class="acorn500 text-3xl font-bold text-gray-900 text-center">
-                    Overview
-                </h2>
+            <!-- Showcase Section -->
+            <section class="space-y-32 mb-32">
+              <div 
+                v-for="(screenshot, index) in project.screenshots" 
+                :key="index" 
+                v-motion
+                :initial="{ opacity: 0, y: 50 }"
+                :visible="{ opacity: 1, y: 0, transition: { duration: 800, delay: index * 100 } }"
+                class="space-y-12"
+              >
+                <div 
+                  class="relative -mx-6 md:-mx-12 lg:-mx-24 rounded-[3rem] overflow-hidden bg-primary/[0.02] border border-primary/5 shadow-2xl cursor-pointer group"
+                  @click="openLightbox(screenshot)"
+                >
+                  <img 
+                    :src="screenshot.image" 
+                    :alt="screenshot.title" 
+                    class="w-full h-auto transition-transform duration-700 group-hover:scale-105" 
+                  />
+                  <div class="absolute inset-0 bg-primary/0 group-hover:bg-warna1/10 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <div class="w-20 h-20 bg-bg/90 rounded-full flex items-center justify-center text-warna1 shadow-2xl">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="text-center max-w-2xl mx-auto space-y-4">
+                  <h3 class="text-3xl font-black text-primary acorn tracking-tighter italic">
+                    {{ screenshot.title }}
+                  </h3>
+                  <p class="text-lg text-secondary font-medium leading-relaxed">
+                    {{ screenshot.description }}
+                  </p>
+                </div>
+              </div>
+            </section>
 
-                <p class="text-gray-700 leading-relaxed text-xl text-center max-w-2xl mx-auto">
-                    {{ project.description }}
-                </p>
-            </section> -->
+            <!-- Lightbox -->
+            <Teleport to="body">
+              <div v-if="lightboxOpen" 
+                   class="fixed inset-0 z-[200] bg-primary/95 backdrop-blur-xl flex items-center justify-center p-8 md:p-20"
+                   @click="closeLightbox">
+                <button class="absolute top-10 right-10 text-bg/60 hover:text-bg transition-colors" @click="closeLightbox">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <img :src="currentImage" class="max-w-full max-h-full rounded-2xl shadow-2xl object-contain shadow-black/50" />
+              </div>
+            </Teleport>
 
-
-
-            <!-- Project Screenshots with Descriptions -->
-            <section class="space-y-20 mb-20">
-  <div 
-    v-motion
-    :initial="{ opacity: 0, y: 100 }"
-    :visible="{ opacity: 1, y: 0, transition: { duration: 800, delay: index * 150 } }" 
-    v-for="(screenshot, index) in project.screenshots" 
-    :key="index" 
-    class="space-y-6 mx-4 md:mx-0"
-  >
-    <div 
-      class="relative -mx-6 md:-mx-12 lg:-mx-20 overflow-hidden rounded-3xl shadow-2xl cursor-pointer group"
-      @click="openLightbox(screenshot)"
-    >
-      <img 
-        :src="screenshot.image" 
-        :alt="screenshot.title" 
-        class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" 
-      />
-      <!-- Overlay hover effect -->
-      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-        <UIcon 
-          name="i-heroicons-magnifying-glass-plus" 
-          class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        />
-      </div>
-    </div>
-    <div class="text-center max-w-2xl mx-auto">
-      <h3 class="acorn500 text-3xl font-bold text-gray-900 mb-3">
-        {{ screenshot.title }}
-      </h3>
-      <p class="text-gray-600 leading-relaxed text-lg">
-        {{ screenshot.description }}
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Lightbox Modal -->
-<Teleport to="body">
-  <div 
-    v-if="lightboxOpen"
-    v-motion
-    :initial="{ opacity: 0 }"
-    :enter="{ opacity: 1, transition: { duration: 300 } }"
-    :leave="{ opacity: 0, transition: { duration: 300 } }"
-    class="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
-    @click="closeLightbox"
-  >
-    <!-- Close button -->
-    <button
-      class="absolute top-4 right-4 md:top-8 md:right-8 text-white/80 hover:text-white transition-colors z-10"
-      @click="closeLightbox"
-    >
-      <UIcon name="i-heroicons-x-mark" class="w-8 h-8 md:w-10 md:h-10" />
-    </button>
-
-    <!-- Image container -->
-    <div 
-      v-motion
-      :initial="{ scale: 0.8, y: 50 }"
-      :enter="{ scale: 1, y: 0, transition: { duration: 500, type: 'spring', stiffness: 100 } }"
-      :leave="{ scale: 0.8, y: 50, transition: { duration: 300 } }"
-      class="max-w-7xl w-full"
-      @click.stop
-    >
-      <!-- Image -->
-      <div class="relative rounded-2xl overflow-hidden shadow-2xl mb-6">
-        <img 
-          :src="currentImage" 
-          :alt="currentTitle" 
-          class="w-full h-auto max-h-[80vh] mx-10 object-contain"
-        />
-      </div>
-
-      <!-- Caption -->
-      <div 
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 200 } }"
-        class="text-center text-white space-y-2"
-      >
-      </div>
-    </div>
-
-    <!-- Hint text -->
-    <div 
-      v-motion
-      :initial="{ opacity: 0 }"
-      :enter="{ opacity: 1, transition: { duration: 400, delay: 400 } }"
-      class="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-xs md:text-sm"
-    >
-      Klik di luar atau tekan ESC untuk menutup
-    </div>
-  </div>
-</Teleport>
-            <!-- Divider -->
-            <div class="border-t border-gray-300 my-16"></div>
-
-            <!-- Recommended Projects -->
-            <div class="mw-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 relative">
-                <h3 class="acorn500 text-2xl font-bold text-gray-900 mb-4">
-                    Recommended Projects
-                </h3>
-                <!-- Grid Projects -->
+            <!-- Recommended Footer -->
+            <div class="pt-32 border-t border-primary/5">
+                <h3 class="text-3xl font-black text-primary acorn tracking-tighter mb-12 italic">Recommended Projects</h3>
                 <div v-motion
                     :initial="{ opacity: 0, y: 60 }"
                     :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }" class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
                     <ProjectCard
-                    v-for="project in recommendedProjects"
-                    :key="project.judul"
-                    :project="project"
+                      v-for="(p, i) in recommendedProjects"
+                      :key="p.judul"
+                      :project="p"
+                      :index="i"
                     />
                 </div>
 
-                <NuxtLink to="/" aria-label="Go back Home"
-                class="inline-flex mt-4 items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-12 group">
-                <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-                <span class="text-sm font-medium">Back to Home</span>
-            </NuxtLink>
+                <NuxtLink to="/" class="flex flex-col items-center group gap-4">
+                  <div class="w-16 h-16 bg-primary/[0.03] border border-primary/5 rounded-2xl flex items-center justify-center text-secondary group-hover:bg-warna1 group-hover:text-bg transition-all duration-300">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a2 2 0 01-2 2h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                  </div>
+                  <span class="text-sm font-black uppercase tracking-[0.3em] text-secondary group-hover:text-primary transition-colors">Back to Selection</span>
+                </NuxtLink>
             </div>
         </div>
     </div>
@@ -197,76 +134,43 @@ import { projectsData } from '~/data/project-detail'
 
 const route = useRoute()
 const router = useRouter()
+const projectDetail = route.params.detail as string
 
-const goBack = () => window.history.length > 1 
-                        ? router.back() 
-                        : router.push('/')
-                        
-const projectDetail = route.params.detail as keyof typeof projectsData
-// Lightbox state
-const lightboxOpen = ref(false);
-const currentImage = ref('');
-const currentTitle = ref('');
-const currentDescription = ref('');
+const lightboxOpen = ref(false)
+const currentImage = ref('')
 
-const openLightbox = (screenshot: { image: string; title: string; description: string }) => {
-  currentImage.value = screenshot.image;
-  currentTitle.value = screenshot.title;
-  currentDescription.value = screenshot.description;
-  lightboxOpen.value = true;
-  // Prevent body scroll
-  document.body.style.overflow = 'hidden';
-};
-
-const closeLightbox = () => {
-  lightboxOpen.value = false;
-  document.body.style.overflow = '';
-};
-if (!projectsData[projectDetail]) {
-    throw createError({ statusCode: 404 })
+const openLightbox = (screenshot: any) => {
+  currentImage.value = screenshot.image
+  lightboxOpen.value = true
+  document.body.style.overflow = 'hidden'
 }
 
-const project = computed(() => {
-    return projectsData[projectDetail] ?? projectsData.teory
-})
+const closeLightbox = () => {
+  lightboxOpen.value = false
+  document.body.style.overflow = ''
+}
+
+const goBack = () => router.push('/')
+
+const project = computed(() => projectsData[projectDetail as keyof typeof projectsData] || projectsData.teory)
 
 const recommendedProjects = computed(() => {
-    if (!project.value) return []
-
-    return projects
-        // exclude current project
-        .filter(p => p.detail !== projectDetail)
-        // similarity by tech
-        .map(p => {
-            const commonTech = p.techs.filter(t =>
-                project.value.techs.includes(t)
-            )
-
-            return {
-                ...p,
-                score: commonTech.length,
-            }
-        })
-        // urutkan dari paling relevan
-        .sort((a, b) => b.score - a.score)
-        // ambil 3 teratas
-        .slice(0, 2)
+  return projects
+    .filter(p => p.detail !== projectDetail)
+    .slice(0, 2)
 })
 
+useHead({ title: `${project.value.title} - Project Detail` })
 
 onMounted(() => {
-  // ... kode yang sudah ada ...
-
-  // ESC key to close lightbox
-  const handleEsc = (e) => {
-    if (e.key === 'Escape' && lightboxOpen.value) {
-      closeLightbox();
-    }
-  };
-  window.addEventListener('keydown', handleEsc);
-  
-  onBeforeUnmount(() => {
-    window.removeEventListener('keydown', handleEsc);
-  });
-});
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox()
+  })
+})
 </script>
+
+<style scoped>
+.acorn {
+  font-family: 'Fredoka', sans-serif;
+}
+</style>

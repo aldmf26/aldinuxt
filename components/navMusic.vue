@@ -1,87 +1,61 @@
 <template>
-    <div class="mt-10 sticky bottom-0 z-10 bg-warnaHeading p-4 shadow-md rounded-3xl max-w-4xl px-4 sm:px-10 md:px-8 md:mx-auto mx-10">
-      <!-- Navigasi pemutaran musik -->
-      <div class="flex items-center justify-center space-x-4">
-        <button @click="playPause">
-          <svg v-if="isPlaying" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-            <path
-              fill-rule="evenodd"
-              d="M5 4a1 1 0 011.633-.774l6 5a1 1 0 010 1.548l-6 5A1 1 0 015 16V4zm2 2v8.546L10.717 10 7 8.546V6h.001z"
-              clip-rule="evenodd"
-            />
+    <div class="mt-10 sticky bottom-6 z-50 bg-bg border border-primary/10 p-4 shadow-2xl rounded-[2rem] max-w-xl mx-auto backdrop-blur-md transition-colors duration-500">
+      <div class="flex items-center justify-between px-6">
+        <!-- Player Controls -->
+        <div class="flex items-center space-x-6">
+          <button @click="previousTrack" class="text-primary hover:text-warna1 transition-colors">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 19h2V5H6v14zm3.5-7L18 19V5l-8.5 7z"/>
+            </svg>
+          </button>
+          
+          <button @click="playPause" class="w-12 h-12 bg-warna1 text-bg rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg shadow-warna1/20">
+            <svg v-if="!isPlaying" class="h-6 w-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg v-else class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+          </button>
+
+          <button @click="nextTrack" class="text-primary hover:text-warna1 transition-colors">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M16 19h2V5h-2v14zM6 5v14l8.5-7L6 5z"/>
+            </svg>
+          </button>
+        </div>
+    
+        <!-- Volume -->
+        <div class="flex items-center gap-4">
+          <svg class="h-5 w-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
           </svg>
-          <svg v-else class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-            <path
-              fill-rule="evenodd"
-              d="M7 4a1 1 0 011.633-.774l6 5a1 1 0 010 1.548l-6 5A1 1 0 015 16V4zm2 2v8.546L10.717 10 7 8.546V6h.001z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </button>
-        <button @click="previousTrack">
-          <svg class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-            <path
-              fill-rule="evenodd"
-              d="M5.707 5.707a1 1 0 010 1.414L2.414 10l3.293 3.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M16 5a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </button>
-        <button @click="nextTrack">
-          <svg class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-            <path
-              fill-rule="evenodd"
-              d="M14.293 5.707a1 1 0 010 1.414L17.586 10l-3.293 3.293a1 1 0 11-1.414-1.414l4-4a1 1 0 010-1.414l-4-4a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M6 5a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
-  
-      <!-- Kontrol volume -->
-      <div class="flex items-center justify-center mt-4">
-        <input type="range" min="0" max="100" v-model="volume" class="w-48" @input="changeVolume">
+          <input 
+            type="range" 
+            min="0" 
+            max="100" 
+            v-model="volume" 
+            class="w-24 h-1.5 bg-primary/10 rounded-lg appearance-none cursor-pointer accent-warna1" 
+            @input="changeVolume"
+          >
+        </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script setup>
-  import { ref } from 'vue';
-  
-  // Simpan status pemutaran musik dan kontrol volume di komponen navbar
-  const isPlaying = ref(false);
-  const volume = ref(50);
-  
-  // Fungsi untuk mengontrol pemutaran musik
-  const playPause = () => {
-    isPlaying.value = !isPlaying.value;
-    // Tambahkan logika untuk memainkan atau menjeda musik di sini
-  };
-  
-  const previousTrack = () => {
-    // Tambahkan logika untuk memainkan track sebelumnya di sini
-  };
-  
-  const nextTrack = () => {
-    // Tambahkan logika untuk memainkan track berikutnya di sini
-  };
-  
-  const changeVolume = () => {
-    // Tambahkan logika untuk mengatur volume di sini
-  };
-  </script>
-  
-  <style scoped>
-  /* Tambahkan gaya CSS sesuai kebutuhan Anda */
-  </style>
-  
+<script setup>
+const isPlaying = ref(false)
+const volume = ref(50)
+
+const playPause = () => isPlaying.value = !isPlaying.value
+const previousTrack = () => {}
+const nextTrack = () => {}
+const changeVolume = () => {}
+</script>
+
+<style scoped>
+/* Custom range thumb styling */
+input[type=range]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+</style>

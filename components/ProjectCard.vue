@@ -1,51 +1,54 @@
 <template>
   <NuxtLink
     :to="`/projects/${project.detail}`"
-    :class="cardClass"
-    class="block group h-full"
-    
+    class="group block relative bg-bg rounded-[3rem] p-8 md:p-14 hover:shadow-[0_60px_100px_rgba(0,0,0,0.1)] transition-all duration-700 hover:-translate-y-4 border border-primary/5 h-full overflow-hidden"
   >
-    <div class="p-6 flex flex-col h-full">
-      <!-- Title -->
-      <div v-if="project.judul === 'AgaFood'">
-        <img
-          src="\public\projects\tkmr.png"
-          class="inline"
-          width="120"
-          alt="Project Logo"
-        />
-        <img
-          src="\public\projects\sdb.png"
-          class="inline"
-          width="120"
-          alt="Project Logo"
+    <!-- Background Gradient (Awwwards Style) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-warna1/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+    
+    <!-- Index Number -->
+    <div class="absolute top-8 left-8 md:top-12 md:left-12">
+      <span class="text-[10px] font-black tracking-[0.5em] text-primary/20 group-hover:text-warna1/40 transition-colors uppercase">
+        Project {{ (index + 1).toString().padStart(2, '0') }}
+      </span>
+    </div>
+
+    <div class="relative z-10 flex flex-col h-full mt-8 md:mt-12">
+      <!-- Feature Visual Area (Cinematic) -->
+      <div class="mb-12 w-full aspect-video rounded-2xl bg-primary/[0.02] border border-primary/[0.05] overflow-hidden flex items-center justify-center p-12 md:p-16 group-hover:bg-primary/[0.04] transition-all duration-700 relative">
+        <!-- Floating Shine Layer -->
+        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+        
+        <div v-if="project.judul === 'AgaFood'" class="flex gap-10 items-center flex-wrap justify-center relative z-10">
+          <img src="/projects/tkmr.png" class="h-16 md:h-24 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Takemori" />
+          <div class="w-px h-16 bg-primary/10"></div>
+          <img src="/projects/sdb.png" class="h-16 md:h-24 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Soondobu" />
+        </div>
+        <img 
+          v-else 
+          :src="project.logoUrl" 
+          class="max-h-full max-w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] group-hover:scale-110 transition-transform duration-700 relative z-10" 
+          :alt="project.judul" 
         />
       </div>
-      <div v-else>
-        <img
-          :src="project.logoUrl"
-          class="inline"
-          width="120"
-          alt="Project Logo"
-        />
+
+      <!-- Text Content -->
+      <div class="space-y-4">
+        <h3 class="text-3xl md:text-5xl font-black text-primary acorn tracking-tighter group-hover:text-warna1 transition-colors italic leading-none">
+          {{ project.judul }}
+        </h3>
+        
+        <p class="text-secondary text-lg font-medium leading-relaxed line-clamp-2 opacity-80 group-hover:opacity-100 transition-opacity">
+          {{ project.deskripsi }}
+        </p>
       </div>
-      <h3
-        class="acorn500 text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors"
-      >
-        {{ project.judul }}
-      </h3>
 
-      <!-- Description -->
-      <p class="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
-        {{ project.deskripsi }}
-      </p>
-
-      <!-- Tech Stack -->
-      <div class="flex flex-wrap justify-center gap-2 mt-auto">
+      <!-- Tech Stack Badges (Minimalist) -->
+      <div class="flex flex-wrap gap-2 mt-12">
         <span
           v-for="tech in project.techs"
           :key="tech"
-          class="px-3 py-1 bg-slate-600 text-white text-xs rounded-lg"
+          class="px-4 py-1.5 bg-primary/[0.03] text-primary/40 text-[9px] font-black uppercase tracking-[0.25em] rounded-full border border-primary/5 group-hover:border-warna1/20 group-hover:text-warna1 transition-all duration-300"
         >
           {{ tech }}
         </span>
@@ -56,15 +59,15 @@
 
 <script setup lang="ts">
 defineProps<{
+  index: number;
   project: {
+    id: number;
     detail: string;
     judul: string;
     deskripsi: string;
-    logoUrl: string;
-    techs: string[];
+    logoUrl?: string;
+    techs: readonly any[];
+    link: string;
   };
 }>();
-
-const cardClass =
-  "bg-white/40 backdrop-blur-sm cursor-pointer hover:shadow-2xl hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300 ease-out rounded-2xl border border-gray-100";
 </script>

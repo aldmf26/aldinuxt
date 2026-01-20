@@ -1,67 +1,45 @@
-<style scoped>
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #334155;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #cbd6e5;
-  border-radius: 5px;
-  border-width: 1px;
-}
-</style>
-
 <template>
-    <div
-    class="shadow-2xl bg-slate-700 acorn md:flex p-2 flex-col md:justify-between rounded-xl"
-  >
-  
-    <h5 class="text-2xl md:text-4xl mt-3">My Youtube</h5>
-    <div class=" flex gap-5 pr-5">
-      
-      <ul class="p-3 flex justify-items-center gap-2 md:gap-5">
+  <div class="shadow-2xl bg-bg border border-primary/10 acorn md:flex p-8 flex-col md:justify-between rounded-[3rem] transition-colors duration-500">
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6">
+      <h5 class="text-4xl md:text-6xl font-black text-primary italic tracking-tighter">My Youtube</h5>
+      <ul class="flex flex-wrap gap-2">
         <li
           v-for="(g, index) in typeSc"
           :key="index"
-          :class="{ active: selectedType === g }"
-          class="hover:bg-slate-500 text-sm md:text-lg cursor-pointer rounded-2xl p-2 md:p-3"
+          :class="[
+            selectedType === g 
+              ? 'bg-warna1 text-bg shadow-lg' 
+              : 'bg-primary/5 text-primary hover:bg-primary/10'
+          ]"
+          class="text-xs md:text-sm font-black uppercase tracking-widest cursor-pointer rounded-full px-6 py-3 transition-all duration-300"
           @click="filterByType(g)"
         >
           {{ g }}
         </li>
       </ul>
-      
     </div>
 
-    
-    <div class="overflow-y-auto max-h-80 mb-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      
-      <div class="" v-for="item in filteredType">
-        <iframe
-        class="relative z-10 w-full md:w-[301px] -[169px] rounded-t-3xl"
-          :src="`https://www.youtube.com/embed/${item.src}`"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
-        <div class="text-start bg-slate-800 text-warnaHeading rounded-b-xl p-2">
-          <div class="flex justify-between items-center px-2">
-            <span class="text-sm md:text-lg">{{item.judul}}</span>
-            <span class="text-xs md:text-sm text-[#dbf57d]">{{item.bpm}} Bpm</span>
+    <div class="overflow-y-auto max-h-[800px] pr-4 custom-scrollbar">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-for="item in filteredType" :key="item.src" class="group bg-primary/[0.02] border border-primary/5 rounded-[2rem] overflow-hidden hover:border-warna1 hover:translate-y-[-4px] transition-all duration-500">
+          <div class="aspect-video">
+            <iframe
+              class="w-full h-full"
+              :src="`https://www.youtube.com/embed/${item.src}`"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
           </div>
-          
+          <div class="p-5 flex justify-between items-center bg-bg group-hover:bg-primary/[0.03] transition-colors">
+            <span class="font-bold text-primary truncate pr-4 text-lg">{{item.judul}}</span>
+            <span class="text-[10px] font-black uppercase tracking-widest text-warnaHijau bg-warnaHijau/10 px-3 py-1 rounded-full whitespace-nowrap">{{item.bpm}} Bpm</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 

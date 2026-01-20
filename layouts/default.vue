@@ -1,134 +1,85 @@
 <template>
-  <div class="fredoka text-center">
+  <div class="min-h-screen bg-bg transition-colors duration-500 fredoka selection:bg-warna1 selection:text-bg">
     <Nav />
 
-    <slot />
+    <main>
+      <slot />
+    </main>
 
-    <div class="hidden md:flex justify-evenly mx-auto mt-20">
-      <div class="">
-        <img src="~/public/animasi/2.png" class="w-16" alt="" />
-        <h1 class="text-warnaHeading">
-          © 2024 Fahrizãldi . Banjarmasin, Indonesia
-        </h1>
-      </div>
-      <div class="">
-        <div class="flex gap-5 md:gap-20 justify-between">
+    <!-- Refined Footer -->
+    <footer class="pt-24 pb-12 border-t border-primary/5 bg-primary/[0.02]">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-12 items-start text-left">
+          <!-- Logo & Copyright -->
+          <div class="space-y-6">
+            <div class="w-16 h-16 bg-bg border border-primary/10 rounded-2xl flex items-center justify-center text-3xl font-black text-warna1 shadow-xl">
+              A
+            </div>
+            <p class="text-secondary font-medium italic">
+              © 2024 Fahrizãldi. <br> 
+              Banjarmasin, Indonesia
+            </p>
+          </div>
+
+          <!-- Links -->
           <div>
-            <h1 class="font-semibold mb-5">ELSEWHERE</h1>
-            <ul class="text-start">
-              <li class="mb-3">
-                <a target="_blank" href="https://www.instagram.com/aldiiimf"
-                  >Instagram</a
-                >
-              </li>
-              <li class="mb-3">
-                <a target="_blank" href="https://github.com/aldmf26">Github</a>
-              </li>
-              <li class="mb-3">
-                <a target="_blank" href="https://www.youtube.com/@ALdMFbeat"
-                  >Youtube</a
-                >
+            <h3 class="text-primary font-black uppercase tracking-widest text-sm mb-6">Elsewhere</h3>
+            <ul class="space-y-4">
+              <li v-for="link in socialLinks" :key="link.name">
+                <a :href="link.url" target="_blank" class="text-secondary hover:text-warna1 transition-colors font-bold flex items-center gap-2">
+                  <span>{{ link.name }}</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
               </li>
             </ul>
           </div>
+
+          <!-- Contact -->
           <div>
-            <h1 class="font-semibold mb-5">CONTACT</h1>
-            <ul>
-              <li class="mb-3">
-                <a
-                  href="mailto:aldimf26@gmail.com?subject=Aldi,aku%20butuh%20bantuan!"
-                >
-                  Email</a
-                >
-              </li>
-            </ul>
+            <h3 class="text-primary font-black uppercase tracking-widest text-sm mb-6">Contact</h3>
+            <a href="mailto:aldimf26@gmail.com?subject=Aldi,aku%20butuh%20bantuan!" class="group inline-flex items-center gap-4 p-6 bg-bg border border-primary/10 rounded-[2rem] hover:border-warna1 transition-all duration-300">
+              <div class="w-12 h-12 bg-warna1/10 rounded-xl flex items-center justify-center text-warna1 group-hover:bg-warna1 group-hover:text-bg transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <span class="block text-xs font-black text-secondary uppercase tracking-widest">Email me at</span>
+                <span class="text-primary font-bold">aldimf26@gmail.com</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
 
-    <div class="block md:hidden mt-16">
-      <div class="flex gap-5 md:gap-20 justify-around">
-        <div>
-          <h1 class="font-semibold mb-5">ELSEWHERE</h1>
-          <ul class="text-start">
-            <li class="mb-3">
-              <a target="_blank" href="https://www.instagram.com/aldiiimf"
-                >Instagram</a
-              >
-            </li>
-            <li class="mb-3">
-              <a target="_blank" href="https://github.com/aldmf26">Github</a>
-            </li>
-            <li class="mb-3">
-              <a target="_blank" href="https://www.youtube.com/@ALdMFbeat"
-                >Youtube</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div>
-          <img src="~/public/animasi/2.png" class="w-16" alt="" />
-        </div>
-        <div>
-          <h1 class="font-semibold mb-5">CONTACT</h1>
-          <ul>
-            <li class="mb-3">
-              <a
-                href="mailto:aldimf26@gmail.com?subject=Aldi,aku%20butuh%20bantuan!"
-              >
-                Email</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <h1 class="text-warna1">© 2024 Fahrizãldi . Banjarmasin, Indonesia</h1>
-    </div>
-  </div>
-
-  <div v-if="scrollY > 200" class="fixed bottom-0 right-0 p-5">
-    <button
-      class="bg-warna1 text-white font-bold py-2 px-4 rounded-full"
+    <!-- Back to Top -->
+    <button 
+      v-if="scrollY > 300"
       @click="backToTop"
+      class="fixed bottom-8 right-8 w-14 h-14 bg-warna1 text-bg rounded-2xl shadow-2xl flex items-center justify-center hover:-translate-y-2 transition-all duration-300 z-50 group"
     >
-      <svg
-        class="h-6 w-6 transform rotate-180"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M19 9l-7 7-7-7"
-        />
-      </svg>
+      <svg class="w-6 h-6 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
     </button>
   </div>
 </template>
+
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+const scrollY = ref(0)
+const onScroll = () => scrollY.value = window.scrollY
+const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
-const scrollY = ref(0);
+const socialLinks = [
+  { name: 'Instagram', url: 'https://www.instagram.com/aldiiimf' },
+  { name: 'Github', url: 'https://github.com/aldmf26' },
+  { name: 'Youtube', url: 'https://www.youtube.com/@ALdMFbeat' }
+]
 
-const onScroll = () => {
-  scrollY.value = window.scrollY;
-};
-
-const backToTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
-// ⬇️ HANYA JALAN DI CLIENT
-onMounted(() => {
-  window.addEventListener("scroll", onScroll);
-});
-
-// ⬇️ BERSIHKAN EVENT
-onUnmounted(() => {
-  window.removeEventListener("scroll", onScroll);
-});
+onMounted(() => window.addEventListener('scroll', onScroll))
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
+
+<style>
+/* Global styles for smooth theme transition */
+* {
+  @apply transition-colors duration-300;
+}
+</style>

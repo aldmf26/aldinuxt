@@ -1,13 +1,51 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-  @apply bg-gradient-to-tl from-gray-800 via-cyan-500 to-gray-500;
-} */
+:root {
+  --bg-color: #fafafa;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --accent-color: #255BA6;
+  --accent-secondary: #EFC217;
+}
+
+body.theme-dark {
+  --bg-color: #0E141B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --accent-color: #B8DBD9;
+  --accent-secondary: #588157;
+}
+
+body.theme-cream {
+  --bg-color: #E4E5DC;
+  --text-primary: #493432;
+  --text-secondary: #6b5a59;
+  --accent-color: #470FF4;
+  --accent-secondary: #D44D5C;
+}
+
+body.theme-green {
+  --bg-color: #294936;
+  --text-primary: #F0F4EF;
+  --text-secondary: #B6C649;
+  --accent-color: #B6C649;
+  --accent-secondary: #F0F4EF;
+}
+
+body.theme-bright {
+  --bg-color: #ECECEA;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --accent-color: #266DD3;
+  --accent-secondary: #FCA311;
+}
+
 body {
-  @apply bg-gradient-to-tl from-yellow-100 via-cyan-500 to-lime-100;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 @font-face {
@@ -16,36 +54,42 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+
 .acorn {
   font-family: "acorn", sans-serif;
-  font-weight: 700; /* Sesuaikan dengan berat font yang diinginkan */
-  font-style: normal;
-  color: #f1f1e1;
-  line-height: 90px;
-  font-size: 80px;
 }
+
 .acorn500 {
   font-family: "acorn", sans-serif;
-  font-weight: 500; /* Sesuaikan dengan berat font yang diinginkan */
-  font-style: normal;
+  font-weight: 500;
 }
+
 .fredoka {
   font-family: "Fredoka", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400; /* Pilih berat font yang sesuai */
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
 }
+
+/* Glass effect refinement */
 .glass {
-  /* From https://css.glass */
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(1.7px);
-  -webkit-backdrop-filter: blur(1.7px);
-  border: 1px solid #f1f1e1;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
 
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 10px;
+  opacity: 0.2;
+}
 
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}

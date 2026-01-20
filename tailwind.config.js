@@ -10,11 +10,14 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
-        warna1: '#255BA6',
-        warnaHeading: '#f1f1e1',
-        warnaBiru: '#4A7CBF',
-        warnaHijau: '#EFC217',
+      colors: {
+        warna1: 'var(--accent-color)',
+        warnaHeading: 'var(--bg-color)',
+        warnaBiru: 'var(--accent-color)',
+        warnaHijau: 'var(--accent-secondary)',
+        primary: 'var(--text-primary)',
+        secondary: 'var(--text-secondary)',
+        bg: 'var(--bg-color)',
       }
     },
   },
