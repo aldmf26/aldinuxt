@@ -60,9 +60,9 @@
             <a href="#projects" class="px-10 py-5 bg-primary text-bg rounded-2xl font-bold text-lg hover:bg-warna1 hover:-translate-y-1 transition-all shadow-xl shadow-primary/10">
               Explore Projects
             </a>
-            <a href="#music" class="px-10 py-5 bg-bg text-primary border-2 border-primary/10 rounded-2xl font-bold text-lg hover:border-warna1 hover:text-warna1 hover:-translate-y-1 transition-all shadow-sm">
+            <NuxtLink to="/music" class="px-10 py-5 bg-bg text-primary border-2 border-primary/10 rounded-2xl font-bold text-lg hover:border-warna1 hover:text-warna1 hover:-translate-y-1 transition-all shadow-sm">
               Listen to Beats
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>
