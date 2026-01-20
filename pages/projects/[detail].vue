@@ -65,7 +65,7 @@
                 class="space-y-12"
               >
                 <div 
-                  class="relative -mx-6 md:-mx-12 lg:-mx-24 rounded-[3rem] overflow-hidden bg-primary/[0.02] border border-primary/5 shadow-2xl cursor-pointer group"
+                  class="relative -mx-2 md:-mx-12 lg:-mx-24 rounded-[3rem] overflow-hidden bg-primary/[0.02] border border-primary/5 shadow-2xl cursor-pointer group"
                   @click="openLightbox(screenshot)"
                 >
                   <img 
