@@ -10,42 +10,57 @@
   --accent-secondary: #f000b8;
 }
 
+/* Light - Clean Blue */
 body.theme-light {
   --bg-color: #ffffff;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --accent-color: #570df8;
-  --accent-secondary: #f000b8;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-color: #2563eb;
+  --accent-secondary: #7c3aed;
 }
 
+/* Dark - Deep Slate */
 body.theme-dark {
-  --bg-color: #0d1117;
-  --text-primary: #f0f6fc;
-  --text-secondary: #8b949e;
-  --accent-color: #58a6ff;
-  --accent-secondary: #bc8cff;
-}
-
-body.theme-luxury {
-  --bg-color: #09090b;
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --accent-color: #d4af37;
-  --accent-secondary: #696785;
-}
-
-body.theme-synthwave {
-  --bg-color: #1a103d;
+  --bg-color: #0a0a0a;
   --text-primary: #f8fafc;
-  --text-secondary: #e879f9;
-  --accent-color: #f62d8f;
-  --accent-secondary: #209cee;
+  --text-secondary: #94a3b8;
+  --accent-color: #06b6d4;
+  --accent-secondary: #8b5cf6;
+}
+
+/* Synthwave - Neon Pink/Cyan */
+body.theme-synthwave {
+  --bg-color: #1a0033;
+  --text-primary: #ff0080;
+  --text-secondary: #bd00ff;
+  --accent-color: #00ffff;
+  --accent-secondary: #ffff00;
+}
+
+/* Luxury - Emerald Gold */
+body.theme-luxury {
+  --bg-color: #064e3b;
+  --text-primary: #fef3c7;
+  --text-secondary: #fcd34d;
+  --accent-color: #10b981;
+  --accent-secondary: #d97706;
+}
+
+/* Funk - Electric Purple */
+body.theme-funk {
+  --bg-color: #4c1d95;
+  --text-primary: #fbbf24;
+  --text-secondary: #f59e0b;
+  --accent-color: #ec4899;
+  --accent-secondary: #06b6d4;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
 @font-face {
