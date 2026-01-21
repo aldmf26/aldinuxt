@@ -15,9 +15,6 @@
         <!-- Pulse Effect -->
         <div class="absolute inset-0 rounded-full bg-warna1 opacity-20 animate-ping -z-10"></div>
       </div>
-      <div class="mt-6">
-        <span class="text-2xl font-black text-primary acorn tracking-tighter uppercase">ALDI</span>
-      </div>
     </div>
 
 
