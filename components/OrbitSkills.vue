@@ -20,9 +20,10 @@
       </div>
     </div>
 
+
     <!-- Orbit Tracks (Visual only) -->
-    <div class="absolute border-2 border-dashed border-primary/5 rounded-full w-[300px] h-[300px] -z-10 opacity-30 transition-colors duration-500"></div>
-    <div class="absolute border-2 border-dashed border-primary/5 rounded-full w-[460px] h-[460px] -z-10 opacity-30 transition-colors duration-500"></div>
+    <div class="absolute border border-primary/20 rounded-full w-[300px] h-[300px] -z-10 transition-colors duration-500"></div>
+    <div class="absolute border border-primary/20 rounded-full w-[460px] h-[460px] -z-10 transition-colors duration-500"></div>
 
     <!-- Skill Items -->
     <div 
@@ -44,16 +45,19 @@
 <script setup>
 const webSkills = [
   { name: 'Nuxt JS', type: 'web' },
-  { name: 'Vue JS', type: 'web' },
   { name: 'Tailwind', type: 'web' },
-  { name: 'Laravel', type: 'web' }
+  { name: 'Laravel', type: 'web' },
+  { name: 'MySQL', type: 'web' },
+  { name: 'Git', type: 'web' },
+  { name: 'Docker', type: 'web' },
 ]
 
 const musicSkills = [
   { name: 'FL Studio', type: 'music' },
   { name: 'Mixing', type: 'music' },
   { name: 'Producer', type: 'music' },
-  { name: 'Sound Design', type: 'music' }
+  { name: 'Sound Design', type: 'music' },
+  { name: 'Capcut', type: 'music' },
 ]
 
 const allSkills = [...webSkills, ...musicSkills]
