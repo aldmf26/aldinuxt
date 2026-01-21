@@ -1,5 +1,5 @@
 <template>
-  <div v-motion-fade class="acorn py-10 transition-colors duration-500">
+  <div v-motion-fade class="acorn py-10 transition-colors duration-500 pt-28">
     <!-- Mobile Title -->
     <div class="max-w-5xl mx-auto px-6 mb-8 block md:hidden text-left">
       <h1 class="text-primary text-6xl font-black italic tracking-tighter uppercase">Music</h1>
