@@ -42,7 +42,7 @@ export const projectsData = {
     description:
       "Premium landing page for PT. Agrika Gatya Arum, Indonesia's leading bird's nest exporter. Designed to attract international buyers and showcase product quality to global markets.",
     techs: ["Laravel", "jQuery", "Bootstrap 5", "MySQL"],
-    link: "https://ptagrikagatyaarum.com/",
+    link: "",
     imgLink: "agrika.png",
     year: "2024",
     role: "Full Stack Developer & UI Designer",
@@ -214,7 +214,7 @@ export const projectsData = {
     description:
       "Complete learning management system for Circle English Course in Muara Teweh. Manages student enrollment, course materials, progress tracking, and assessments.",
     techs: ["Laravel", "Livewire", "Bootstrap", "Alpine JS"],
-    link: "https://circleenglishcourse.com/",
+    link: "",
     year: "2024",
     role: "Full Stack Developer",
     impact: "Digital transformation for local education center • Student progress tracking • Automated enrollment",
@@ -237,7 +237,7 @@ export const projectsData = {
     description:
       "Domain-specific Indonesian-English translator focusing on wetlands and environmental terminology. Built for researchers, students, and conservationists working in wetland ecosystems.",
     techs: ["Laravel", "Livewire", "Bootstrap", "Alpine JS"],
-    link: "https://englishforwetlands.web.id/",
+    link: "",
     year: "2024",
     role: "Full Stack Developer",
     impact: "Specialized vocabulary resource • Academic research tool • Environmental education support",
