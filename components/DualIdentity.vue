@@ -1,139 +1,103 @@
 <template>
-  <section id="dual-identity" class="relative py-16 md:py-40 overflow-hidden">
-    <div class="max-w-[1600px] mx-auto px-6 md:px-16">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-0 relative">
+  <section id="dual-identity" class="relative py-32 md:py-56 overflow-hidden bg-[var(--bg-primary)]">
+    <!-- Section Label -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 z-20">
+       <span class="section-label opacity-40">Creative Duality</span>
+    </div>
 
-        <!-- LEFT: DEV MODE -->
-        <div
-          ref="devSide"
-          class="relative p-8 md:p-16 rounded-2xl lg:rounded-l-2xl lg:rounded-r-none overflow-hidden opacity-0 bg-[var(--bg-surface)] border border-text-primary/10 lg:border-r-0"
-        >
-          <!-- Background symbol -->
-          <div class="absolute top-8 right-8 text-[15vw] lg:text-[10vw] leading-none font-mono text-text-primary opacity-[0.03] select-none pointer-events-none">&lt;/&gt;</div>
+    <div class="max-w-[1700px] mx-auto px-6 md:px-12 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-text-primary/10 rounded-[3rem] overflow-hidden border border-text-primary/10 shadow-[0_0_100px_rgba(0,0,0,0.3)]">
 
-          <div class="relative z-10">
-            <h3 class="font-mono text-sm text-text-primary tracking-[0.3em] uppercase mb-8 flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-lime"></span>
-              // Dev Mode
-            </h3>
+        <!-- DEV SIDE -->
+        <div ref="devSide" class="relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-text-primary/[0.02]">
+          <div class="relative z-10 space-y-12">
+            <div class="flex items-center gap-6">
+               <div class="w-14 h-14 rounded-2xl bg-lime/10 flex items-center justify-center border border-lime/20 group-hover:bg-lime group-hover:text-dark transition-all duration-500 shadow-lg shadow-lime/5">
+                  <span class="font-mono text-xl">&lt;/&gt;</span>
+               </div>
+               <div>
+                  <h3 class="font-display italic text-3xl text-text-primary">Software Engineer</h3>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-text-primary/30">Logical Architecture</p>
+               </div>
+            </div>
 
             <!-- Terminal -->
-            <div class="bg-black/60 rounded-xl p-6 font-mono text-sm mb-10 border border-text-primary/10 shadow-2xl">
-              <div class="flex items-center gap-2 mb-6">
-                <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
-              </div>
-              <div class="space-y-4">
-                <div v-for="(line, i) in terminalLines" :key="i" class="flex items-start gap-3">
-                  <span class="text-lime/60 mt-1">$</span>
-                  <span ref="terminalRefs" class="text-text-primary/80 terminal-line leading-relaxed" :data-text="line.text">
-                    <span class="typed-text"></span>
-                    <span v-if="line.done" class="text-lime ml-2">✓</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stack badges -->
-            <div class="flex flex-wrap gap-3">
-              <span
-                v-for="tech in devStack"
-                :key="tech"
-                class="px-5 py-2.5 bg-text-primary/5 border border-text-primary/10 rounded-full font-mono text-sm text-text-primary/60 hover:border-lime/50 hover:text-lime hover:scale-105 transition-all duration-300 cursor-default"
-                data-cursor-hover
-              >
-                {{ tech }}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CENTER DIVIDER (Desktop Only) -->
-        <div
-          ref="centerDivider"
-          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center"
-        >
-          <div ref="dividerLine" class="w-px bg-lime/40 h-0 transition-all"></div>
-          <div class="my-6">
-            <div class="w-12 h-12 rounded-full border border-lime flex items-center justify-center bg-[var(--bg-primary)]">
-               <span class="text-lime text-xl">×</span>
-            </div>
-          </div>
-          <div ref="dividerLine2" class="w-px bg-lime/40 h-0 transition-all"></div>
-        </div>
-
-        <!-- RIGHT: STUDIO MODE (FL Studio Style) -->
-        <div
-          ref="studioSide"
-          class="relative p-8 md:p-16 rounded-2xl lg:rounded-r-2xl lg:rounded-l-none overflow-hidden opacity-0 bg-[#1D1E22] border border-text-primary/10"
-        >
-          <!-- Background symbol -->
-          <div class="absolute top-8 left-8 text-[15vw] lg:text-[10vw] leading-none font-display text-text-primary opacity-[0.03] select-none pointer-events-none">♪</div>
-
-          <div class="relative z-10">
-            <h3 class="font-mono text-sm text-text-primary tracking-[0.3em] uppercase mb-8 flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-[#FF6B35]"></span>
-              // Studio Mode
-            </h3>
-
-            <!-- FL Studio Inspired UI -->
-            <div class="bg-[#25262B] rounded-xl overflow-hidden border border-white/10 shadow-2xl mb-10">
-               <!-- Transport Panel -->
-               <div class="bg-[#313339] px-4 py-2 flex items-center gap-4 border-b border-black/40">
-                  <div class="flex gap-1">
-                    <div class="w-6 h-6 rounded bg-[#3B3D44] flex items-center justify-center hover:bg-lime/20 cursor-pointer transition-colors" @click="togglePlay">
-                       <div :class="isPlaying ? 'w-2 h-2 bg-lime' : 'w-0 h-0 border-l-[6px] border-l-lime border-y-[4px] border-y-transparent ml-0.5'"></div>
-                    </div>
-                    <div class="w-6 h-6 rounded bg-[#3B3D44] flex items-center justify-center hover:bg-red-500/20 cursor-pointer">
-                       <div class="w-2 h-2 bg-text-primary/40 rounded-full"></div>
-                    </div>
-                  </div>
-                  <div class="bg-black/40 px-3 py-1 rounded font-mono text-[10px] text-lime flex gap-3">
-                    <span>120.000</span>
-                    <span class="opacity-40">4/4</span>
-                  </div>
-                  <div class="flex-1"></div>
-                  <div class="font-mono text-[10px] text-text-primary/40 uppercase tracking-tighter">Pattern 1</div>
+            <div class="bg-[#08090D] rounded-3xl p-10 font-mono text-sm border border-white/5 shadow-2xl relative overflow-hidden">
+               <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-lime/0 via-lime/40 to-lime/0"></div>
+               <div class="flex gap-2 mb-10">
+                  <div v-for="c in ['#FF5F56', '#FFBD2E', '#27C93F']" :key="c" class="w-3 h-3 rounded-full" :style="{ backgroundColor: c, opacity: 0.5 }"></div>
                </div>
-
-               <!-- Piano Roll Visualization -->
-               <div ref="pianoRollContainer" class="relative h-44 overflow-hidden bg-[#18191E]">
-                  <div class="piano-roll-grid absolute inset-0">
-                    <div
-                      v-for="(note, i) in pianoNotes"
-                      :key="i"
-                      class="piano-note absolute rounded-sm shadow-[0_0_8px_rgba(var(--accent-rgb),0.3)]"
-                      :style="{
-                        left: note.left + '%',
-                        top: note.top + '%',
-                        width: note.width + '%',
-                        height: note.height + '%',
-                        background: 'var(--accent)',
-                        opacity: note.opacity,
-                        animationDelay: note.delay + 's',
-                        animationDuration: (isPlaying ? 2 : 4) + 's'
-                      }"
-                    ></div>
+               <div class="space-y-6">
+                  <div v-for="(line, i) in terminalLines" :key="i" class="flex gap-4">
+                     <span class="text-lime/30">$</span>
+                     <span ref="terminalRefs" class="text-text-primary/70 leading-relaxed">{{ line.text }}</span>
                   </div>
-                  <!-- Playhead -->
-                  <div class="absolute top-0 bottom-0 w-px bg-white/20 left-1/4"></div>
+                  <div class="flex gap-4 animate-pulse">
+                     <span class="text-lime/30">$</span>
+                     <span class="w-2 h-5 bg-lime/60"></span>
+                  </div>
                </div>
             </div>
 
-            <!-- Music labels -->
             <div class="flex flex-wrap gap-3">
-              <span
-                v-for="skill in musicStack"
-                :key="skill"
-                class="px-5 py-2.5 bg-text-primary/5 border border-text-primary/10 rounded-full font-mono text-sm text-text-primary/60 hover:border-[#FF6B35]/50 hover:text-[#FF6B35] hover:scale-105 transition-all duration-300 cursor-default"
-                data-cursor-hover
-              >
-                {{ skill }}
-              </span>
+               <span v-for="t in devStack" :key="t" class="px-6 py-3 bg-text-primary/[0.03] border border-text-primary/10 rounded-full font-mono text-[10px] uppercase tracking-widest text-text-primary/40 hover:border-lime/40 hover:text-lime transition-all cursor-default">
+                  {{ t }}
+               </span>
             </div>
           </div>
         </div>
+
+        <!-- STUDIO SIDE -->
+        <div ref="studioSide" class="relative group p-10 md:p-24 bg-[#0F1015] transition-colors duration-700 hover:bg-[#15171E]">
+          <div class="relative z-10 space-y-12">
+            <div class="flex items-center gap-6">
+               <div class="w-14 h-14 rounded-2xl bg-[#FF6B35]/10 flex items-center justify-center border border-[#FF6B35]/20 group-hover:bg-[#FF6B35] group-hover:text-dark transition-all duration-500 shadow-lg shadow-[#FF6B35]/5">
+                  <span class="font-mono text-xl">♪</span>
+               </div>
+               <div>
+                  <h3 class="font-display italic text-3xl text-text-primary">Music Producer</h3>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-text-primary/30">Sonic Sculpting</p>
+               </div>
+            </div>
+
+            <!-- Studio UI -->
+            <div class="bg-[#181A21] rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
+               <div class="bg-[#21242D] px-8 py-5 flex items-center justify-between border-b border-black/40">
+                  <div class="flex items-center gap-6">
+                     <button @click="togglePlay" class="w-12 h-12 rounded-full bg-[#2D313D] flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-lime shadow-lg">
+                        <span v-if="isPlaying" class="text-xl">■</span>
+                        <span v-else class="text-xl ml-1">▶</span>
+                     </button>
+                     <div class="hidden md:block">
+                        <div class="text-[10px] font-mono text-text-primary/30 uppercase mb-1">Master Volume</div>
+                        <div class="w-32 h-1.5 bg-black/40 rounded-full overflow-hidden">
+                           <div class="h-full bg-lime/60 w-[70%]"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="font-mono text-xs text-lime/80 tracking-widest bg-black/30 px-4 py-2 rounded-lg border border-white/5">
+                     140.00 BPM
+                  </div>
+               </div>
+               <div class="p-8 grid grid-cols-16 gap-1 h-32">
+                  <div v-for="i in 16" :key="i" class="flex flex-col gap-1">
+                     <div v-for="j in 6" :key="j" 
+                          class="flex-1 rounded-[2px] transition-all duration-500"
+                          :class="[Math.random() > 0.85 ? 'bg-lime/40 shadow-[0_0_10px_rgba(200,245,128,0.2)]' : 'bg-white/[0.03]']"
+                          :style="{ opacity: isPlaying ? (0.3 + Math.random() * 0.7) : 1 }">
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+               <span v-for="s in musicStack" :key="s" class="px-6 py-3 bg-white/[0.03] border border-white/10 rounded-full font-mono text-[10px] uppercase tracking-widest text-text-primary/40 hover:border-[#FF6B35]/40 hover:text-[#FF6B35] transition-all cursor-default">
+                  {{ s }}
+               </span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -141,133 +105,41 @@
 
 <script setup>
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const devSide = ref(null)
 const studioSide = ref(null)
-const dividerLine = ref(null)
-const dividerLine2 = ref(null)
-const terminalRefs = ref([])
 const isPlaying = ref(false)
 
-const terminalLines = ref([
-  { text: 'npm run dev --portfolio', done: false },
-  { text: 'building optimized digital rhythms...', done: false },
-  { text: 'deployment successful. live at aldimf.dev', done: false },
-])
+const terminalLines = [
+  { text: 'npm run innovate' },
+  { text: 'compiling vision...' },
+  { text: 'ready in 12ms' },
+]
 
-const devStack = ['Nuxt 3', 'Laravel', 'Tailwind', 'PostgreSQL', 'Three.js']
-const musicStack = ['FL Studio 21', 'Mixing', 'Sound Design', 'Mastering']
+const devStack = ['Nuxt JS', 'Laravel', 'PostgreSQL', 'Docker', 'GSAP']
+const musicStack = ['FL Studio', 'Serum', 'FabFilter', 'Mixing', 'Arrangement']
 
-// Generate piano roll notes
-const pianoNotes = Array.from({ length: 28 }, (_, i) => ({
-  left: (i * 7) % 120,
-  top: [10, 25, 40, 55, 70, 85][Math.floor(Math.random() * 6)],
-  width: Math.random() * 10 + 5,
-  height: 10,
-  opacity: Math.random() * 0.4 + 0.3,
-  delay: Math.random() * 3,
-}))
-
-const togglePlay = () => {
-  isPlaying.value = !isPlaying.value
-}
-
-// Typewriter effect
-const typewriterEffect = async () => {
-  for (let i = 0; i < terminalLines.value.length; i++) {
-    const line = terminalLines.value[i]
-    const el = terminalRefs.value[i]
-    if (!el) continue
-
-    const typedEl = el.querySelector('.typed-text')
-    if (!typedEl) continue
-
-    const text = line.text
-    for (let j = 0; j <= text.length; j++) {
-      typedEl.textContent = text.slice(0, j)
-      await new Promise((r) => setTimeout(r, 30 + Math.random() * 20))
-    }
-    line.done = true
-    await new Promise((r) => setTimeout(r, 400))
-  }
-}
+const togglePlay = () => isPlaying.value = !isPlaying.value
 
 onMounted(() => {
   if (typeof window === 'undefined') return
-
-  // Entrance animations
-  ScrollTrigger.create({
-    trigger: '#dual-identity',
-    start: 'top 85%',
-    onEnter: () => {
-      gsap.to(devSide.value, {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      })
-      gsap.from(devSide.value, {
-        x: -40,
-        duration: 0.8,
-        ease: 'power3.out',
-      })
-
-      gsap.to(studioSide.value, {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        delay: 0.15,
-        ease: 'power3.out',
-      })
-      gsap.from(studioSide.value, {
-        x: 40,
-        duration: 0.8,
-        delay: 0.15,
-        ease: 'power3.out',
-      })
-
-      // Divider grows
-      gsap.to(dividerLine.value, {
-        height: 150,
-        duration: 1.2,
-        delay: 0.4,
-        ease: 'power2.out',
-      })
-      gsap.to(dividerLine2.value, {
-        height: 150,
-        duration: 1.2,
-        delay: 0.4,
-        ease: 'power2.out',
-      })
-
-      // Start typewriter after reveal
-      setTimeout(typewriterEffect, 800)
-    },
-    once: true,
+  
+  gsap.from([devSide.value, studioSide.value], {
+    opacity: 0,
+    y: 100,
+    duration: 1.5,
+    stagger: 0.3,
+    ease: 'expo.out',
+    scrollTrigger: {
+      trigger: '#dual-identity',
+      start: 'top 80%',
+    }
   })
 })
 </script>
 
 <style scoped>
-.piano-note {
-  animation: noteSlide 4s linear infinite;
-}
-
-@keyframes noteSlide {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-500%); }
-}
-
-.piano-roll-grid {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 10% 16.66%;
-}
-
-.terminal-line {
-  min-height: 1.5em;
-  display: block;
+.grid-cols-16 {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
 }
 </style>

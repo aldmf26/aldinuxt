@@ -3,35 +3,28 @@
     <!-- Noise Overlay -->
     <div class="noise-overlay"></div>
 
-    <!-- Custom Cursor -->
-    <ClientOnly>
-      <AppCursor />
-    </ClientOnly>
-
-    <!-- Theme Switcher -->
-    <ClientOnly>
-      <AppThemeSwitcher />
-    </ClientOnly>
-
-    <!-- Preloader -->
-    <ClientOnly>
-      <AppPreloader v-if="showPreloader" @complete="onPreloaderComplete" />
-    </ClientOnly>
+    <!-- Navigation -->
+    <Nav />
 
     <!-- Main Content -->
-    <main
-      :class="{ 'opacity-0': showPreloader, 'opacity-100': !showPreloader }"
-      class="transition-opacity duration-700"
-    >
+    <main>
       <slot />
     </main>
   </div>
 </template>
 
 <script setup>
-const showPreloader = ref(true)
-
-const onPreloaderComplete = () => {
-  showPreloader.value = false
-}
+// components/nav.vue is auto-imported as <Nav />
 </script>
+
+<style>
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  filter: contrast(150%) brightness(1000%);
+}
+</style>

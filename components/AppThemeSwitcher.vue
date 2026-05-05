@@ -1,5 +1,5 @@
 <template>
-  <div :class="['bg-' + activeTheme, 'fixed top-1/2 right-6 -translate-y-1/2 z-[100] flex flex-col gap-2 p-2 rounded-full border border-white/10 shadow-2xl transition-all duration-500']">
+  <div :class="['bg-' + activeTheme, 'fixed top-1/2 right-6 -translate-y-1/2 z-[9999] flex flex-col gap-2 p-2 rounded-full border border-white/10 shadow-2xl transition-all duration-500']">
     <button
       v-for="theme in themes"
       :key="theme.id"

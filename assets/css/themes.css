@@ -67,3 +67,45 @@
               border-color 0.25s ease,
               box-shadow 0.25s ease !important;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+/* Custom thin scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Selection Color */
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+/* Awwwards Section Label Utility */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Giant Ghost Numbers Utility */
+.ghost-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(100px, 15vw, 200px);
+  font-weight: 900;
+  color: var(--bg-surface);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}

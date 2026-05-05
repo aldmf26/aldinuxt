@@ -1,59 +1,79 @@
 <template>
-  <section id="contact" class="relative py-16 md:py-40 px-6 md:px-16 min-h-[70vh] md:min-h-screen flex items-center overflow-x-hidden">
-    <div class="max-w-[1600px] mx-auto w-full">
-      <!-- Giant text -->
-      <div ref="contactText" class="mb-12">
-        <a
-          href="mailto:aldimf26@gmail.com?subject=Let's%20Talk!"
-          class="block group"
-          data-cursor-hover
-        >
-          <h2 class="font-display italic leading-[0.85] tracking-tight contact-headline text-text-primary group-hover:text-lime transition-colors duration-700">
-            <span ref="line1" class="block opacity-0 translate-y-[60px]">LET'S</span>
-            <span ref="line2" class="block opacity-0 translate-y-[60px]">TALK.</span>
-          </h2>
-        </a>
-      </div>
+  <section id="contact" class="relative py-32 md:py-64 px-6 md:px-16 min-h-screen flex flex-col justify-end overflow-hidden">
+    <!-- Background Ghost Word -->
+    <div class="absolute top-20 left-0 z-0 pointer-events-none select-none opacity-[0.03] text-text-muted font-black tracking-tighter leading-none ghost-hello">
+      HELLO
+    </div>
 
-      <!-- Email -->
-      <div ref="emailRef" class="mb-16 opacity-0">
-        <a
-          href="mailto:aldimf26@gmail.com"
-          class="font-mono text-base md:text-lg text-text-primary/70 hover:text-lime transition-colors link-underline"
-          data-cursor-hover
-        >
-          → aldimf26@gmail.com
-        </a>
-      </div>
-
-      <!-- Footer / Social Links -->
-      <div ref="footerRef" class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pt-12 border-t border-text-primary/10 opacity-0">
-        <div>
-          <p class="font-mono text-sm text-text-primary/60">
-            © 2025 Fahrizaldi · Crafted with code & rhythm · Banjarmasin 🇮🇩
-          </p>
-        </div>
-
-        <div class="flex items-center gap-8">
+    <div class="max-w-[1800px] mx-auto w-full relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-20 items-end">
+        <!-- Giant Editorial Headline -->
+        <div ref="headlineRef">
+          <span class="section-label block mb-12">Get in touch</span>
           <a
-            v-for="link in socialLinks"
-            :key="link.name"
-            :href="link.url"
-            target="_blank"
-            class="font-mono text-sm text-text-primary/70 hover:text-lime transition-colors link-underline tracking-wider uppercase"
+            href="mailto:aldimf26@gmail.com?subject=Let's%20Talk!"
+            class="group block transition-colors duration-500"
             data-cursor-hover
           >
-            {{ link.name }}
+            <h2 class="font-display font-black leading-[0.8] tracking-tighter text-text-primary group-hover:text-lime transition-colors duration-700 contact-title">
+              LET'S <br/>
+              WORK.
+            </h2>
           </a>
-
-          <button
-            @click="scrollToTop"
-            class="font-mono text-sm text-text-primary/70 hover:text-lime transition-colors tracking-wider uppercase"
-            data-cursor-hover
-          >
-            Back to top ↑
-          </button>
         </div>
+
+        <!-- Contact Details -->
+        <div ref="detailsRef" class="space-y-16 pb-10">
+           <div class="space-y-4">
+              <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Email</span>
+              <a 
+                href="mailto:aldimf26@gmail.com" 
+                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-text-primary/10 pb-2 inline-block"
+                data-cursor-hover
+              >
+                aldimf26@gmail.com
+              </a>
+           </div>
+
+           <div class="grid grid-cols-2 gap-12">
+              <div class="space-y-4">
+                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Social</span>
+                 <ul class="space-y-3">
+                   <li v-for="social in socialLinks" :key="social.name">
+                     <a 
+                        :href="social.url" 
+                        target="_blank" 
+                        class="font-mono text-xs uppercase tracking-widest text-text-primary/60 hover:text-lime transition-colors"
+                        data-cursor-hover
+                      >
+                       {{ social.name }}
+                     </a>
+                   </li>
+                 </ul>
+              </div>
+              <div class="space-y-4">
+                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Location</span>
+                 <p class="font-mono text-xs text-text-primary/60 uppercase tracking-widest leading-relaxed">
+                   Banjarmasin, ID <br/>
+                   {{ localTime }}
+                 </p>
+              </div>
+           </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="mt-32 pt-12 border-t border-text-primary/5 flex flex-col md:flex-row justify-between items-center gap-8">
+        <p class="font-mono text-[10px] text-text-primary/30 uppercase tracking-[0.2em]">
+          © 2025 Aldi Fahrizaldi · Crafted with code & rhythm
+        </p>
+        <button 
+          @click="scrollToTop"
+          class="font-mono text-[10px] text-lime uppercase tracking-[0.3em] hover:opacity-70 transition-opacity"
+          data-cursor-hover
+        >
+          Back to top ↑
+        </button>
       </div>
     </div>
   </section>
@@ -61,12 +81,10 @@
 
 <script setup>
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const line1 = ref(null)
-const line2 = ref(null)
-const emailRef = ref(null)
-const footerRef = ref(null)
+const headlineRef = ref(null)
+const detailsRef = ref(null)
+const localTime = ref('')
 
 const socialLinks = [
   { name: 'Instagram', url: 'https://www.instagram.com/aldiiimf' },
@@ -74,54 +92,56 @@ const socialLinks = [
   { name: 'Youtube', url: 'https://www.youtube.com/@ALdMFbeat' },
 ]
 
+const updateTime = () => {
+  const now = new Date()
+  localTime.value = now.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    timeZoneName: 'short' 
+  })
+}
+
 const scrollToTop = () => {
-  const { $lenis } = useNuxtApp()
-  if ($lenis) {
-    $lenis.scrollTo(0)
-  } else {
+  if (process.client) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
 
 onMounted(() => {
   if (typeof window === 'undefined') return
+  updateTime()
+  setInterval(updateTime, 60000)
 
-  // Giant text reveal
-  gsap.to(line1.value, {
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
+  gsap.from(headlineRef.value, {
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    ease: 'power4.out',
+    scrollTrigger: {
+      trigger: headlineRef.value,
+      start: 'top 90%',
+    }
+  })
+
+  gsap.from(detailsRef.value, {
+    y: 60,
+    opacity: 0,
+    duration: 1,
+    delay: 0.2,
     ease: 'power3.out',
-    scrollTrigger: { trigger: '#contact', start: 'top 90%' },
-  })
-
-  gsap.to(line2.value, {
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    delay: 0.15,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: '#contact', start: 'top 90%' },
-  })
-
-  gsap.to(emailRef.value, {
-    opacity: 1,
-    duration: 0.6,
-    delay: 0.3,
-    scrollTrigger: { trigger: '#contact', start: 'top 90%' },
-  })
-
-  gsap.to(footerRef.value, {
-    opacity: 1,
-    duration: 0.6,
-    delay: 0.4,
-    scrollTrigger: { trigger: '#contact', start: 'top 90%' },
+    scrollTrigger: {
+      trigger: detailsRef.value,
+      start: 'top 90%',
+    }
   })
 })
 </script>
 
 <style scoped>
-.contact-headline {
-  font-size: clamp(80px, 18vw, 280px);
+.contact-title {
+  font-size: clamp(80px, 15vw, 220px);
+}
+.ghost-hello {
+  font-size: clamp(120px, 20vw, 300px);
 }
 </style>

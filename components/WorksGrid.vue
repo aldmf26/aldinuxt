@@ -1,27 +1,27 @@
 <template>
-  <section id="works" class="relative py-24 md:py-40 px-6 md:px-16 overflow-hidden">
-    <!-- Background "WORKS" text -->
-    <div
-      ref="bgText"
-      class="absolute top-20 left-1/2 -translate-x-1/2 font-display italic text-works text-text-primary opacity-[0.02] select-none pointer-events-none z-0 whitespace-nowrap"
-    >
+  <section id="works" class="relative py-32 md:py-48 px-4 md:px-10 overflow-hidden">
+    <!-- Giant Ghost Word -->
+    <div class="absolute -top-12 -left-4 z-0 pointer-events-none select-none opacity-[0.08] text-text-muted font-black tracking-tighter leading-none" style="font-size: clamp(120px, 18vw, 260px); letter-spacing: -0.04em;">
       WORKS
     </div>
 
-    <div class="max-w-[1600px] mx-auto relative z-10">
+    <div class="max-w-[1800px] mx-auto relative z-10">
       <!-- Section header -->
-      <div ref="sectionHeader" class="mb-24 opacity-0">
-        <span class="font-mono text-xs text-lime tracking-[0.3em] uppercase block mb-6">Selected Projects</span>
-        <h2 class="font-display italic text-section text-text-primary leading-none">Works</h2>
+      <div ref="header" class="mb-24 px-4">
+        <span class="section-label block mb-6">Selected Works</span>
+        <h2 class="font-display italic text-text-primary leading-none" style="font-size: clamp(64px, 8vw, 120px)">
+          Portfolio
+        </h2>
       </div>
 
-      <!-- Projects Grid - Simplified 2-column grid for cleaner text-only cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+      <!-- Asymmetric Grid -->
+      <div class="works-grid">
         <ProjectCard 
           v-for="(project, index) in projects" 
           :key="project.slug || index" 
           :project="project" 
-          :index="index" 
+          :index="index"
+          class="project-card-item"
         />
       </div>
     </div>
@@ -29,57 +29,69 @@
 </template>
 
 <script setup>
+import { projects } from '~/data/project'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import { projects } from '~/data/project'
-
-const bgText = ref(null)
-const sectionHeader = ref(null)
+const header = ref(null)
 
 onMounted(() => {
   if (typeof window === 'undefined') return
-
-  // Header animation
-  gsap.to(sectionHeader.value, {
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: 'power3.out',
+  
+  gsap.from(header.value, {
+    y: 60,
+    opacity: 0,
+    duration: 1,
+    ease: 'power4.out',
     scrollTrigger: {
-      trigger: sectionHeader.value,
-      start: 'top 80%',
-    },
-  })
-  gsap.from(sectionHeader.value, {
-    y: 40,
-    duration: 0.8,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: sectionHeader.value,
-      start: 'top 80%',
-    },
-  })
-
-  // Background text parallax
-  gsap.to(bgText.value, {
-    yPercent: -20,
-    scrollTrigger: {
-      trigger: '#works',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 1.2,
-    },
+      trigger: header.value,
+      start: 'top 90%',
+    }
   })
 })
 </script>
 
 <style scoped>
-.text-works {
-  font-size: clamp(120px, 15vw, 220px);
+.works-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  background: var(--text-primary);
+  opacity: 0.1; /* Very subtle grid lines */
 }
 
-.text-section {
-  font-size: clamp(60px, 8vw, 140px);
+/* Base grid setup for desktop */
+@media (min-width: 1024px) {
+  .works-grid {
+    grid-template-columns: 1.6fr 1fr;
+    gap: 4px;
+    background: transparent;
+    opacity: 1;
+  }
+
+  /* Card 1: Full width */
+  .project-card-item:nth-child(1) {
+    grid-column: 1 / -1;
+  }
+
+  /* Card 2: Left column, Tall */
+  .project-card-item:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2 / 4;
+  }
+
+  /* Cards 3 & 4: Right column, stacked */
+  .project-card-item:nth-child(3) {
+    grid-column: 2;
+  }
+
+  .project-card-item:nth-child(4) {
+    grid-column: 2;
+  }
+
+  /* Card 5: Full width */
+  .project-card-item:nth-child(5) {
+    grid-column: 1 / -1;
+  }
 }
 </style>
