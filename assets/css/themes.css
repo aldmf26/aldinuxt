@@ -7,6 +7,9 @@
   --text-primary: #E8E8E0;
   --text-muted: #555555;
   --highlight: #7EB3F0;
+  --pattern-color: rgba(255, 255, 255, 0.03);
+  --pill-bg: rgba(255, 255, 255, 0.05);
+  --pill-border: rgba(255, 255, 255, 0.08);
 }
 
 :root[data-theme="ember"] {
@@ -17,6 +20,9 @@
   --text-primary: #F0EAD6;
   --text-muted: #4A3A28;
   --highlight: #FFB347;
+  --pattern-color: rgba(255, 255, 255, 0.03);
+  --pill-bg: rgba(255, 255, 255, 0.05);
+  --pill-border: rgba(255, 255, 255, 0.08);
 }
 
 :root[data-theme="frost"] {
@@ -27,6 +33,22 @@
   --text-primary: #D8E8F8;
   --text-muted: #2A3A50;
   --highlight: #A8D8FF;
+  --pattern-color: rgba(255, 255, 255, 0.03);
+  --pill-bg: rgba(255, 255, 255, 0.05);
+  --pill-border: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="contrast"] {
+  --accent: #111111;
+  --accent-dim: #444444;
+  --bg-primary: #FFFFFF;
+  --bg-surface: #F2F2F2;
+  --text-primary: #080808;
+  --text-muted: #888888;
+  --highlight: #0044FF;
+  --pattern-color: rgba(0, 0, 0, 0.05);
+  --pill-bg: rgba(0, 0, 0, 0.03);
+  --pill-border: rgba(0, 0, 0, 0.06);
 }
 
 /* Smooth transition when switching */

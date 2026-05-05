@@ -52,46 +52,46 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Mobile: single column */
 .works-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2px;
-  background: var(--text-primary);
-  opacity: 0.1; /* Very subtle grid lines */
+  gap: 16px;
+  background: transparent;
 }
 
-/* Base grid setup for desktop */
+/* Reset all nth-child spanning on mobile */
+@media (max-width: 767px) {
+  .project-card-item:nth-child(n) {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+  .works-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--text-primary);
+  }
+  .works-grid > * {
+    background: var(--bg-primary); /* Ensure background is solid behind gaps */
+  }
+}
+
+/* Desktop: asymmetric */
 @media (min-width: 1024px) {
   .works-grid {
     grid-template-columns: 1.6fr 1fr;
     gap: 4px;
     background: transparent;
-    opacity: 1;
   }
 
-  /* Card 1: Full width */
-  .project-card-item:nth-child(1) {
-    grid-column: 1 / -1;
-  }
-
-  /* Card 2: Left column, Tall */
-  .project-card-item:nth-child(2) {
-    grid-column: 1;
-    grid-row: 2 / 4;
-  }
-
-  /* Cards 3 & 4: Right column, stacked */
-  .project-card-item:nth-child(3) {
-    grid-column: 2;
-  }
-
-  .project-card-item:nth-child(4) {
-    grid-column: 2;
-  }
-
-  /* Card 5: Full width */
-  .project-card-item:nth-child(5) {
-    grid-column: 1 / -1;
-  }
+  .project-card-item:nth-child(1) { grid-column: 1 / -1; }
+  .project-card-item:nth-child(2) { grid-column: 1; grid-row: 2 / 4; }
+  .project-card-item:nth-child(3) { grid-column: 2; }
+  .project-card-item:nth-child(4) { grid-column: 2; }
+  .project-card-item:nth-child(5) { grid-column: 1 / -1; }
 }
 </style>

@@ -2,81 +2,182 @@
   <NuxtLink
     v-if="project.slug"
     :to="`/projects/${project.slug}`"
-    class="group relative overflow-hidden bg-[var(--bg-surface)] border border-text-primary/5 flex flex-col transition-all duration-700"
+    class="project-card group relative overflow-hidden flex flex-col transition-all duration-700"
     :class="[
-      isWide ? 'md:flex-row aspect-auto md:h-[450px]' : 'aspect-[4/5] md:aspect-[3/4]'
+      isWide ? 'md:flex-row' : ''
     ]"
     data-cursor-hover
   >
-    <!-- Content Area -->
+    <!-- VISUAL AREA (REBUILT FOR SAFARI) -->
     <div 
-      class="flex-1 p-8 md:p-12 flex flex-col justify-between z-10 relative bg-[var(--bg-surface)] transition-transform duration-700 group-hover:translate-x-2"
-      :class="{ 'md:max-w-[40%] border-r border-text-primary/5': isWide }"
+      class="proj-visual-wrap"
+      :style="{
+        position: 'relative',
+        width: '100%',
+        paddingTop: '56.25%',  /* 16:9 = 56.25% — works on ALL browsers */
+        overflow: 'hidden',
+        backgroundColor: 'var(--bg-surface)',
+        flex: isWide ? '1.5' : 'none'
+      }"
     >
-      <div>
-        <div class="font-mono text-[10px] text-lime tracking-[0.3em] uppercase mb-10 flex items-center gap-4">
-          <span class="w-8 h-px bg-lime/30"></span>
-          Prj. {{ project.number }}
+      <!-- INNER: absolute fill -->
+      <div
+        class="proj-visual-inner"
+        :style="{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }"
+      >
+        <!-- Top color bar -->
+        <div :style="{
+          position: 'absolute',
+          top: 0, left: 0, right: 0,
+          height: '3px',
+          background: project.color || 'var(--accent)',
+        }" />
+
+        <!-- Diagonal lines pattern — use variable for theme compatibility -->
+        <div :style="{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundImage: `repeating-linear-gradient(
+            45deg,
+            var(--pattern-color) 0px,
+            var(--pattern-color) 1px,
+            transparent 1px,
+            transparent 24px
+          )`,
+        }" />
+
+        <!-- Ghost number — bottom right -->
+        <span :style="{
+          position: 'absolute',
+          right: '8px',
+          bottom: '-8px',
+          fontFamily: '\'JetBrains Mono\', monospace',
+          fontSize: '96px',
+          fontWeight: '900',
+          lineHeight: '1',
+          color: 'var(--text-primary)',
+          opacity: '0.06',
+          userSelect: 'none',
+          pointerEvents: 'none',
+        }">{{ project.number }}</span>
+
+        <!-- Center content -->
+        <div :style="{
+          position: 'relative',
+          zIndex: '1',
+          textAlign: 'center',
+          padding: '16px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '10px',
+        }">
+          <!-- Project type label -->
+          <p :style="{
+            fontFamily: '\'JetBrains Mono\', monospace',
+            fontSize: '9px',
+            letterSpacing: '0.35em',
+            textTransform: 'uppercase',
+            color: project.color || 'var(--accent)',
+            margin: 0,
+          }">{{ project.type }}</p>
+
+          <!-- Tech pills -->
+          <div :style="{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '6px',
+            justifyContent: 'center',
+          }">
+            <span
+              v-for="tech in project.stack.slice(0, 3)"
+              :key="tech"
+              :style="{
+                fontFamily: '\'JetBrains Mono\', monospace',
+                fontSize: '9px',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                padding: '4px 10px',
+                borderRadius: '100px',
+                border: `1px solid ${project.color || 'var(--accent)'}`,
+                color: project.color || 'var(--accent)',
+                background: 'transparent',
+                whiteSpace: 'nowrap',
+              }"
+            >{{ tech }}</span>
+          </div>
         </div>
-
-        <h3 class="font-display italic text-4xl md:text-5xl lg:text-6xl text-text-primary mb-6 leading-[0.9] tracking-tighter">
-          {{ project.name }}
-        </h3>
-        
-        <p class="text-text-primary/50 text-sm md:text-base max-w-md font-body leading-relaxed mb-8">
-          {{ project.shortDesc }}
-        </p>
       </div>
+    </div>
 
-      <div class="flex flex-wrap gap-2 mt-auto">
+    <!-- TEXT AREA (REBUILT FOR SAFARI) -->
+    <div :style="{
+      padding: '16px',
+      background: 'var(--bg-surface)',
+      flex: '1',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    }">
+      <!-- Project number -->
+      <p :style="{
+        fontFamily: '\'JetBrains Mono\', monospace',
+        fontSize: '10px',
+        letterSpacing: '0.2em',
+        textTransform: 'uppercase',
+        color: 'var(--text-muted)',
+        margin: '0 0 6px 0',
+      }">{{ project.number }}</p>
+
+      <!-- Project name -->
+      <h3 :style="{
+        fontSize: '20px',
+        fontWeight: '700',
+        color: 'var(--text-primary)',
+        margin: '0 0 8px 0',
+        lineHeight: '1.2',
+      }">{{ project.name }}</h3>
+
+      <!-- Description -->
+      <p :style="{
+        fontSize: '13px',
+        color: 'var(--text-muted)',
+        margin: '0 0 12px 0',
+        lineHeight: '1.5',
+      }">{{ project.shortDesc }}</p>
+
+      <!-- Tech pills row -->
+      <div :style="{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '6px',
+      }">
         <span
           v-for="tech in project.stack"
           :key="tech"
-          class="font-mono text-[9px] uppercase tracking-wider text-text-primary/30 px-2 py-1 border border-text-primary/10 rounded-sm"
-        >
-          {{ tech }}
-        </span>
+          :style="{
+            fontSize: '10px',
+            fontFamily: '\'JetBrains Mono\', monospace',
+            padding: '3px 8px',
+            borderRadius: '4px',
+            background: 'var(--pill-bg)',
+            color: 'var(--text-muted)',
+            border: '1px solid var(--pill-border)',
+          }"
+        >{{ tech }}</span>
       </div>
     </div>
 
-    <!-- Image Area: Branded Visual (REBUILT) -->
-    <div class="flex-1 relative overflow-hidden bg-[var(--bg-surface)] flex items-center justify-center">
-       <!-- Branded Mockup -->
-       <div class="project-visual-card">
-          <!-- Colored accent top bar -->
-          <div class="accent-bar" :style="{ background: project.color }"></div>
-
-          <!-- Giant project number ghost -->
-          <span class="ghost-number" :style="{ color: project.color }">{{ project.number }}</span>
-
-          <!-- Diagonal grid lines -->
-          <div class="diagonal-grid" :style="{ 
-            backgroundImage: `repeating-linear-gradient(45deg, ${project.color}15 0px, ${project.color}15 1px, transparent 1px, transparent 28px)` 
-          }"></div>
-
-          <!-- Center Content -->
-          <div class="relative z-10 text-center p-5">
-             <p class="visual-type" :style="{ color: project.color }">{{ project.type }}</p>
-             <div class="flex flex-wrap gap-2 justify-center">
-                <span
-                  v-for="tech in project.stack.slice(0, 3)"
-                  :key="tech"
-                  class="tech-pill"
-                  :style="{
-                    border: `1px solid ${project.color}60`,
-                    color: project.color,
-                    background: `${project.color}10`,
-                  }"
-                >{{ tech }}</span>
-             </div>
-          </div>
-       </div>
-    </div>
-
-    <!-- Arrow Indicator (Top Right) -->
-    <div class="absolute top-8 right-8 z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
-       <svg class="w-6 h-6 text-lime" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    <!-- Arrow Indicator (Top Right - hidden on mobile) -->
+    <div class="absolute top-6 right-6 z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0 hidden md:block">
+       <svg class="w-5 h-5" :style="{ color: project.color || 'var(--accent)' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
        </svg>
     </div>
   </NuxtLink>
@@ -94,73 +195,24 @@ const isWide = computed(() => {
 </script>
 
 <style scoped>
-.project-visual-card {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-surface);
+.project-card {
+  text-decoration: none;
 }
 
-.accent-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  width: 100%;
-  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.group:hover .accent-bar {
-  width: 103%;
+.project-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
 }
 
-.ghost-number {
-  position: absolute;
-  right: -8px;
-  bottom: -16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 120px;
-  font-weight: 900;
-  opacity: 0.07;
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
-  transition: opacity 0.4s;
-}
-.group:hover .ghost-number {
-  opacity: 0.12;
+/* Hover animation for ghost number */
+.project-card:hover .proj-visual-inner span {
+  opacity: 0.12 !important;
+  transition: opacity 0.3s ease;
 }
 
-.diagonal-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 1;
-  transition: opacity 0.4s;
-}
-.group:hover .diagonal-grid {
-  opacity: 1; /* Keep it consistent as per instruction opacity is 1 already but lines could vary */
-}
-
-.visual-type {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  opacity: 0.8;
-}
-
-.tech-pill {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 100px;
-  white-space: nowrap;
+@media (min-width: 1024px) {
+  .project-card.md\:flex-row {
+    min-height: 400px;
+  }
 }
 </style>

@@ -230,3 +230,24 @@ html.theme-transitioning,
 html.theme-transitioning * {
   transition: background-color 0.35s ease, color 0.25s ease, border-color 0.25s ease, fill 0.25s ease, stroke 0.25s ease !important;
 }
+
+/* Safari iOS fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Force GPU acceleration on cards to fix rendering */
+  .project-card,
+  .proj-visual-wrap,
+  .proj-visual-inner {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  /* Fix position: absolute children in Safari */
+  .proj-visual-wrap {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Remove any mix-blend-mode from cards — not safe on Safari iOS */
+.project-card * {
+  mix-blend-mode: normal !important;
+}

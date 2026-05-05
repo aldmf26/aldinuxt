@@ -8,7 +8,7 @@
         'w-[10px] h-[10px] rounded-full transition-all duration-300 group relative',
         activeTheme === theme.id ? 'ring-2 ring-white scale-110' : 'opacity-40 hover:opacity-100 hover:scale-125'
       ]"
-      :style="{ backgroundColor: theme.dot }"
+      :style="{ backgroundColor: theme.dot, border: theme.id === 'contrast' ? '1px solid rgba(255,255,255,0.2)' : 'none' }"
       :title="theme.label"
       data-cursor-hover
     >
@@ -22,9 +22,10 @@
 
 <script setup>
 const themes = [
-  { id: 'signal', dot: '#C8F580', label: 'Signal' },
-  { id: 'ember',  dot: '#FF6B35', label: 'Ember'  },
-  { id: 'frost',  dot: '#7EB3F0', label: 'Frost'  },
+  { id: 'signal',   dot: '#C8F580', label: 'Signal' },
+  { id: 'ember',    dot: '#FF6B35', label: 'Ember'  },
+  { id: 'frost',    dot: '#7EB3F0', label: 'Frost'  },
+  { id: 'contrast', dot: '#FFFFFF', label: 'Contrast' },
 ]
 
 const activeTheme = ref('signal')
