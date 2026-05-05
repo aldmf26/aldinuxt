@@ -53,7 +53,7 @@
       </div>
 
       <!-- Piano Roll Visualizer -->
-      <div class="mb-20">
+      <div ref="pianoRollRef" class="mb-20 scroll-mt-32">
         <div class="flex justify-between items-center mb-2 px-2">
           <span class="font-mono text-[10px] md:text-[11px] tracking-[0.3em] text-text-muted uppercase">
             {{ activeItem ? `▶ ${activeItem.judul || 'SoundCloud Track'} — ${activeItem.bpm || 120} BPM` : '● PIANO ROLL — SELECT A BEAT' }}
@@ -72,7 +72,7 @@
         <div
           v-for="item in displayedItems"
           :key="item.src"
-          class="group relative rounded-[1.5rem] overflow-hidden border transition-all duration-500 cursor-pointer flex flex-col"
+          class="beat-card group relative rounded-[1.5rem] overflow-hidden border transition-all duration-500 cursor-pointer flex flex-col"
           :class="[
             activeItem?.src === item.src 
               ? 'border-lime' 
@@ -82,20 +82,40 @@
             background: 'var(--bg-surface)',
             boxShadow: activeItem?.src === item.src ? `0 0 30px ${glowColor}` : 'none'
           }"
-          @click="selectItem(item)"
+          @click="setActive(item)"
         >
           <!-- Active Dot -->
           <div v-if="activeItem?.src === item.src" class="absolute top-4 left-4 z-20">
              <div class="w-3 h-3 rounded-full bg-lime animate-pulse shadow-[0_0_10px_var(--accent)]"></div>
           </div>
 
-          <!-- Embed Area -->
-          <div class="aspect-video relative overflow-hidden bg-black">
+          <!-- Content Info (Above to ensure clickability) -->
+          <div class="p-6 pb-2">
+            <div class="flex justify-between items-start mb-4">
+              <h4 class="font-body font-bold text-lg text-text-primary group-hover:text-lime transition-colors pr-4">
+                {{ item.judul || item.type + ' Track' }}
+              </h4>
+              <div v-if="item.bpm" class="px-2.5 py-1 rounded-md font-mono text-[10px] bg-lime/10 text-lime border border-lime/20 shrink-0">
+                {{ item.bpm }} BPM
+              </div>
+              <div v-else class="px-2.5 py-1 rounded-md font-mono text-[10px] bg-orange-500/10 text-orange-500 border border-orange-500/20 shrink-0 uppercase tracking-tighter">
+                {{ item.platform }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Embed Area (Wrapped to handle pointer events) -->
+          <div 
+            class="beat-iframe-wrapper aspect-video relative overflow-hidden bg-black mx-4 mb-4 rounded-xl"
+            :class="{ 'is-active': activeItem?.src === item.src }"
+          >
             <!-- YouTube Embed -->
             <iframe
               v-if="item.platform === 'youtube'"
               class="w-full h-full"
-              :src="`https://www.youtube.com/embed/${item.src}`"
+              :src="activeItem?.src === item.src 
+                ? `https://www.youtube.com/embed/${item.src}?autoplay=1` 
+                : `https://www.youtube.com/embed/${item.src}`"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -110,24 +130,12 @@
               scrolling="no"
               frameborder="no"
               allow="autoplay"
-              :src="`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.src}&color=%23${accentHex}&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`"
+              :src="`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.src}&color=%23${accentHex}&auto_play=${activeItem?.src === item.src ? 'true' : 'false'}&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`"
             ></iframe>
           </div>
 
-          <!-- Content -->
-          <div class="p-6 flex flex-col justify-between flex-1">
-            <div class="flex justify-between items-start mb-4">
-              <h4 class="font-body font-bold text-lg text-text-primary group-hover:text-lime transition-colors pr-4">
-                {{ item.judul || item.type + ' Track' }}
-              </h4>
-              <div v-if="item.bpm" class="px-2.5 py-1 rounded-md font-mono text-[10px] bg-lime/10 text-lime border border-lime/20 shrink-0">
-                {{ item.bpm }} BPM
-              </div>
-              <div v-else class="px-2.5 py-1 rounded-md font-mono text-[10px] bg-orange-500/10 text-orange-500 border border-orange-500/20 shrink-0 uppercase tracking-tighter">
-                {{ item.platform }}
-              </div>
-            </div>
-            
+          <!-- Bottom Meta -->
+          <div class="px-6 pb-6 mt-auto">
             <div class="flex items-center gap-2">
               <span class="font-mono text-[10px] text-text-muted uppercase tracking-widest">{{ item.type }}</span>
               <span class="w-1 h-1 rounded-full bg-text-muted opacity-30"></span>
@@ -137,7 +145,7 @@
         </div>
       </div>
 
-      <!-- Load More Button (Mobile Optimized) -->
+      <!-- Load More Button -->
       <div v-if="filteredItems.length > displayLimit && !showAllItems" class="mt-12 text-center">
         <button
           @click="showAllItems = true"
@@ -145,17 +153,6 @@
         >
           Show All Tracks ({{ filteredItems.length }})
         </button>
-      </div>
-
-      <!-- CTA -->
-      <div class="mt-24 text-center">
-        <a
-          href="https://www.youtube.com/@ALdMFbeat"
-          target="_blank"
-          class="group inline-flex items-center gap-4 px-12 py-6 bg-lime text-dark font-body font-black text-sm tracking-[0.2em] rounded-full hover:bg-lime/90 hover:scale-105 transition-all duration-300"
-        >
-          HEAR MY BEATS ON YOUTUBE →
-        </a>
       </div>
     </div>
   </section>
@@ -166,6 +163,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const pianoRoll = ref(null)
+const pianoRollRef = ref(null)
 const activeItem = ref(null)
 const activeTab = ref('ALL')
 const bgBeats = ref(null)
@@ -184,7 +182,6 @@ const NOTE_ROWS = 16
 const BASE_SPEED = 1.2
 
 const musicData = [
-  // YouTube Data
   { judul: 'Hanoman',           src: 'WivTmpt7w5c', type: 'Trap Beat', bpm: 95,  platform: 'youtube' },
   { judul: 'Snakey',            src: '51X_4JpYxJ4', type: 'Free FLP',  bpm: 108, platform: 'youtube' },
   { judul: 'Flamingo',          src: 'UaNnC24Pnrg', type: 'Free FLP',  bpm: 100, platform: 'youtube' },
@@ -200,22 +197,12 @@ const musicData = [
   { judul: 'Habits',            src: 'mtSq-fF_ZDI', type: 'Free FLP',  bpm: 170, platform: 'youtube' },
   { judul: 'SMASH',             src: 'ACMkBeKlqJ8', type: 'EDM',       bpm: 150, platform: 'youtube' },
   { judul: 'ZAT Selatan',       src: 'Qb5_jPIvbnk', type: 'EDM',       bpm: 150, platform: 'youtube' },
-  
-  // SoundCloud Data
-  { src: "1184667226", type: "Trap",      platform: 'soundcloud' },
-  { src: "476601726",  type: "Trap",      platform: 'soundcloud' },
-  { src: "882811474",  type: "Trap",      platform: 'soundcloud' },
-  { src: "882811156",  type: "Trap",      platform: 'soundcloud' },
-  { src: "882810868",  type: "Trap",      platform: 'soundcloud' },
-  { src: "882810076",  type: "Trap",      platform: 'soundcloud' },
-  { src: "576378918",  type: "Orchestra", platform: 'soundcloud' },
-  { src: "576379527",  type: "Orchestra", platform: 'soundcloud' },
-  { src: "615512247",  type: "Remix",     platform: 'soundcloud' },
-  { src: "616400406",  type: "Remix",     platform: 'soundcloud' },
-  { src: "616415394",  type: "Remix",     platform: 'soundcloud' },
-  { src: "616400958",  type: "Remix",     platform: 'soundcloud' },
-  { src: "616400973",  type: "Remix",     platform: 'soundcloud' },
-  { src: "616400799",  type: "Remix",     platform: 'soundcloud' },
+  { src: "1184667226", type: "Trap", platform: 'soundcloud' },
+  { src: "476601726",  type: "Trap", platform: 'soundcloud' },
+  { src: "882811474",  type: "Trap", platform: 'soundcloud' },
+  { src: "882811156",  type: "Trap", platform: 'soundcloud' },
+  { src: "882810868",  type: "Trap", platform: 'soundcloud' },
+  { src: "882810076",  type: "Trap", platform: 'soundcloud' },
 ]
 
 const filteredItems = computed(() => {
@@ -224,8 +211,12 @@ const filteredItems = computed(() => {
   return musicData.filter(i => i.type === activeTab.value)
 })
 
-function selectItem(item) {
+function setActive(item) {
   activeItem.value = item
+  // Scroll to piano roll
+  nextTick(() => {
+    pianoRollRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  })
 }
 
 function generateWavePath(seed) {
@@ -238,18 +229,11 @@ function generateWavePath(seed) {
 }
 
 const accentColor = ref('#C8F580')
-const accentDimColor = ref('#8FB850')
 const glowColor = ref('rgba(200, 245, 128, 0.2)')
-
-const accentHex = computed(() => {
-  return accentColor.value.replace('#', '')
-})
+const accentHex = computed(() => accentColor.value.replace('#', ''))
 
 function parseColor(val, opacity = 1) {
   if (!val) return 'rgba(0,0,0,0)'
-  if (val.includes(' ') && !val.includes('(')) {
-    return `rgba(${val.split(' ').join(',')}, ${opacity})`
-  }
   if (val.startsWith('#')) {
     if (opacity === 1) return val
     const alpha = Math.round(opacity * 255).toString(16).padStart(2, '0')
@@ -262,14 +246,11 @@ function updateColors() {
   if (typeof document !== 'undefined') {
     const style = getComputedStyle(document.documentElement)
     const rawAccent = style.getPropertyValue('--accent').trim() || '#C8F580'
-    const rawAccentDim = style.getPropertyValue('--accent-dim').trim() || '#8FB850'
     accentColor.value = parseColor(rawAccent)
-    accentDimColor.value = parseColor(rawAccentDim, 0.26)
     glowColor.value = parseColor(rawAccent, 0.2)
   }
 }
 
-// Piano Roll Logic
 function generateNotes(bpm) {
   const canvas = pianoRoll.value
   if (!canvas) return []
@@ -330,15 +311,12 @@ function drawPianoRoll() {
   }
 
   for (const note of notes) {
-    const x = note.x
-    const y = note.row * rowH + rowH * 0.1
-    const h = rowH * 0.75
     ctx.shadowColor = accent
     ctx.shadowBlur = activeItem.value ? 6 : 2
     ctx.fillStyle = parseColor(accent, note.opacity)
     ctx.beginPath()
-    if (ctx.roundRect) ctx.roundRect(x, y, note.width, h, 3)
-    else ctx.rect(x, y, note.width, h)
+    if (ctx.roundRect) ctx.roundRect(note.x, note.row * rowH + rowH * 0.1, note.width, rowH * 0.75, 3)
+    else ctx.rect(note.x, note.row * rowH + rowH * 0.1, note.width, rowH * 0.75)
     ctx.fill()
     ctx.shadowBlur = 0
     note.x -= note.speed
@@ -361,10 +339,6 @@ function drawPianoRoll() {
     ctx.moveTo(0, y + rowH)
     ctx.lineTo(KEYBOARD_W, y + rowH)
     ctx.stroke()
-    if (!isBlack) {
-      ctx.fillStyle = 'rgba(255,255,255,0.06)'
-      ctx.fillRect(2, y + 1, KEYBOARD_W - 6, rowH - 2)
-    }
   }
 
   ctx.strokeStyle = parseColor(accent, 0.2)
@@ -402,9 +376,7 @@ onMounted(() => {
   }
 
   window.addEventListener('resize', () => {
-    if (pianoRoll.value) {
-      pianoRoll.value.width = pianoRoll.value.offsetWidth
-    }
+    if (pianoRoll.value) pianoRoll.value.width = pianoRoll.value.offsetWidth
   })
 })
 
@@ -423,16 +395,12 @@ onUnmounted(() => {
   100% { transform: translateX(-15px); }
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+.beat-iframe-wrapper {
+  pointer-events: none;
+  transition: transform 0.3s ease;
 }
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 10px;
+.beat-iframe-wrapper.is-active {
+  pointer-events: all;
+  transform: scale(1.02);
 }
 </style>

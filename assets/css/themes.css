@@ -29,37 +29,6 @@
   --highlight: #A8D8FF;
 }
 
-:root[data-theme="sakura"] {
-  --accent: #FF85A1;
-  --accent-dim: #CC5070;
-  --bg-primary: #0A0608;
-  --bg-surface: #1A0E14;
-  --text-primary: #F8D8E0;
-  --text-muted: #4A2A38;
-  --highlight: #FFB3C6;
-}
-
-:root[data-theme="void"] {
-  --accent: #1A1A1A;
-  --accent-dim: #333333;
-  --bg-primary: #F5F4F0;
-  --bg-surface: #E8E6E0;
-  --text-primary: #1A1A1A;
-  --text-muted: #888880;
-  --highlight: #2A2AFF;
-}
-
-
-:root[data-theme="white"] {
-  --accent: #C8F580;
-  --accent-dim: #8FB850;
-  --bg-primary: #FFFFFF;
-  --bg-surface: #FFFFFF;
-  --text-primary: #212529;
-  --text-muted: #666666;
-  --highlight: #7EB3F0;
-}
-
 /* Smooth transition when switching */
 *, *::before, *::after {
   transition: background-color 0.35s ease, 
