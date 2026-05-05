@@ -14,6 +14,7 @@
         ALDMF
       </NuxtLink>
 
+
       <!-- Nav Links -->
       <div class="hidden md:flex items-center gap-12">
         <NuxtLink 
@@ -30,27 +31,51 @@
 
       <!-- Theme/Mobile Toggle -->
       <div class="flex items-center gap-6">
-        <button class="font-mono text-[11px] uppercase tracking-[0.1em] text-lime" data-cursor-hover>
-          Menu
+        <button 
+          @click="isMenuOpen = !isMenuOpen"
+          class="font-mono text-[11px] uppercase tracking-[0.1em] text-lime z-[110] relative" 
+          data-cursor-hover
+        >
+          {{ isMenuOpen ? 'Close' : 'Menu' }}
         </button>
       </div>
     </div>
     
+    <!-- Mobile Menu Overlay -->
+    <Transition name="menu-fade">
+      <div v-if="isMenuOpen" class="fixed inset-0 bg-[var(--bg-primary)] z-[105] flex flex-col items-center justify-center p-10">
+        <div class="flex flex-col gap-8 text-center">
+          <NuxtLink 
+            v-for="(link, i) in navLinks" 
+            :key="link.path"
+            :to="link.path"
+            @click="isMenuOpen = false"
+            class="text-4xl md:text-6xl font-display italic text-text-primary hover:text-lime transition-all"
+            :style="{ transitionDelay: `${i * 100}ms` }"
+          >
+            {{ link.name }}
+          </NuxtLink>
+        </div>
+      </div>
+    </Transition>
+
     <!-- Subtle Blur Background -->
-    <div class="absolute inset-0 -z-10 backdrop-blur-md bg-[var(--bg-primary)]/10 opacity-0 transition-opacity duration-500" :class="{ 'opacity-100': isScrolled }"></div>
+    <div class="absolute inset-0 -z-10 backdrop-blur-md bg-[var(--bg-primary)]/10 opacity-0 transition-opacity duration-500" :class="{ 'opacity-100': isScrolled && !isMenuOpen }"></div>
   </nav>
+
 </template>
 
 <script setup>
 const isHidden = ref(false)
 const isScrolled = ref(false)
+const isMenuOpen = ref(false)
 let lastScroll = 0
+
 
 const navLinks = [
   { name: 'Works', path: '/#works' },
   { name: 'Sound', path: '/#music' },
   { name: 'About', path: '/#about' },
-  { name: 'Contact', path: '/#contact' },
 ]
 
 onMounted(() => {
@@ -90,4 +115,14 @@ onMounted(() => {
 .router-link-active .nav-underline {
   width: 100%;
 }
+
+/* Menu Transition */
+.menu-fade-enter-active, .menu-fade-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu-fade-enter-from, .menu-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
 </style>
+

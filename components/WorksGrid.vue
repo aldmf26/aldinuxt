@@ -1,7 +1,7 @@
 <template>
   <section id="works" class="relative py-32 md:py-48 px-4 md:px-10 overflow-hidden">
     <!-- Giant Ghost Word -->
-    <div class="absolute -top-12 -left-4 z-0 pointer-events-none select-none opacity-[0.08] text-text-muted font-black tracking-tighter leading-none" style="font-size: clamp(120px, 18vw, 260px); letter-spacing: -0.04em;">
+    <div class="absolute top-12 md:top-0 -left-4 z-0 pointer-events-none select-none opacity-[0.08] text-text-muted font-black tracking-tighter leading-none" style="font-size: clamp(120px, 18vw, 260px); letter-spacing: -0.04em;">
       WORKS
     </div>
 
@@ -72,20 +72,15 @@ onMounted(() => {
 @media (min-width: 768px) {
   .works-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: var(--text-primary);
-  }
-  .works-grid > * {
-    background: var(--bg-primary); /* Ensure background is solid behind gaps */
+    gap: 24px;
   }
 }
 
 /* Desktop: asymmetric */
 @media (min-width: 1024px) {
   .works-grid {
-    grid-template-columns: 1.6fr 1fr;
-    gap: 4px;
-    background: transparent;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 32px;
   }
 
   .project-card-item:nth-child(1) { grid-column: 1 / -1; }
