@@ -30,7 +30,7 @@
                <div class="space-y-6">
                   <div v-for="(line, i) in terminalLines" :key="i" class="flex gap-4">
                      <span class="text-lime/30">$</span>
-                     <span ref="terminalRefs" class="text-text-primary/70 leading-relaxed">{{ line.text }}</span>
+                     <span class="text-text-primary/70 leading-relaxed">{{ line.text }}</span>
                   </div>
                   <div class="flex gap-4 animate-pulse">
                      <span class="text-lime/30">$</span>
@@ -47,8 +47,16 @@
           </div>
         </div>
 
-        <!-- STUDIO SIDE -->
-        <div ref="studioSide" class="relative group p-10 md:p-24 bg-[#0F1015] transition-colors duration-700 hover:bg-[#15171E]">
+        <!-- STUDIO SIDE (REBUILT INTERACTION) -->
+        <div 
+          ref="studioSide" 
+          class="relative group p-10 md:p-24 bg-[#0F1015] transition-all duration-700 hover:bg-[#15171E]"
+          :style="{ 
+            boxShadow: isPlaying 
+              ? '0 0 0 1px var(--accent)40, 0 0 30px var(--accent)15' 
+              : 'none'
+          }"
+        >
           <div class="relative z-10 space-y-12">
             <div class="flex items-center gap-6">
                <div class="w-14 h-14 rounded-2xl bg-[#FF6B35]/10 flex items-center justify-center border border-[#FF6B35]/20 group-hover:bg-[#FF6B35] group-hover:text-dark transition-all duration-500 shadow-lg shadow-[#FF6B35]/5">
@@ -62,31 +70,51 @@
 
             <!-- Studio UI -->
             <div class="bg-[#181A21] rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
+               <!-- Transport -->
                <div class="bg-[#21242D] px-8 py-5 flex items-center justify-between border-b border-black/40">
                   <div class="flex items-center gap-6">
-                     <button @click="togglePlay" class="w-12 h-12 rounded-full bg-[#2D313D] flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-lime shadow-lg">
-                        <span v-if="isPlaying" class="text-xl">■</span>
-                        <span v-else class="text-xl ml-1">▶</span>
+                     <button 
+                       @click="togglePlay" 
+                       class="w-12 h-12 rounded-full bg-[#2D313D] flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-lime shadow-lg"
+                       :class="{ 'btn-pulse': isPlaying }"
+                     >
+                        <span class="text-xl" :style="{ marginLeft: isPlaying ? '0' : '2px' }">
+                          {{ isPlaying ? '■' : '▶' }}
+                        </span>
                      </button>
-                     <div class="hidden md:block">
+                     <div class="hidden md:block w-32">
                         <div class="text-[10px] font-mono text-text-primary/30 uppercase mb-1">Master Volume</div>
-                        <div class="w-32 h-1.5 bg-black/40 rounded-full overflow-hidden">
-                           <div class="h-full bg-lime/60 w-[70%]"></div>
+                        <div class="h-[3px] bg-black/40 rounded-full overflow-hidden">
+                           <div 
+                             class="h-full bg-lime transition-all duration-150"
+                             :style="{ width: volumeLevel + '%' }"
+                           ></div>
                         </div>
                      </div>
                   </div>
-                  <div class="font-mono text-xs text-lime/80 tracking-widest bg-black/30 px-4 py-2 rounded-lg border border-white/5">
-                     140.00 BPM
+                  <div class="font-mono text-xs tracking-widest bg-black/30 px-4 py-2 rounded-lg border border-white/5 transition-colors duration-75"
+                       :style="{ color: (currentStep % 4 === 0 && isPlaying) ? 'var(--accent)' : 'var(--text-primary)' }">
+                     {{ bpm }}.00 BPM
                   </div>
                </div>
+
+               <!-- Piano Roll Grid -->
                <div class="p-8 grid grid-cols-16 gap-1 h-32">
-                  <div v-for="i in 16" :key="i" class="flex flex-col gap-1">
-                     <div v-for="j in 6" :key="j" 
-                          class="flex-1 rounded-[2px] transition-all duration-500"
-                          :class="[Math.random() > 0.85 ? 'bg-lime/40 shadow-[0_0_10px_rgba(200,245,128,0.2)]' : 'bg-white/[0.03]']"
-                          :style="{ opacity: isPlaying ? (0.3 + Math.random() * 0.7) : 1 }">
-                     </div>
-                  </div>
+                  <template v-for="row in ROWS" :key="`row-${row}`">
+                    <div 
+                      v-for="step in STEPS" :key="`cell-${row}-${step}`"
+                      class="rounded-[2px] transition-all duration-75"
+                      :style="{
+                        background: activeCells.has(`${row-1}-${step-1}`)
+                          ? (currentStep === step-1 && isPlaying 
+                              ? 'var(--accent)' 
+                              : 'var(--accent-dim)')
+                          : (currentStep === step-1 && isPlaying
+                              ? 'rgba(255,255,255,0.12)' 
+                              : 'rgba(255,255,255,0.04)')
+                      }"
+                    ></div>
+                  </template>
                </div>
             </div>
 
@@ -108,7 +136,18 @@ import { gsap } from 'gsap'
 
 const devSide = ref(null)
 const studioSide = ref(null)
+
+// Music Engine State
 const isPlaying = ref(false)
+const bpm = ref(140)
+const volumeLevel = ref(60)
+const ROWS = 8
+const STEPS = 16
+const currentStep = ref(-1)
+const activeCells = ref(new Set())
+
+let stepInterval = null
+let volumeInterval = null
 
 const terminalLines = [
   { text: 'npm run innovate' },
@@ -119,7 +158,53 @@ const terminalLines = [
 const devStack = ['Nuxt JS', 'Laravel', 'PostgreSQL', 'Docker', 'GSAP']
 const musicStack = ['FL Studio', 'Serum', 'FabFilter', 'Mixing', 'Arrangement']
 
-const togglePlay = () => isPlaying.value = !isPlaying.value
+function generateRandomPattern() {
+  const pattern = new Set()
+  // Kick: row 0, steps 0, 4, 8, 12
+  ;[0, 4, 8, 12].forEach(s => pattern.add(`0-${s}`))
+  // Snare: row 2, steps 4, 12  
+  ;[4, 12].forEach(s => pattern.add(`2-${s}`))
+  // Hi-hat: row 4, every 2 steps
+  for (let s = 0; s < STEPS; s += 2) pattern.add(`4-${s}`)
+  // Melody: random notes on rows 5-7
+  for (let s = 0; s < STEPS; s++) {
+    if (Math.random() > 0.7) pattern.add(`${5 + Math.floor(Math.random() * 3)}-${s}`)
+  }
+  return pattern
+}
+
+function togglePlay() {
+  isPlaying.value = !isPlaying.value
+  
+  if (isPlaying.value) {
+    startPlayback()
+  } else {
+    stopPlayback()
+  }
+}
+
+function startPlayback() {
+  const msPerStep = (60 / bpm.value) * 1000 / 4 // 16th notes
+  currentStep.value = 0
+  activeCells.value = generateRandomPattern()
+  
+  stepInterval = setInterval(() => {
+    currentStep.value = (currentStep.value + 1) % STEPS
+  }, msPerStep)
+
+  volumeInterval = setInterval(() => {
+    volumeLevel.value = 45 + Math.random() * 35
+  }, 150)
+}
+
+function stopPlayback() {
+  clearInterval(stepInterval)
+  clearInterval(volumeInterval)
+  stepInterval = null
+  volumeInterval = null
+  currentStep.value = -1
+  volumeLevel.value = 60
+}
 
 onMounted(() => {
   if (typeof window === 'undefined') return
@@ -136,10 +221,23 @@ onMounted(() => {
     }
   })
 })
+
+onUnmounted(() => {
+  stopPlayback()
+})
 </script>
 
 <style scoped>
 .grid-cols-16 {
   grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+.btn-pulse {
+  animation: buttonPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes buttonPulse {
+  from { box-shadow: 0 0 0px var(--accent); }
+  to   { box-shadow: 0 0 12px var(--accent); }
 }
 </style>

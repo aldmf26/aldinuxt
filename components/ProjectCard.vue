@@ -39,46 +39,41 @@
       </div>
     </div>
 
-    <!-- Image Area / Mockup Area -->
-    <div class="flex-1 relative overflow-hidden bg-black/20">
-       <!-- Styled Placeholder for projects without images or as a design choice -->
-       <div 
-          class="w-full h-full flex items-center justify-center relative overflow-hidden"
-          :style="{ background: `linear-gradient(135deg, var(--bg-surface) 0%, ${project.color}15 100%)` }"
-       >
-          <!-- Big project number as texture -->
-          <span class="absolute right-[-10px] bottom-[-20px] font-mono font-black text-[160px] text-text-primary opacity-[0.04] leading-none select-none">
-            {{ project.number }}
-          </span>
+    <!-- Image Area: Branded Visual (REBUILT) -->
+    <div class="flex-1 relative overflow-hidden bg-[var(--bg-surface)] flex items-center justify-center">
+       <!-- Branded Mockup -->
+       <div class="project-visual-card">
+          <!-- Colored accent top bar -->
+          <div class="accent-bar" :style="{ background: project.color }"></div>
 
-          <!-- Real Image if exists -->
-          <img 
-            v-if="project.image" 
-            :src="project.image" 
-            :alt="project.name" 
-            class="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-out" 
-          />
-          
-          <!-- Tech stack floating pills (Visible only if no image or on hover) -->
-          <div class="relative z-10 flex flex-wrap gap-2 justify-center p-8 transition-opacity duration-500" :class="{ 'opacity-0 group-hover:opacity-100': project.image }">
-             <span 
-               v-for="tech in project.stack" 
-               :key="tech"
-               class="font-mono text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full border border-lime text-lime bg-black/20 backdrop-blur-sm"
-             >
-               {{ tech }}
-             </span>
+          <!-- Giant project number ghost -->
+          <span class="ghost-number" :style="{ color: project.color }">{{ project.number }}</span>
+
+          <!-- Diagonal grid lines -->
+          <div class="diagonal-grid" :style="{ 
+            backgroundImage: `repeating-linear-gradient(45deg, ${project.color}15 0px, ${project.color}15 1px, transparent 1px, transparent 28px)` 
+          }"></div>
+
+          <!-- Center Content -->
+          <div class="relative z-10 text-center p-5">
+             <p class="visual-type" :style="{ color: project.color }">{{ project.type }}</p>
+             <div class="flex flex-wrap gap-2 justify-center">
+                <span
+                  v-for="tech in project.stack.slice(0, 3)"
+                  :key="tech"
+                  class="tech-pill"
+                  :style="{
+                    border: `1px solid ${project.color}60`,
+                    color: project.color,
+                    background: `${project.color}10`,
+                  }"
+                >{{ tech }}</span>
+             </div>
           </div>
-
-          <!-- Accent Line -->
-          <div class="absolute top-0 left-0 right-0 h-[2px]" :style="{ background: project.color || 'var(--accent)' }"></div>
        </div>
-       
-       <!-- Accent Overlay -->
-       <div class="absolute inset-0 bg-lime/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
     </div>
 
-    <!-- Arrow Indicator -->
+    <!-- Arrow Indicator (Top Right) -->
     <div class="absolute top-8 right-8 z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
        <svg class="w-6 h-6 text-lime" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -99,7 +94,73 @@ const isWide = computed(() => {
 </script>
 
 <style scoped>
-.group:hover img {
-  filter: grayscale(0%);
+.project-visual-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface);
+}
+
+.accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  width: 100%;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .accent-bar {
+  width: 103%;
+}
+
+.ghost-number {
+  position: absolute;
+  right: -8px;
+  bottom: -16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 120px;
+  font-weight: 900;
+  opacity: 0.07;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.group:hover .ghost-number {
+  opacity: 0.12;
+}
+
+.diagonal-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+.group:hover .diagonal-grid {
+  opacity: 1; /* Keep it consistent as per instruction opacity is 1 already but lines could vary */
+}
+
+.visual-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.tech-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
 }
 </style>

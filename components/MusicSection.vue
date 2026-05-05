@@ -56,7 +56,7 @@
       <div ref="pianoRollRef" class="mb-20 scroll-mt-32">
         <div class="flex justify-between items-center mb-2 px-2">
           <span class="font-mono text-[10px] md:text-[11px] tracking-[0.3em] text-text-muted uppercase">
-            {{ activeItem ? `▶ ${activeItem.judul || 'SoundCloud Track'} — ${activeItem.bpm || 120} BPM` : '● PIANO ROLL — SELECT A BEAT' }}
+            {{ activeItem ? `▶ ${activeItem.judul || 'Track'} — ${activeItem.bpm || 120} BPM` : '● PIANO ROLL — SELECT A BEAT' }}
           </span>
           <span class="font-mono text-[10px] text-lime opacity-60">
             FL STUDIO MODE
@@ -67,80 +67,54 @@
         </div>
       </div>
 
-      <!-- Items Grid -->
+      <!-- Items Grid (REBUILT) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="item in displayedItems"
           :key="item.src"
-          class="beat-card group relative rounded-[1.5rem] overflow-hidden border transition-all duration-500 cursor-pointer flex flex-col"
-          :class="[
-            activeItem?.src === item.src 
-              ? 'border-lime' 
-              : 'border-white/10'
-          ]"
+          class="beat-card group relative rounded-[1.5rem] overflow-hidden border border-white/10 transition-all duration-500 flex flex-col"
+          :class="{ 'border-lime': activeItem?.src === item.src }"
           :style="{ 
             background: 'var(--bg-surface)',
             boxShadow: activeItem?.src === item.src ? `0 0 30px ${glowColor}` : 'none'
           }"
-          @click="setActive(item)"
         >
-          <!-- Active Dot -->
-          <div v-if="activeItem?.src === item.src" class="absolute top-4 left-4 z-20">
-             <div class="w-3 h-3 rounded-full bg-lime animate-pulse shadow-[0_0_10px_var(--accent)]"></div>
+          <!-- TOP: BPM Visualization -->
+          <div class="beat-bars" :class="{ active: activeItem?.src === item.src }">
+            <div 
+              v-for="i in 24" :key="i"
+              class="beat-bar"
+              :style="{ animationDelay: `${i * 0.04}s`, animationDuration: `${0.4 + (i % 5) * 0.08}s` }"
+            />
           </div>
 
-          <!-- Content Info (Above to ensure clickability) -->
-          <div class="p-6 pb-2">
-            <div class="flex justify-between items-start mb-4">
-              <h4 class="font-body font-bold text-lg text-text-primary group-hover:text-lime transition-colors pr-4">
-                {{ item.judul || item.type + ' Track' }}
+          <!-- BOTTOM: Info & Controls -->
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h4 class="text-text-primary text-base font-bold truncate pr-4">
+                {{ item.judul }}
               </h4>
-              <div v-if="item.bpm" class="px-2.5 py-1 rounded-md font-mono text-[10px] bg-lime/10 text-lime border border-lime/20 shrink-0">
-                {{ item.bpm }} BPM
-              </div>
-              <div v-else class="px-2.5 py-1 rounded-md font-mono text-[10px] bg-orange-500/10 text-orange-500 border border-orange-500/20 shrink-0 uppercase tracking-tighter">
-                {{ item.platform }}
-              </div>
+              <button 
+                @click="toggleActive(item)"
+                class="play-toggle-btn"
+                :class="{ 'is-active': activeItem?.src === item.src }"
+              >
+                {{ activeItem?.src === item.src ? '■' : '▶' }}
+              </button>
             </div>
-          </div>
 
-          <!-- Embed Area (Wrapped to handle pointer events) -->
-          <div 
-            class="beat-iframe-wrapper aspect-video relative overflow-hidden bg-black mx-4 mb-4 rounded-xl"
-            :class="{ 'is-active': activeItem?.src === item.src }"
-          >
-            <!-- YouTube Embed -->
-            <iframe
-              v-if="item.platform === 'youtube'"
-              class="w-full h-full"
-              :src="activeItem?.src === item.src 
-                ? `https://www.youtube.com/embed/${item.src}?autoplay=1` 
-                : `https://www.youtube.com/embed/${item.src}`"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-            
-            <!-- SoundCloud Embed -->
-            <iframe
-              v-else
-              class="w-full h-full"
-              scrolling="no"
-              frameborder="no"
-              allow="autoplay"
-              :src="`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.src}&color=%23${accentHex}&auto_play=${activeItem?.src === item.src ? 'true' : 'false'}&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`"
-            ></iframe>
-          </div>
+            <p class="font-mono text-[11px] text-text-muted uppercase tracking-widest">
+              {{ item.type }} · {{ item.bpm }} BPM
+            </p>
 
-          <!-- Bottom Meta -->
-          <div class="px-6 pb-6 mt-auto">
-            <div class="flex items-center gap-2">
-              <span class="font-mono text-[10px] text-text-muted uppercase tracking-widest">{{ item.type }}</span>
-              <span class="w-1 h-1 rounded-full bg-text-muted opacity-30"></span>
-              <span class="font-mono text-[10px] text-text-muted uppercase tracking-widest">ALdMF</span>
-            </div>
+            <!-- External Link -->
+            <a 
+              :href="`https://www.youtube.com/watch?v=${item.src.split('?')[0]}`"
+              target="_blank"
+              class="yt-link"
+            >
+              Watch on YouTube ↗
+            </a>
           </div>
         </div>
       </div>
@@ -197,26 +171,22 @@ const musicData = [
   { judul: 'Habits',            src: 'mtSq-fF_ZDI', type: 'Free FLP',  bpm: 170, platform: 'youtube' },
   { judul: 'SMASH',             src: 'ACMkBeKlqJ8', type: 'EDM',       bpm: 150, platform: 'youtube' },
   { judul: 'ZAT Selatan',       src: 'Qb5_jPIvbnk', type: 'EDM',       bpm: 150, platform: 'youtube' },
-  { src: "1184667226", type: "Trap", platform: 'soundcloud' },
-  { src: "476601726",  type: "Trap", platform: 'soundcloud' },
-  { src: "882811474",  type: "Trap", platform: 'soundcloud' },
-  { src: "882811156",  type: "Trap", platform: 'soundcloud' },
-  { src: "882810868",  type: "Trap", platform: 'soundcloud' },
-  { src: "882810076",  type: "Trap", platform: 'soundcloud' },
 ]
 
 const filteredItems = computed(() => {
   if (activeTab.value === 'ALL') return musicData
-  if (activeTab.value === 'SoundCloud') return musicData.filter(i => i.platform === 'soundcloud')
-  return musicData.filter(i => i.type === activeTab.value)
+  return musicData.filter(i => i.type === activeTab.value || (activeTab.value === 'SoundCloud' && i.platform === 'soundcloud'))
 })
 
-function setActive(item) {
-  activeItem.value = item
-  // Scroll to piano roll
-  nextTick(() => {
-    pianoRollRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  })
+function toggleActive(item) {
+  if (activeItem.value?.src === item.src) {
+    activeItem.value = null
+  } else {
+    activeItem.value = item
+    nextTick(() => {
+      pianoRollRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+  }
 }
 
 function generateWavePath(seed) {
@@ -230,7 +200,6 @@ function generateWavePath(seed) {
 
 const accentColor = ref('#C8F580')
 const glowColor = ref('rgba(200, 245, 128, 0.2)')
-const accentHex = computed(() => accentColor.value.replace('#', ''))
 
 function parseColor(val, opacity = 1) {
   if (!val) return 'rgba(0,0,0,0)'
@@ -366,12 +335,7 @@ onMounted(() => {
   if (bgBeats.value) {
     gsap.to(bgBeats.value, {
       yPercent: -20,
-      scrollTrigger: {
-        trigger: '#music',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1.2,
-      },
+      scrollTrigger: { trigger: '#music', start: 'top bottom', end: 'bottom top', scrub: 1.2 }
     })
   }
 
@@ -389,18 +353,81 @@ onUnmounted(() => {
 .waveform-path {
   animation: waveMove 4s ease-in-out infinite alternate;
 }
-
 @keyframes waveMove {
   0% { transform: translateX(0); }
   100% { transform: translateX(-15px); }
 }
 
-.beat-iframe-wrapper {
-  pointer-events: none;
-  transition: transform 0.3s ease;
+/* Beat Cards Stylized (REBUILT) */
+.beat-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 60px;
+  padding: 12px 16px 8px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.beat-iframe-wrapper.is-active {
-  pointer-events: all;
-  transform: scale(1.02);
+.beat-bar {
+  flex: 1;
+  background: var(--accent);
+  opacity: 0.3;
+  border-radius: 2px 2px 0 0;
+  height: 20%;
+  transition: height 0.1s ease;
+}
+.beat-bars.active .beat-bar {
+  opacity: 1;
+  animation: barPulse var(--dur, 0.5s) ease-in-out infinite alternate;
+}
+@keyframes barPulse {
+  from { height: 15%; }
+  to { height: 85%; }
+}
+.beat-bars.active .beat-bar:nth-child(3n)   { --dur: 0.3s; }
+.beat-bars.active .beat-bar:nth-child(3n+1) { --dur: 0.5s; }
+.beat-bars.active .beat-bar:nth-child(3n+2) { --dur: 0.4s; }
+
+.play-toggle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  font-size: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.play-toggle-btn:hover {
+  transform: scale(1.1);
+}
+.play-toggle-btn.is-active {
+  animation: buttonPulse 0.5s ease-in-out infinite alternate;
+}
+@keyframes buttonPulse {
+  from { box-shadow: 0 0 0px var(--accent); }
+  to   { box-shadow: 0 0 12px var(--accent); }
+}
+
+.yt-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.yt-link:hover {
+  opacity: 1;
 }
 </style>
