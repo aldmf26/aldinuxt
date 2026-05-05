@@ -1,73 +1,137 @@
 <template>
+  <!-- Card as NuxtLink -->
   <NuxtLink
-    :to="`/projects/${project.detail}`"
-    class="group block relative bg-bg rounded-[3rem] p-8 md:p-14 hover:shadow-[0_60px_100px_rgba(0,0,0,0.1)] transition-all duration-700 hover:-translate-y-4 border border-primary/5 h-full overflow-hidden"
+    v-if="project.slug"
+    :to="`/projects/${project.slug}`"
+    ref="cardRefLink"
+    class="group relative bg-[var(--bg-surface)] rounded-2xl overflow-hidden transition-all duration-500 hover:bg-[var(--bg-surface)] opacity-0 translate-y-[60px] cursor-pointer block flex flex-col border border-white/5 hover:border-lime/30"
+    data-cursor-hover
   >
-    <!-- Background Gradient (Awwwards Style) -->
-    <div class="absolute inset-0 bg-gradient-to-br from-warna1/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-    
-    <!-- Index Number -->
-    <div class="absolute top-8 left-8 md:top-12 md:left-12">
-      <span class="text-[10px] font-black tracking-[0.5em] text-primary/20 group-hover:text-warna1/40 transition-colors uppercase">
-        Project {{ (index + 1).toString().padStart(2, '0') }}
-      </span>
-    </div>
+    <!-- Lime left border on hover -->
+    <div class="absolute left-0 top-0 bottom-0 w-0 bg-lime group-hover:w-[3px] transition-all duration-500 z-20"></div>
 
-    <div class="relative z-10 flex flex-col h-full mt-8 md:mt-12">
-      <!-- Feature Visual Area (Cinematic) -->
-      <div class="mb-12 w-full aspect-video rounded-3xl bg-primary/[0.02] border border-primary/[0.05] overflow-hidden flex items-center justify-center p-6 md:p-16 group-hover:bg-primary/[0.04] transition-all duration-700 relative">
-        <!-- Floating Shine Layer -->
-        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-        
-        <div v-if="project.judul === 'AgaFood'" class="flex gap-6 md:gap-10 items-center flex-wrap justify-center relative z-10 w-full">
-          <img src="/projects/tkmr.png" class="h-20 md:h-28 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Takemori" />
-          <div class="w-px h-12 md:h-16 bg-primary/10"></div>
-          <img src="/projects/sdb.png" class="h-20 md:h-28 w-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" alt="Soondobu" />
+    <!-- Content Area -->
+    <div class="p-8 md:p-10 flex-1 flex flex-col justify-between relative z-10">
+      <div>
+        <div class="flex items-center gap-6 mb-6">
+          <span class="font-mono text-2xl text-text-primary opacity-20 font-bold">
+            {{ String(index + 1).padStart(2, '0') }}
+          </span>
+          <h3 class="font-display italic text-3xl md:text-4xl text-text-primary group-hover:text-lime transition-colors duration-500">
+            {{ project.name }}
+          </h3>
         </div>
-        <img 
-          v-else 
-          :src="project.logoUrl" 
-          class="max-h-[85%] max-w-[85%] md:max-h-full md:max-w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] group-hover:scale-110 transition-transform duration-700 relative z-10" 
-          :alt="project.judul" 
-        />
-      </div>
 
-      <!-- Text Content -->
-      <div class="space-y-4">
-        <h3 class="text-3xl md:text-5xl font-black text-primary acorn tracking-tighter group-hover:text-warna1 transition-colors italic leading-none">
-          {{ project.judul }}
-        </h3>
-        
-        <p class="text-secondary text-lg font-medium leading-relaxed line-clamp-2 opacity-80 group-hover:opacity-100 transition-opacity">
-          {{ project.deskripsi }}
+        <p class="text-text-muted text-base md:text-lg leading-relaxed max-w-2xl mb-8">
+          {{ project.description }}
         </p>
       </div>
 
-      <!-- Tech Stack Badges (Minimalist) -->
-      <div class="flex flex-wrap gap-2 mt-12">
-        <span
-          v-for="tech in project.techs"
-          :key="tech"
-          class="px-4 py-1.5 bg-primary/[0.03] text-primary/40 text-[9px] font-black uppercase tracking-[0.25em] rounded-full border border-primary/5 group-hover:border-warna1/20 group-hover:text-warna1 transition-all duration-300"
-        >
-          {{ tech }}
-        </span>
+      <div class="flex items-end justify-between">
+        <div class="flex flex-wrap gap-3">
+          <span
+            v-for="tech in project.stack"
+            :key="tech"
+            class="px-4 py-1.5 bg-text-primary/5 border border-text-primary/10 rounded-full font-mono text-xs text-text-primary uppercase tracking-wider"
+          >
+            {{ tech }}
+          </span>
+        </div>
+
+        <div class="w-12 h-12 shrink-0 rounded-full border border-text-muted opacity-50 flex items-center justify-center group-hover:border-lime/50 group-hover:bg-lime/10 transition-all duration-500 cursor-pointer hover:opacity-100">
+          <svg
+            class="w-5 h-5 text-text-muted group-hover:text-lime transition-all duration-500 group-hover:rotate-[-45deg]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </div>
       </div>
     </div>
   </NuxtLink>
+
+  <!-- Card as Div (Private) -->
+  <div
+    v-else
+    ref="cardRefDiv"
+    class="group relative bg-[var(--bg-surface)] rounded-2xl overflow-hidden transition-all duration-500 hover:bg-[var(--bg-surface)] opacity-0 translate-y-[60px] flex flex-col border border-white/5"
+    data-cursor-hover
+  >
+    <div class="absolute left-0 top-0 bottom-0 w-0 bg-text-muted/20 group-hover:w-[3px] transition-all duration-500 z-20"></div>
+
+    <!-- Content Area -->
+    <div class="p-8 md:p-10 flex-1 flex flex-col justify-between relative z-10">
+      <div>
+        <div class="flex items-center gap-6 mb-6">
+          <span class="font-mono text-2xl text-text-primary opacity-20 font-bold">
+            {{ String(index + 1).padStart(2, '0') }}
+          </span>
+          <h3 class="font-display italic text-3xl md:text-4xl text-text-primary opacity-50">
+            {{ project.name }}
+          </h3>
+        </div>
+
+        <p class="text-text-muted text-base md:text-lg leading-relaxed max-w-2xl mb-8">
+          {{ project.description }}
+        </p>
+      </div>
+
+      <div class="flex items-end justify-between">
+        <div class="flex flex-wrap gap-3">
+          <span
+            v-for="tech in project.stack"
+            :key="tech"
+            class="px-4 py-1.5 bg-text-primary/5 border border-text-primary/10 rounded-full font-mono text-xs text-text-primary uppercase tracking-wider"
+          >
+            {{ tech }}
+          </span>
+        </div>
+
+        <div v-if="project.private" class="px-5 py-2.5 shrink-0 rounded-full border border-text-muted/20 flex items-center justify-center bg-text-muted/10">
+           <span class="font-mono text-xs text-text-muted uppercase tracking-wider flex items-center gap-2">
+             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+             Private Project
+           </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts">
-defineProps<{
-  index: number;
-  project: {
-    id: number;
-    detail: string;
-    judul: string;
-    deskripsi: string;
-    logoUrl?: string;
-    techs: readonly any[];
-    link: string;
-  };
-}>();
+<script setup>
+import { gsap } from 'gsap'
+
+const props = defineProps({
+  project: { type: Object, required: true },
+  index: { type: Number, required: true },
+  tall: { type: Boolean, default: false },
+})
+
+const cardRefLink = ref(null)
+const cardRefDiv = ref(null)
+
+onMounted(async () => {
+  if (typeof window === 'undefined') return
+
+  const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+  gsap.registerPlugin(ScrollTrigger)
+
+  const target = cardRefLink.value || cardRefDiv.value
+  if (!target) return
+
+  const el = target.$el || target
+
+  gsap.to(el, {
+    y: 0,
+    opacity: 1,
+    duration: 0.7,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: el,
+      start: 'top 85%',
+    },
+  })
+})
 </script>

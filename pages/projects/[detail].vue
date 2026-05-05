@@ -105,13 +105,13 @@
 
             <!-- Recommended Footer -->
             <div class="pt-32 border-t border-primary/5">
-                <h3 class="text-3xl font-black text-primary acorn tracking-tighter mb-12 italic">Recommended Projects</h3>
+                <h3 class="text-3xl font-black text-text-primary acorn tracking-tighter mb-12 italic">Recommended Projects</h3>
                 <div v-motion
                     :initial="{ opacity: 0, y: 60 }"
                     :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }" class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
                     <ProjectCard
                       v-for="(p, i) in recommendedProjects"
-                      :key="p.judul"
+                      :key="p.name"
                       :project="p"
                       :index="i"
                     />
@@ -152,11 +152,34 @@ const closeLightbox = () => {
 
 const goBack = () => router.push('/')
 
-const project = computed(() => projectsData[projectDetail as keyof typeof projectsData] || projectsData.teory)
+const project = computed(() => {
+  const slug = (projectDetail as string).toLowerCase()
+  const keys = Object.keys(projectsData) as Array<keyof typeof projectsData>
+
+  // Look for exact match first
+  let found = keys.find(k => k.toLowerCase() === slug)
+
+  // Fallback to searching titles or slug versions if keys don't match exactly
+  if (!found) {
+    found = keys.find(k => {
+      const p = projectsData[k]
+      const titleSlug = p.title
+        .toLowerCase()
+        .replace(/\s*&\s*/g, '-')
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]/g, '')
+      return titleSlug === slug
+    })
+  }
+
+  return found ? projectsData[found] : projectsData.laporku
+})
 
 const recommendedProjects = computed(() => {
+  // Use the slug from route to exclude current project
   return projects
-    .filter(p => p.detail !== projectDetail)
+    .filter(p => p.slug !== projectDetail)
+    .filter(p => !p.private) // Optionally exclude private ones from recommendations
     .slice(0, 2)
 })
 

@@ -34,7 +34,7 @@ export const projectsData = {
       },
     ],
   },
-  agrika: {
+  'agrika-gatya-arum': {
     logoUrl: "/projects/logo_agrika.webp",
     width: "120",
     title: "Agrika Gatya Arum",
@@ -58,7 +58,7 @@ export const projectsData = {
       },
     ],
   },
-  resto: {
+  agafood: {
     logoUrl: "/projects/laporku.png",
     width: "120",
     title: "AgaFood",
@@ -90,7 +90,7 @@ export const projectsData = {
       },
     ],
   },
-  jenerymf: {
+  'jenerymf-tools': {
     logoUrl: "/projects/jenerymf.png",
     width: "150",
     title: "JeneryMF Tools",
@@ -119,7 +119,7 @@ export const projectsData = {
       },
     ],
   },
-  teory: {
+  'aldi-teori': {
     logoUrl: "https://alditeori.vercel.app/_nuxt/man.5139a8dc.png",
     width: "70",
     title: "Aldi Teori",
@@ -148,7 +148,7 @@ export const projectsData = {
       },
     ],
   },
-  translation: {
+  'translation-app': {
     logoUrl: "https://terjemahan.klinikhappykids.com/img/logo.png",
     width: "100",
     title: "Dayak Language Translator",
@@ -206,7 +206,7 @@ export const projectsData = {
       },
     ],
   },
-  circle: {
+  'circle-english-course': {
     logoUrl: "/projects/circle.png",
     width: "120",
     title: "Circle English Course",
@@ -229,7 +229,7 @@ export const projectsData = {
       },
     ],
   },
-  efw: {
+  'english-for-wetlands': {
     logoUrl: "/projects/efw.png",
     width: "120",
     title: "English for Wetlands",

@@ -1,10 +1,7 @@
 <template>
-  <ThemeSwitcher />
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-
-</style>

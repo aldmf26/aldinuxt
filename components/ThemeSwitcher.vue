@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed top-6 left-6 z-[100] flex gap-2 p-1.5 bg-bg/80 backdrop-blur-md rounded-full border border-primary/10 shadow-2xl transition-all duration-500"
+    class="fixed top-6 left-6 z-[100] flex gap-2 p-1.5 bg-dark/80 backdrop-blur-md rounded-full border border-white/10 shadow-2xl transition-all duration-500"
   >
     <button
       v-for="theme in themes"
@@ -9,11 +9,12 @@
       :class="[
         'w-8 h-8 rounded-full border-2 transition-all duration-300 hover:scale-110 flex items-center justify-center relative overflow-hidden group',
         currentTheme === theme.class
-          ? 'border-primary scale-110'
+          ? 'border-white/80 scale-110'
           : 'border-transparent opacity-60 hover:opacity-100',
       ]"
       :style="{ backgroundColor: theme.color }"
       :title="theme.name"
+      data-cursor-hover
     >
       <div
         class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -24,23 +25,25 @@
 
 <script setup>
 const themes = [
-  { name: "Light", class: "theme-light", color: "#2563eb" },
-  { name: "Dark", class: "theme-dark", color: "#06b6d4" },
-  { name: "Synthwave", class: "theme-synthwave", color: "#ff0080" },
-  { name: "Luxury", class: "theme-luxury", color: "#10b981" },
-  { name: "Funk", class: "theme-funk", color: "#ec4899" },
+  { name: "Signal", class: "theme-signal", color: "#C8F580" },
+  { name: "Cyan", class: "theme-cyan", color: "#06b6d4" },
+  { name: "Neon", class: "theme-neon", color: "#ff0080" },
+  { name: "Gold", class: "theme-gold", color: "#f59e0b" },
+  { name: "Violet", class: "theme-violet", color: "#8b5cf6" },
 ];
 
-const currentTheme = ref("theme-light");
+const currentTheme = ref("theme-signal");
 
 const setTheme = (className) => {
   currentTheme.value = className;
-  document.body.className = className;
+  // Remove all theme classes first
+  document.body.classList.remove(...themes.map(t => t.class));
+  document.body.classList.add(className);
   localStorage.setItem("user-theme", className);
 };
 
 onMounted(() => {
-  const savedTheme = localStorage.getItem("user-theme") || "theme-light";
+  const savedTheme = localStorage.getItem("user-theme") || "theme-signal";
   setTheme(savedTheme);
 });
 </script>
