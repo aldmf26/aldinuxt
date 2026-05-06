@@ -17,7 +17,7 @@
           >
             <h2 class="font-display font-black leading-[0.8] tracking-tighter text-text-primary group-hover:text-lime transition-colors duration-700 contact-title">
               LET'S <br/>
-              WORK.
+              TALK.
             </h2>
           </a>
         </div>
@@ -31,7 +31,15 @@
                 class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-text-primary/10 pb-2 inline-block"
                 data-cursor-hover
               >
-                aldimf26@gmail.com
+                → aldimf26@gmail.com
+              </a>
+              <a 
+                href="https://wa.me/6289541311053" 
+                target="_blank"
+                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-text-primary/10 pb-2 flex items-center gap-4 mt-4"
+                data-cursor-hover
+              >
+                → +62 895-413111-053
               </a>
            </div>
 
@@ -40,12 +48,13 @@
                  <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Social</span>
                  <ul class="space-y-3">
                    <li v-for="social in socialLinks" :key="social.name">
-                     <a 
-                        :href="social.url" 
-                        target="_blank" 
-                        class="font-mono text-xs uppercase tracking-widest text-text-primary/60 hover:text-lime transition-colors"
+                     <a
+                        :href="social.url"
+                        target="_blank"
+                        class="font-mono text-xs uppercase tracking-widest text-text-primary/60 hover:text-lime transition-colors flex items-center gap-2"
                         data-cursor-hover
                       >
+                       <i :class="getSocialIcon(social.url)" class="text-lg"></i>
                        {{ social.name }}
                      </a>
                    </li>
@@ -65,7 +74,7 @@
       <!-- Footer Bottom -->
       <div class="mt-32 pt-12 border-t border-text-primary/5 flex flex-col md:flex-row justify-between items-center gap-8">
         <p class="font-mono text-[10px] text-text-primary/30 uppercase tracking-[0.2em]">
-          © 2025 Aldi Fahrizaldi · Crafted with code & rhythm
+          © 2025 Muhammad Fahrizaldi · Banjarmasin, Indonesia 🇮🇩
         </p>
         <button 
           @click="scrollToTop"
@@ -87,9 +96,9 @@ const detailsRef = ref(null)
 const localTime = ref('')
 
 const socialLinks = [
-  { name: 'Instagram', url: 'https://www.instagram.com/aldiiimf' },
-  { name: 'Github', url: 'https://github.com/aldmf26' },
-  { name: 'Youtube', url: 'https://www.youtube.com/@ALdMFbeat' },
+  { name: '@aldiiimf', url: 'https://www.instagram.com/aldiiimf' },
+  { name: 'aldmf26', url: 'https://github.com/aldmf26' },
+  { name: '@ALdMFbeat', url: 'https://www.youtube.com/@ALdMFbeat' },
 ]
 
 const updateTime = () => {
@@ -105,6 +114,14 @@ const scrollToTop = () => {
   if (process.client) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+}
+
+const getSocialIcon = (url) => {
+  const u = url.toLowerCase()
+  if (u.includes('instagram.com')) return 'ri-instagram-line'
+  if (u.includes('github.com')) return 'ri-github-line'
+  if (u.includes('youtube.com')) return 'ri-youtube-line'
+  return 'ri-share-line'
 }
 
 onMounted(() => {

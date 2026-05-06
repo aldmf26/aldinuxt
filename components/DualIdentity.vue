@@ -2,7 +2,7 @@
   <section id="dual-identity" class="relative py-32 md:py-56 overflow-hidden bg-[var(--bg-primary)]">
     <!-- Section Label -->
     <div class="absolute top-10 left-1/2 -translate-x-1/2 z-20">
-       <span class="section-label opacity-40">Creative Duality</span>
+       <span class="section-label opacity-40">WHAT I DO</span>
     </div>
 
     <div class="max-w-[1700px] mx-auto px-6 md:px-12 relative z-10">
@@ -150,9 +150,10 @@ let stepInterval = null
 let volumeInterval = null
 
 const terminalLines = [
-  { text: 'npm run innovate' },
-  { text: 'compiling vision...' },
-  { text: 'ready in 12ms' },
+  { text: 'building laporku dashboard...  ✓' },
+  { text: 'deploying to vercel...  ✓' },
+  { text: 'client happy. shipped.  ✓' },
+  { text: 'next project?  _' },
 ]
 
 const devStack = ['Nuxt JS', 'Laravel', 'PostgreSQL', 'Docker', 'GSAP']

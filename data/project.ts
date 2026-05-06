@@ -2,7 +2,7 @@ export const projects = [
   {
     number: '01',
     name: 'Laporku',
-    shortDesc: 'Financial reporting & real-time analytics platform.',
+    shortDesc: "Financial reporting app for small business owners — understand your numbers without knowing accounting.",
     description: 'Financial reporting & management app with real-time analytics and collaborative workflows for modern business accounting.',
     stack: ['Nuxt JS', 'Nuxt UI', 'Supabase'],
     image: '/projects/laporku.png',
@@ -14,7 +14,7 @@ export const projects = [
   {
     number: '02',
     name: 'Agrika Gatya Arum',
-    shortDesc: 'Premium birdnest export company showcase.',
+    shortDesc: "Premium landing page for a birdnest export company. Built to convert international buyers on first visit.",
     description: 'Premium birdnest export company landing page with elegant product showcase and international shipping integrations.',
     stack: ['Laravel', 'jQuery', 'Bootstrap'],
     image: '/projects/agrika.png',
@@ -26,7 +26,7 @@ export const projects = [
   {
     number: '03',
     name: 'AgaFood',
-    shortDesc: 'Restaurant POS & management system.',
+    shortDesc: "One POS system running two restaurants — Takemori (Japanese) and Soondobu (Korean) — in Banjarmasin.",
     description: 'Advanced Point of Sale system for Japanese and Korean restaurants, handling inventory, ordering, and staff management.',
     stack: ['Laravel', 'Livewire', 'Alpine JS'],
     image: '/projects/resto1.png',
@@ -38,7 +38,7 @@ export const projects = [
   {
     number: '04',
     name: 'JeneryMF Tools',
-    shortDesc: 'Technical fitness measurement & tracking.',
+    shortDesc: "Body measurement calculator for industrial sizing. Fast, accurate, built for field use.",
     description: 'Smart body measurement tool for fitness tracking with visual progress charts and biometric data analysis.',
     stack: ['Nuxt JS', 'Supabase', 'Chart.js'],
     image: '/projects/jenerymf.png',
@@ -50,7 +50,7 @@ export const projects = [
   {
     number: '05',
     name: 'Aldi Teori',
-    shortDesc: 'Interactive cultural education platform.',
+    shortDesc: "A knowledge base for historical figures and civilizations. Structured, searchable, built for learners.",
     description: 'Interactive history and cultural education app making learning engaging through gamification and storytelling.',
     stack: ['Nuxt JS', 'Tailwind', 'GSAP'],
     image: '/projects/teori.png',
@@ -62,7 +62,7 @@ export const projects = [
   {
     number: '06',
     name: 'Translation App',
-    shortDesc: 'Indonesian-Dayak linguistic bridge.',
+    shortDesc: "Indonesian ↔ Dayak language translator. Preserving a language that has almost no digital presence.",
     description: 'Indonesian-Dayak language translator preserving cultural heritage through modern web technology and community data.',
     stack: ['Laravel', 'Livewire', 'MySQL'],
     image: '/projects/terjemahan.png',
@@ -74,7 +74,7 @@ export const projects = [
   {
     number: '07',
     name: 'Circle English Course',
-    shortDesc: 'Online language learning management.',
+    shortDesc: "Enrollment and learning platform for an English course in Muara Teweh, Central Kalimantan.",
     description: 'Online English learning platform with interactive lessons, scheduling, and student progress tracking dashboards.',
     stack: ['Laravel', 'Livewire', 'Tailwind'],
     image: '/projects/circle.png',
@@ -86,7 +86,7 @@ export const projects = [
   {
     number: '08',
     name: 'English for Wetlands',
-    shortDesc: 'Specialized ecological vocabulary app.',
+    shortDesc: "Bilingual wetlands vocabulary app for researchers and conservationists working in Kalimantan.",
     description: 'Specialized vocabulary app for wetlands ecology terminology, designed for university researchers and students.',
     stack: ['Laravel', 'Livewire', 'Tailwind'],
     image: '/projects/efw.png',

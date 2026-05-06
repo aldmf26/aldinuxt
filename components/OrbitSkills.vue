@@ -1,60 +1,64 @@
 <template>
-  <div class="relative w-full h-[600px] flex items-center justify-center overflow-hidden bg-bg transition-colors duration-500">
+  <div class="relative w-full h-[600px] flex items-center justify-center overflow-hidden bg-bg-primary transition-colors duration-500">
     <!-- Decorative Background Grid (Subtle) -->
     <div class="absolute inset-0 opacity-[0.015]" style="background-image: radial-gradient(var(--text-primary) 1px, transparent 1px); background-size: 40px 40px;"></div>
 
     <!-- Center Point (The Artist) -->
-    <div class="relative z-20 flex flex-col items-center">
-      <div 
-        v-motion
-        :initial="{ scale: 0.8, opacity: 0 }"
-        :enter="{ scale: 1, opacity: 1, transition: { type: 'spring', damping: 15 } }"
-        class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-warna1 flex items-center justify-center text-bg text-5xl font-black shadow-2xl border-4 border-bg relative"
-      >
-        A
-        <!-- Pulse Effect -->
-        <div class="absolute inset-0 rounded-full bg-warna1 opacity-20 animate-ping -z-10"></div>
+    <ClientOnly>
+      <div class="relative z-20 flex flex-col items-center">
+        <div 
+          v-motion
+          :initial="{ scale: 0.8, opacity: 0 }"
+          :enter="{ scale: 1, opacity: 1, transition: { type: 'spring', damping: 15 } }"
+          class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-accent flex items-center justify-center text-bg-primary text-5xl font-black shadow-2xl border-4 border-bg-primary relative"
+        >
+          A
+          <!-- Pulse Effect -->
+          <div class="absolute inset-0 rounded-full bg-accent opacity-20 animate-ping -z-10"></div>
+        </div>
       </div>
-    </div>
 
 
-    <!-- Orbit Tracks (Visual only) -->
-    <div class="absolute border border-primary/20 rounded-full w-[300px] h-[300px] -z-10 transition-colors duration-500"></div>
-    <div class="absolute border border-primary/20 rounded-full w-[460px] h-[460px] -z-10 transition-colors duration-500"></div>
+      <!-- Orbit Tracks (Visual only) -->
+      <div class="absolute border border-primary/20 rounded-full w-[300px] h-[300px] -z-10 transition-colors duration-500"></div>
+      <div class="absolute border border-primary/20 rounded-full w-[460px] h-[460px] -z-10 transition-colors duration-500"></div>
 
-    <!-- Skill Items -->
-    <div 
-      v-for="(skill, index) in allSkills" 
-      :key="skill.name"
-      class="absolute z-10 flex items-center justify-center orbit-container"
-      :style="getOrbitStyle(index)"
-    >
+      <!-- Skill Items -->
       <div 
-        class="flex items-center gap-3 px-5 py-2.5 bg-bg rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-primary/5 hover:scale-125 transition-all duration-300 cursor-default group whitespace-nowrap"
+        v-for="(skill, index) in allSkills" 
+        :key="skill.name"
+        class="absolute z-10 flex items-center justify-center orbit-container"
+        :style="getOrbitStyle(index)"
       >
-        <div :class="['w-2.5 h-2.5 rounded-full', skill.type === 'web' ? 'bg-warna1' : 'bg-warnaHijau']"></div>
-        <span class="text-sm font-black text-primary tracking-tight">{{ skill.name }}</span>
+        <div 
+          class="flex items-center gap-3 px-5 py-2.5 bg-bg-surface rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-primary/5 hover:scale-125 transition-all duration-300 cursor-default group whitespace-nowrap"
+        >
+          <div :class="['w-8 h-8 rounded-full flex items-center justify-center text-lg', skill.type === 'web' ? 'bg-accent/10 text-accent' : 'bg-highlight/10 text-highlight']">
+            <i :class="skill.icon"></i>
+          </div>
+          <span class="text-sm font-black text-primary tracking-tight">{{ skill.name }}</span>
+        </div>
       </div>
-    </div>
+    </ClientOnly>
   </div>
 </template>
 
 <script setup>
 const webSkills = [
-  { name: 'Nuxt JS', type: 'web' },
-  { name: 'Tailwind', type: 'web' },
-  { name: 'Laravel', type: 'web' },
-  { name: 'MySQL', type: 'web' },
-  { name: 'Git', type: 'web' },
-  { name: 'Docker', type: 'web' },
+  { name: 'Nuxt JS', type: 'web', icon: 'ri-nuxt-fill' },
+  { name: 'Tailwind', type: 'web', icon: 'ri-tailwind-css-fill' },
+  { name: 'Laravel', type: 'web', icon: 'ri-laravel-fill' },
+  { name: 'MySQL', type: 'web', icon: 'ri-database-2-fill' },
+  { name: 'Git', type: 'web', icon: 'ri-git-merge-line' },
+  { name: 'Docker', type: 'web', icon: 'ri-docker-fill' },
 ]
 
 const musicSkills = [
-  { name: 'FL Studio', type: 'music' },
-  { name: 'Mixing', type: 'music' },
-  { name: 'Producer', type: 'music' },
-  { name: 'Sound Design', type: 'music' },
-  { name: 'Capcut', type: 'music' },
+  { name: 'FL Studio', type: 'music', icon: 'ri-music-2-fill' },
+  { name: 'Mixing', type: 'music', icon: 'ri-equalizer-fill' },
+  { name: 'Producer', type: 'music', icon: 'ri-mic-fill' },
+  { name: 'Sound Design', type: 'music', icon: 'ri-pulse-fill' },
+  { name: 'Capcut', type: 'music', icon: 'ri-video-fill' },
 ]
 
 const allSkills = [...webSkills, ...musicSkills]

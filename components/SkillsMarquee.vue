@@ -27,8 +27,8 @@
 <script setup>
 import { gsap } from 'gsap'
 
-const row1Items = ['Web Developer', 'Nuxt JS', 'Laravel', 'Tailwind', 'Docker']
-const row2Items = ['Music Producer', 'FL Studio', 'Beatmaker', 'Sound Design', 'Banjarmasin']
+const row1Items = ['WEB DEVELOPER', 'NUXT JS', 'LARAVEL', 'MYSQL', 'FULL STACK', 'TAILWIND', 'GIT']
+const row2Items = ['MUSIC PRODUCER', 'FL STUDIO', 'BEATMAKER', 'SOUND DESIGN', 'BANJARMASIN', 'KALIMANTAN']
 
 const container = ref(null)
 

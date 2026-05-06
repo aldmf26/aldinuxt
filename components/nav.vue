@@ -73,9 +73,9 @@ let lastScroll = 0
 
 
 const navLinks = [
-  { name: 'Works', path: '/#works' },
-  { name: 'Sound', path: '/#music' },
-  { name: 'About', path: '/#about' },
+  { name: 'Work', path: '/#works' },
+  { name: 'Music', path: '/#music' },
+  { name: 'Hire Me', path: '/service' },
 ]
 
 onMounted(() => {

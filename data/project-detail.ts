@@ -11,8 +11,8 @@ export const projectsData = {
     year: "2025",
     role: "Full Stack Developer & Product Designer",
     impact: "Active users tracking Rp 50M+ monthly transactions • 95% user satisfaction • Reduced bookkeeping time by 70%",
-    problem: "SME owners in Indonesia spend 10+ hours weekly on manual bookkeeping, often missing critical financial insights that could grow their business.",
-    solution: "Built an intuitive dashboard with automated reporting, smart financial tips, and affordable pricing (Rp 99k/month) specifically designed for non-accountants.",
+    problem: "Small business owners in Indonesia often have no idea if their business is actually profitable. Existing accounting tools are too complex for people without a finance background.",
+    solution: "Built a dashboard that turns raw transaction data into plain-language financial summaries — revenue, expenses, and profit at a glance. No accounting degree required.",
     screenshots: [
       {
         image: "/detail/laporku/landing.jpg",
@@ -47,8 +47,8 @@ export const projectsData = {
     year: "2024",
     role: "Full Stack Developer & UI Designer",
     impact: "Professional web presence for international B2B transactions • SEO-optimized for global reach",
-    problem: "Export company needed credible online presence to attract international buyers and showcase premium Indonesian products.",
-    solution: "Built responsive, multilingual landing page with product catalog, company credentials, and integrated contact forms optimized for B2B conversions.",
+    problem: "A premium birdnest export company needed a web presence that could earn the trust of international buyers immediately — without looking like every other Indonesian export site.",
+    solution: "Designed a clean, premium landing page with strong visual hierarchy and product-focused content. Every section is built to answer a buyer's question before they ask it.",
     screenshots: [
       {
         image: "/detail/agrika/landing.png",
@@ -69,6 +69,8 @@ export const projectsData = {
     link: "",
     year: "2024",
     role: "Full Stack Developer",
+    problem: "Two restaurants with different menus, brands, and staff needed their own POS — but building two separate systems would double the maintenance cost and effort.",
+    solution: "Built one unified POS system with separate configurations per restaurant. Cashier, kitchen, payroll, and reporting — all in one codebase, deployed twice.",
     screenshots: [
       {
         image: "/detail/resto/home.png",
@@ -102,8 +104,8 @@ export const projectsData = {
     year: "2024",
     role: "Frontend Developer & UX Designer",
     impact: "Streamlined measurement process • Customer history tracking • Mobile-optimized for field use",
-    problem: "Fashion professionals needed quick, accurate body measurements on-site without manual calculations.",
-    solution: "Built mobile-first calculator with customer database, measurement history, and instant size recommendations.",
+    problem: "An industrial sizing calculation that was being done manually — slow, error-prone, and hard to share in the field.",
+    solution: "A clean utility app: input pole diameter, get body size immediately. Shareable results, works on mobile, no login needed.",
     screenshots: [
       {
         image: "/detail/jenerym/landing.png",
@@ -131,8 +133,8 @@ export const projectsData = {
     year: "2024",
     role: "Full Stack Developer",
     impact: "Free educational resource • Mobile-responsive learning platform",
-    problem: "Students needed accessible, organized platform for exploring complex historical theories beyond textbooks.",
-    solution: "Created searchable knowledge base with detailed articles on historical events, figures, and theories. Optimized for mobile learning.",
+    problem: "Historical knowledge in Bahasa Indonesia is scattered across low-quality sites with poor search and no structure.",
+    solution: "Built a categorized knowledge base with clean search — historical figures, civilizations, and timelines in one place.",
     screenshots: [
       {
         image: "/detail/teory/landing.png",
@@ -160,8 +162,8 @@ export const projectsData = {
     year: "2024",
     role: "Full Stack Developer",
     impact: "Preserving indigenous language • Educational tool for schools • Community resource",
-    problem: "Dayak language facing decline among younger generations. No accessible digital tools for learning.",
-    solution: "Built simple, fast translator with expanding vocabulary database. Designed for educational use and daily reference.",
+    problem: "The Dayak language has almost no digital presence. No translator, no dictionary app — nothing accessible online.",
+    solution: "Built a bilingual translation app with a curated Indonesian–Dayak dictionary. Small step toward preserving a language at risk of disappearing.",
     screenshots: [
       {
         image: "/detail/terjemahan/home.png",
@@ -218,8 +220,8 @@ export const projectsData = {
     year: "2024",
     role: "Full Stack Developer",
     impact: "Digital transformation for local education center • Student progress tracking • Automated enrollment",
-    problem: "Language center managing students, materials, and progress using spreadsheets and paper.",
-    solution: "Built LMS with student dashboard, course content management, progress tracking, and automated reporting for instructors.",
+    problem: "A local English course in Muara Teweh was limited to in-person classes. No way to manage enrollments or share materials remotely.",
+    solution: "Built a full learning platform: enrollment, lesson materials, progress tracking, and an instructor dashboard.",
     screenshots: [
       {
         image: "/detail/circle/dash.png",
@@ -241,8 +243,8 @@ export const projectsData = {
     year: "2024",
     role: "Full Stack Developer",
     impact: "Specialized vocabulary resource • Academic research tool • Environmental education support",
-    problem: "Wetlands researchers and students needed accurate translation of technical environmental terms.",
-    solution: "Curated database of wetlands-specific vocabulary with contextual usage examples and scientific references.",
+    problem: "Researchers and field workers in Kalimantan's wetlands had no specialized bilingual vocabulary tool for ecology terms.",
+    solution: "Created a focused translation app with a wetlands-specific dictionary — built for scientists and conservationists, not tourists.",
     screenshots: [
       {
         image: "https://placehold.co/1200x800/d1fae5/10b981?text=EFW+Translator",

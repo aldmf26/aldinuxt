@@ -56,6 +56,7 @@
 
             <!-- Showcase Section -->
             <section class="space-y-32 mb-32">
+            <ClientOnly>
               <div 
                 v-for="(screenshot, index) in project.screenshots" 
                 :key="index" 
@@ -89,6 +90,7 @@
                   </p>
                 </div>
               </div>
+            </ClientOnly>
             </section>
 
             <!-- Lightbox -->
