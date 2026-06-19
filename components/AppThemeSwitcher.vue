@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-1/2 right-5 -translate-y-1/2 z-[9999] flex flex-col gap-3 p-[10px_8px] rounded-full backdrop-blur-md bg-black/40 border border-white/10 shadow-2xl transition-all duration-500">
+  <div class="fixed top-1/2 right-5 -translate-y-1/2 z-[9999] flex flex-col gap-3 p-[10px_8px] rounded-full bg-[#0a0a0a] ring-1 ring-white/[0.08] transition-all duration-500">
     <button
       v-for="theme in themes"
       :key="theme.id"
@@ -14,7 +14,7 @@
       data-cursor-hover
     >
       <!-- Tooltip -->
-      <span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-black/80 text-white text-[10px] font-mono uppercase tracking-widest rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-white/10">
+      <span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-[#0a0a0a] text-white/80 text-[10px] font-mono uppercase tracking-widest rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap ring-1 ring-white/[0.08]">
         {{ theme.label }}
       </span>
     </button>

@@ -66,7 +66,7 @@
             FL STUDIO MODE
           </span>
         </div>
-        <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-black/40">
+        <div class="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-black/40">
           <canvas ref="pianoRoll" class="w-full block" height="160"></canvas>
         </div>
       </div>
@@ -76,12 +76,12 @@
         <div
           v-for="item in displayedItems"
           :key="item.src"
-          class="beat-card group relative rounded-[1.5rem] overflow-hidden border border-white/10 transition-all duration-500 flex flex-col"
-          :class="{ 'border-lime': activeItem?.src === item.src }"
-          :style="{ 
-            background: 'var(--bg-surface)',
-            boxShadow: activeItem?.src === item.src ? `0 0 30px ${glowColor}` : 'none'
-          }"
+           class="beat-card group relative rounded-[1.5rem] overflow-hidden border border-white/[0.06] transition-all duration-500 flex flex-col"
+           :class="{ 'ring-1 ring-lime/50': activeItem?.src === item.src }"
+           :style="{ 
+             background: 'var(--bg-surface)',
+             boxShadow: activeItem?.src === item.src ? `0 0 30px ${glowColor}` : 'none'
+           }"
         >
           <!-- TOP: BPM Visualization -->
           <div class="beat-bars" :class="{ active: activeItem?.src === item.src }">
@@ -127,7 +127,7 @@
       <div v-if="filteredItems.length > displayLimit && !showAllItems" class="mt-12 text-center">
         <button
           @click="showAllItems = true"
-          class="px-10 py-5 bg-[var(--bg-surface)] border border-white/10 text-text-primary font-mono text-xs uppercase tracking-widest rounded-full hover:bg-white/5 transition-all duration-300"
+          class="px-10 py-5 bg-[var(--bg-surface)] border border-white/[0.06] text-text-primary font-mono text-xs uppercase tracking-widest rounded-full hover:bg-white/[0.03] transition-all duration-300"
         >
           Show All Tracks ({{ filteredItems.length }})
         </button>

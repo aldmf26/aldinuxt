@@ -31,7 +31,7 @@
         :style="getOrbitStyle(index)"
       >
         <div 
-          class="flex items-center gap-3 px-5 py-2.5 bg-bg-surface rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-primary/5 hover:scale-125 transition-all duration-300 cursor-default group whitespace-nowrap"
+          class="flex items-center gap-3 px-4 py-2 bg-[#0a0a0a] ring-1 ring-white/[0.06] rounded-lg hover:scale-110 transition-all duration-300 cursor-default group whitespace-nowrap"
         >
           <div :class="['w-8 h-8 rounded-full flex items-center justify-center text-lg', skill.type === 'web' ? 'bg-accent/10 text-accent' : 'bg-highlight/10 text-highlight']">
             <i :class="skill.icon"></i>

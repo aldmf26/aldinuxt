@@ -21,26 +21,28 @@
                </div>
             </div>
 
-            <!-- Terminal -->
-            <div class="bg-[#08090D] rounded-3xl p-10 font-mono text-sm border border-white/5 shadow-2xl relative overflow-hidden">
-               <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-lime/0 via-lime/40 to-lime/0"></div>
-               <div class="flex gap-2 mb-10">
-                  <div v-for="c in ['#FF5F56', '#FFBD2E', '#27C93F']" :key="c" class="w-3 h-3 rounded-full" :style="{ backgroundColor: c, opacity: 0.5 }"></div>
-               </div>
-               <div class="space-y-6">
-                  <div v-for="(line, i) in terminalLines" :key="i" class="flex gap-4">
-                     <span class="text-lime/30">$</span>
-                     <span class="text-text-primary/70 leading-relaxed">{{ line.text }}</span>
-                  </div>
-                  <div class="flex gap-4 animate-pulse">
-                     <span class="text-lime/30">$</span>
-                     <span class="w-2 h-5 bg-lime/60"></span>
-                  </div>
-               </div>
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-2 gap-px bg-text-primary/10 rounded-2xl overflow-hidden font-mono">
+              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
+                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">5+</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Years Building</span>
+              </div>
+              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
+                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">20+</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Projects Shipped</span>
+              </div>
+              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
+                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">12+</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Stack Mastered</span>
+              </div>
+              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
+                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">100%</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Client Sat.</span>
+              </div>
             </div>
 
-            <div class="flex flex-wrap gap-3">
-               <span v-for="t in devStack" :key="t" class="px-6 py-3 bg-text-primary/[0.03] border border-text-primary/10 rounded-full font-mono text-[10px] uppercase tracking-widest text-text-primary/40 hover:border-lime/40 hover:text-lime transition-all cursor-default">
+            <div class="flex flex-wrap gap-2">
+               <span v-for="t in devStack" :key="t" class="px-4 py-2 bg-[#08090D] ring-1 ring-white/[0.06] rounded-lg font-mono text-[11px] tracking-wider text-text-primary/50 hover:ring-lime/40 hover:text-lime transition-all cursor-default">
                   {{ t }}
                </span>
             </div>
@@ -119,7 +121,7 @@
             </div>
 
             <div class="flex flex-wrap gap-3">
-               <span v-for="s in musicStack" :key="s" class="px-6 py-3 bg-white/[0.03] border border-white/10 rounded-full font-mono text-[10px] uppercase tracking-widest text-text-primary/40 hover:border-[#FF6B35]/40 hover:text-[#FF6B35] transition-all cursor-default">
+               <span v-for="s in musicStack" :key="s" class="px-4 py-2 bg-[#181A21] ring-1 ring-white/[0.06] rounded-lg font-mono text-[11px] tracking-wider text-text-primary/50 hover:ring-[#FF6B35]/40 hover:text-[#FF6B35] transition-all cursor-default">
                   {{ s }}
                </span>
             </div>
@@ -148,13 +150,6 @@ const activeCells = ref(new Set())
 
 let stepInterval = null
 let volumeInterval = null
-
-const terminalLines = [
-  { text: 'building laporku dashboard...  ✓' },
-  { text: 'deploying to vercel...  ✓' },
-  { text: 'client happy. shipped.  ✓' },
-  { text: 'next project?  _' },
-]
 
 const devStack = ['Nuxt JS', 'Laravel', 'PostgreSQL', 'Docker', 'GSAP']
 const musicStack = ['FL Studio', 'Serum', 'FabFilter', 'Mixing', 'Arrangement']

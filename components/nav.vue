@@ -1,57 +1,61 @@
 <template>
-  <nav 
-    ref="navRef"
-    class="fixed top-0 left-0 w-full z-[100] transition-transform duration-500 ease-in-out"
+  <nav
+    class="fixed left-0 top-0 z-[100] w-full transition-transform duration-500 ease-in-out"
     :class="{ '-translate-y-full': isHidden }"
   >
-    <div class="max-w-[1800px] mx-auto px-6 md:px-12 py-8 flex justify-between items-center">
-      <!-- Logo -->
-      <NuxtLink 
-        to="/" 
-        class="font-mono text-sm tracking-[0.3em] text-text-primary hover:text-lime transition-colors"
+    <div class="mx-auto flex max-w-[1800px] items-center justify-between px-5 py-4 sm:px-6 md:px-12 md:py-5">
+      <NuxtLink
+        to="/"
+        class="group flex items-center gap-3"
         data-cursor-hover
       >
-        ALDMF
+        <span class="grid h-9 w-9 place-items-center rounded-full bg-orange-400/20 text-sm font-black text-orange-300">
+          A
+        </span>
+        <span class="font-display text-2xl font-black italic tracking-[-0.04em] text-white transition-colors group-hover:text-orange-300">
+          AldiMF
+        </span>
       </NuxtLink>
 
-
-      <!-- Nav Links -->
-      <div class="hidden md:flex items-center gap-12">
-        <NuxtLink 
-          v-for="link in navLinks" 
+      <div class="hidden items-center gap-1 rounded-full bg-[#0a0a0a] px-1.5 py-1.5 ring-1 ring-white/[0.06] md:flex">
+        <NuxtLink
+          v-for="link in navLinks"
           :key="link.path"
           :to="link.path"
-          class="nav-link font-mono text-[11px] uppercase tracking-[0.2em] text-text-primary/60 hover:text-lime transition-all relative py-1"
+          class="rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-white/65 transition-all hover:bg-white/[0.04] hover:text-white"
           data-cursor-hover
         >
           {{ link.name }}
-          <span class="nav-underline"></span>
         </NuxtLink>
       </div>
 
-      <!-- Theme/Mobile Toggle -->
-      <div class="flex items-center gap-6">
-        <button 
-          @click="isMenuOpen = !isMenuOpen"
-          class="font-mono text-[11px] uppercase tracking-[0.1em] text-lime z-[110] relative" 
+      <div class="flex items-center gap-4">
+        <NuxtLink
+          to="/service"
+          class="hidden rounded-full bg-white px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-black transition hover:bg-orange-300 md:inline-flex"
           data-cursor-hover
+        >
+          Hire Me
+        </NuxtLink>
+        <button
+          class="relative z-[110] rounded-full bg-[#0a0a0a] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.14em] text-white ring-1 ring-white/[0.08] md:hidden"
+          data-cursor-hover
+          @click="isMenuOpen = !isMenuOpen"
         >
           {{ isMenuOpen ? 'Close' : 'Menu' }}
         </button>
       </div>
     </div>
-    
-    <!-- Mobile Menu Overlay -->
+
     <Transition name="menu-fade">
-      <div v-if="isMenuOpen" class="fixed inset-0 bg-[var(--bg-primary)] z-[105] flex flex-col items-center justify-center p-10">
+      <div v-if="isMenuOpen" class="fixed inset-0 z-[105] flex flex-col items-center justify-center bg-[#050608] p-10">
         <div class="flex flex-col gap-8 text-center">
-          <NuxtLink 
-            v-for="(link, i) in navLinks" 
+          <NuxtLink
+            v-for="link in mobileLinks"
             :key="link.path"
             :to="link.path"
+            class="font-display text-4xl italic text-white transition-all hover:text-orange-300 md:text-6xl"
             @click="isMenuOpen = false"
-            class="text-4xl md:text-6xl font-display italic text-text-primary hover:text-lime transition-all"
-            :style="{ transitionDelay: `${i * 100}ms` }"
           >
             {{ link.name }}
           </NuxtLink>
@@ -59,10 +63,11 @@
       </div>
     </Transition>
 
-    <!-- Subtle Blur Background -->
-    <div class="absolute inset-0 -z-10 backdrop-blur-md bg-[var(--bg-primary)]/10 opacity-0 transition-opacity duration-500" :class="{ 'opacity-100': isScrolled && !isMenuOpen }"></div>
+    <div
+      class="absolute inset-0 -z-10 bg-[#0a0a0a] opacity-0 transition-opacity duration-500"
+      :class="{ 'opacity-100': isScrolled && !isMenuOpen }"
+    ></div>
   </nav>
-
 </template>
 
 <script setup>
@@ -71,58 +76,43 @@ const isScrolled = ref(false)
 const isMenuOpen = ref(false)
 let lastScroll = 0
 
-
 const navLinks = [
-  { name: 'Work', path: '/#works' },
+  { name: 'Web', path: '/#works' },
   { name: 'Music', path: '/#music' },
+  { name: 'Projects', path: '/#works' },
+  { name: 'Contact', path: '/#contact' },
+]
+
+const mobileLinks = [
+  ...navLinks,
   { name: 'Hire Me', path: '/service' },
 ]
 
+function onScroll() {
+  const currentScroll = window.pageYOffset
+  isHidden.value = currentScroll > lastScroll && currentScroll > 120
+  isScrolled.value = currentScroll > 40
+  lastScroll = currentScroll
+}
+
 onMounted(() => {
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset
-    
-    // Hide on scroll down, show on scroll up
-    if (currentScroll > lastScroll && currentScroll > 100) {
-      isHidden.value = true
-    } else {
-      isHidden.value = false
-    }
-    
-    // Background blur on scroll
-    isScrolled.value = currentScroll > 50
-    
-    lastScroll = currentScroll
-  }, { passive: true })
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
 })
 </script>
 
 <style scoped>
-.nav-link .nav-underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.3s ease;
+.menu-fade-enter-active,
+.menu-fade-leave-active {
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-link:hover .nav-underline {
-  width: 100%;
-}
-
-.router-link-active .nav-underline {
-  width: 100%;
-}
-
-/* Menu Transition */
-.menu-fade-enter-active, .menu-fade-leave-active {
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.menu-fade-enter-from, .menu-fade-leave-to {
+.menu-fade-enter-from,
+.menu-fade-leave-to {
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateY(-18px);
 }
 </style>
-

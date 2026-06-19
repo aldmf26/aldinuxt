@@ -40,16 +40,11 @@
           zIndex: 10
         }" />
 
-        <!-- Diagonal pattern -->
+        <!-- Subtle texture -->
         <div :style="{
           position: 'absolute', inset: 0,
-          backgroundImage: `repeating-linear-gradient(
-            -45deg,
-            rgba(128,128,128,0.04) 0px,
-            rgba(128,128,128,0.04) 1px,
-            transparent 1px,
-            transparent 30px
-          )`,
+          backgroundImage: `radial-gradient(circle at 50% 50%, rgba(128,128,128,0.02) 1px, transparent 1px)`,
+          backgroundSize: '32px 32px',
         }" />
 
         <!-- Ghost number -->
@@ -57,11 +52,11 @@
           position: 'absolute',
           right: '20px', bottom: '-10px',
           fontFamily: 'JetBrains Mono, monospace',
-          fontSize: 'clamp(120px, 15vw, 240px)',
+          fontSize: 'clamp(80px, 10vw, 140px)',
           fontWeight: '900',
           lineHeight: '1',
           color: project.color,
-          opacity: '0.05',
+          opacity: '0.03',
           userSelect: 'none',
           pointerEvents: 'none',
           letterSpacing: '-0.05em',

@@ -1,149 +1,101 @@
 <template>
-  <section id="hero" class="relative min-h-screen overflow-hidden flex flex-col justify-center">
-    <!-- Cinematic Entrance Line -->
-    <div class="hero-line"></div>
+  <section
+    id="hero"
+    class="relative flex min-h-screen items-center overflow-hidden bg-[#050608] px-5 pt-28 sm:px-8 lg:px-12"
+    style="min-height: 100dvh"
+  >
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.025)_1px,transparent_1px)] bg-[size:56px_56px] opacity-30"></div>
 
-    <!-- Three.js Canvas Background -->
-    <div
-      ref="threeContainer"
-      class="absolute inset-0 z-0"
-    ></div>
 
-    <!-- Content -->
-    <div class="relative z-10 px-6 md:px-16 lg:px-24 py-20">
-      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-center max-w-[1700px] mx-auto w-full">
-        <!-- Left Column: Display Text -->
-        <div class="overflow-hidden">
-          <h1 class="hero-headline font-display leading-[0.85] tracking-tighter">
-            <span class="hero-word block text-text-primary font-bold">Websites</span>
-            <span class="hero-word block text-lime font-bold">That Work.</span>
-            <span class="hero-word block text-text-primary font-light">Music</span>
-            <span class="hero-word block text-text-primary font-display italic">That Hits.</span>
+    <div class="relative z-10 mx-auto flex w-full max-w-[1800px] flex-col gap-10 pb-12">
+      <div class="grid items-end gap-8 lg:grid-cols-[1.08fr_.92fr]">
+        <div class="space-y-7">
+          <div class="hero-kicker inline-flex items-center gap-3 rounded-full border border-white/[0.06] bg-white/[0.03] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.28em] text-white/60">
+            <span class="h-2 w-2 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(251,146,60,.8)]"></span>
+            Web Developer - Music Producer - Beat Maker
+          </div>
+
+          <h1 class="font-display text-[clamp(54px,9vw,150px)] font-black leading-[0.88] tracking-[-0.07em] text-white">
+            <span class="hero-word block">I build</span>
+            <span class="hero-word block text-cyan-200">websites</span>
+            <span class="hero-word block text-white/85">and produce</span>
+            <span class="hero-word block font-display italic text-orange-300">beats.</span>
           </h1>
         </div>
 
-        <!-- Right Column: Bio + CTAs -->
-        <div class="hero-right lg:pl-12 space-y-10">
-          <div class="space-y-6">
-            <p class="text-xl md:text-2xl text-text-primary font-body leading-relaxed">
-              I'm <span class="text-lime font-semibold">Aldi</span> — a web developer from Banjarmasin who builds 
-              systems that actually solve problems.
-            </p>
-            <p class="text-base md:text-lg text-text-primary/60 font-body leading-relaxed max-w-lg">
-              5+ years. 8+ projects shipped. 
-              One rule: if it doesn't work for the client, it doesn't ship.
-            </p>
-          </div>
+        <div class="hero-copy space-y-7 lg:pb-4">
+          <p class="max-w-xl text-lg leading-relaxed text-white/74 sm:text-xl">
+            I craft fast, expressive web experiences and produce beats with FL Studio, blending clean code with rhythm, texture, and mood.
+          </p>
 
-          <!-- CTAs -->
-          <div class="flex flex-wrap gap-5">
+          <div class="flex flex-wrap gap-4">
             <a
               href="#works"
-              class="group inline-flex items-center gap-4 px-10 py-5 bg-lime text-dark font-mono text-xs uppercase tracking-[0.2em] rounded-full hover:bg-lime/90 transition-all duration-300"
+              class="inline-flex items-center gap-3 rounded-full bg-orange-500 px-7 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.18em] text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600"
               data-cursor-hover
             >
-              See My Work
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              View Projects
+              <span aria-hidden="true">-></span>
             </a>
             <a
               href="#music"
-              class="group inline-flex items-center gap-4 px-10 py-5 border border-lime/30 text-lime font-mono text-xs uppercase tracking-[0.2em] rounded-full hover:bg-lime/10 transition-all duration-300"
+              class="inline-flex items-center gap-3 rounded-full border border-cyan-200/20 bg-white/[0.03] px-7 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.18em] text-cyan-100 transition hover:-translate-y-0.5 hover:bg-cyan-200/10"
               data-cursor-hover
             >
-              Hear My Beats
+              Listen Beats
             </a>
           </div>
 
-          <!-- Location -->
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-px bg-lime/30"></div>
-            <span class="font-mono text-xs text-text-primary/40 tracking-[0.3em] uppercase">
-              📍 Banjarmasin, South Kalimantan
-            </span>
+          <div class="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.22em] text-white/40">
+            <span class="h-px w-12 bg-orange-400/50"></span>
+            Banjarmasin, Indonesia
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Scroll Indicator -->
-    
+      <div class="relative">
+        <PianoVisual />
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup>
-import { gsap } from 'gsap'
 
-const threeContainer = ref(null)
-const scrollIndicator = ref(null)
-
-// Three.js setup
-if (process.client) {
-  useThree({ container: threeContainer })
-}
-
-onMounted(() => {
-  if (typeof window === 'undefined') return
-
-  const tl = gsap.timeline({ delay: 0.5 })
-
-  // Step 1: A single horizontal line draws across
-  tl.fromTo('.hero-line', 
-    { scaleX: 0, transformOrigin: 'left center', opacity: 1 },
-    { scaleX: 1, duration: 0.8, ease: 'power4.inOut' }
-  )
-
-  // Step 2: Words crash in
-  tl.fromTo('.hero-word',
-    { clipPath: 'inset(0 0 100% 0)', y: 60 },
-    { clipPath: 'inset(0 0 0% 0)', y: 0, duration: 1, stagger: 0.1, ease: 'expo.out' },
-    '-=0.4'
-  )
-
-  // Step 3: Right column content
-  tl.fromTo('.hero-right > *',
-    { y: 40, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' },
-    '-=0.6'
-  )
-
-  // Step 4: Line fades
-  tl.to('.hero-line', { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, '-=0.2')
-
-  // Scroll indicator
-  tl.to(scrollIndicator.value, {
-    opacity: 1,
-    duration: 1,
-    ease: 'power2.out',
-  }, '+=0.2')
-})
 </script>
 
 <style scoped>
-.hero-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--accent);
-  z-index: 20;
-  pointer-events: none;
-  opacity: 0;
+.hero-word,
+.hero-copy,
+.hero-kicker {
+  animation: heroRise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.hero-headline {
-  font-size: clamp(72px, 11vw, 160px);
+.hero-word:nth-child(1) { animation-delay: 0.12s; }
+.hero-word:nth-child(2) { animation-delay: 0.22s; }
+.hero-word:nth-child(3) { animation-delay: 0.32s; }
+.hero-word:nth-child(4) { animation-delay: 0.42s; }
+.hero-copy { animation-delay: 0.55s; }
+.hero-kicker { animation-delay: 0.05s; }
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
-.scroll-dot {
-  animation: scrollDot 2.5s cubic-bezier(0.76, 0, 0.24, 1) infinite;
-}
-
-@keyframes scrollDot {
-  0% { transform: translateY(-100%); }
-  50% { transform: translateY(150%); }
-  100% { transform: translateY(-100%); }
+@media (prefers-reduced-motion: reduce) {
+  .hero-word,
+  .hero-copy,
+  .hero-kicker {
+    animation: none;
+  }
 }
 </style>

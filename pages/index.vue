@@ -50,7 +50,7 @@ onMounted(() => {
 })
 
 useHead({
-  title: 'Aldi Fahrizaldi — Web Developer × Music Producer',
+  title: 'Aldi Fahrizaldi - Web Developer x Music Producer',
   meta: [
     { name: 'description', content: 'Crafting digital code & sonic rhythms. Web Developer (Nuxt, Laravel, Tailwind) and Music Producer based in Banjarmasin, Indonesia.' },
   ],

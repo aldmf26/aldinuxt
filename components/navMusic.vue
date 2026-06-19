@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-10 sticky bottom-6 z-50 bg-bg border border-primary/10 p-4 shadow-2xl rounded-[2rem] max-w-xl mx-auto backdrop-blur-md transition-colors duration-500">
+    <div class="mt-10 sticky bottom-6 z-50 bg-[#0a0a0a] p-4 rounded-[2rem] max-w-xl mx-auto ring-1 ring-white/[0.06] transition-colors duration-500">
       <div class="flex items-center justify-between px-6">
         <!-- Player Controls -->
         <div class="flex items-center space-x-6">
