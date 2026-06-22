@@ -1,41 +1,34 @@
 /* ═══════════════════════════════════════════════════
-   DARK SIGNAL — Design System
+   VOIDCODE × FL STUDIO — Design System
    Portfolio: Aldi Fahrizaldi
+   Web Dev + Music Producer identity
    ═══════════════════════════════════════════════════ */
 
-/* ── Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* ── Fonts: Space Grotesk (body) + JetBrains Mono (code/labels) ── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
-/* Editorial New — loaded via CDN fallback to Georgia serif */
-@font-face {
-  font-family: 'Editorial New';
-  src: url('https://fonts.cdnfonts.com/css/editorial-new') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Editorial New';
-  src: url('https://fonts.cdnfonts.com/css/editorial-new') format('woff2');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* ── Root Variables (Theme 1 - Signal) ── */
+/* ── Root Base (overridden by themes.css per data-theme) ── */
 :root {
-  --accent: 200 245 128;
-  --accent-dim: 143 184 80;
-  --bg-primary: 8 8 8;
-  --bg-surface: 26 26 26;
-  --bg-elevated: 20 20 20;
-  --text-primary: 232 232 224;
-  --text-muted: 68 68 68;
-  --highlight: 126 179 240;
-  --font-display: 'Editorial New', Georgia, 'Times New Roman', serif;
-  --font-body: 'Space Grotesk', -apple-system, sans-serif;
+  /* Font stacks */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Fallback tokens (themes.css overrides these) */
+  --accent: #7C6FF7;
+  --accent-rgb: 124, 111, 247;
+  --accent-dim: #5A50D4;
+  --accent-glow: rgba(124, 111, 247, 0.25);
+  --accent2: #F5A623;
+  --bg-primary: #0C0C10;
+  --bg-surface: #13131A;
+  --bg-elevated: #1A1A24;
+  --text-primary: #EEEEF5;
+  --text-secondary: #9999B8;
+  --text-muted: #555568;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-accent: rgba(124, 111, 247, 0.3);
+  --border-strong: rgba(255, 255, 255, 0.14);
 }
 
 
@@ -79,27 +72,15 @@ body {
 
 /* ── Selection ── */
 ::selection {
-  background: var(--accent-primary);
+  background: var(--accent);
   color: var(--bg-primary);
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #d4ff8a;
-}
+/* ── Scrollbar (also handled in themes.css) ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { filter: brightness(1.3); }
 
 /* ── Typography Classes ── */
 .font-display {
@@ -126,40 +107,8 @@ body {
   background-size: 256px 256px;
 }
 
-/* ── Custom Cursor ── */
-.custom-cursor {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--accent-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10001;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background 0.2s;
-  mix-blend-mode: normal;
-}
-
-.custom-cursor-trail {
-  position: fixed;
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--accent-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s;
-  opacity: 0.5;
-}
-
-.custom-cursor-trail.hovering {
-  width: 60px;
-  height: 60px;
-  mix-blend-mode: difference;
-  background: var(--accent-primary);
-  opacity: 0.2;
-}
+/* ── Custom Cursor (managed by AppCursor.vue) ── */
+/* Crosshair + particle system — see components/AppCursor.vue */
 
 /* ── Magnetic Link Underline ── */
 .link-underline {
@@ -174,7 +123,7 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--accent-primary);
+  background: var(--accent);
   transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 

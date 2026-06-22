@@ -48,7 +48,7 @@
           :class="[
             activeTab === tab 
               ? 'bg-lime text-dark font-black' 
-              : 'bg-[var(--bg-surface)] text-text-muted hover:text-text-primary border border-white/5'
+              : 'bg-[var(--bg-surface)] text-text-muted hover:text-text-primary border border-[var(--border)]'
           ]"
           class="px-6 py-3 rounded-full font-mono text-xs uppercase tracking-widest transition-all duration-300"
         >
@@ -66,7 +66,7 @@
             FL STUDIO MODE
           </span>
         </div>
-        <div class="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-black/40">
+        <div class="relative rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--bg-surface)]/50">
           <canvas ref="pianoRoll" class="w-full block" height="160"></canvas>
         </div>
       </div>
@@ -76,7 +76,7 @@
         <div
           v-for="item in displayedItems"
           :key="item.src"
-           class="beat-card group relative rounded-[1.5rem] overflow-hidden border border-white/[0.06] transition-all duration-500 flex flex-col"
+           class="beat-card group relative rounded-[1.5rem] overflow-hidden border border-[var(--border)] transition-all duration-500 flex flex-col"
            :class="{ 'ring-1 ring-lime/50': activeItem?.src === item.src }"
            :style="{ 
              background: 'var(--bg-surface)',
@@ -127,7 +127,7 @@
       <div v-if="filteredItems.length > displayLimit && !showAllItems" class="mt-12 text-center">
         <button
           @click="showAllItems = true"
-          class="px-10 py-5 bg-[var(--bg-surface)] border border-white/[0.06] text-text-primary font-mono text-xs uppercase tracking-widest rounded-full hover:bg-white/[0.03] transition-all duration-300"
+          class="px-10 py-5 bg-[var(--bg-surface)] border border-[var(--border)] text-text-primary font-mono text-xs uppercase tracking-widest rounded-full hover:bg-white/[0.03] transition-all duration-300"
         >
           Show All Tracks ({{ filteredItems.length }})
         </button>
@@ -370,7 +370,7 @@ onUnmounted(() => {
   height: 60px;
   padding: 12px 16px 8px;
   background: var(--bg-surface);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--border);
 }
 .beat-bar {
   flex: 1;

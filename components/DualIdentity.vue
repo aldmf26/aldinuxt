@@ -6,43 +6,43 @@
     </div>
 
     <div class="max-w-[1700px] mx-auto px-6 md:px-12 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-text-primary/10 rounded-[3rem] overflow-hidden border border-text-primary/10 shadow-[0_0_100px_rgba(0,0,0,0.3)]">
+      <div class="grid grid-cols-1 lg:grid-cols-2 rounded-[3rem] overflow-hidden border border-[var(--border-strong)] shadow-[0_0_100px_rgba(0,0,0,0.18)]">
 
         <!-- DEV SIDE -->
-        <div ref="devSide" class="relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-text-primary/[0.02]">
+        <div ref="devSide" class="relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-[var(--text-primary)]/[0.01] border-b lg:border-b-0 lg:border-r border-[var(--border-strong)]">
           <div class="relative z-10 space-y-12">
             <div class="flex items-center gap-6">
-               <div class="w-14 h-14 rounded-2xl bg-lime/10 flex items-center justify-center border border-lime/20 group-hover:bg-lime group-hover:text-dark transition-all duration-500 shadow-lg shadow-lime/5">
+               <div class="w-14 h-14 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center border border-[var(--accent)]/20 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-primary)] transition-all duration-500 shadow-lg shadow-[var(--accent)]/5">
                   <span class="font-mono text-xl">&lt;/&gt;</span>
                </div>
                <div>
-                  <h3 class="font-display italic text-3xl text-text-primary">Software Engineer</h3>
-                  <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-text-primary/30">Logical Architecture</p>
+                  <h3 class="font-display italic text-3xl text-[var(--text-primary)]">Software Engineer</h3>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-primary)]/30">Logical Architecture</p>
                </div>
             </div>
 
             <!-- Metrics Grid -->
-            <div class="grid grid-cols-2 gap-px bg-text-primary/10 rounded-2xl overflow-hidden font-mono">
-              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
-                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">5+</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Years Building</span>
+            <div class="grid grid-cols-2 rounded-2xl overflow-hidden font-mono border border-[var(--border-strong)] divide-x divide-y divide-[var(--border-strong)]">
+              <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
+                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">5+</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Years Building</span>
               </div>
-              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
-                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">20+</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Projects Shipped</span>
+              <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
+                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">20+</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Projects Shipped</span>
               </div>
-              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
-                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">12+</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Stack Mastered</span>
+              <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
+                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">12+</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Stack Mastered</span>
               </div>
-              <div class="bg-[#08090D] p-8 flex flex-col items-center text-center group">
-                <span class="text-lime text-5xl md:text-6xl font-black tabular-nums">100%</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-text-primary/40 mt-3">Client Sat.</span>
+              <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
+                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">100%</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Client Sat.</span>
               </div>
             </div>
 
             <div class="flex flex-wrap gap-2">
-               <span v-for="t in devStack" :key="t" class="px-4 py-2 bg-[#08090D] ring-1 ring-white/[0.06] rounded-lg font-mono text-[11px] tracking-wider text-text-primary/50 hover:ring-lime/40 hover:text-lime transition-all cursor-default">
+               <span v-for="t in devStack" :key="t" class="px-4 py-2 bg-[var(--bg-primary)] ring-1 ring-[var(--border)] rounded-lg font-mono text-[11px] tracking-wider text-[var(--text-primary)]/50 hover:ring-[var(--accent)]/40 hover:text-[var(--accent)] transition-all cursor-default">
                   {{ t }}
                </span>
             </div>
@@ -52,32 +52,32 @@
         <!-- STUDIO SIDE (REBUILT INTERACTION) -->
         <div 
           ref="studioSide" 
-          class="relative group p-10 md:p-24 bg-[#0F1015] transition-all duration-700 hover:bg-[#15171E]"
+          class="relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-all duration-700 border-t lg:border-t-0 lg:border-l border-[var(--border)]"
           :style="{ 
             boxShadow: isPlaying 
-              ? '0 0 0 1px var(--accent)40, 0 0 30px var(--accent)15' 
+              ? '0 0 30px var(--border-accent)' 
               : 'none'
           }"
         >
           <div class="relative z-10 space-y-12">
             <div class="flex items-center gap-6">
-               <div class="w-14 h-14 rounded-2xl bg-[#FF6B35]/10 flex items-center justify-center border border-[#FF6B35]/20 group-hover:bg-[#FF6B35] group-hover:text-dark transition-all duration-500 shadow-lg shadow-[#FF6B35]/5">
+               <div class="w-14 h-14 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center border border-[var(--accent)]/20 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-primary)] transition-all duration-500 shadow-lg shadow-[var(--accent)]/5">
                   <span class="font-mono text-xl">♪</span>
                </div>
                <div>
-                  <h3 class="font-display italic text-3xl text-text-primary">Music Producer</h3>
-                  <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-text-primary/30">Sonic Sculpting</p>
+                  <h3 class="font-display italic text-3xl text-[var(--text-primary)]">Music Producer</h3>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-primary)]/30">Sonic Sculpting</p>
                </div>
             </div>
 
             <!-- Studio UI -->
-            <div class="bg-[#181A21] rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
+            <div class="bg-[var(--bg-elevated)] rounded-3xl overflow-hidden border border-[var(--border)] shadow-2xl">
                <!-- Transport -->
-               <div class="bg-[#21242D] px-8 py-5 flex items-center justify-between border-b border-black/40">
+               <div class="bg-[var(--bg-surface)] px-8 py-5 flex items-center justify-between border-b border-[var(--border)]">
                   <div class="flex items-center gap-6">
                      <button 
                        @click="togglePlay" 
-                       class="w-12 h-12 rounded-full bg-[#2D313D] flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-lime shadow-lg"
+                       class="w-12 h-12 rounded-full bg-[var(--bg-elevated)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-[var(--accent)] shadow-lg border border-[var(--border)]"
                        :class="{ 'btn-pulse': isPlaying }"
                      >
                         <span class="text-xl" :style="{ marginLeft: isPlaying ? '0' : '2px' }">
@@ -85,16 +85,16 @@
                         </span>
                      </button>
                      <div class="hidden md:block w-32">
-                        <div class="text-[10px] font-mono text-text-primary/30 uppercase mb-1">Master Volume</div>
-                        <div class="h-[3px] bg-black/40 rounded-full overflow-hidden">
+                        <div class="text-[10px] font-mono text-[var(--text-primary)]/30 uppercase mb-1">Master Volume</div>
+                        <div class="h-[3px] bg-[var(--bg-primary)] rounded-full overflow-hidden">
                            <div 
-                             class="h-full bg-lime transition-all duration-150"
+                             class="h-full bg-[var(--accent)] transition-all duration-150"
                              :style="{ width: volumeLevel + '%' }"
                            ></div>
                         </div>
                      </div>
                   </div>
-                  <div class="font-mono text-xs tracking-widest bg-black/30 px-4 py-2 rounded-lg border border-white/5 transition-colors duration-75"
+                  <div class="font-mono text-xs tracking-widest bg-[var(--bg-primary)] px-4 py-2 rounded-lg border border-[var(--border)] transition-colors duration-75"
                        :style="{ color: (currentStep % 4 === 0 && isPlaying) ? 'var(--accent)' : 'var(--text-primary)' }">
                      {{ bpm }}.00 BPM
                   </div>
@@ -111,9 +111,10 @@
                           ? (currentStep === step-1 && isPlaying 
                               ? 'var(--accent)' 
                               : 'var(--accent-dim)')
-                          : (currentStep === step-1 && isPlaying
-                              ? 'rgba(255,255,255,0.12)' 
-                              : 'rgba(255,255,255,0.04)')
+                          : 'var(--text-primary)',
+                        opacity: activeCells.has(`${row-1}-${step-1}`)
+                          ? 1
+                          : (currentStep === step-1 && isPlaying ? 0.35 : 0.08)
                       }"
                     ></div>
                   </template>
@@ -121,7 +122,7 @@
             </div>
 
             <div class="flex flex-wrap gap-3">
-               <span v-for="s in musicStack" :key="s" class="px-4 py-2 bg-[#181A21] ring-1 ring-white/[0.06] rounded-lg font-mono text-[11px] tracking-wider text-text-primary/50 hover:ring-[#FF6B35]/40 hover:text-[#FF6B35] transition-all cursor-default">
+               <span v-for="s in musicStack" :key="s" class="px-4 py-2 bg-[var(--bg-primary)] ring-1 ring-[var(--border)] rounded-lg font-mono text-[11px] tracking-wider text-[var(--text-primary)]/50 hover:ring-[var(--accent)]/40 hover:text-[var(--accent)] transition-all cursor-default">
                   {{ s }}
                </span>
             </div>

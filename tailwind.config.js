@@ -11,39 +11,33 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        dark: {
-          DEFAULT: 'var(--bg-primary)',
-          surface: 'var(--bg-surface)',
-          elevated: 'var(--bg-surface)',
-        },
-        lime: {
-          DEFAULT: 'var(--accent)',
-          dim: 'var(--accent-dim)',
-        },
-        cool: {
-          DEFAULT: 'var(--highlight)',
-        },
-        primary: 'var(--text-primary)',
-        muted: 'var(--text-muted)',
-        text: {
-          primary: 'var(--text-primary)',
-          muted: 'var(--text-muted)',
-        },
-        accent: 'var(--accent)',
-        'accent-dim': 'var(--accent-dim)',
+        // Background tokens
         'bg-primary': 'var(--bg-primary)',
         'bg-surface': 'var(--bg-surface)',
+        'bg-elevated': 'var(--bg-elevated)',
+        // Text tokens
         'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
         'text-muted': 'var(--text-muted)',
-        highlight: 'var(--highlight)',
-        dev: 'var(--bg-surface)',
-        studio: 'var(--bg-primary)',
-        music: 'var(--bg-primary)',
+        // Accent tokens
+        accent: 'var(--accent)',
+        'accent-dim': 'var(--accent-dim)',
+        'accent2': 'var(--accent2)',
+        // Border tokens
+        border: 'var(--border)',
+        'border-accent': 'var(--border-accent)',
+        'border-strong': 'var(--border-strong)',
+        // Legacy aliases (keep for backward compat)
+        lime: { DEFAULT: 'var(--accent)', dim: 'var(--accent-dim)' },
+        primary: 'var(--text-primary)',
+        muted: 'var(--text-muted)',
+        text: { primary: 'var(--text-primary)', muted: 'var(--text-muted)', secondary: 'var(--text-secondary)' },
+        dark: { DEFAULT: 'var(--bg-primary)', surface: 'var(--bg-surface)', elevated: 'var(--bg-elevated)' },
       },
       fontFamily: {
-        display: ['"Editorial New"', 'Georgia', 'serif'],
-        body: ['"Space Grotesk"', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
       },
       fontSize: {
         'hero': 'clamp(80px, 12vw, 180px)',

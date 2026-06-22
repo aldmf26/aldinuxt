@@ -1,21 +1,21 @@
 <template>
   <div
     ref="pianoRef"
-    class="piano-shell relative mx-auto w-full max-w-6xl rounded-[28px] border border-white/10 bg-[#080a0d]/90 p-3 shadow-2xl shadow-black/60 sm:p-4"
+    class="piano-shell relative mx-auto w-full max-w-6xl rounded-[28px] border border-[var(--border)] bg-[var(--bg-surface)] p-3 shadow-2xl shadow-black/30 sm:p-4"
     @mousemove="onMove"
     @mouseleave="hoveredKey = null"
   >
-    <div class="absolute inset-x-8 -top-8 h-16 rounded-full bg-orange-500/20 blur-3xl"></div>
+    <div class="absolute inset-x-8 -top-8 h-16 rounded-full bg-[var(--accent)]/10 blur-3xl"></div>
     <div
       class="pointer-events-none absolute inset-0 rounded-[28px] opacity-70"
       :style="spotlightStyle"
     ></div>
 
-    <div class="relative h-36 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#151922] to-[#090b0f] sm:h-44 md:h-56">
-      <div class="absolute left-0 right-0 top-0 z-20 flex h-4 items-center gap-2 border-b border-white/10 bg-white/[0.03] px-4">
-        <span class="h-1.5 w-1.5 rounded-full bg-orange-400"></span>
-        <span class="h-1.5 w-1.5 rounded-full bg-cyan-300"></span>
-        <span class="font-mono text-[9px] uppercase tracking-[0.22em] text-white/30">midi keys</span>
+    <div class="relative h-36 overflow-hidden rounded-2xl border border-[var(--border)] bg-gradient-to-b from-[var(--bg-elevated)] to-[var(--bg-surface)] sm:h-44 md:h-56">
+      <div class="absolute left-0 right-0 top-0 z-20 flex h-4 items-center gap-2 border-b border-[var(--border)] bg-[var(--text-primary)]/[0.03] px-4">
+        <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
+        <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-dim)]"></span>
+        <span class="font-mono text-[9px] uppercase tracking-[0.22em] text-[var(--text-primary)]/40">midi keys</span>
       </div>
 
       <div class="absolute inset-x-0 top-5 h-16 overflow-hidden sm:h-20 md:h-24">
@@ -91,7 +91,7 @@ const midiNotes = [
 ]
 
 const spotlightStyle = computed(() => ({
-  background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(103,232,249,.22), rgba(251,146,60,.12) 24%, transparent 48%)`,
+  background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, var(--border-accent), transparent 48%)`,
 }))
 
 let intervalId

@@ -9,20 +9,20 @@
         class="group flex items-center gap-3"
         data-cursor-hover
       >
-        <span class="grid h-9 w-9 place-items-center rounded-full bg-orange-400/20 text-sm font-black text-orange-300">
+        <span class="grid h-9 w-9 place-items-center rounded-full bg-[var(--accent)]/20 text-sm font-black text-[var(--accent)]">
           A
         </span>
-        <span class="font-display text-2xl font-black italic tracking-[-0.04em] text-white transition-colors group-hover:text-orange-300">
+        <span class="font-display text-2xl font-black italic tracking-[-0.04em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
           AldiMF
         </span>
       </NuxtLink>
 
-      <div class="hidden items-center gap-1 rounded-full bg-[#0a0a0a] px-1.5 py-1.5 ring-1 ring-white/[0.06] md:flex">
+      <div class="hidden items-center gap-1 rounded-full bg-[var(--bg-surface)] px-1.5 py-1.5 ring-1 ring-[var(--border)] md:flex">
         <NuxtLink
           v-for="link in navLinks"
           :key="link.path"
           :to="link.path"
-          class="rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-white/65 transition-all hover:bg-white/[0.04] hover:text-white"
+          class="rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-primary)]/70 transition-all hover:bg-[var(--text-primary)]/[0.04] hover:text-[var(--text-primary)]"
           data-cursor-hover
         >
           {{ link.name }}
@@ -32,13 +32,13 @@
       <div class="flex items-center gap-4">
         <NuxtLink
           to="/service"
-          class="hidden rounded-full bg-white px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-black transition hover:bg-orange-300 md:inline-flex"
+          class="hidden rounded-full bg-[var(--text-primary)] px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--bg-primary)] transition hover:bg-[var(--accent)] hover:text-[var(--bg-primary)] md:inline-flex"
           data-cursor-hover
         >
           Hire Me
         </NuxtLink>
         <button
-          class="relative z-[110] rounded-full bg-[#0a0a0a] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.14em] text-white ring-1 ring-white/[0.08] md:hidden"
+          class="relative z-[110] rounded-full bg-[var(--bg-surface)] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-primary)] ring-1 ring-[var(--border)] md:hidden"
           data-cursor-hover
           @click="isMenuOpen = !isMenuOpen"
         >
@@ -48,13 +48,13 @@
     </div>
 
     <Transition name="menu-fade">
-      <div v-if="isMenuOpen" class="fixed inset-0 z-[105] flex flex-col items-center justify-center bg-[#050608] p-10">
+      <div v-if="isMenuOpen" class="fixed inset-0 z-[105] flex flex-col items-center justify-center bg-[var(--bg-primary)] p-10">
         <div class="flex flex-col gap-8 text-center">
           <NuxtLink
             v-for="link in mobileLinks"
             :key="link.path"
             :to="link.path"
-            class="font-display text-4xl italic text-white transition-all hover:text-orange-300 md:text-6xl"
+            class="font-display text-4xl italic text-[var(--text-primary)] transition-all hover:text-[var(--accent)] md:text-6xl"
             @click="isMenuOpen = false"
           >
             {{ link.name }}
@@ -64,7 +64,7 @@
     </Transition>
 
     <div
-      class="absolute inset-0 -z-10 bg-[#0a0a0a] opacity-0 transition-opacity duration-500"
+      class="absolute inset-0 -z-10 bg-[var(--bg-surface)] border-b border-[var(--border)] opacity-0 transition-opacity duration-500"
       :class="{ 'opacity-100': isScrolled && !isMenuOpen }"
     ></div>
   </nav>

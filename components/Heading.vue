@@ -28,10 +28,10 @@
             </div>
 
             <!-- Floating GSAP Elements -->
-            <div class="magnetic-icon absolute -top-4 -right-4 w-16 h-16 bg-[#0a0a0a] ring-1 ring-white/[0.08] rounded-2xl flex items-center justify-center -rotate-12 z-20">
+            <div class="magnetic-icon absolute -top-4 -right-4 w-16 h-16 bg-[var(--bg-surface)] ring-1 ring-[var(--border)] rounded-2xl flex items-center justify-center -rotate-12 z-20">
               <span class="text-3xl">🎹</span>
             </div>
-            <div class="magnetic-icon absolute -bottom-6 -left-6 w-16 h-16 bg-[#0a0a0a] ring-1 ring-white/[0.08] rounded-2xl flex items-center justify-center rotate-12 z-20">
+            <div class="magnetic-icon absolute -bottom-6 -left-6 w-16 h-16 bg-[var(--bg-surface)] ring-1 ring-[var(--border)] rounded-2xl flex items-center justify-center rotate-12 z-20">
               <span class="text-3xl">💻</span>
             </div>
 

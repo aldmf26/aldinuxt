@@ -1,83 +1,212 @@
 <template>
-  <div class="hidden md:block">
-    <!-- Dot: snaps to mouse instantly -->
-    <div ref="dot" class="cursor-dot" />
-    <!-- Circle: follows with lerp delay -->
-    <div ref="ring" class="cursor-ring" />
+  <div class="hidden md:block" aria-hidden="true">
+    <!-- Crosshair cursor center -->
+    <div ref="cursorEl" class="cursor-crosshair">
+      <span class="ch-h" />
+      <span class="ch-v" />
+      <span class="ch-dot" />
+    </div>
+    <!-- Particle container -->
+    <teleport to="body">
+      <div ref="particleRoot" class="cursor-particle-root" />
+    </teleport>
   </div>
 </template>
 
 <script setup>
-const dot = ref(null)
-const ring = ref(null)
+const cursorEl = ref(null)
+const particleRoot = ref(null)
+
+// Pool of symbols: music notes + code tokens
+const SYMBOLS = [
+  '♪', '♫', '♬', '♩',
+  '{}', '/>', 'fn', 'const',
+  '=>', '[ ]', '🎹', '🎵',
+  '<!', '.ts', '()', ';;',
+]
+
 let mouseX = 0, mouseY = 0
-let ringX = 0, ringY = 0
+let lastSpawnTime = 0
+let particleCount = 0
+const MAX_PARTICLES = 28
+
+function spawnParticle(x, y) {
+  if (!particleRoot.value) return
+  if (particleCount >= MAX_PARTICLES) return
+
+  const el = document.createElement('span')
+  const symbol = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)]
+  el.textContent = symbol
+  el.className = 'cur-particle'
+
+  // Random direction burst
+  const angle = Math.random() * Math.PI * 2
+  const dist = 40 + Math.random() * 60
+  const dx = Math.cos(angle) * dist
+  const dy = Math.sin(angle) * dist - 30 // slight upward bias
+
+  // Random size & color between accent/music-orange
+  const colors = ['#a78bfa', '#f59e0b', '#22d3ee', '#fb923c', '#4ade80']
+  const color = colors[Math.floor(Math.random() * colors.length)]
+  const size = 10 + Math.random() * 8
+
+  el.style.cssText = `
+    left:${x}px; top:${y}px;
+    font-size:${size}px; color:${color};
+    --dx:${dx}px; --dy:${dy}px;
+  `
+
+  particleRoot.value.appendChild(el)
+  particleCount++
+
+  // Remove after animation ends (~700ms)
+  setTimeout(() => {
+    el.remove()
+    particleCount--
+  }, 750)
+}
 
 onMounted(() => {
+  // Hide default OS cursor on desktop
+  document.body.style.cursor = 'none'
+
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX
     mouseY = e.clientY
-    if (dot.value) {
-      dot.value.style.left = mouseX + 'px'
-      dot.value.style.top = mouseY + 'px'
+
+    if (cursorEl.value) {
+      cursorEl.value.style.left = mouseX + 'px'
+      cursorEl.value.style.top = mouseY + 'px'
+    }
+
+    // Throttle particle spawning (~30fps)
+    const now = performance.now()
+    if (now - lastSpawnTime > 60) {
+      lastSpawnTime = now
+      spawnParticle(mouseX, mouseY)
     }
   })
 
-  // Hover detection
-  const addHoverListeners = () => {
-    document.querySelectorAll('a, button, [data-cursor-hover], .group').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        ring.value?.classList.add('is-hovering')
-        dot.value?.classList.add('is-hovering')
-      })
-      el.addEventListener('mouseleave', () => {
-        ring.value?.classList.remove('is-hovering')
-        dot.value?.classList.remove('is-hovering')
-      })
+  // Burst on click
+  document.addEventListener('click', (e) => {
+    for (let i = 0; i < 6; i++) {
+      setTimeout(() => spawnParticle(e.clientX, e.clientY), i * 30)
+    }
+  })
+
+  // Scale up on hover
+  const updateHover = () => {
+    document.querySelectorAll('a, button, [data-cursor-hover]').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorEl.value?.classList.add('is-hovering'))
+      el.addEventListener('mouseleave', () => cursorEl.value?.classList.remove('is-hovering'))
     })
   }
+  updateHover()
+  new MutationObserver(updateHover).observe(document.body, { childList: true, subtree: true })
+})
 
-  addHoverListeners()
-  const observer = new MutationObserver(addHoverListeners)
-  observer.observe(document.body, { childList: true, subtree: true })
-
-  // Lerp loop for ring
-  function lerp(a, b, t) { return a + (b - a) * t }
-  function loop() {
-    if (ring.value) {
-      ringX = lerp(ringX, mouseX, 0.1)
-      ringY = lerp(ringY, mouseY, 0.1)
-      ring.value.style.left = ringX + 'px'
-      ring.value.style.top = ringY + 'px'
-    }
-    requestAnimationFrame(loop)
-  }
-  loop()
+onBeforeUnmount(() => {
+  document.body.style.cursor = ''
 })
 </script>
 
 <style>
-.cursor-dot {
-  position: fixed; pointer-events: none; z-index: 99999;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent);
+/* ── Crosshair cursor ── */
+.cursor-crosshair {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background 0.2s, opacity 0.2s;
+  transition: transform 0.15s ease;
+  width: 24px;
+  height: 24px;
 }
-.cursor-ring {
-  position: fixed; pointer-events: none; z-index: 99998;
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1.5px solid var(--accent);
-  transform: translate(-50%, -50%);
-  opacity: 0.6;
-  transition: width 0.3s, height 0.3s, opacity 0.3s, border-color 0.3s, background 0.3s;
+.cursor-crosshair.is-hovering {
+  transform: translate(-50%, -50%) scale(1.6);
 }
-/* Hover state on links/buttons/cards */
-.cursor-ring.is-hovering {
-  width: 64px; height: 64px; opacity: 1;
-  mix-blend-mode: difference;
+.cursor-crosshair.is-hovering .ch-dot {
   background: var(--accent);
-  border-color: transparent;
+  box-shadow: 0 0 8px var(--accent);
 }
-.cursor-dot.is-hovering { opacity: 0; }
+
+/* Horizontal arm */
+.ch-h {
+  position: absolute;
+  top: 50%; left: 0;
+  width: 100%; height: 1.5px;
+  background: var(--accent);
+  transform: translateY(-50%);
+}
+/* Vertical arm */
+.ch-v {
+  position: absolute;
+  left: 50%; top: 0;
+  width: 1.5px; height: 100%;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+/* Center dot */
+.ch-dot {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+/* Gap in the center so it looks like a proper crosshair */
+.cursor-crosshair::before, .cursor-crosshair::after {
+  content: '';
+  position: absolute;
+  background: var(--bg-primary, #0a0a0f);
+  z-index: 1;
+}
+.cursor-crosshair::before {
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Particle root ── */
+.cursor-particle-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99998;
+  overflow: hidden;
+}
+
+/* ── Individual particle ── */
+.cur-particle {
+  position: absolute;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  user-select: none;
+  animation: particle-burst 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes particle-burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+  }
+  60% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0.3);
+  }
+}
+
+/* Hide native cursor everywhere on desktop */
+@media (pointer: fine) {
+  *, *::before, *::after { cursor: none !important; }
+}
 </style>

@@ -15,7 +15,7 @@
       </div>
 
       <!-- Stats / Years -->
-      <div ref="statsRef" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-text-primary/10 max-w-5xl mx-auto opacity-0 border border-text-primary/10 rounded-2xl overflow-hidden shadow-2xl">
+      <div ref="statsRef" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] max-w-5xl mx-auto opacity-0 border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl">
         <div class="bg-[var(--bg-surface)] p-12 md:p-20 flex flex-col items-center text-center group">
           <span class="section-label mb-8 group-hover:text-lime transition-colors">Web Dev since</span>
           <div class="relative">
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Moving Strip Text -->
-    <div class="mt-32 border-y border-text-primary/10 py-10 overflow-hidden whitespace-nowrap flex">
+    <div class="mt-32 border-y border-[var(--border)] py-10 overflow-hidden whitespace-nowrap flex">
        <div class="flex animate-marquee-fast">
           <span v-for="n in 10" :key="n" class="inline-block font-mono text-xs uppercase tracking-[0.3em] text-text-primary/30 mx-12">
             OPEN TO FREELANCE · REMOTE FRIENDLY · BASED IN BANJARMASIN · FAST DELIVERY · LET'S TALK ·

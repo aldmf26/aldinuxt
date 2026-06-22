@@ -28,7 +28,7 @@
               <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Email</span>
               <a 
                 href="mailto:aldimf26@gmail.com" 
-                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-text-primary/10 pb-2 inline-block"
+                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-[var(--border)] pb-2 inline-block"
                 data-cursor-hover
               >
                 → aldimf26@gmail.com
@@ -36,7 +36,7 @@
               <a 
                 href="https://wa.me/6289541311053" 
                 target="_blank"
-                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-text-primary/10 pb-2 flex items-center gap-4 mt-4"
+                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-[var(--border)] pb-2 flex items-center gap-4 mt-4"
                 data-cursor-hover
               >
                 → +62 895-413111-053
@@ -72,7 +72,7 @@
       </div>
 
       <!-- Footer Bottom -->
-      <div class="mt-32 pt-12 border-t border-text-primary/5 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="mt-32 pt-12 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-8">
         <p class="font-mono text-[10px] text-text-primary/30 uppercase tracking-[0.2em]">
           © 2025 Muhammad Fahrizaldi · Banjarmasin, Indonesia 🇮🇩
         </p>

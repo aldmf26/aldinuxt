@@ -1,79 +1,147 @@
+/* ═══════════════════════════════════════════════════
+   THEME SYSTEM — Aldi Fahrizaldi
+   4 themes: 3 dark variants + 1 true light
+   Identity: Web Dev × FL Studio × Motion-site
+   ═══════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────
+   1. VOIDCODE  (default dark)
+   Electric indigo + neon amber
+   Like VSCode dark + FL Studio channel rack
+   ───────────────────────────────────────────────── */
 :root,
 :root[data-theme="signal"] {
-  --accent: #C8F580;
-  --accent-rgb: 200, 245, 128;
-  --accent-dim: #8FB850;
-  --bg-primary: #080808;
-  --bg-surface: #141414;
-  --bg-elevated: #1E1E1E;
-  --text-primary: #E8E8E0;
-  --text-muted: #888888;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(200, 245, 128, 0.3);
+  --accent: #7C6FF7;            /* electric indigo */
+  --accent-rgb: 124, 111, 247;
+  --accent-dim: #5A50D4;
+  --accent-glow: rgba(124, 111, 247, 0.25);
+  --accent2: #F5A623;           /* warm amber — piano key / beat pad */
+  --accent2-rgb: 245, 166, 35;
+
+  --bg-primary: #0C0C10;        /* near-black with cool tint */
+  --bg-surface: #13131A;        /* card / panel */
+  --bg-elevated: #1A1A24;       /* hover state / raised */
+  --bg-overlay: #22222E;        /* tooltip, dropdown */
+
+  --text-primary: #EEEEF5;      /* warm-cool white, readable */
+  --text-secondary: #9999B8;    /* muted, still legible */
+  --text-muted: #555568;        /* placeholder, disabled */
+
+  --border: rgba(255, 255, 255, 0.07);
+  --border-accent: rgba(124, 111, 247, 0.3);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  /* Semantic */
+  --is-dark: 1;
 }
 
-
+/* ─────────────────────────────────────────────────
+   2. MIDNIGHT STUDIO  (dark warm — FL Studio night)
+   Neon orange-red + deep coal
+   Like FL Studio's default dark theme
+   ───────────────────────────────────────────────── */
 :root[data-theme="ember"] {
-  --accent: #FF6B35;
-  --accent-rgb: 255, 107, 53;
-  --accent-dim: #CC4A1A;
-  --bg-primary: #0A0703;
-  --bg-surface: #1A1108;
-  --bg-elevated: #221608;
-  --text-primary: #F0EAD6;
-  --text-muted: #8A7A68;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(255, 107, 53, 0.3);
+  --accent: #FF4D1C;            /* hot orange-red */
+  --accent-rgb: 255, 77, 28;
+  --accent-dim: #CC3200;
+  --accent-glow: rgba(255, 77, 28, 0.22);
+  --accent2: #FFB547;           /* warm gold */
+  --accent2-rgb: 255, 181, 71;
+
+  --bg-primary: #0A0805;        /* almost-black warm */
+  --bg-surface: #161008;        /* dark walnut */
+  --bg-elevated: #1E1509;
+  --bg-overlay: #261B0C;
+
+  --text-primary: #F5EDD8;      /* warm cream — readable */
+  --text-secondary: #A0906A;    /* warm muted */
+  --text-muted: #5C4E35;
+
+  --border: rgba(255, 245, 220, 0.07);
+  --border-accent: rgba(255, 77, 28, 0.3);
+  --border-strong: rgba(255, 245, 220, 0.14);
+
+  --is-dark: 1;
 }
 
-
+/* ─────────────────────────────────────────────────
+   3. CRYOGEN  (dark blue-cold — terminal/SSH feel)
+   Cyan + deep navy — like a running terminal
+   ───────────────────────────────────────────────── */
 :root[data-theme="frost"] {
-  --accent: #7EB3F0;
-  --accent-rgb: 126, 179, 240;
-  --accent-dim: #4A8ACC;
-  --bg-primary: #060810;
-  --bg-surface: #0E1420;
-  --bg-elevated: #121828;
-  --text-primary: #D8E8F8;
-  --text-muted: #6A7A90;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(126, 179, 240, 0.3);
+  --accent: #00D4FF;            /* terminal cyan */
+  --accent-rgb: 0, 212, 255;
+  --accent-dim: #0099CC;
+  --accent-glow: rgba(0, 212, 255, 0.2);
+  --accent2: #7BFF8A;           /* green — like bash $ prompt */
+  --accent2-rgb: 123, 255, 138;
+
+  --bg-primary: #050810;        /* deep navy-black */
+  --bg-surface: #0A0F1E;
+  --bg-elevated: #101828;
+  --bg-overlay: #182236;
+
+  --text-primary: #CDE4F5;      /* cold white-blue */
+  --text-secondary: #6A8BA8;
+  --text-muted: #304055;
+
+  --border: rgba(0, 212, 255, 0.08);
+  --border-accent: rgba(0, 212, 255, 0.28);
+  --border-strong: rgba(0, 212, 255, 0.15);
+
+  --is-dark: 1;
 }
 
+/* ─────────────────────────────────────────────────
+   4. DAYLIGHT  (true light mode — professional cerah)
+   Deep charcoal text + electric indigo accent
+   Like a pro Figma/Linear workspace in daylight
+   ───────────────────────────────────────────────── */
+:root[data-theme="studio-light"] {
+  --accent: #5548E8;            /* deep electric indigo — readable on white */
+  --accent-rgb: 85, 72, 232;
+  --accent-dim: #3C30CC;
+  --accent-glow: rgba(85, 72, 232, 0.15);
+  --accent2: #E8830A;           /* amber — warm beat accent */
+  --accent2-rgb: 232, 131, 10;
 
+  --bg-primary: #F4F4F8;        /* cool off-white, not cream */
+  --bg-surface: #FFFFFF;        /* card surface */
+  --bg-elevated: #ECEEF6;       /* hover / pressed */
+  --bg-overlay: #E4E6F0;
 
+  --text-primary: #12121A;      /* near-black, cool-tinted */
+  --text-secondary: #4A4A68;    /* readable secondary */
+  --text-muted: #9090A8;        /* placeholder */
 
-/* Smooth transition when switching */
-*, *::before, *::after {
-  transition: background-color 0.35s ease, 
-              color 0.25s ease, 
-              border-color 0.25s ease,
-              box-shadow 0.25s ease !important;
+  --border: rgba(18, 18, 26, 0.09);
+  --border-accent: rgba(85, 72, 232, 0.25);
+  --border-strong: rgba(18, 18, 26, 0.16);
+
+  --is-dark: 0;
 }
+
+/* ═══════════════════════════════════════════════════
+   GLOBAL UTILITIES (shared across all themes)
+   ═══════════════════════════════════════════════════ */
 
 body {
   overflow-x: hidden;
 }
 
-/* Custom thin scrollbar */
-::-webkit-scrollbar {
-  width: 3px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 2px;
-}
+/* Thin accent scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { filter: brightness(1.3); }
 
-/* Selection Color */
+/* Selection */
 ::selection {
   background: var(--accent);
   color: var(--bg-primary);
 }
 
-/* Awwwards Section Label Utility */
+/* Section label utility (mono eyebrow) */
 .section-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
@@ -82,7 +150,7 @@ body {
   color: var(--accent);
 }
 
-/* Giant Ghost Numbers Utility */
+/* Ghost number utility */
 .ghost-number {
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(100px, 15vw, 200px);
@@ -91,4 +159,14 @@ body {
   line-height: 1;
   pointer-events: none;
   user-select: none;
+}
+
+/* Accent glow utility (for hero elements, dots, etc.) */
+.glow-accent {
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Cursor crosshair gap — matches bg-primary per theme */
+.cursor-crosshair::before {
+  background: var(--bg-primary) !important;
 }

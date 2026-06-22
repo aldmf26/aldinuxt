@@ -20,9 +20,9 @@
 
 
       <!-- Orbit Tracks (Visual only) -->
-      <div class="absolute border border-primary/20 rounded-full w-[300px] h-[300px] -z-10 transition-colors duration-500"></div>
-      <div class="absolute border border-primary/20 rounded-full w-[460px] h-[460px] -z-10 transition-colors duration-500"></div>
-
+      <div class="absolute border border-[var(--border)] rounded-full w-[300px] h-[300px] -z-10 transition-colors duration-500"></div>
+      <div class="absolute border border-[var(--border)] rounded-full w-[460px] h-[460px] -z-10 transition-colors duration-500"></div>
+ 
       <!-- Skill Items -->
       <div 
         v-for="(skill, index) in allSkills" 
@@ -31,7 +31,7 @@
         :style="getOrbitStyle(index)"
       >
         <div 
-          class="flex items-center gap-3 px-4 py-2 bg-[#0a0a0a] ring-1 ring-white/[0.06] rounded-lg hover:scale-110 transition-all duration-300 cursor-default group whitespace-nowrap"
+          class="flex items-center gap-3 px-4 py-2 bg-[var(--bg-surface)] ring-1 ring-[var(--border)] rounded-lg hover:scale-110 transition-all duration-300 cursor-default group whitespace-nowrap"
         >
           <div :class="['w-8 h-8 rounded-full flex items-center justify-center text-lg', skill.type === 'web' ? 'bg-accent/10 text-accent' : 'bg-highlight/10 text-highlight']">
             <i :class="skill.icon"></i>
