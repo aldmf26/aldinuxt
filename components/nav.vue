@@ -17,12 +17,12 @@
         </span>
       </NuxtLink>
 
-      <div class="hidden items-center gap-1 rounded-full bg-[var(--bg-surface)] px-1.5 py-1.5 ring-1 ring-[var(--border)] md:flex">
+      <div class="hidden items-center gap-6 md:flex">
         <NuxtLink
           v-for="link in navLinks"
           :key="link.path"
           :to="link.path"
-          class="rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-primary)]/70 transition-all hover:bg-[var(--text-primary)]/[0.04] hover:text-[var(--text-primary)]"
+          class="nav-link font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-primary)]/55 transition-colors hover:text-[var(--text-primary)]"
           data-cursor-hover
         >
           {{ link.name }}
@@ -32,7 +32,7 @@
       <div class="flex items-center gap-4">
         <NuxtLink
           to="/service"
-          class="hidden rounded-full bg-[var(--text-primary)] px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--bg-primary)] transition hover:bg-[var(--accent)] hover:text-[var(--bg-primary)] md:inline-flex"
+          class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--text-primary)]/70 underline-offset-4 hover:text-[var(--accent)] transition md:inline-flex"
           data-cursor-hover
         >
           Hire Me
@@ -64,7 +64,7 @@
     </Transition>
 
     <div
-      class="absolute inset-0 -z-10 bg-[var(--bg-surface)] border-b border-[var(--border)] opacity-0 transition-opacity duration-500"
+      class="absolute bottom-0 left-0 right-0 h-px bg-[var(--border)] opacity-0 transition-opacity duration-500"
       :class="{ 'opacity-100': isScrolled && !isMenuOpen }"
     ></div>
   </nav>

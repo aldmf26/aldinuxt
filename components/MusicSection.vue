@@ -187,9 +187,6 @@ function toggleActive(item) {
     activeItem.value = null
   } else {
     activeItem.value = item
-    nextTick(() => {
-      pianoRollRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    })
   }
 }
 
@@ -329,6 +326,8 @@ watch(activeItem, (val) => {
 })
 
 onMounted(() => {
+  if (typeof window === 'undefined') return
+  gsap.registerPlugin(ScrollTrigger)
   updateColors()
   notes = generateNotes(120)
   drawPianoRoll()
@@ -336,10 +335,25 @@ onMounted(() => {
   const observer = new MutationObserver(updateColors)
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
 
+  // Parallax: background BEATS text
   if (bgBeats.value) {
     gsap.to(bgBeats.value, {
       yPercent: -20,
       scrollTrigger: { trigger: '#music', start: 'top bottom', end: 'bottom top', scrub: 1.2 }
+    })
+  }
+
+  // Parallax: piano roll floats upward as you scroll — feels like it's floating
+  if (pianoRollRef.value) {
+    gsap.to(pianoRollRef.value, {
+      y: -30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#music',
+        start: 'top bottom',
+        end: 'center top',
+        scrub: 1.8,
+      }
     })
   }
 

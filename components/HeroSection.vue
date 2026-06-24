@@ -10,9 +10,8 @@
     <div class="relative z-10 mx-auto flex w-full max-w-[1800px] flex-col gap-10 pb-12">
       <div class="grid items-end gap-8 lg:grid-cols-[1.08fr_.92fr]">
         <div class="space-y-7">
-          <div class="hero-kicker inline-flex items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--bg-surface)] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--text-primary)]/70">
-            <span class="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_18px_var(--accent)]"></span>
-            Web Developer - Music Producer - Beat Maker
+          <div class="hero-kicker font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-primary)]/45">
+            Banjarmasin&nbsp;&nbsp;/&nbsp;&nbsp;Web Dev&nbsp;&nbsp;/&nbsp;&nbsp;Music Producer
           </div>
 
           <h1 class="font-display text-[clamp(54px,9vw,150px)] font-black leading-[0.88] tracking-[-0.07em] text-[var(--text-primary)]">
@@ -25,7 +24,7 @@
 
         <div class="hero-copy space-y-7 lg:pb-4">
           <p class="max-w-xl text-lg leading-relaxed text-[var(--text-primary)]/80 sm:text-xl">
-            I craft fast, expressive web experiences and produce beats with FL Studio, blending clean code with rhythm, texture, and mood.
+            Bikin website yang beneran jalan, dan beats yang beneran didengar. Dua hal berbeda, satu orang.
           </p>
 
           <div class="flex flex-wrap gap-4">
@@ -46,10 +45,7 @@
             </a>
           </div>
 
-          <div class="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-primary)]/40">
-            <span class="h-px w-12 bg-[var(--accent)]/50"></span>
-            Banjarmasin, Indonesia
-          </div>
+
         </div>
       </div>
 

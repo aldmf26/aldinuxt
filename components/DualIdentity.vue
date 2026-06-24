@@ -9,7 +9,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 rounded-[3rem] overflow-hidden border border-[var(--border-strong)] shadow-[0_0_100px_rgba(0,0,0,0.18)]">
 
         <!-- DEV SIDE -->
-        <div ref="devSide" class="relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-[var(--text-primary)]/[0.01] border-b lg:border-b-0 lg:border-r border-[var(--border-strong)]">
+        <div ref="devSide" class="dual-panel relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-[var(--text-primary)]/[0.01] border-b lg:border-b-0 lg:border-r border-[var(--border-strong)]">
           <div class="relative z-10 space-y-12">
             <div class="flex items-center gap-6">
                <div class="w-14 h-14 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center border border-[var(--accent)]/20 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-primary)] transition-all duration-500 shadow-lg shadow-[var(--accent)]/5">
@@ -52,7 +52,7 @@
         <!-- STUDIO SIDE (REBUILT INTERACTION) -->
         <div 
           ref="studioSide" 
-          class="relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-all duration-700 border-t lg:border-t-0 lg:border-l border-[var(--border)]"
+          class="dual-panel relative group p-10 md:p-24 bg-[var(--bg-surface)] transition-all duration-700 border-t lg:border-t-0 lg:border-l border-[var(--border)]"
           :style="{ 
             boxShadow: isPlaying 
               ? '0 0 30px var(--border-accent)' 
@@ -101,18 +101,18 @@
                </div>
 
                <!-- Piano Roll Grid -->
-               <div class="p-8 grid grid-cols-16 gap-1 h-32">
+               <div class="p-8 grid gap-1 h-32" style="grid-template-columns: repeat(16, minmax(0, 1fr))">
                   <template v-for="row in ROWS" :key="`row-${row}`">
                     <div 
                       v-for="step in STEPS" :key="`cell-${row}-${step}`"
                       class="rounded-[2px] transition-all duration-75"
                       :style="{
-                        background: activeCells.has(`${row-1}-${step-1}`)
+                        background: activeCells[`${row-1}-${step-1}`]
                           ? (currentStep === step-1 && isPlaying 
                               ? 'var(--accent)' 
                               : 'var(--accent-dim)')
                           : 'var(--text-primary)',
-                        opacity: activeCells.has(`${row-1}-${step-1}`)
+                        opacity: activeCells[`${row-1}-${step-1}`]
                           ? 1
                           : (currentStep === step-1 && isPlaying ? 0.35 : 0.08)
                       }"
@@ -135,7 +135,6 @@
 </template>
 
 <script setup>
-import { gsap } from 'gsap'
 
 const devSide = ref(null)
 const studioSide = ref(null)
@@ -147,7 +146,7 @@ const volumeLevel = ref(60)
 const ROWS = 8
 const STEPS = 16
 const currentStep = ref(-1)
-const activeCells = ref(new Set())
+const activeCells = ref({})
 
 let stepInterval = null
 let volumeInterval = null
@@ -156,16 +155,16 @@ const devStack = ['Nuxt JS', 'Laravel', 'PostgreSQL', 'Docker', 'GSAP']
 const musicStack = ['FL Studio', 'Serum', 'FabFilter', 'Mixing', 'Arrangement']
 
 function generateRandomPattern() {
-  const pattern = new Set()
+  const pattern = {}
   // Kick: row 0, steps 0, 4, 8, 12
-  ;[0, 4, 8, 12].forEach(s => pattern.add(`0-${s}`))
-  // Snare: row 2, steps 4, 12  
-  ;[4, 12].forEach(s => pattern.add(`2-${s}`))
+  ;[0, 4, 8, 12].forEach(s => { pattern[`0-${s}`] = true })
+  // Snare: row 2, steps 4, 12
+  ;[4, 12].forEach(s => { pattern[`2-${s}`] = true })
   // Hi-hat: row 4, every 2 steps
-  for (let s = 0; s < STEPS; s += 2) pattern.add(`4-${s}`)
+  for (let s = 0; s < STEPS; s += 2) pattern[`4-${s}`] = true
   // Melody: random notes on rows 5-7
   for (let s = 0; s < STEPS; s++) {
-    if (Math.random() > 0.7) pattern.add(`${5 + Math.floor(Math.random() * 3)}-${s}`)
+    if (Math.random() > 0.7) pattern[`${5 + Math.floor(Math.random() * 3)}-${s}`] = true
   }
   return pattern
 }
@@ -204,19 +203,7 @@ function stopPlayback() {
 }
 
 onMounted(() => {
-  if (typeof window === 'undefined') return
-  
-  gsap.from([devSide.value, studioSide.value], {
-    opacity: 0,
-    y: 100,
-    duration: 1.5,
-    stagger: 0.3,
-    ease: 'expo.out',
-    scrollTrigger: {
-      trigger: '#dual-identity',
-      start: 'top 80%',
-    }
-  })
+  // no GSAP needed — CSS handles entrance
 })
 
 onUnmounted(() => {
@@ -225,8 +212,14 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.grid-cols-16 {
-  grid-template-columns: repeat(16, minmax(0, 1fr));
+
+.dual-panel {
+  animation: panelRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panelRise {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .btn-pulse {
