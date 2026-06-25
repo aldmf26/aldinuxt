@@ -6,14 +6,6 @@
     </div>
 
     <div class="max-w-[1400px] mx-auto px-6 md:px-16">
-      <!-- Pull Quote -->
-      <div ref="quoteRef" class="max-w-4xl mx-auto text-center mb-32 opacity-0">
-        <span class="section-label block mb-12">Vision</span>
-        <blockquote class="font-display italic text-3xl md:text-5xl lg:text-7xl text-text-primary leading-[1.1] tracking-tight">
-          "From a POS system running two restaurants in Banjarmasin, to a language app preserving Dayak vocabulary — the work is always about the constraint, not the stack."
-        </blockquote>
-      </div>
-
       <!-- Stats / Years -->
       <div ref="statsRef" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] max-w-5xl mx-auto opacity-0 border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl">
         <div class="bg-[var(--bg-surface)] p-12 md:p-20 flex flex-col items-center text-center group">
@@ -50,20 +42,10 @@
 <script setup>
 import { gsap } from 'gsap'
 
-const quoteRef = ref(null)
 const statsRef = ref(null)
 
 onMounted(() => {
   if (typeof window === 'undefined') return
-
-  // Quote reveal
-  gsap.to(quoteRef.value, {
-    opacity: 1,
-    y: 0,
-    duration: 1.2,
-    ease: 'power4.out',
-    scrollTrigger: { trigger: quoteRef.value, start: 'top 85%' },
-  })
 
   // Stats
   gsap.to(statsRef.value, {
