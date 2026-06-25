@@ -13,7 +13,7 @@
           Portfolio
         </h2>
         <p class="text-text-muted font-body text-base md:text-xl max-w-2xl leading-relaxed">
-          Real projects. Real clients. Real problems solved.
+          Eight projects. Each one built around a real constraint.
         </p>
       </div>
 

@@ -32,12 +32,13 @@
 
       <!-- Name reveal -->
       <div class="overflow-hidden">
-        <h1
+        <p
           ref="nameRef"
+          aria-label="Aldi Fahrizaldi"
           class="font-display text-6xl md:text-8xl italic text-lime opacity-0 tracking-tight"
         >
           ALDI
-        </h1>
+        </p>
       </div>
     </div>
 

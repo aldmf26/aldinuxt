@@ -2,7 +2,7 @@
   <section id="dual-identity" class="relative py-32 md:py-56 overflow-hidden bg-[var(--bg-primary)]">
     <!-- Section Label -->
     <div class="absolute top-10 left-1/2 -translate-x-1/2 z-20">
-       <span class="section-label opacity-40">WHAT I DO</span>
+       <span class="section-label opacity-40">THE SETUP</span>
     </div>
 
     <div class="max-w-[1700px] mx-auto px-6 md:px-12 relative z-10">
@@ -24,20 +24,20 @@
             <!-- Metrics Grid -->
             <div class="grid grid-cols-2 rounded-2xl overflow-hidden font-mono border border-[var(--border-strong)] divide-x divide-y divide-[var(--border-strong)]">
               <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
-                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">5+</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Years Building</span>
+                <span class="text-[var(--accent)] text-4xl md:text-5xl font-black tabular-nums">2020</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Since</span>
               </div>
               <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
-                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">20+</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Projects Shipped</span>
+                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">8</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Shipped Publicly</span>
               </div>
               <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
-                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">12+</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Stack Mastered</span>
+                <span class="text-[var(--accent)] text-3xl md:text-4xl font-black">Laravel</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">to FL Studio</span>
               </div>
               <div class="bg-[var(--bg-primary)] p-8 flex flex-col items-center text-center group">
-                <span class="text-[var(--accent)] text-5xl md:text-6xl font-black tabular-nums">100%</span>
-                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Client Sat.</span>
+                <span class="text-[var(--accent)] text-3xl md:text-4xl font-black">Clients</span>
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-3">Come Back</span>
               </div>
             </div>
 

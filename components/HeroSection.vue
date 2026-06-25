@@ -14,12 +14,14 @@
             Banjarmasin&nbsp;&nbsp;/&nbsp;&nbsp;Web Dev&nbsp;&nbsp;/&nbsp;&nbsp;Music Producer
           </div>
 
-          <h1 class="font-display text-[clamp(54px,9vw,150px)] font-black leading-[0.88] tracking-[-0.07em] text-[var(--text-primary)]">
+          <h1 class="sr-only">Aldi Fahrizaldi — Full-Stack Developer & Beat Producer</h1>
+
+          <p class="font-display text-[clamp(54px,9vw,150px)] font-black leading-[0.88] tracking-[-0.07em] text-[var(--text-primary)]" aria-hidden="true">
             <span class="hero-word block">I build</span>
             <span class="hero-word block text-[var(--accent)]">websites</span>
             <span class="hero-word block text-[var(--text-primary)]/90">and produce</span>
             <span class="hero-word block font-display italic text-[var(--accent-dim)]">beats.</span>
-          </h1>
+          </p>
         </div>
 
         <div class="hero-copy space-y-7 lg:pb-4">

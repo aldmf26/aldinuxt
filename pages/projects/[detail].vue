@@ -185,7 +185,7 @@ const recommendedProjects = computed(() => {
     .slice(0, 2)
 })
 
-useHead({ title: `${project.value.title} - Project Detail` })
+useHead({ title: `${project.value.title} — Project Detail | Aldi Fahrizaldi` })
 
 onMounted(() => {
   window.addEventListener('keydown', (e) => {

@@ -10,7 +10,7 @@
       <div ref="quoteRef" class="max-w-4xl mx-auto text-center mb-32 opacity-0">
         <span class="section-label block mb-12">Vision</span>
         <blockquote class="font-display italic text-3xl md:text-5xl lg:text-7xl text-text-primary leading-[1.1] tracking-tight">
-          "I don't just build websites. I build things that work — for the people who use them and the businesses behind them."
+          "From a POS system running two restaurants in Banjarmasin, to a language app preserving Dayak vocabulary — the work is always about the constraint, not the stack."
         </blockquote>
       </div>
 

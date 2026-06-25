@@ -122,10 +122,7 @@
 import { projects } from '~/data/project'
 import { projectsData } from '~/data/project-detail'
 
-// Disable SSR for this page to avoid hydration mismatches with GSAP/Animations
-definePageMeta({
-  ssr: false
-})
+
 
 const route = useRoute()
 
@@ -158,7 +155,10 @@ const recommendedProjects = computed(() => {
 })
 
 useHead({
-  title: project.value ? `${project.value.title} — Case Study` : 'Project Not Found',
+  title: project.value ? `${project.value.title} — Case Study | Aldi Fahrizaldi` : 'Project Not Found',
+  meta: [
+    { name: 'description', content: project.value?.subtitle || '' },
+  ],
 })
 </script>
 
