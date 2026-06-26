@@ -68,24 +68,7 @@
         </button>
       </div>
 
-      <!-- Real-Time Music Visualizer -->
-      <div 
-        ref="pianoRollRef" 
-        class="mb-20 scroll-mt-32 visualizer-wrapper rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--bg-surface)]/50 p-4"
-        :class="{ 'is-floating': isVisualizerFloating && activeItem }"
-      >
-        <div class="flex justify-between items-center mb-2 px-2">
-          <span class="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-text-muted uppercase truncate pr-4">
-            {{ activeItem ? `${activeItem.platform === 'local' ? '▶ PLAYING' : '▶ BPM SYNC'} — ${activeItem.judul || 'Track'}` : '● LAB VISUALIZER — SELECT A BEAT' }}
-          </span>
-          <span class="font-mono text-[9px] text-lime opacity-60 whitespace-nowrap">
-            {{ activeItem?.platform === 'local' ? 'REAL SPECTRUM' : 'FL STUDIO SYNC' }}
-          </span>
-        </div>
-        <div class="relative rounded-xl overflow-hidden bg-black/40">
-          <canvas ref="pianoRoll" class="w-full block" height="130"></canvas>
-        </div>
-      </div>
+      
 
       <!-- Items Grid (REBUILT) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -103,8 +86,8 @@
           <div class="beat-bars" :class="{ active: activeItem?.src === item.src }">
             <div 
               v-for="i in 24" :key="i"
+              :ref="(el) => { if (el) setBarRef(el, item.src, i - 1) }"
               class="beat-bar"
-              :style="{ animationDelay: `${i * 0.04}s`, animationDuration: `${0.4 + (i % 5) * 0.08}s` }"
             />
           </div>
 
@@ -163,7 +146,7 @@
     <transition name="slide-up-left">
       <div 
         v-if="activeItem" 
-          class="fixed bottom-6 left-6 z-[99999] bg-[var(--bg-surface)]/95 backdrop-blur-md border border-[var(--border)] rounded-2xl py-3 px-4 flex items-center justify-between gap-3 shadow-[0_12px_40px_rgba(0,0,0,0.6)] w-[280px] hover:scale-[1.02] transition-all duration-300"
+          class="fixed bottom-24 right-6 z-[99999] bg-[var(--bg-surface)]/95 backdrop-blur-md border border-[var(--border)] rounded-2xl py-3 px-4 flex items-center justify-between gap-3 shadow-[0_12px_40px_rgba(0,0,0,0.6)] w-[280px] hover:scale-[1.02] transition-all duration-300"
       >
         <!-- Mini controls & Info -->
         <div class="flex items-center gap-3 min-w-0 flex-1">
@@ -175,6 +158,13 @@
           </button>
           
           <div class="min-w-0 flex-1">
+            <div v-if="isAudioPlaying" class="mini-bars">
+              <div 
+                v-for="i in 10" :key="i"
+                :ref="(el) => { if (el) miniBarRefs[i - 1] = el }"
+                class="mini-bar"
+              />
+            </div>
             <h5 class="text-text-primary text-xs font-bold truncate">
               {{ activeItem.judul }}
             </h5>
@@ -185,33 +175,22 @@
         </div>
 
         <!-- Close Controls -->
-        <div class="flex items-center gap-2">
-          <a 
-            v-if="activeItem.platform !== 'local'"
-            :href="`https://www.youtube.com/watch?v=${activeItem.src.split('?')[0]}`"
-            target="_blank"
-            class="w-6 h-6 rounded-full border border-[var(--border)] hover:border-lime text-text-muted hover:text-lime flex items-center justify-center text-[10px] transition-colors"
-            title="Watch Full Video"
-          >
-            ↗
-          </a>
-          <a 
-            v-else-if="activeItem.ytLink"
-            :href="activeItem.ytLink"
-            target="_blank"
-            class="w-6 h-6 rounded-full border border-[var(--border)] hover:border-lime text-text-muted hover:text-lime flex items-center justify-center text-[10px] transition-colors"
-            title="Watch Full Video"
-          >
-            ↗
-          </a>
-          <button 
-            @click="toggleActive(activeItem)"
-            class="w-6 h-6 rounded-full border border-[var(--border)] hover:border-red-400 text-text-muted hover:text-red-400 flex items-center justify-center text-[10px] font-mono transition-colors"
-            title="Close Player"
-          >
-            ✕
-          </button>
-        </div>
+        <a 
+          v-if="activeItem.ytLink"
+          :href="activeItem.ytLink"
+          target="_blank"
+          class="w-6 h-6 rounded-full border border-[var(--border)] hover:border-lime text-text-muted hover:text-lime flex items-center justify-center text-[10px] transition-colors flex-shrink-0"
+          title="Watch on YouTube"
+        >
+          ↗
+        </a>
+        <button 
+          @click="toggleActive(activeItem)"
+          class="w-6 h-6 rounded-full border border-[var(--border)] hover:border-red-400 text-text-muted hover:text-red-400 flex items-center justify-center text-[10px] font-mono transition-colors flex-shrink-0"
+          title="Close Player"
+        >
+          ✕
+        </button>
       </div>
     </transition>
   </section>
@@ -221,8 +200,6 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const pianoRoll = ref(null)
-const pianoRollRef = ref(null)
 const activeItem = ref(null)
 const activeTab = ref('ALL')
 const bgBeats = ref(null)
@@ -234,33 +211,17 @@ const audioEl = ref(null)
 let audioCtx = null
 let analyser = null
 let sourceNode = null
-let animFrame = null
 const uploadedBeats = ref([])
 
 const currentTime = ref(0)
 const duration = ref(0)
 const isAudioPlaying = ref(false)
-const isVisualizerFloating = ref(false)
 
-const tabs = ['ALL', 'Trap Beat', 'Free FLP', 'EDM', 'SoundCloud']
+const barRefsMap = {}
+const miniBarRefs = []
+let animFrame = null
 
-const musicData = [
-  { judul: 'Hanoman',           src: 'WivTmpt7w5c', type: 'Trap Beat', bpm: 95,  platform: 'youtube' },
-  { judul: 'Snakey',            src: '51X_4JpYxJ4', type: 'Free FLP',  bpm: 108, platform: 'youtube' },
-  { judul: 'Flamingo',          src: 'UaNnC24Pnrg', type: 'Free FLP',  bpm: 100, platform: 'youtube' },
-  { judul: 'GTA',               src: 'QDRnVt_5vRc', type: 'Free FLP',  bpm: 194, platform: 'youtube' },
-  { judul: 'Ginto',             src: 'e4k6F9XnN_4', type: 'Free FLP',  bpm: 110, platform: 'youtube' },
-  { judul: 'Boom',              src: 'IC29VAokmN8', type: 'Free FLP',  bpm: 90,  platform: 'youtube' },
-  { judul: 'Chronela',          src: 'kRE6lMO8fvE', type: 'Free FLP',  bpm: 198, platform: 'youtube' },
-  { judul: 'Bap Bap',           src: '8wFIg7C2slU', type: 'Free FLP',  bpm: 101, platform: 'youtube' },
-  { judul: 'Dendang',           src: 'IuPr2iU23h0', type: 'Free FLP',  bpm: 90,  platform: 'youtube' },
-  { judul: 'Kurma',             src: 'kuWnALFzasE', type: 'Free FLP',  bpm: 160, platform: 'youtube' },
-  { judul: 'Beatbox v2',        src: 'VAf120fBT9o', type: 'Free FLP',  bpm: 190, platform: 'youtube' },
-  { judul: 'Barkan',            src: 'tqWjv8MMQ5U', type: 'Free FLP',  bpm: 170, platform: 'youtube' },
-  { judul: 'Habits',            src: 'mtSq-fF_ZDI', type: 'Free FLP',  bpm: 170, platform: 'youtube' },
-  { judul: 'SMASH',             src: 'ACMkBeKlqJ8', type: 'EDM',       bpm: 150, platform: 'youtube' },
-  { judul: 'ZAT Selatan',       src: 'Qb5_jPIvbnk', type: 'EDM',       bpm: 150, platform: 'youtube' },
-]
+const tabs = ['ALL', 'Trap Beat', 'Free FLP', 'EDM']
 
 const fetchUploadedBeats = async () => {
   try {
@@ -274,12 +235,12 @@ const fetchUploadedBeats = async () => {
 }
 
 const allBeats = computed(() => {
-  return [...uploadedBeats.value, ...musicData]
+  return uploadedBeats.value
 })
 
 const filteredItems = computed(() => {
   if (activeTab.value === 'ALL') return allBeats.value
-  return allBeats.value.filter(i => i.type === activeTab.value || (activeTab.value === 'SoundCloud' && i.platform === 'soundcloud'))
+  return allBeats.value.filter(i => i.type === activeTab.value)
 })
 
 const displayedItems = computed(() => {
@@ -319,21 +280,25 @@ function togglePlayPause() {
     if (audioEl.value.paused) {
       audioEl.value.play().catch(err => console.log(err))
       isAudioPlaying.value = true
+      startVisualizer()
     } else {
       audioEl.value.pause()
       isAudioPlaying.value = false
+      stopVisualizer()
     }
   }
 }
 
 function toggleActive(item) {
   if (activeItem.value?.src === item.src) {
+    stopVisualizer()
     activeItem.value = null
     isAudioPlaying.value = false
     if (audioEl.value) {
       audioEl.value.pause()
     }
   } else {
+    stopVisualizer()
     activeItem.value = item
     currentTime.value = 0
     duration.value = 30
@@ -346,6 +311,7 @@ function toggleActive(item) {
           audioEl.value.play()
             .then(() => {
               isAudioPlaying.value = true
+              startVisualizer()
             })
             .catch(e => {
               console.log('Audio playback block:', e)
@@ -372,6 +338,68 @@ function generateWavePath(seed) {
   return d
 }
 
+function setBarRef(el, src, index) {
+  if (!barRefsMap[src]) barRefsMap[src] = []
+  barRefsMap[src][index] = el
+}
+
+function startVisualizer() {
+  stopVisualizer()
+  const update = () => {
+    if (!analyser || !activeItem.value) {
+      animFrame = requestAnimationFrame(update)
+      return
+    }
+    const bufferLength = analyser.frequencyBinCount
+    const dataArray = new Uint8Array(bufferLength)
+    analyser.getByteFrequencyData(dataArray)
+
+    const bars = barRefsMap[activeItem.value.src]
+    if (bars) {
+      const step = bufferLength / bars.length
+      for (let i = 0; i < bars.length; i++) {
+        let val = 0
+        for (let j = 0; j < step; j++) {
+          val += dataArray[Math.floor(i * step + j)]
+        }
+        val = val / step / 255
+        if (bars[i]) bars[i].style.height = `${Math.max(8, val * 90)}%`
+      }
+    }
+
+    const mStep = bufferLength / miniBarRefs.length
+    for (let i = 0; i < miniBarRefs.length; i++) {
+      let val = 0
+      for (let j = 0; j < mStep; j++) {
+        val += dataArray[Math.floor(i * mStep + j)]
+      }
+      val = val / mStep / 255
+      if (miniBarRefs[i]) miniBarRefs[i].style.height = `${Math.max(10, val * 100)}%`
+    }
+
+    animFrame = requestAnimationFrame(update)
+  }
+  animFrame = requestAnimationFrame(update)
+}
+
+function stopVisualizer() {
+  if (animFrame !== null) {
+    cancelAnimationFrame(animFrame)
+    animFrame = null
+  }
+  for (const src in barRefsMap) {
+    const bars = barRefsMap[src]
+    if (bars) {
+      for (let i = 0; i < bars.length; i++) {
+        if (bars[i]) bars[i].style.height = '20%'
+      }
+    }
+  }
+  for (let i = 0; i < miniBarRefs.length; i++) {
+    if (miniBarRefs[i]) miniBarRefs[i].style.height = '20%'
+  }
+}
+
 const accentColor = ref('#C8F580')
 const glowColor = ref('rgba(200, 245, 128, 0.2)')
 
@@ -394,103 +422,11 @@ function updateColors() {
   }
 }
 
-function drawVisualizer() {
-  const canvas = pianoRoll.value
-  if (!canvas) return
-  canvas.width = canvas.offsetWidth || 800
-  const ctx = canvas.getContext('2d')
-  const W = canvas.width
-  const H = canvas.height
-  
-  const style = getComputedStyle(document.documentElement)
-  const accent = accentColor.value
-  const bgSurface = style.getPropertyValue('--bg-surface').trim() || '#1A1A1A'
-  
-  ctx.fillStyle = bgSurface
-  ctx.fillRect(0, 0, W, H)
-
-  const barsCount = 64
-  const barWidth = W / barsCount
-  const time = performance.now() * 0.001
-  const active = activeItem.value
-  const bpm = active?.bpm || 120
-
-  // Draw technological background grid
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)'
-  ctx.lineWidth = 1
-  for (let x = 0; x < W; x += 40) {
-    ctx.beginPath()
-    ctx.moveTo(x, 0)
-    ctx.lineTo(x, H)
-    ctx.stroke()
-  }
-  for (let y = 0; y < H; y += 20) {
-    ctx.beginPath()
-    ctx.moveTo(0, y)
-    ctx.lineTo(W, y)
-    ctx.stroke()
-  }
-
-  let dataArray = new Uint8Array(0)
-  if (active && active.platform === 'local' && analyser) {
-    const bufferLength = analyser.frequencyBinCount
-    dataArray = new Uint8Array(bufferLength)
-    analyser.getByteFrequencyData(dataArray)
-  }
-
-  const pulseFactor = Math.abs(Math.sin(time * Math.PI * (bpm / 60)))
-  const isPlayingLocal = active && active.platform === 'local' && dataArray.length > 0
-
-  for (let i = 0; i < barsCount; i++) {
-    let rawHeight = 0
-
-    if (isPlayingLocal) {
-      const dataIndex = Math.floor((i / barsCount) * dataArray.length)
-      rawHeight = (dataArray[dataIndex] / 255) * H * 0.95
-    } else if (active) {
-      const waveFreq = Math.sin(time * 5 + i * 0.25) * 0.25 + 0.35
-      const beatImpact = Math.pow(pulseFactor, 4) * 0.5 + 0.1
-      rawHeight = (waveFreq + beatImpact) * H * 0.65
-    } else {
-      const waveFreq = Math.sin(time * 2.0 + i * 0.15) * 0.15 + 0.1
-      rawHeight = waveFreq * H * 0.4
-    }
-
-    if (active) {
-      rawHeight += Math.random() * 2
-    }
-
-    const height = Math.max(4, rawHeight)
-    const x = i * barWidth
-    const y = H - height
-
-    const grad = ctx.createLinearGradient(x, y, x, H)
-    grad.addColorStop(0, accent)
-    grad.addColorStop(1, parseColor(accent, 0.05))
-
-    ctx.fillStyle = grad
-    ctx.shadowColor = accent
-    ctx.shadowBlur = active ? 8 : 2
-
-    if (ctx.roundRect) {
-      ctx.beginPath()
-      ctx.roundRect(x + 2, y, barWidth - 4, height, 4)
-      ctx.fill()
-    } else {
-      ctx.fillRect(x + 2, y, barWidth - 4, height)
-    }
-    ctx.shadowBlur = 0
-  }
-
-  animFrame = requestAnimationFrame(drawVisualizer)
-}
-
 onMounted(() => {
   if (typeof window === 'undefined') return
   gsap.registerPlugin(ScrollTrigger)
   updateColors()
   fetchUploadedBeats()
-  drawVisualizer()
 
   const observer = new MutationObserver(updateColors)
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
@@ -502,40 +438,10 @@ onMounted(() => {
       scrollTrigger: { trigger: '#music', start: 'top bottom', end: 'bottom top', scrub: 1.2 }
     })
   }
-
-  // ScrollTrigger to detach visualizer and make it float in 3D perspective on the left
-  ScrollTrigger.create({
-    trigger: '#music',
-    start: 'bottom 10%',
-    onEnter: () => {
-      isVisualizerFloating.value = true
-    },
-    onLeaveBack: () => {
-      isVisualizerFloating.value = false
-    }
-  })
-
-  // Visualizer parallax (only active when not floating)
-  if (pianoRollRef.value) {
-    gsap.to(pianoRollRef.value, {
-      y: -30,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#music',
-        start: 'top bottom',
-        end: 'center top',
-        scrub: 1.8,
-      }
-    })
-  }
-
-  window.addEventListener('resize', () => {
-    if (pianoRoll.value) pianoRoll.value.width = pianoRoll.value.offsetWidth
-  })
 })
 
 onUnmounted(() => {
-  if (animFrame) cancelAnimationFrame(animFrame)
+  stopVisualizer()
   if (audioEl.value) {
     audioEl.value.pause()
   }
@@ -549,6 +455,23 @@ onUnmounted(() => {
 @keyframes waveMove {
   0% { transform: translateX(0); }
   100% { transform: translateX(-15px); }
+}
+
+/* Mini bars in floating player */
+.mini-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+  margin-bottom: 4px;
+}
+.mini-bar {
+  flex: 1;
+  background: var(--accent);
+  border-radius: 1px 1px 0 0;
+  height: 20%;
+  opacity: 0.8;
+  transition: height 0.05s ease;
 }
 
 /* Beat Cards Stylized (REBUILT) */
@@ -571,15 +494,7 @@ onUnmounted(() => {
 }
 .beat-bars.active .beat-bar {
   opacity: 1;
-  animation: barPulse var(--dur, 0.5s) ease-in-out infinite alternate;
 }
-@keyframes barPulse {
-  from { height: 15%; }
-  to { height: 85%; }
-}
-.beat-bars.active .beat-bar:nth-child(3n)   { --dur: 0.3s; }
-.beat-bars.active .beat-bar:nth-child(3n+1) { --dur: 0.5s; }
-.beat-bars.active .beat-bar:nth-child(3n+2) { --dur: 0.4s; }
 
 .play-toggle-btn {
   width: 32px;
@@ -622,52 +537,6 @@ onUnmounted(() => {
 }
 .yt-link:hover {
   opacity: 1;
-}
-
-/* Floating Visualizer Apple Style 3D on the Left */
-.visualizer-wrapper {
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.4s,
-              background 0.4s,
-              box-shadow 0.6s;
-}
-
-.visualizer-wrapper.is-floating {
-  position: fixed;
-  bottom: 84px;
-  left: 24px;
-  right: auto;
-  width: 280px;
-  z-index: 998;
-  margin-bottom: 0;
-  transform: perspective(1200px) rotateY(20deg) rotateX(12deg) scale(0.9);
-  transform-style: preserve-3d;
-  background: rgba(26, 26, 26, 0.9);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(200, 245, 128, 0.25);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8),
-              0 0 20px rgba(200, 245, 128, 0.05);
-}
-
-.visualizer-wrapper.is-floating::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, var(--accent), transparent 60%);
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.3;
-}
-
-@media (max-width: 768px) {
-  .visualizer-wrapper.is-floating {
-    width: calc(100% - 32px);
-    left: 16px;
-    bottom: 104px;
-    transform: perspective(1000px) rotateY(10deg) rotateX(8deg) scale(0.95);
-  }
 }
 
 /* Slide Up Left Animation */
