@@ -49,10 +49,19 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Hanya file audio (.mp3, .wav, .ogg, .m4a) yang diperbolehkan!' })
   }
 
-  // Ensure directories exist
+  // Vercel has a read-only filesystem — file uploads to disk are not supported.
+  // Only works in local dev (when VERCEL env var is not set).
+  if (process.env.VERCEL) {
+    throw createError({
+      statusCode: 503,
+      message: 'File upload tidak tersedia di Vercel (filesystem read-only). Gunakan lokal/VPS untuk fitur ini.'
+    })
+  }
+
+  // Ensure directories exist (local dev only)
   const uploadsDir = path.resolve(process.cwd(), 'public/uploads')
   const dataDir = path.resolve(process.cwd(), 'public/data')
-  
+
   if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true })
   }
@@ -88,7 +97,7 @@ export default defineEventHandler(async (event) => {
     uploadedAt: new Date().toISOString()
   }
 
-  beats.unshift(newBeat) // Add to start of list
+  beats.unshift(newBeat)
   fs.writeFileSync(metadataPath, JSON.stringify(beats, null, 2), 'utf-8')
 
   return {
@@ -97,3 +106,4 @@ export default defineEventHandler(async (event) => {
     track: newBeat
   }
 })
+
