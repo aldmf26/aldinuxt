@@ -23,7 +23,7 @@ logs
 .env.*
 !.env.example
 
-# Uploaded Beats Data
-public/uploads/
-public/data/uploaded_beats.json
+# Uploaded Beats Data (legacy — migrated to Supabase Storage)
+# public/uploads/
+# public/data/uploaded_beats.json
 

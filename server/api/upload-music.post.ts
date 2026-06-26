@@ -1,5 +1,4 @@
 import { readMultipartFormData, createError, defineEventHandler } from 'h3'
-import fs from 'node:fs'
 import path from 'node:path'
 
 export default defineEventHandler(async (event) => {
@@ -32,7 +31,6 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  // Validate password
   const envPassword = process.env.UPLOAD_PASSWORD || 'aldi123'
   if (password !== envPassword) {
     throw createError({ statusCode: 403, message: 'Password/PIN salah!' })
@@ -42,46 +40,43 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Judul dan File Audio wajib diisi!' })
   }
 
-  // Verify file type (audio files)
   const allowedExtensions = ['.mp3', '.wav', '.ogg', '.m4a']
   const fileExt = path.extname(audioFile.filename).toLowerCase()
   if (!allowedExtensions.includes(fileExt)) {
     throw createError({ statusCode: 400, message: 'Hanya file audio (.mp3, .wav, .ogg, .m4a) yang diperbolehkan!' })
   }
 
-  // Vercel has a read-only filesystem — file uploads to disk are not supported.
-  // Only works in local dev (when VERCEL env var is not set).
-  if (process.env.VERCEL) {
-    throw createError({
-      statusCode: 503,
-      message: 'File upload tidak tersedia di Vercel (filesystem read-only). Gunakan lokal/VPS untuk fitur ini.'
-    })
-  }
+  const supabase = getSupabase()
+  const bucket = getBucket()
 
-  // Ensure directories exist (local dev only)
-  const uploadsDir = path.resolve(process.cwd(), 'public/uploads')
-  const dataDir = path.resolve(process.cwd(), 'public/data')
-
-  if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true })
-  }
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true })
-  }
-
-  // Create unique filename
   const cleanFilename = `${Date.now()}_${audioFile.filename.replace(/[^a-zA-Z0-9.-]/g, '_')}`
-  const filePath = path.join(uploadsDir, cleanFilename)
+  const audioPath = `audio/${cleanFilename}`
 
-  // Write file
-  fs.writeFileSync(filePath, audioFile.data)
+  const { error: uploadError } = await supabase.storage
+    .from(bucket)
+    .upload(audioPath, audioFile.data, {
+      contentType: audioFile.type || 'audio/mpeg',
+      upsert: false
+    })
 
-  // Write metadata
-  const metadataPath = path.join(dataDir, 'uploaded_beats.json')
+  if (uploadError) {
+    throw createError({ statusCode: 500, message: 'Gagal upload audio: ' + uploadError.message })
+  }
+
+  const { data: publicUrlData } = supabase.storage
+    .from(bucket)
+    .getPublicUrl(audioPath)
+
+  // Read existing metadata
   let beats: any[] = []
-  if (fs.existsSync(metadataPath)) {
+  const { data: jsonData, error: jsonError } = await supabase.storage
+    .from(bucket)
+    .download('beats.json')
+
+  if (!jsonError && jsonData) {
     try {
-      beats = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'))
+      const text = await jsonData.text()
+      beats = JSON.parse(text)
     } catch (e) {
       beats = []
     }
@@ -91,14 +86,24 @@ export default defineEventHandler(async (event) => {
     judul,
     bpm,
     type,
-    src: `/uploads/${cleanFilename}`,
+    src: publicUrlData.publicUrl,
     platform: 'local',
     ytLink: ytLink || undefined,
     uploadedAt: new Date().toISOString()
   }
 
   beats.unshift(newBeat)
-  fs.writeFileSync(metadataPath, JSON.stringify(beats, null, 2), 'utf-8')
+
+  const { error: uploadJsonError } = await supabase.storage
+    .from(bucket)
+    .upload('beats.json', new Blob([JSON.stringify(beats, null, 2)], { type: 'application/json' }), {
+      contentType: 'application/json',
+      upsert: true
+    })
+
+  if (uploadJsonError) {
+    throw createError({ statusCode: 500, message: 'Gagal menyimpan metadata: ' + uploadJsonError.message })
+  }
 
   return {
     success: true,
@@ -106,4 +111,3 @@ export default defineEventHandler(async (event) => {
     track: newBeat
   }
 })
-

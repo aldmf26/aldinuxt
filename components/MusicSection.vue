@@ -263,7 +263,7 @@ const musicData = [
 
 const fetchUploadedBeats = async () => {
   try {
-    const res = await fetch('/data/uploaded_beats.json')
+    const res = await fetch('/api/beats')
     if (res.ok) {
       uploadedBeats.value = await res.json()
     }

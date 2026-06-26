@@ -39,6 +39,6 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
   },
 
-  compatibilityDate: '2024-01-01',
+  compatibilityDate: '2026-06-26',
   ssr: false
 })
