@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
-    '@vercel/analytics'
+    '@vercel/analytics/nuxt'
   ],
 
   plugins: [
