@@ -62,11 +62,11 @@ const waveformPath = ref(null)
 const counterRef = ref(null)
 const nameRef = ref(null)
 
-// Generate waveform path
+// Generate a deterministic waveform path (no Math.random — avoids SSR/client hydration mismatch)
 const generateWaveform = () => {
   let d = 'M 0 50'
   for (let i = 0; i <= 600; i += 3) {
-    const y = 50 + Math.sin(i * 0.05) * 20 + Math.sin(i * 0.02) * 15 + (Math.random() - 0.5) * 10
+    const y = 50 + Math.sin(i * 0.05) * 20 + Math.sin(i * 0.02) * 15 + Math.sin(i * 0.11) * 5
     d += ` L ${i} ${y}`
   }
   return d

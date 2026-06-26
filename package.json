@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxtjs/sitemap": "^8.2.1",
     "@vueuse/core": "^14.3.0",
     "@vueuse/motion": "^2.0.0-beta.29",
     "gsap": "^3.14.2",
