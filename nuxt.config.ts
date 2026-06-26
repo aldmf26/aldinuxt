@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
-    '@vercel/analytics/nuxt'
   ],
 
   plugins: [
@@ -32,6 +31,9 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css' },
+      ],
+      script: [
+        { src: '/_vercel/insights/script.js', defer: true },
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
