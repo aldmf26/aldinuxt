@@ -33,7 +33,9 @@
         <div 
           class="flex items-center gap-3 px-4 py-2 bg-[var(--bg-surface)] ring-1 ring-[var(--border)] rounded-lg hover:scale-110 transition-all duration-300 cursor-default group whitespace-nowrap"
         >
-          <div :class="['w-8 h-8 rounded-full flex items-center justify-center text-lg', skill.type === 'web' ? 'bg-accent/10 text-accent' : 'bg-highlight/10 text-highlight']">
+          <div :class="['w-8 h-8 rounded-full flex items-center justify-center text-lg', skill.type === 'web' ? 'text-accent' : '']"
+            :style="skill.type === 'web' ? { background: 'var(--accent)', opacity: 0.1 } : { background: 'var(--accent2)', opacity: 0.1 }"
+          >
             <i :class="skill.icon"></i>
           </div>
           <span class="text-sm font-black text-primary tracking-tight">{{ skill.name }}</span>
@@ -97,7 +99,4 @@ const getOrbitStyle = (index) => {
   }
 }
 
-.acorn {
-  font-family: 'Fredoka', sans-serif;
-}
 </style>
