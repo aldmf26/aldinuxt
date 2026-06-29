@@ -73,9 +73,14 @@
 
       <!-- Footer Bottom -->
       <div class="mt-32 pt-12 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-8">
-        <p class="font-mono text-[10px] text-text-primary/30 uppercase tracking-[0.2em]">
-          © 2025 Muhammad Fahrizaldi · Banjarmasin, Indonesia 🇮🇩
-        </p>
+        <div class="text-center md:text-left">
+          <p class="font-mono text-[10px] text-text-primary/30 uppercase tracking-[0.2em]">
+            © 2025 Muhammad Fahrizaldi · Banjarmasin, Indonesia
+          </p>
+          <p class="font-mono text-[8px] text-text-primary/20 uppercase tracking-[0.3em] mt-2">
+            Code &amp; Beats · One Human, Two Obsessions
+          </p>
+        </div>
         <button 
           @click="scrollToTop"
           class="font-mono text-[10px] text-lime uppercase tracking-[0.3em] hover:opacity-70 transition-opacity"

@@ -72,18 +72,21 @@
 
       <!-- Items Grid (REBUILT) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div
+       <div
           v-for="item in displayedItems"
           :key="item.src"
-           class="beat-card group relative rounded-[1.5rem] overflow-hidden border border-[var(--border)] transition-all duration-500 flex flex-col"
+           class="beat-card group relative rounded-[1.5rem] overflow-hidden border border-[var(--border)] transition-all duration-500 flex flex-col hover:-translate-y-1 hover:border-[var(--border-accent)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
            :class="{ 'ring-1 ring-lime/50': activeItem?.src === item.src }"
            :style="{ 
              background: 'var(--bg-surface)',
              boxShadow: activeItem?.src === item.src ? `0 0 30px ${glowColor}` : 'none'
            }"
         >
-          <!-- TOP: BPM Visualization -->
-          <div class="beat-bars" :class="{ active: activeItem?.src === item.src }">
+           <!-- Color bar top (matching ProjectCard) -->
+           <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); z-index: 10; opacity: 0.5; transition: opacity 0.3s;" class="group-hover:opacity-100"></div>
+
+           <!-- TOP: BPM Visualization -->
+           <div class="beat-bars" :class="{ active: activeItem?.src === item.src }">
             <div 
               v-for="i in 24" :key="i"
               :ref="(el) => { if (el) setBarRef(el, item.src, i - 1) }"

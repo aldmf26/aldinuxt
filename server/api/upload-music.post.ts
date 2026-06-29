@@ -33,17 +33,17 @@ export default defineEventHandler(async (event) => {
 
   const envPassword = process.env.UPLOAD_PASSWORD || 'aldi123'
   if (password !== envPassword) {
-    throw createError({ statusCode: 403, message: 'Password/PIN salah!' })
+    throw createError({ statusCode: 403, message: 'Nope. Wrong password.' })
   }
 
   if (!judul || !audioFile || !audioFile.filename) {
-    throw createError({ statusCode: 400, message: 'Judul dan File Audio wajib diisi!' })
+    throw createError({ statusCode: 400, message: 'Title and audio file are required.' })
   }
 
   const allowedExtensions = ['.mp3', '.wav', '.ogg', '.m4a']
   const fileExt = path.extname(audioFile.filename).toLowerCase()
   if (!allowedExtensions.includes(fileExt)) {
-    throw createError({ statusCode: 400, message: 'Hanya file audio (.mp3, .wav, .ogg, .m4a) yang diperbolehkan!' })
+    throw createError({ statusCode: 400, message: 'Audio files only (.mp3, .wav, .ogg, .m4a).' })
   }
 
   const supabase = getSupabase()
@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
     })
 
   if (uploadError) {
-    throw createError({ statusCode: 500, message: 'Gagal upload audio: ' + uploadError.message })
+    throw createError({ statusCode: 500, message: 'Audio upload flopped: ' + uploadError.message })
   }
 
   const { data: publicUrlData } = supabase.storage
@@ -102,12 +102,12 @@ export default defineEventHandler(async (event) => {
     })
 
   if (uploadJsonError) {
-    throw createError({ statusCode: 500, message: 'Gagal menyimpan metadata: ' + uploadJsonError.message })
+    throw createError({ statusCode: 500, message: 'Could not save metadata: ' + uploadJsonError.message })
   }
 
   return {
     success: true,
-    message: 'Musik berhasil diunggah!',
+    message: 'Beat uploaded successfully!',
     track: newBeat
   }
 })

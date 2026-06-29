@@ -11,7 +11,7 @@
       <div class="grid items-end gap-8 lg:grid-cols-[1.08fr_.92fr]">
         <div class="space-y-7">
           <div class="hero-kicker font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-primary)]/45">
-            Banjarmasin&nbsp;&nbsp;/&nbsp;&nbsp;Web Dev&nbsp;&nbsp;/&nbsp;&nbsp;Music Producer
+            Banjarmasin&nbsp;&nbsp;/&nbsp;&nbsp;Code &amp;&nbsp;Beats&nbsp;&nbsp;/&nbsp;&nbsp;Est.&nbsp;2020
           </div>
 
           <h1 class="sr-only">Aldi Fahrizaldi — Full-Stack Developer & Beat Producer</h1>
@@ -26,7 +26,7 @@
 
         <div class="hero-copy space-y-7 lg:pb-4">
           <p class="max-w-xl text-lg leading-relaxed text-[var(--text-primary)]/80 sm:text-xl">
-            Bikin website yang beneran jalan, dan beats yang beneran didengar. Dua hal berbeda, satu orang.
+            Websites that actually work. Beats people actually press play on. Two crafts, same weirdo.
           </p>
 
           <div class="flex flex-wrap gap-4">

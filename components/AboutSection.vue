@@ -6,6 +6,18 @@
     </div>
 
     <div class="max-w-[1400px] mx-auto px-6 md:px-16">
+      <!-- Unifying Statement -->
+      <div class="text-center mb-20 max-w-3xl mx-auto">
+        <span class="section-label block mb-6">ONE PRACTICE</span>
+        <p class="font-display italic text-3xl md:text-5xl text-text-primary leading-tight">
+          Composing software. <br class="md:hidden"/>
+          <span class="text-text-muted">Composing sound.</span>
+        </p>
+        <p class="font-mono text-xs text-text-muted/60 uppercase tracking-[0.3em] mt-6">
+           Five years in. Two studios. One caffeine source.
+        </p>
+      </div>
+
       <!-- Stats / Years -->
       <div ref="statsRef" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] max-w-5xl mx-auto opacity-0 border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl">
         <div class="bg-[var(--bg-surface)] p-12 md:p-20 flex flex-col items-center text-center group">

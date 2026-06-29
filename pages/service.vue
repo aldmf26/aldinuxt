@@ -60,7 +60,7 @@
         <h2 class="font-display italic text-6xl md:text-8xl mb-12">Ready to start?</h2>
         <div class="flex flex-col items-center gap-8">
           <a 
-            href="https://wa.me/6289541311053?text=Halo+Aldi,+saya+mau+diskusi+project+web" 
+            href="https://wa.me/6289541311053?text=Hey+Aldi,+I+got+a+project+idea" 
             class="px-12 py-6 bg-dark text-lime rounded-full font-mono text-sm uppercase tracking-widest hover:scale-105 transition-transform"
           >
             Chat on WhatsApp →

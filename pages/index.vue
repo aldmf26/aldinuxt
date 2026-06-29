@@ -18,7 +18,9 @@
     </section>
     <div class="section-divider"></div>
     <WorksGrid />
-    <div class="section-divider"></div>
+    <div class="section-divider relative flex items-center justify-center my-0 h-12">
+      <span class="section-divider-label">◈ &nbsp; studio switch &nbsp; ◈</span>
+    </div>
     <MusicSection />
     <div class="section-divider"></div>
     <AboutSection />
@@ -71,5 +73,23 @@ useHead({
   opacity: 0;
   margin: 0;
   transform-origin: center;
+}
+
+.section-divider-label {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  padding: 0 16px;
+  white-space: nowrap;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.section-divider:not(:has(.section-divider-label)) .section-divider-label {
+  display: none;
 }
 </style>

@@ -12,9 +12,12 @@
         <span class="grid h-9 w-9 place-items-center rounded-full bg-[var(--accent)]/20 text-sm font-black text-[var(--accent)]">
           A
         </span>
-        <span class="font-display text-2xl font-black italic tracking-[-0.04em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
-          AldiMF
-        </span>
+        <div>
+          <span class="font-display text-2xl font-black italic tracking-[-0.04em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
+            AldiMF
+          </span>
+          <p class="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-muted)] -mt-0.5">code &amp; beats</p>
+        </div>
       </NuxtLink>
 
       <div class="hidden items-center gap-6 md:flex">
@@ -77,9 +80,9 @@ const isMenuOpen = ref(false)
 let lastScroll = 0
 
 const navLinks = [
-  { name: 'Web', path: '/#works' },
-  { name: 'Music', path: '/#music' },
-  { name: 'Projects', path: '/#works' },
+  { name: 'Work', path: '/#works' },
+  { name: 'Beats', path: '/#music' },
+  { name: 'About', path: '/#about' },
   { name: 'Contact', path: '/#contact' },
 ]
 

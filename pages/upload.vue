@@ -195,7 +195,7 @@ const verifyPIN = async () => {
       // Correct password! Since it bypassed the 403 password check.
       isAuthenticated.value = true
     } else {
-      errorMsg.value = err.data?.message || err.statusMessage || 'Password salah!'
+      errorMsg.value = err.data?.message || err.statusMessage || 'Wrong password, mate.'
     }
   }
 }
@@ -216,7 +216,7 @@ const handleFileChange = (e) => {
     URL.revokeObjectURL(audio.src)
     const duration = audio.duration
     if (duration > 31) { // 31 seconds tolerance
-      durationError.value = `File audio terlalu panjang (${Math.round(duration)} detik). Maksimal durasi adalah 30 detik.`
+      durationError.value = `Whoa, that's over 30 seconds (${Math.round(duration)}s). Trim it down.`
       audioFile.value = null
       if (fileInput.value) fileInput.value.value = ''
     } else {
@@ -225,7 +225,7 @@ const handleFileChange = (e) => {
   }
 
   audio.onerror = () => {
-    durationError.value = 'Gagal memuat metadata audio. Format file mungkin rusak.'
+    durationError.value = 'Can\'t read this file. Might be corrupted.'
     audioFile.value = null
     if (fileInput.value) fileInput.value.value = ''
   }
@@ -241,7 +241,7 @@ const formatSize = (bytes) => {
 
 const handleUpload = async () => {
   if (!audioFile.value) {
-    errorMsg.value = 'Silakan pilih file audio terlebih dahulu.'
+    errorMsg.value = 'Pick an audio file first.'
     return
   }
 
@@ -262,7 +262,7 @@ const handleUpload = async () => {
       method: 'POST',
       body: formData
     })
-    successMsg.value = 'Lagu berhasil diunggah!'
+    successMsg.value = 'Beat uploaded. Let it rip.'
     // Reset form
     judul.value = ''
     bpm.value = 130
@@ -270,7 +270,7 @@ const handleUpload = async () => {
     audioFile.value = null
     if (fileInput.value) fileInput.value.value = ''
   } catch (err) {
-    errorMsg.value = err.data?.message || err.statusMessage || 'Terjadi kesalahan saat mengunggah file.'
+    errorMsg.value = err.data?.message || err.statusMessage || 'Upload failed. Try again or blame the wifi.'
   } finally {
     isUploading.value = false
   }
