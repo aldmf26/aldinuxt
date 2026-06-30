@@ -1,43 +1,12 @@
 <template>
   <section id="dual-identity" class="relative py-32 md:py-56 overflow-hidden bg-[var(--bg-primary)]">
-    <!-- Section Label -->
-    <div class="absolute top-10 left-1/2 -translate-x-1/2 z-20">
-       <span class="section-label opacity-40">THE SETUP</span>
-    </div>
-
     <div class="max-w-[1700px] mx-auto px-6 md:px-12 relative z-10">
       <div class="rounded-[3rem] overflow-hidden border border-[var(--border-strong)] shadow-[0_0_100px_rgba(0,0,0,0.18)] bg-[var(--bg-surface)]">
-
-        <!-- Terminal Header — Unifying Statement -->
-        <div ref="terminalHeader" class="p-10 md:p-16 md:pb-14 border-b border-[var(--border)]">
-          <div class="flex items-center gap-3 mb-8">
-            <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
-            <span class="w-2 h-2 rounded-full bg-[var(--accent-dim)]"></span>
-            <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-muted)]">composer.sh</span>
-          </div>
-          <div class="font-mono text-sm md:text-base text-[var(--text-secondary)] leading-loose md:leading-loose space-y-2">
-            <p><span class="text-[var(--text-muted)]">$</span> <span class="text-[var(--text-primary)]">whoami</span></p>
-            <p class="pl-6 text-[var(--accent)]">&rarr; composer</p>
-            <p><span class="text-[var(--text-muted)]">$</span> <span class="text-[var(--text-primary)]">tools --list</span></p>
-            <p class="pl-6">
-              <span class="text-[var(--text-secondary)]">software: </span>
-              <span class="text-[var(--text-primary)]">Nuxt, Laravel, PostgreSQL, Docker, GSAP</span>
-            </p>
-            <p class="pl-6">
-              <span class="text-[var(--text-secondary)]">sonic: </span>
-              <span class="text-[var(--text-primary)]">FL Studio, Serum, FabFilter, Mixing</span>
-            </p>
-            <p class="flex items-center gap-1">
-              <span class="text-[var(--text-muted)]">$</span>
-              <span class="w-2 h-5 bg-[var(--accent)] animate-pulse"></span>
-            </p>
-          </div>
-        </div>
 
         <!-- Two-Column Spectrum (NO DIVIDER) -->
         <div class="grid grid-cols-1 md:grid-cols-2">
           <!-- DEV SIDE -->
-          <div ref="devSide" class="relative p-10 md:p-16 space-y-8 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-[var(--text-primary)]/[0.01]">
+          <div class="relative p-10 md:p-16 space-y-8 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-[var(--text-primary)]/[0.01]">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center border border-[var(--accent)]/20">
                 <span class="font-mono text-lg text-[var(--accent)]">&lt;/&gt;</span>
@@ -45,18 +14,6 @@
               <div>
                 <h3 class="font-display italic text-2xl text-[var(--text-primary)]">Software Engineer</h3>
                 <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-primary)]/30">Logical Architecture</p>
-              </div>
-            </div>
-
-            <!-- Metrics -->
-            <div class="grid grid-cols-2 gap-2">
-              <div class="bg-[var(--bg-primary)] p-6 rounded-xl text-center">
-                <span class="text-[var(--accent)] text-3xl font-black tabular-nums">2020</span>
-                <p class="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-2">Since</p>
-              </div>
-              <div class="bg-[var(--bg-primary)] p-6 rounded-xl text-center">
-                <span class="text-[var(--accent)] text-3xl font-black">8</span>
-                <p class="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--text-primary)]/40 mt-2">Projects</p>
               </div>
             </div>
 
@@ -69,7 +26,6 @@
 
           <!-- MUSIC SIDE (Same visual weight, no border divider) -->
           <div 
-            ref="studioSide" 
             class="relative p-10 md:p-16 space-y-8 bg-[var(--bg-surface)] transition-all duration-700 hover:bg-[var(--text-primary)]/[0.01]"
             :style="{ 
               boxShadow: isPlaying 
@@ -146,10 +102,6 @@
 
 <script setup>
 
-const devSide = ref(null)
-const studioSide = ref(null)
-const terminalHeader = ref(null)
-
 // Music Engine State
 const isPlaying = ref(false)
 const bpm = ref(140)
@@ -160,8 +112,8 @@ const activeCells = ref({})
 
 let stepInterval = null
 
-const devStack = ['Nuxt JS', 'Laravel', 'PostgreSQL', 'Docker', 'GSAP']
-const musicStack = ['FL Studio', 'Serum', 'FabFilter', 'Mixing', 'Arrangement']
+const devStack = ['Nuxt JS', 'Laravel', 'Tailwind', 'PostgreSQL', 'MySQL', 'Git', 'Docker']
+const musicStack = ['FL Studio', 'Serum', 'FabFilter', 'Mixing', 'Arrangement', 'Sound Design', 'Capcut']
 
 function generateRandomPattern() {
   const pattern = {}
@@ -197,10 +149,6 @@ function stopPlayback() {
   stepInterval = null
   currentStep.value = -1
 }
-
-onMounted(() => {
-  // no GSAP — CSS handles entrance
-})
 
 onUnmounted(() => {
   stopPlayback()
