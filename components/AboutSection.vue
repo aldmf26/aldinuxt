@@ -9,9 +9,9 @@
       <!-- Unifying Statement -->
       <div class="text-center mb-20 max-w-3xl mx-auto">
         <span class="section-label block mb-6">ONE PRACTICE</span>
-        <p class="font-display italic text-3xl md:text-5xl text-text-primary leading-tight">
+        <p class="font-display italic text-3xl md:text-5xl text-text-primary leading-tight" style="font-weight: 600;">
           Composing software. <br class="md:hidden"/>
-          <span class="text-text-muted">Composing sound.</span>
+          <span class="text-text-secondary">Composing sound.</span>
         </p>
         <p class="font-mono text-xs text-text-muted/60 uppercase tracking-[0.3em] mt-6">
            Five years in. Two studios. One caffeine source.

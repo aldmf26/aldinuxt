@@ -7,9 +7,7 @@
     <SkillsMarquee />
     <div class="section-divider"></div>
     <WorksGrid />
-    <div class="section-divider relative flex items-center justify-center my-0 h-12">
-      <span class="section-divider-label">◈ &nbsp; studio switch &nbsp; ◈</span>
-    </div>
+    <div class="section-divider relative my-0"></div>
     <MusicSection />
     <div class="section-divider"></div>
     <AboutSection />
@@ -41,9 +39,9 @@ onMounted(() => {
 })
 
 useHead({
-  title: 'Aldi Fahrizaldi — Full-Stack Developer & Beat Producer',
+  title: 'Aldi Fahrizaldi — Web Developer & Music Producer',
   meta: [
-    { name: 'description', content: 'Full-stack developer (Nuxt, Laravel, Tailwind) and beat producer (FL Studio) based in Banjarmasin, Indonesia. Building web apps and producing beats since 2020.' },
+    { name: 'description', content: 'Web developer (Nuxt, Laravel, Tailwind) and music producer (FL Studio) based in Banjarmasin, Indonesia. Building web apps and producing beats.' },
   ],
 })
 </script>

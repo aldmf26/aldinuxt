@@ -143,8 +143,9 @@
 
       <!-- Description -->
       <p :style="{
-        fontSize: 'clamp(15px, 1.5vw, 17px)',
-        color: 'var(--text-muted)',
+        fontSize: 'clamp(16px, 1.5vw, 18px)',
+        fontWeight: '500',
+        color: 'var(--text-secondary)',
         margin: '0 0 32px 0',
         lineHeight: '1.7',
         maxWidth: '500px'

@@ -12,12 +12,12 @@
         <span class="grid h-9 w-9 place-items-center rounded-full bg-[var(--accent)]/20 text-sm font-black text-[var(--accent)]">
           A
         </span>
-        <div>
-          <span class="font-display text-2xl font-black italic tracking-[-0.04em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
-            AldiMF
-          </span>
-          <p class="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-muted)] -mt-0.5">code &amp; beats</p>
-        </div>
+          <div>
+            <span class="font-display text-2xl font-black tracking-[-0.04em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
+              AldiMF
+            </span>
+            <p class="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-secondary)]/70 -mt-0.5">web dev &amp; music producer</p>
+          </div>
       </NuxtLink>
 
       <div class="hidden items-center gap-6 md:flex">

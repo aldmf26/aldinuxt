@@ -24,21 +24,21 @@
     </section>
 
     <!-- Meta Grid -->
-    <section class="py-20 border-y border-text-primary/10 px-6 md:px-16 lg:px-24 bg-text-primary/[0.02]">
-       <div class="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
-          <div class="space-y-4">
+    <section class="py-12 border-y border-text-primary/10 px-6 md:px-16 lg:px-24 bg-text-primary/[0.02]">
+       <div class="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="space-y-3">
              <span class="section-label text-text-primary/40">Role</span>
              <p class="font-mono text-sm uppercase tracking-widest">{{ project.role || 'Fullstack Dev' }}</p>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-3">
              <span class="section-label text-text-primary/40">Year</span>
              <p class="font-mono text-sm uppercase tracking-widest">{{ project.year || '2024' }}</p>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-3">
              <span class="section-label text-text-primary/40">Stack</span>
              <p class="font-mono text-sm uppercase tracking-widest">{{ project.techs.join(', ') }}</p>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-3">
              <span class="section-label text-text-primary/40">Impact</span>
              <p class="font-mono text-sm uppercase tracking-widest">{{ project.impact || 'Delivered' }}</p>
           </div>
@@ -46,36 +46,36 @@
     </section>
 
     <!-- Content Area -->
-    <section class="py-40 px-6 md:px-16 lg:px-24">
-       <div class="max-w-[1200px] mx-auto space-y-40">
+    <section class="py-20 px-6 md:px-16 lg:px-24">
+       <div class="max-w-[900px] mx-auto space-y-20">
           
           <!-- Challenge & Solution -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-            <div class="space-y-8 p-12 rounded-[2rem] bg-red-500/5 border border-red-500/10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-6 p-8 rounded-2xl bg-red-500/5 border border-red-500/10">
               <span class="font-mono text-xs text-red-500 uppercase tracking-widest">Challenge</span>
-              <h3 class="text-3xl font-display italic text-text-primary">The Problem</h3>
-              <p class="text-lg text-text-primary/70 leading-relaxed">{{ project.problem }}</p>
+              <h3 class="text-2xl font-display italic text-text-primary">The Problem</h3>
+              <p class="text-base text-text-primary/75 leading-[1.75]">{{ project.problem }}</p>
             </div>
-            <div class="space-y-8 p-12 rounded-[2rem] bg-lime/5 border border-lime/10">
+            <div class="space-y-6 p-8 rounded-2xl bg-lime/5 border border-lime/10">
               <span class="font-mono text-xs text-lime uppercase tracking-widest">Solution</span>
-              <h3 class="text-3xl font-display italic text-text-primary">The Outcome</h3>
-              <p class="text-lg text-text-primary/70 leading-relaxed">{{ project.solution }}</p>
+              <h3 class="text-2xl font-display italic text-text-primary">The Outcome</h3>
+              <p class="text-base text-text-primary/75 leading-[1.75]">{{ project.solution }}</p>
             </div>
           </div>
 
           <!-- Showcase Screenshots -->
-          <div v-for="(img, i) in project.screenshots" :key="i" class="space-y-12">
-            <div class="w-full rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-[var(--bg-surface)]">
+          <div v-for="(img, i) in project.screenshots" :key="i" class="space-y-6">
+            <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-white/5 bg-[var(--bg-surface)]">
               <img :src="img.image" :alt="img.title" class="w-full h-auto" />
             </div>
             <div class="max-w-2xl">
-              <h4 class="text-2xl font-bold text-text-primary mb-4">{{ img.title }}</h4>
-              <p class="text-lg text-text-muted leading-relaxed">{{ img.description }}</p>
+              <h4 class="text-xl font-bold text-text-primary mb-3">{{ img.title }}</h4>
+              <p class="text-base text-text-primary/70 leading-[1.75]">{{ img.description }}</p>
             </div>
           </div>
 
           <!-- Recommended Section -->
-          <section class="mt-40 pt-20 border-t border-white/5">
+          <section class="mt-20 pt-12 border-t border-white/5">
             <p class="section-label mb-12">More Projects</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

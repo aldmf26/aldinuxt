@@ -12,7 +12,7 @@
         <h2 class="font-display italic text-text-primary leading-none mb-8" style="font-size: clamp(64px, 8vw, 120px)">
           Portfolio
         </h2>
-        <p class="text-text-muted font-body text-base md:text-xl max-w-2xl leading-relaxed">
+        <p class="text-text-secondary font-body text-base md:text-xl max-w-2xl leading-relaxed" style="font-weight: 500;">
           Eight projects. Each one built around a real constraint.
         </p>
       </div>

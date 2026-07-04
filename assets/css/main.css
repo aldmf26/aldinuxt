@@ -4,14 +4,14 @@
    Web Dev + Music Producer identity
    ═══════════════════════════════════════════════════ */
 
-/* ── Fonts: Space Grotesk (body) + JetBrains Mono (code/labels) ── */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+/* ── Fonts: Urbanist (body/display) + JetBrains Mono (code/labels) ── */
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 /* ── Root Base (overridden by themes.css per data-theme) ── */
 :root {
   /* Font stacks */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-display: 'Urbanist', system-ui, sans-serif;
+  --font-body: 'Urbanist', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Fallback tokens (themes.css overrides these) */

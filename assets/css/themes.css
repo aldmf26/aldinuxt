@@ -25,7 +25,7 @@
 
   --text-primary: #EEEEF5;      /* warm-cool white, readable */
   --text-secondary: #9999B8;    /* muted, still legible */
-  --text-muted: #555568;        /* placeholder, disabled */
+  --text-muted: #7A7A8F;        /* placeholder, disabled — increased contrast */
 
   --border: rgba(255, 255, 255, 0.07);
   --border-accent: rgba(124, 111, 247, 0.3);
@@ -148,6 +148,7 @@ body {
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--accent);
+  font-weight: 600;
 }
 
 /* Ghost number utility */

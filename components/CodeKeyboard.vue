@@ -60,6 +60,9 @@
 </template>
 
 <script setup>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 const kbRef = ref(null)
 const hoveredKey = ref(null)
 const activeKeys = ref(['c', 'o', 'n', 's', 't'])
@@ -152,6 +155,7 @@ const spotlightStyle = computed(() => ({
 }))
 
 let intervalId
+let scatterCtx
 
 function onMove(event) {
   const rect = kbRef.value?.getBoundingClientRect()
@@ -160,7 +164,41 @@ function onMove(event) {
   mouse.y = ((event.clientY - rect.top) / rect.height) * 100
 }
 
+/**
+ * Compute per-element scatter offsets weighted by distance from container center.
+ * Called once on mount — values stay stable across re-renders for scrub reversibility.
+ */
+function computeScatterOffsets(elements, container) {
+  const cRect = container.getBoundingClientRect()
+  const cx = cRect.width / 2
+  const cy = cRect.height / 2
+  const maxDist = Math.sqrt(cx * cx + cy * cy)
+
+  return Array.from(elements).map((el) => {
+    const eRect = el.getBoundingClientRect()
+    const elCx = eRect.left - cRect.left + eRect.width / 2
+    const elCy = eRect.top - cRect.top + eRect.height / 2
+
+    const dx = elCx - cx
+    const dy = elCy - cy
+    const dist = Math.sqrt(dx * dx + dy * dy)
+    const norm = Math.min(dist / maxDist, 1) // 0 = center, 1 = corner
+
+    // Push away from center with added randomness
+    const angle = Math.atan2(dy, dx)
+    const spread = 150 + norm * 250
+    const randomAngle = angle + (Math.random() - 0.5) * 1.2
+
+    return {
+      x: Math.cos(randomAngle) * spread * (0.5 + norm),
+      y: Math.sin(randomAngle) * spread * (0.5 + norm) + 100,
+      rotation: (Math.random() - 0.5) * 50 * (0.5 + norm),
+    }
+  })
+}
+
 onMounted(() => {
+  // --- Existing: key highlight cycling ---
   const patterns = [
     ['c', 'o', 'n', 's', 't'],
     ['n', 'p', 'm', 'space', 'd', 'e', 'v'],
@@ -172,10 +210,60 @@ onMounted(() => {
     step = (step + 1) % patterns.length
     activeKeys.value = patterns[step]
   }, 620)
+
+  // --- Scatter/disperse on scroll ---
+  const shell = kbRef.value
+  if (!shell) return
+
+  const keycaps = shell.querySelectorAll('.keycap')
+  if (!keycaps.length) return
+
+  const offsets = computeScatterOffsets(keycaps, shell)
+
+  scatterCtx = gsap.context(() => {
+    const mm = gsap.matchMedia()
+
+    // Desktop: full scatter with transforms
+    mm.add('(min-width: 1024px)', () => {
+      keycaps.forEach((cap, i) => {
+        gsap.to(cap, {
+          x: offsets[i].x,
+          y: offsets[i].y,
+          rotation: offsets[i].rotation,
+          opacity: 0,
+          pointerEvents: 'none',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+          delay: i * 0.03, // stagger via per-tween delay (works with scrub)
+        })
+      })
+    })
+
+    // Reduced motion: opacity-only fade, no transforms
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.to(keycaps, {
+        opacity: 0,
+        pointerEvents: 'none',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      })
+    })
+  }, shell)
 })
 
 onUnmounted(() => {
   if (intervalId) window.clearInterval(intervalId)
+  if (scatterCtx) scatterCtx.revert()
 })
 </script>
 

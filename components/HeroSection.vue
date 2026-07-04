@@ -12,7 +12,7 @@
         Banjarmasin&nbsp;&nbsp;/&nbsp;&nbsp;Code &amp;&nbsp;Beats&nbsp;&nbsp;/&nbsp;&nbsp;Est.&nbsp;2020
       </div>
 
-      <h1 class="sr-only">Aldi Fahrizaldi — Full-Stack Developer & Beat Producer</h1>
+      <h1 class="sr-only">Aldi Fahrizaldi — Web Developer & Music Producer</h1>
 
       <div class="flex min-h-0 flex-col py-4 lg:flex-1 lg:justify-center lg:py-6">
         <div class="mx-auto grid w-full max-w-[1400px] items-center gap-4 lg:grid-cols-2 lg:gap-12">
@@ -31,9 +31,11 @@
       <div ref="headlineRef" class="mx-auto w-full max-w-[1400px] shrink-0 pb-8 lg:pb-10">
         <p class="hero-headline font-display text-[clamp(32px,7vw,110px)] font-black leading-[0.9] tracking-[-0.06em] text-[var(--text-primary)]" aria-hidden="true">
           <span class="hero-word block">I build</span>
-          <span class="hero-word block text-[var(--accent)]">websites</span>
-          <span class="hero-word block text-[var(--text-primary)]/90">and produce</span>
-          <span class="hero-word block italic text-[var(--accent-dim)]">beats.</span>
+          <span class="hero-word block">
+            <span class="text-[var(--accent)]">websites</span>
+            <span class="text-[var(--text-primary)]/70 mx-4 inline-block" style="font-size: 0.5em; vertical-align: middle;">&</span>
+            <span class="italic text-[var(--accent-dim)]">beats.</span>
+          </span>
         </p>
 
         <div class="hero-cta mt-4 flex flex-wrap items-center gap-3 sm:mt-6">
@@ -160,9 +162,7 @@ onMounted(() => {
 }
 
 .hero-word:nth-child(1) { animation-delay: 0.12s; }
-.hero-word:nth-child(2) { animation-delay: 0.22s; }
-.hero-word:nth-child(3) { animation-delay: 0.32s; }
-.hero-word:nth-child(4) { animation-delay: 0.42s; }
+.hero-word:nth-child(2) { animation-delay: 0.32s; }
 .hero-kicker { animation-delay: 0.05s; }
 .hero-cta { animation-delay: 0.6s; }
 

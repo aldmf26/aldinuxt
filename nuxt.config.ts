@@ -17,11 +17,11 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
-      title: 'Aldi Fahrizaldi - Web Developer x Music Producer',
+      title: 'Aldi Fahrizaldi - Web Developer & Music Producer',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Crafting digital code & sonic rhythms. Web Developer (Nuxt, Laravel, Tailwind) and Music Producer (FL Studio) based in Banjarmasin, Indonesia.' },
+        { name: 'description', content: 'Web developer (Nuxt, Laravel, Tailwind) and music producer (FL Studio) based in Banjarmasin, Indonesia. Building web apps and producing beats.' },
         { name: 'theme-color', content: '#080808' },
         { property: 'og:title', content: 'Aldi Fahrizaldi - Web Developer x Music Producer' },
         { property: 'og:description', content: 'Crafting digital code & sonic rhythms.' },

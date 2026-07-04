@@ -25,7 +25,7 @@
         <!-- Contact Details -->
         <div ref="detailsRef" class="space-y-16 pb-10">
            <div class="space-y-4">
-              <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Email</span>
+              <span class="font-mono text-[10px] text-text-secondary/70 uppercase tracking-[0.3em] block">Email</span>
               <a 
                 href="mailto:aldimf26@gmail.com" 
                 class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-[var(--border)] pb-2 inline-block"

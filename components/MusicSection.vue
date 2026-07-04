@@ -28,7 +28,7 @@
         <h2 class="font-display italic text-text-primary leading-none mb-6" style="font-size: clamp(48px, 7vw, 120px)">
           Beats &<br/>Productions
         </h2>
-        <p class="text-text-muted font-body text-base md:text-lg max-w-2xl mb-8 leading-relaxed">
+        <p class="text-text-secondary font-body text-base md:text-lg max-w-2xl mb-8 leading-relaxed" style="font-weight: 500;">
           Trap, EDM, and free FLP packs — all produced in FL Studio. 
           Available for licensing, content use, or just listening.
         </p>

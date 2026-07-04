@@ -62,6 +62,9 @@
 </template>
 
 <script setup>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 const pianoRef = ref(null)
 const hoveredKey = ref(null)
 const activeKeys = ref([0, 4, 7, 11])
@@ -95,6 +98,7 @@ const spotlightStyle = computed(() => ({
 }))
 
 let intervalId
+let scatterCtx
 
 function onMove(event) {
   const rect = pianoRef.value?.getBoundingClientRect()
@@ -103,7 +107,41 @@ function onMove(event) {
   mouse.y = ((event.clientY - rect.top) / rect.height) * 100
 }
 
+/**
+ * Compute per-element scatter offsets weighted by distance from container center.
+ * Called once on mount — values stay stable across re-renders for scrub reversibility.
+ */
+function computeScatterOffsets(elements, container, multiplier = 1) {
+  const cRect = container.getBoundingClientRect()
+  const cx = cRect.width / 2
+  const cy = cRect.height / 2
+  const maxDist = Math.sqrt(cx * cx + cy * cy)
+
+  return Array.from(elements).map((el) => {
+    const eRect = el.getBoundingClientRect()
+    const elCx = eRect.left - cRect.left + eRect.width / 2
+    const elCy = eRect.top - cRect.top + eRect.height / 2
+
+    const dx = elCx - cx
+    const dy = elCy - cy
+    const dist = Math.sqrt(dx * dx + dy * dy)
+    const norm = Math.min(dist / maxDist, 1) // 0 = center, 1 = corner
+
+    // Push away from center with added randomness
+    const angle = Math.atan2(dy, dx)
+    const spread = (150 + norm * 250) * multiplier
+    const randomAngle = angle + (Math.random() - 0.5) * 1.2
+
+    return {
+      x: Math.cos(randomAngle) * spread * (0.5 + norm),
+      y: Math.sin(randomAngle) * spread * (0.5 + norm) + 100 * multiplier,
+      rotation: (Math.random() - 0.5) * 50 * (0.5 + norm),
+    }
+  })
+}
+
 onMounted(() => {
+  // --- Existing: key highlight cycling ---
   const patterns = [
     { white: [0, 4, 7, 11], black: ['b2', 'b7'] },
     { white: [2, 5, 9, 13], black: ['b4', 'b8'] },
@@ -116,10 +154,82 @@ onMounted(() => {
     activeKeys.value = patterns[step].white
     activeBlackKeys.value = patterns[step].black
   }, 620)
+
+  // --- Scatter/disperse on scroll ---
+  const shell = pianoRef.value
+  if (!shell) return
+
+  const whites = shell.querySelectorAll('.white-key')
+  const blacks = shell.querySelectorAll('.black-key')
+  if (!whites.length && !blacks.length) return
+
+  const whiteOffsets = computeScatterOffsets(whites, shell)
+  // Black keys get 1.3x multiplier for extra depth (they sit on top)
+  const blackOffsets = computeScatterOffsets(blacks, shell, 1.3)
+
+  scatterCtx = gsap.context(() => {
+    const mm = gsap.matchMedia()
+
+    // Desktop: full scatter with transforms
+    mm.add('(min-width: 1024px)', () => {
+      whites.forEach((key, i) => {
+        gsap.to(key, {
+          x: whiteOffsets[i].x,
+          y: whiteOffsets[i].y,
+          rotation: whiteOffsets[i].rotation,
+          opacity: 0,
+          pointerEvents: 'none',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+          delay: i * 0.03,
+        })
+      })
+
+      blacks.forEach((key, i) => {
+        gsap.to(key, {
+          x: blackOffsets[i].x,
+          y: blackOffsets[i].y,
+          rotation: blackOffsets[i].rotation,
+          opacity: 0,
+          pointerEvents: 'none',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+          delay: i * 0.04, // slightly more stagger for blacks
+        })
+      })
+    })
+
+    // Reduced motion: opacity-only fade, no transforms
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      const allKeys = [...whites, ...blacks]
+      gsap.to(allKeys, {
+        opacity: 0,
+        pointerEvents: 'none',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      })
+    })
+  }, shell)
 })
 
 onUnmounted(() => {
   if (intervalId) window.clearInterval(intervalId)
+  if (scatterCtx) scatterCtx.revert()
 })
 </script>
 

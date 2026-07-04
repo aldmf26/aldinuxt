@@ -5,7 +5,7 @@
       <div class="flex animate-marquee-left whitespace-nowrap marquee-row-1">
         <span v-for="n in 6" :key="'r1-' + n" class="flex items-center">
           <span v-for="(item, i) in row1Items" :key="i" class="inline-flex items-center">
-            <span class="font-black uppercase tracking-tighter text-marquee text-text-primary">{{ item }}</span>
+            <span class="font-bold uppercase tracking-tighter text-marquee text-text-primary" style="font-weight: 800;">{{ item }}</span>
             <span class="mx-10 text-lime text-marquee">•</span>
           </span>
         </span>
