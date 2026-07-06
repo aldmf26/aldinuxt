@@ -8,9 +8,9 @@
     <div class="parallax-grid absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.015)_1px,transparent_1px)] bg-[size:56px_56px] opacity-40 will-change-transform"></div>
 
     <div class="relative z-10 flex min-h-screen flex-col px-4 py-6 sm:px-8 sm:py-10 lg:px-12">
-      <div class="hero-kicker shrink-0 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-primary)]/45">
+      <!-- <div class="hero-kicker shrink-0 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-primary)]/45">
         Banjarmasin&nbsp;&nbsp;/&nbsp;&nbsp;Code &amp;&nbsp;Beats&nbsp;&nbsp;/&nbsp;&nbsp;Est.&nbsp;2020
-      </div>
+      </div> -->
 
       <h1 class="sr-only">Aldi Fahrizaldi — Web Developer & Music Producer</h1>
 
