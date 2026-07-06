@@ -7,7 +7,7 @@
     <Nav />
 
     <!-- Main Content -->
-    <main>
+    <main class="pt-[72px] md:pt-20">
       <slot />
     </main>
   </div>

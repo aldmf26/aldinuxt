@@ -14,7 +14,7 @@
       :style="{
         position: 'relative',
         width: '100%',
-        paddingTop: isWide ? '0' : '65%', /* Taller for normal cards, 0 for wide to use flex */
+        paddingTop: isWide ? '0' : '45%', /* Taller for normal cards, 0 for wide to use flex */
         minHeight: isWide ? '450px' : 'auto',
         overflow: 'hidden',
         background: 'var(--bg-surface)',
@@ -228,7 +228,7 @@ const isWide = computed(() => {
 
 @media (max-width: 1023px) {
   .proj-visual-wrap {
-    padding-top: 65% !important;
+    padding-top: 45% !important;
     flex: none !important;
   }
 }
