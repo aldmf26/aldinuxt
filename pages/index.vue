@@ -3,8 +3,8 @@
     <HeroSection />
     <div class="section-divider"></div>
     <DualIdentity />
-    <div class="section-divider"></div>
-    <SkillsMarquee />
+    <!-- <div class="section-divider"></div>
+    <SkillsMarquee /> -->
     <div class="section-divider"></div>
     <WorksGrid />
     <div class="section-divider relative my-0"></div>

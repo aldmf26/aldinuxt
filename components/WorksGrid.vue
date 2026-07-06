@@ -8,7 +8,6 @@
     <div class="max-w-[1800px] mx-auto relative z-10">
       <!-- Section header -->
       <div ref="header" class="mb-24 px-4">
-        <span class="section-label block mb-6">Selected Works</span>
         <h2 class="font-display italic text-text-primary leading-none mb-8" style="font-size: clamp(64px, 8vw, 120px)">
           Portfolio
         </h2>
