@@ -134,28 +134,38 @@ onMounted(() => {
   updateTime()
   setInterval(updateTime, 60000)
 
-  gsap.from(headlineRef.value, {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: headlineRef.value,
-      start: 'top 90%',
+  gsap.fromTo(
+    headlineRef.value,
+    { y: 60, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: headlineRef.value,
+        start: 'top 90%',
+        once: true,
+      },
     }
-  })
+  )
 
-  gsap.from(detailsRef.value, {
-    y: 60,
-    opacity: 0,
-    duration: 1,
-    delay: 0.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: detailsRef.value,
-      start: 'top 90%',
+  gsap.fromTo(
+    detailsRef.value,
+    { y: 40, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      delay: 0.15,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: detailsRef.value,
+        start: 'top 90%',
+        once: true,
+      },
     }
-  })
+  )
 })
 </script>
 

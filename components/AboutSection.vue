@@ -7,7 +7,7 @@
 
     <div class="max-w-[1400px] mx-auto px-6 md:px-16">
       <!-- Unifying Statement -->
-      <div class="text-center mb-20 max-w-3xl mx-auto">
+      <div ref="quoteRef" class="text-center mb-20 max-w-3xl mx-auto">
         <span class="section-label block mb-6">ONE PRACTICE</span>
         <p class="font-display italic text-3xl md:text-5xl text-text-primary leading-tight" style="font-weight: 600;">
           Composing software. <br class="md:hidden"/>
@@ -19,7 +19,7 @@
       </div>
 
       <!-- Stats / Years -->
-      <div ref="statsRef" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] max-w-5xl mx-auto opacity-0 border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl">
+      <div ref="statsRef" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] max-w-5xl mx-auto border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl">
         <div class="bg-[var(--bg-surface)] p-12 md:p-20 flex flex-col items-center text-center group">
           <span class="section-label mb-8 group-hover:text-lime transition-colors">Web Dev since</span>
           <div class="relative">
@@ -55,18 +55,44 @@
 import { gsap } from 'gsap'
 
 const statsRef = ref(null)
+const quoteRef = ref(null)
 
 onMounted(() => {
   if (typeof window === 'undefined') return
 
-  // Stats
-  gsap.to(statsRef.value, {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: statsRef.value, start: 'top 85%' },
-  })
+  // Reveal quote section
+  gsap.fromTo(
+    quoteRef.value,
+    { y: 32, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: quoteRef.value,
+        start: 'top 90%',
+        once: true,
+      },
+    }
+  )
+
+  // Reveal stats block
+  gsap.fromTo(
+    statsRef.value,
+    { y: 40, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: statsRef.value,
+        start: 'top 85%',
+        once: true,
+      },
+    }
+  )
 })
 </script>
 

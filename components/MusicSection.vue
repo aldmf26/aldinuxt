@@ -23,7 +23,7 @@
 
     <div class="max-w-[1600px] mx-auto relative z-10">
       <!-- Section header -->
-      <div class="mb-16">
+      <div ref="sectionHeader" class="mb-16">
         <span class="font-mono text-xs text-lime tracking-[0.3em] uppercase block mb-4">Sound Lab</span>
         <h2 class="font-display italic text-text-primary leading-none mb-6" style="font-size: clamp(48px, 7vw, 120px)">
           Beats &<br/>Productions
@@ -71,7 +71,7 @@
       
 
       <!-- Items Grid (REBUILT) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div ref="beatsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
        <div
           v-for="item in displayedItems"
           :key="item.src"
@@ -206,6 +206,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 const activeItem = ref(null)
 const activeTab = ref('ALL')
 const bgBeats = ref(null)
+const sectionHeader = ref(null)
+const beatsGrid = ref(null)
 const showAllItems = ref(false)
 const displayLimit = ref(6)
 
@@ -441,6 +443,53 @@ onMounted(() => {
       scrollTrigger: { trigger: '#music', start: 'top bottom', end: 'bottom top', scrub: 1.2 }
     })
   }
+
+  // Reveal section header
+  if (sectionHeader.value) {
+    gsap.fromTo(
+      sectionHeader.value,
+      { y: 36, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionHeader.value,
+          start: 'top 90%',
+          once: true,
+        },
+      }
+    )
+  }
+
+  // Stagger beat cards on scroll — deferred until after fetchUploadedBeats renders
+  watch(
+    displayedItems,
+    () => {
+      nextTick(() => {
+        const cards = beatsGrid.value?.querySelectorAll('.beat-card')
+        if (!cards?.length) return
+        gsap.fromTo(
+          cards,
+          { y: 28, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            ease: 'power3.out',
+            stagger: 0.08,
+            scrollTrigger: {
+              trigger: beatsGrid.value,
+              start: 'top 88%',
+              once: true,
+            },
+          }
+        )
+      })
+    },
+    { once: true }
+  )
 })
 
 onUnmounted(() => {

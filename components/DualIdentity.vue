@@ -4,9 +4,9 @@
       <div class="rounded-[3rem] overflow-hidden border border-[var(--border-strong)] shadow-[0_0_100px_rgba(0,0,0,0.18)] bg-[var(--bg-surface)]">
 
         <!-- Two-Column Spectrum (NO DIVIDER) -->
-        <div class="grid grid-cols-1 md:grid-cols-2">
+        <div ref="panelsRef" class="grid grid-cols-1 md:grid-cols-2">
           <!-- DEV SIDE -->
-          <div class="relative p-10 md:p-16 space-y-8 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-[var(--text-primary)]/[0.01]">
+          <div ref="devPanel" class="relative p-10 md:p-16 space-y-8 bg-[var(--bg-surface)] transition-colors duration-700 hover:bg-[var(--text-primary)]/[0.01]">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center border border-[var(--accent)]/20">
                 <span class="font-mono text-lg text-[var(--accent)]">&lt;/&gt;</span>
@@ -25,7 +25,8 @@
           </div>
 
           <!-- MUSIC SIDE (Same visual weight, no border divider) -->
-          <div 
+          <div
+            ref="musicPanel"
             class="relative p-10 md:p-16 space-y-8 bg-[var(--bg-surface)] transition-all duration-700 hover:bg-[var(--text-primary)]/[0.01]"
             :style="{ 
               boxShadow: isPlaying 
@@ -101,6 +102,12 @@
 </template>
 
 <script setup>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+const panelsRef = ref(null)
+const devPanel = ref(null)
+const musicPanel = ref(null)
 
 // Music Engine State
 const isPlaying = ref(false)
@@ -149,6 +156,44 @@ function stopPlayback() {
   stepInterval = null
   currentStep.value = -1
 }
+
+onMounted(() => {
+  if (typeof window === 'undefined') return
+
+  gsap.fromTo(
+    panelsRef.value,
+    { opacity: 0, y: 36 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: panelsRef.value,
+        start: 'top 88%',
+        once: true,
+      },
+    }
+  )
+
+  // Stagger the two panels
+  gsap.fromTo(
+    [devPanel.value, musicPanel.value],
+    { opacity: 0, y: 28 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      stagger: 0.12,
+      scrollTrigger: {
+        trigger: panelsRef.value,
+        start: 'top 85%',
+        once: true,
+      },
+    }
+  )
+})
 
 onUnmounted(() => {
   stopPlayback()

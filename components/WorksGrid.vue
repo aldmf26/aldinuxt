@@ -17,7 +17,7 @@
       </div>
 
       <!-- Asymmetric Grid -->
-      <div class="works-grid">
+      <div ref="gridRef" class="works-grid">
         <ProjectCard 
           v-for="(project, index) in projects" 
           :key="project.slug || index" 
@@ -36,19 +36,49 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const header = ref(null)
+const gridRef = ref(null)
 
 onMounted(() => {
   if (typeof window === 'undefined') return
-  
-  gsap.from(header.value, {
-    y: 60,
-    opacity: 0,
-    duration: 1,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: header.value,
-      start: 'top 90%',
+
+  // Reveal header
+  gsap.fromTo(
+    header.value,
+    { y: 40, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: header.value,
+        start: 'top 90%',
+        once: true,
+      },
     }
+  )
+
+  // Stagger project cards
+  nextTick(() => {
+    const cards = gridRef.value?.querySelectorAll('.project-card-item')
+    if (!cards?.length) return
+
+    gsap.fromTo(
+      cards,
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.09,
+        scrollTrigger: {
+          trigger: gridRef.value,
+          start: 'top 88%',
+          once: true,
+        },
+      }
+    )
   })
 })
 </script>
