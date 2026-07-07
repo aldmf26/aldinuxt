@@ -15,19 +15,18 @@
       <h1 class="sr-only">Aldi Fahrizaldi — Web Developer & Music Producer</h1>
 
       <div class="flex min-h-0 flex-col py-4 lg:flex-1 lg:justify-center lg:py-6">
-        <div class="mx-auto grid w-full max-w-[1400px] items-center gap-4 lg:grid-cols-2 lg:gap-12">
-          <div ref="codePanel" class="parallax-code flex flex-col items-center gap-2 will-change-transform">
+        <div class="mx-auto grid w-full max-w-[1400px] items-center gap-4 lg:grid-cols-2 lg:gap-12" style="perspective: 1500px; transform-style: preserve-3d;">
+          <div ref="codePanel" class="parallax-code flex flex-col items-center gap-2 will-change-transform" style="transform-style: preserve-3d;">
             <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--accent)]/60">code</div>
             <CodeKeyboard />
           </div>
 
-          <div ref="musicPanel" class="parallax-music flex flex-col items-center gap-2 will-change-transform">
+          <div ref="musicPanel" class="parallax-music flex flex-col items-center gap-2 will-change-transform" style="transform-style: preserve-3d;">
             <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--accent-dim)]/60">music</div>
             <PianoVisual />
           </div>
         </div>
       </div>
-
       <div ref="headlineRef" class="mx-auto w-full max-w-[1400px] shrink-0 pb-8 lg:pb-10">
         <p class="hero-headline font-display text-[clamp(32px,7vw,110px)] font-black leading-[0.9] tracking-[-0.06em] text-[var(--text-primary)]" aria-hidden="true">
           <span class="hero-word block">I build</span>
@@ -82,62 +81,53 @@ onMounted(() => {
     const mm = gsap.matchMedia()
 
     mm.add('(min-width: 1024px)', () => {
-      gsap.to('.parallax-grid', {
-        y: '18%',
-        ease: 'none',
+      // Pinned master timeline
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: hero,
           start: 'top top',
-          end: 'bottom top',
-          scrub: 2,
+          end: '+=180%',
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
         },
       })
 
-      gsap.to(codePanel.value, {
-        x: '-3vw',
+      tl.to('.parallax-grid', {
+        y: '15%',
         ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 2,
-        },
-      })
+      }, 0)
 
-      gsap.to(musicPanel.value, {
-        x: '3vw',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 2,
-        },
-      })
-
-      gsap.to(hero.querySelector('.hero-headline'), {
-        y: '-6vh',
-        opacity: 0.2,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom 50%',
-          scrub: 2,
-        },
-      })
-
-      gsap.to('.hero-cta', {
-        y: '-3vh',
+      tl.to(hero.querySelector('.hero-headline'), {
+        y: '50px',
         opacity: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom 60%',
-          scrub: 2,
-        },
-      })
+        scale: 0.98,
+        ease: 'power1.out',
+      }, 0)
+
+      tl.to('.hero-cta', {
+        y: '30px',
+        opacity: 0,
+        ease: 'power1.out',
+      }, 0)
+
+      tl.to(codePanel.value, {
+        x: '-2vw', // shift slightly outward to prevent center collision
+        y: '-4vh', // shift upward to avoid the text area
+        scale: 1.15, // scale slightly less to fit screens perfectly
+        rotateX: 12,
+        rotateY: -8,
+        ease: 'power1.inOut',
+      }, 0.1)
+
+      tl.to(musicPanel.value, {
+        x: '2vw', // shift slightly outward to prevent center collision
+        y: '-4vh', // shift upward to avoid the text area
+        scale: 1.15, // scale slightly less to fit screens perfectly
+        rotateX: 12,
+        rotateY: 8,
+        ease: 'power1.inOut',
+      }, 0.1)
     })
 
     gsap.to(scrollIndicator.value, {
@@ -146,7 +136,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: 'bottom 70%',
+        end: '+=50%',
         scrub: true,
       },
     })

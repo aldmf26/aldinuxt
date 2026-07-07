@@ -125,17 +125,19 @@ function computeScatterOffsets(elements, container, multiplier = 1) {
     const dx = elCx - cx
     const dy = elCy - cy
     const dist = Math.sqrt(dx * dx + dy * dy)
-    const norm = Math.min(dist / maxDist, 1) // 0 = center, 1 = corner
+    const norm = Math.min(dist / maxDist, 1)
 
-    // Push away from center with added randomness
     const angle = Math.atan2(dy, dx)
-    const spread = (150 + norm * 250) * multiplier
-    const randomAngle = angle + (Math.random() - 0.5) * 1.2
+    const spread = (200 + norm * 350) * multiplier
+    const randomAngle = angle + (Math.random() - 0.5) * 1.5
 
     return {
-      x: Math.cos(randomAngle) * spread * (0.5 + norm),
-      y: Math.sin(randomAngle) * spread * (0.5 + norm) + 100 * multiplier,
-      rotation: (Math.random() - 0.5) * 50 * (0.5 + norm),
+      x: Math.cos(randomAngle) * spread * (0.6 + norm * 0.8),
+      y: Math.sin(randomAngle) * spread * (0.6 + norm * 0.8) - 150 * multiplier,
+      z: (Math.random() * 500 + 250) * multiplier, // Fly towards viewer
+      rotation: (Math.random() - 0.5) * 120 * (0.5 + norm),
+      rotationX: (Math.random() - 0.5) * 180,
+      rotationY: (Math.random() - 0.5) * 180,
     }
   })
 }
@@ -176,7 +178,7 @@ onMounted(() => {
         scrollTrigger: {
           trigger: '#hero',
           start: 'top top',
-          end: 'bottom top',
+          end: '+=180%',
           scrub: 1.5,
         },
       })
@@ -185,22 +187,28 @@ onMounted(() => {
         tl.to(key, {
           x: whiteOffsets[i].x,
           y: whiteOffsets[i].y,
+          z: whiteOffsets[i].z,
           rotation: whiteOffsets[i].rotation,
+          rotationX: whiteOffsets[i].rotationX,
+          rotationY: whiteOffsets[i].rotationY,
           opacity: 0,
           pointerEvents: 'none',
-          ease: 'none',
-        }, i * 0.03)
+          ease: 'power1.out',
+        }, i * 0.007)
       })
 
       blacks.forEach((key, i) => {
         tl.to(key, {
           x: blackOffsets[i].x,
           y: blackOffsets[i].y,
+          z: blackOffsets[i].z,
           rotation: blackOffsets[i].rotation,
+          rotationX: blackOffsets[i].rotationX,
+          rotationY: blackOffsets[i].rotationY,
           opacity: 0,
           pointerEvents: 'none',
-          ease: 'none',
-        }, i * 0.04)
+          ease: 'power1.out',
+        }, i * 0.01)
       })
     })
 
@@ -214,7 +222,7 @@ onMounted(() => {
         scrollTrigger: {
           trigger: '#hero',
           start: 'top top',
-          end: 'bottom top',
+          end: '+=180%',
           scrub: true,
         },
       })
@@ -235,6 +243,18 @@ onUnmounted(() => {
 
 .piano-shell {
   animation: pianoIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.white-key {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.black-key {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 
 .white-key.is-active {

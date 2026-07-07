@@ -182,17 +182,19 @@ function computeScatterOffsets(elements, container) {
     const dx = elCx - cx
     const dy = elCy - cy
     const dist = Math.sqrt(dx * dx + dy * dy)
-    const norm = Math.min(dist / maxDist, 1) // 0 = center, 1 = corner
+    const norm = Math.min(dist / maxDist, 1)
 
-    // Push away from center with added randomness
     const angle = Math.atan2(dy, dx)
-    const spread = 150 + norm * 250
-    const randomAngle = angle + (Math.random() - 0.5) * 1.2
+    const spread = 200 + norm * 350
+    const randomAngle = angle + (Math.random() - 0.5) * 1.5
 
     return {
-      x: Math.cos(randomAngle) * spread * (0.5 + norm),
-      y: Math.sin(randomAngle) * spread * (0.5 + norm) + 100,
-      rotation: (Math.random() - 0.5) * 50 * (0.5 + norm),
+      x: Math.cos(randomAngle) * spread * (0.6 + norm * 0.8),
+      y: Math.sin(randomAngle) * spread * (0.6 + norm * 0.8) - 150,
+      z: Math.random() * 500 + 250, // Fly towards viewer
+      rotation: (Math.random() - 0.5) * 120 * (0.5 + norm),
+      rotationX: (Math.random() - 0.5) * 180,
+      rotationY: (Math.random() - 0.5) * 180,
     }
   })
 }
@@ -229,7 +231,7 @@ onMounted(() => {
         scrollTrigger: {
           trigger: '#hero',
           start: 'top top',
-          end: 'bottom top',
+          end: '+=180%',
           scrub: 1.5,
         },
       })
@@ -238,11 +240,14 @@ onMounted(() => {
         tl.to(cap, {
           x: offsets[i].x,
           y: offsets[i].y,
+          z: offsets[i].z,
           rotation: offsets[i].rotation,
+          rotationX: offsets[i].rotationX,
+          rotationY: offsets[i].rotationY,
           opacity: 0,
           pointerEvents: 'none',
-          ease: 'none',
-        }, i * 0.03)
+          ease: 'power1.out',
+        }, i * 0.008) // slightly faster stagger
       })
     })
 
@@ -255,7 +260,7 @@ onMounted(() => {
         scrollTrigger: {
           trigger: '#hero',
           start: 'top top',
-          end: 'bottom top',
+          end: '+=180%',
           scrub: true,
         },
       })
@@ -272,10 +277,14 @@ onUnmounted(() => {
 <style scoped>
 .kb-shell {
   animation: kbIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
 .keycap {
   min-height: 28px;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 
 .keycap.is-active {
