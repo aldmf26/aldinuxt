@@ -172,40 +172,35 @@ onMounted(() => {
 
     // Desktop: full scatter with transforms
     mm.add('(min-width: 1024px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      })
+
       whites.forEach((key, i) => {
-        gsap.to(key, {
+        tl.to(key, {
           x: whiteOffsets[i].x,
           y: whiteOffsets[i].y,
           rotation: whiteOffsets[i].rotation,
           opacity: 0,
           pointerEvents: 'none',
           ease: 'none',
-          scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-          },
-          delay: i * 0.03,
-        })
+        }, i * 0.03)
       })
 
       blacks.forEach((key, i) => {
-        gsap.to(key, {
+        tl.to(key, {
           x: blackOffsets[i].x,
           y: blackOffsets[i].y,
           rotation: blackOffsets[i].rotation,
           opacity: 0,
           pointerEvents: 'none',
           ease: 'none',
-          scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-          },
-          delay: i * 0.04, // slightly more stagger for blacks
-        })
+        }, i * 0.04)
       })
     })
 

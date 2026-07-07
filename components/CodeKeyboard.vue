@@ -225,22 +225,24 @@ onMounted(() => {
 
     // Desktop: full scatter with transforms
     mm.add('(min-width: 1024px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      })
+
       keycaps.forEach((cap, i) => {
-        gsap.to(cap, {
+        tl.to(cap, {
           x: offsets[i].x,
           y: offsets[i].y,
           rotation: offsets[i].rotation,
           opacity: 0,
           pointerEvents: 'none',
           ease: 'none',
-          scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-          },
-          delay: i * 0.03, // stagger via per-tween delay (works with scrub)
-        })
+        }, i * 0.03)
       })
     })
 

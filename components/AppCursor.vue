@@ -14,6 +14,8 @@
 </template>
 
 <script setup>
+import { gsap } from 'gsap'
+
 const cursorEl = ref(null)
 const particleRoot = ref(null)
 
@@ -66,47 +68,73 @@ function spawnParticle(x, y) {
   }, 750)
 }
 
+let xTo = null
+let yTo = null
+
+const onMouseMove = (e) => {
+  mouseX = e.clientX
+  mouseY = e.clientY
+
+  if (xTo && yTo) {
+    xTo(mouseX)
+    yTo(mouseY)
+  }
+
+  // Throttle particle spawning (~30fps)
+  const now = performance.now()
+  if (now - lastSpawnTime > 60) {
+    lastSpawnTime = now
+    spawnParticle(mouseX, mouseY)
+  }
+}
+
+const onClick = (e) => {
+  for (let i = 0; i < 6; i++) {
+    setTimeout(() => spawnParticle(e.clientX, e.clientY), i * 30)
+  }
+}
+
+const onMouseOver = (e) => {
+  const target = e.target?.closest?.('a, button, [data-cursor-hover]')
+  if (target && cursorEl.value) {
+    gsap.to(cursorEl.value, { scale: 1.6, duration: 0.2, overwrite: 'auto' })
+    cursorEl.value.classList.add('is-hovering')
+  }
+}
+
+const onMouseOut = (e) => {
+  const target = e.target?.closest?.('a, button, [data-cursor-hover]')
+  if (target && cursorEl.value) {
+    const related = e.relatedTarget?.closest?.('a, button, [data-cursor-hover]')
+    if (!related) {
+      gsap.to(cursorEl.value, { scale: 1, duration: 0.2, overwrite: 'auto' })
+      cursorEl.value.classList.remove('is-hovering')
+    }
+  }
+}
+
 onMounted(() => {
   // Hide default OS cursor on desktop
   document.body.style.cursor = 'none'
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX
-    mouseY = e.clientY
-
-    if (cursorEl.value) {
-      cursorEl.value.style.left = mouseX + 'px'
-      cursorEl.value.style.top = mouseY + 'px'
-    }
-
-    // Throttle particle spawning (~30fps)
-    const now = performance.now()
-    if (now - lastSpawnTime > 60) {
-      lastSpawnTime = now
-      spawnParticle(mouseX, mouseY)
-    }
-  })
-
-  // Burst on click
-  document.addEventListener('click', (e) => {
-    for (let i = 0; i < 6; i++) {
-      setTimeout(() => spawnParticle(e.clientX, e.clientY), i * 30)
-    }
-  })
-
-  // Scale up on hover
-  const updateHover = () => {
-    document.querySelectorAll('a, button, [data-cursor-hover]').forEach(el => {
-      el.addEventListener('mouseenter', () => cursorEl.value?.classList.add('is-hovering'))
-      el.addEventListener('mouseleave', () => cursorEl.value?.classList.remove('is-hovering'))
-    })
+  if (cursorEl.value) {
+    gsap.set(cursorEl.value, { xPercent: -50, yPercent: -50 })
+    xTo = gsap.quickTo(cursorEl.value, 'x', { duration: 0.08, ease: 'power3.out' })
+    yTo = gsap.quickTo(cursorEl.value, 'y', { duration: 0.08, ease: 'power3.out' })
   }
-  updateHover()
-  new MutationObserver(updateHover).observe(document.body, { childList: true, subtree: true })
+
+  document.addEventListener('mousemove', onMouseMove)
+  document.addEventListener('click', onClick)
+  document.addEventListener('mouseover', onMouseOver)
+  document.addEventListener('mouseout', onMouseOut)
 })
 
 onBeforeUnmount(() => {
   document.body.style.cursor = ''
+  document.removeEventListener('mousemove', onMouseMove)
+  document.removeEventListener('click', onClick)
+  document.removeEventListener('mouseover', onMouseOver)
+  document.removeEventListener('mouseout', onMouseOut)
 })
 </script>
 
@@ -116,13 +144,10 @@ onBeforeUnmount(() => {
   position: fixed;
   pointer-events: none;
   z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease;
+  top: 0;
+  left: 0;
   width: 24px;
   height: 24px;
-}
-.cursor-crosshair.is-hovering {
-  transform: translate(-50%, -50%) scale(1.6);
 }
 .cursor-crosshair.is-hovering .ch-dot {
   background: var(--accent);
