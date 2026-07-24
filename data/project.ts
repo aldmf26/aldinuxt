@@ -95,4 +95,16 @@ export const projects = [
     type: 'Research Tool',
     private: false,
   },
+  {
+    number: '09',
+    name: 'Kasir OK',
+    shortDesc: 'Local-first POS for small shops - fast checkout, stock control, profit reports, and store backup in one focused app.',
+    description: 'Point of Sale application for Indonesian small businesses, covering cashier workflows, inventory, financial reporting, and store settings.',
+    stack: ['Nuxt JS', 'Tailwind CSS', 'Local Storage'],
+    image: '/projects/kasir-ok.png',
+    slug: 'kasir-ok',
+    color: '#2563EB',
+    type: 'Retail / POS',
+    private: false,
+  },
 ];

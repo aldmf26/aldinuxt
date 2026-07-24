@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     v-if="project.slug"
-    :to="`/projects/${project.slug}`"
+    :to="localePath(`/projects/${project.slug}`)"
     class="project-card group relative overflow-hidden flex flex-col transition-all duration-700"
     :class="[
       isWide ? 'md:flex-row' : ''
@@ -149,7 +149,7 @@
         margin: '0 0 32px 0',
         lineHeight: '1.7',
         maxWidth: '500px'
-      }">{{ project.shortDesc }}</p>
+      }">{{ localizedShortDesc }}</p>
 
       <!-- Tech pills row (Bottom) -->
       <div :style="{
@@ -190,6 +190,13 @@ import { hexToRgba } from '~/utils/color'
 const props = defineProps({
   project: { type: Object, required: true },
   index: { type: Number, required: true },
+})
+
+const localePath = useLocalePath()
+const { t, te } = useI18n()
+const localizedShortDesc = computed(() => {
+  const key = `projects.${props.project.slug}.short`
+  return te(key) ? t(key) : props.project.shortDesc
 })
 
 const isWide = computed(() => {

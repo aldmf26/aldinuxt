@@ -10,14 +10,14 @@
 
       <div class="max-w-[1600px] mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
         <div class="lg:col-span-8">
-           <span class="section-label block mb-8 animate-fade-up">Case Study</span>
+           <span class="section-label block mb-8 animate-fade-up">{{ $t('project.caseStudy') }}</span>
            <h1 class="font-display italic leading-[0.85] tracking-tighter mb-8" style="font-size: clamp(64px, 12vw, 180px)">
               {{ project.title }}
            </h1>
         </div>
         <div class="lg:col-span-4 pb-6">
            <p class="font-body text-xl md:text-2xl text-text-primary/60 leading-relaxed animate-fade-up delay-100">
-             {{ project.subtitle }}
+             {{ localized('subtitle') }}
            </p>
         </div>
       </div>
@@ -27,20 +27,20 @@
     <section class="py-12 border-y border-text-primary/10 px-6 md:px-16 lg:px-24 bg-text-primary/[0.02]">
        <div class="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="space-y-3">
-             <span class="section-label text-text-primary/40">Role</span>
-             <p class="font-mono text-sm uppercase tracking-widest">{{ project.role || 'Fullstack Dev' }}</p>
+             <span class="section-label text-text-primary/40">{{ $t('project.role') }}</span>
+             <p class="font-mono text-sm uppercase tracking-widest">{{ localized('role') || 'Fullstack Dev' }}</p>
           </div>
           <div class="space-y-3">
-             <span class="section-label text-text-primary/40">Year</span>
+             <span class="section-label text-text-primary/40">{{ $t('project.year') }}</span>
              <p class="font-mono text-sm uppercase tracking-widest">{{ project.year || '2024' }}</p>
           </div>
           <div class="space-y-3">
-             <span class="section-label text-text-primary/40">Stack</span>
+             <span class="section-label text-text-primary/40">{{ $t('project.stack') }}</span>
              <p class="font-mono text-sm uppercase tracking-widest">{{ project.techs.join(', ') }}</p>
           </div>
           <div class="space-y-3">
-             <span class="section-label text-text-primary/40">Impact</span>
-             <p class="font-mono text-sm uppercase tracking-widest">{{ project.impact || 'Delivered' }}</p>
+             <span class="section-label text-text-primary/40">{{ $t('project.impact') }}</span>
+             <p class="font-mono text-sm uppercase tracking-widest">{{ localized('impact') || 'Delivered' }}</p>
           </div>
        </div>
     </section>
@@ -52,37 +52,37 @@
           <!-- Challenge & Solution -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="space-y-6 p-8 rounded-2xl bg-red-500/5 border border-red-500/10">
-              <span class="font-mono text-xs text-red-500 uppercase tracking-widest">Challenge</span>
-              <h3 class="text-2xl font-display italic text-text-primary">The Problem</h3>
-              <p class="text-base text-text-primary/75 leading-[1.75]">{{ project.problem }}</p>
+              <span class="font-mono text-xs text-red-500 uppercase tracking-widest">{{ $t('project.challenge') }}</span>
+              <h3 class="text-2xl font-display italic text-text-primary">{{ $t('project.problem') }}</h3>
+              <p class="text-base text-text-primary/75 leading-[1.75]">{{ localized('problem') }}</p>
             </div>
             <div class="space-y-6 p-8 rounded-2xl bg-lime/5 border border-lime/10">
-              <span class="font-mono text-xs text-lime uppercase tracking-widest">Solution</span>
-              <h3 class="text-2xl font-display italic text-text-primary">The Outcome</h3>
-              <p class="text-base text-text-primary/75 leading-[1.75]">{{ project.solution }}</p>
+              <span class="font-mono text-xs text-lime uppercase tracking-widest">{{ $t('project.solution') }}</span>
+              <h3 class="text-2xl font-display italic text-text-primary">{{ $t('project.outcome') }}</h3>
+              <p class="text-base text-text-primary/75 leading-[1.75]">{{ localized('solution') }}</p>
             </div>
           </div>
 
           <!-- Showcase Screenshots -->
           <div v-for="(img, i) in project.screenshots" :key="i" class="space-y-6">
             <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-white/5 bg-[var(--bg-surface)]">
-              <img :src="img.image" :alt="img.title" class="w-full h-auto" />
+              <img :src="img.image" :alt="localizedScreenshot(i, 'title', img.title)" class="w-full h-auto" />
             </div>
             <div class="max-w-2xl">
-              <h4 class="text-xl font-bold text-text-primary mb-3">{{ img.title }}</h4>
-              <p class="text-base text-text-primary/70 leading-[1.75]">{{ img.description }}</p>
+              <h4 class="text-xl font-bold text-text-primary mb-3">{{ localizedScreenshot(i, 'title', img.title) }}</h4>
+              <p class="text-base text-text-primary/70 leading-[1.75]">{{ localizedScreenshot(i, 'description', img.description) }}</p>
             </div>
           </div>
 
           <!-- Recommended Section -->
           <section class="mt-20 pt-12 border-t border-white/5">
-            <p class="section-label mb-12">More Projects</p>
+            <p class="section-label mb-12">{{ $t('project.more') }}</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <NuxtLink
                 v-for="proj in recommendedProjects"
                 :key="proj.slug"
-                :to="`/projects/${proj.slug}`"
+                :to="localePath(`/projects/${proj.slug}`)"
                 class="group block no-underline"
               >
                 <div class="bg-[var(--bg-surface)] border border-white/5 rounded-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[var(--accent)]">
@@ -105,7 +105,7 @@
                       {{ proj.name }}
                     </h4>
                     <p class="text-xs text-text-muted line-clamp-2 leading-relaxed">
-                      {{ proj.shortDesc }}
+                      {{ localizedProjectShort(proj) }}
                     </p>
                   </div>
                 </div>
@@ -125,6 +125,8 @@ import { projectsData } from '~/data/project-detail'
 
 
 const route = useRoute()
+const localePath = useLocalePath()
+const { t, te } = useI18n()
 
 const project = computed(() => {
   const slug = route.params.slug as string
@@ -139,6 +141,22 @@ const project = computed(() => {
   }
   return null
 })
+
+const localized = (field: string) => {
+  if (!project.value) return ''
+  const key = `projects.${route.params.slug}.${field}`
+  return te(key) ? t(key) : (project.value as Record<string, any>)[field]
+}
+
+const localizedProjectShort = (proj: typeof projects[number]) => {
+  const key = `projects.${proj.slug}.short`
+  return te(key) ? t(key) : proj.shortDesc
+}
+
+const localizedScreenshot = (index: number, field: string, fallback: string) => {
+  const key = `projects.${route.params.slug}.screenshots.${index}.${field}`
+  return te(key) ? t(key) : fallback
+}
 
 // Server & Client 404 handling
 if (!project.value) {

@@ -2,7 +2,27 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n',
   ],
+
+  i18n: {
+    strategy: 'prefix_except_default',
+    defaultLocale: 'id',
+    locales: [
+      { code: 'id', name: 'Indonesia', iso: 'id-ID', file: 'id.json' },
+      { code: 'en', name: 'English', iso: 'en-US', file: 'en.json' },
+    ],
+    lazy: true,
+    langDir: 'i18n/locales',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'aldi_locale',
+      alwaysRedirect: false,
+      fallbackLocale: 'id',
+      redirectOn: 'root',
+    },
+    vueI18n: './i18n.config.ts',
+  },
 
   plugins: [
     { src: '~/plugins/gsap.client.ts', mode: 'client' },

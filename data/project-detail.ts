@@ -1,4 +1,59 @@
 export const projectsData = {
+  'kasir-ok': {
+    logoUrl: "/projects/kasir-ok.png",
+    width: "180",
+    title: "Kasir OK",
+    subtitle: "Simple Point of Sale for Indonesian Small Businesses",
+    description:
+      "Kasir OK brings daily store operations into one straightforward workspace. Cashiers can process sales, owners can control stock and products, and every transaction flows into readable sales and profit reports.",
+    techs: ["Nuxt JS", "Tailwind CSS", "Local Storage"],
+    link: "",
+    year: "2026",
+    role: "Full Stack Developer & Product Designer",
+    impact: "Cashier, inventory, reporting, and store backup unified in one responsive application",
+    problem:
+      "Small shop owners often use separate tools for checkout, stock notes, and profit calculations. This creates duplicated work and makes it difficult to understand actual daily performance.",
+    solution:
+      "Built a focused POS with quick product selection, barcode support, stock warnings, automatic profit calculations, flexible reports, and local data backup. The interface stays approachable for owners without technical or accounting experience.",
+    screenshots: [
+      {
+        image: "/detail/kasir-ok/dashboard.png",
+        title: "Daily Operations Dashboard",
+        description:
+          "Clear starting point for daily work, showing today's cash position and direct shortcuts to checkout, product entry, and profit records.",
+      },
+      {
+        image: "/detail/kasir-ok/cashier.png",
+        title: "Fast Cashier Workflow",
+        description:
+          "Product catalog, barcode scanning, cart controls, automatic discounts, and payment actions share one screen to keep checkout fast.",
+      },
+      {
+        image: "/detail/kasir-ok/product-management.png",
+        title: "Product and Stock Management",
+        description:
+          "Searchable product table with category and stock filters, restock warnings, pricing, profit visibility, and direct management actions.",
+      },
+      {
+        image: "/detail/kasir-ok/sales-analytics.png",
+        title: "Sales Performance Overview",
+        description:
+          "Date and payment filters reveal sales totals, transaction count, average basket value, item volume, trends, and top products.",
+      },
+      {
+        image: "/detail/kasir-ok/profit-report.png",
+        title: "Profit and Loss Reporting",
+        description:
+          "Revenue, cost of goods, expenses, gross profit, and net profit are summarized with product-level margins for practical decisions.",
+      },
+      {
+        image: "/detail/kasir-ok/store-settings.png",
+        title: "Store Profile and Data Backup",
+        description:
+          "Owners can configure store identity and business type while device backup guidance helps protect product and transaction data.",
+      },
+    ],
+  },
   laporku: {
     logoUrl: "/projects/laporku.png",
     width: "180",

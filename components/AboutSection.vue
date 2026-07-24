@@ -8,34 +8,34 @@
     <div class="max-w-[1400px] mx-auto px-6 md:px-16">
       <!-- Unifying Statement -->
       <div ref="quoteRef" class="text-center mb-20 max-w-3xl mx-auto">
-        <span class="section-label block mb-6">ONE PRACTICE</span>
+        <span class="section-label block mb-6">{{ $t('about.label') }}</span>
         <p class="font-display italic text-3xl md:text-5xl text-text-primary leading-tight" style="font-weight: 600;">
-          Composing software. <br class="md:hidden"/>
-          <span class="text-text-secondary">Composing sound.</span>
+          {{ $t('about.code') }} <br class="md:hidden"/>
+          <span class="text-text-secondary">{{ $t('about.sound') }}</span>
         </p>
         <p class="font-mono text-xs text-text-muted/60 uppercase tracking-[0.3em] mt-6">
-           Five years in. Two studios. One caffeine source.
+           {{ $t('about.note') }}
         </p>
       </div>
 
       <!-- Stats / Years -->
       <div ref="statsRef" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] max-w-5xl mx-auto border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl">
         <div class="bg-[var(--bg-surface)] p-12 md:p-20 flex flex-col items-center text-center group">
-          <span class="section-label mb-8 group-hover:text-lime transition-colors">Web Dev since</span>
+          <span class="section-label mb-8 group-hover:text-lime transition-colors">{{ $t('about.webSince') }}</span>
           <div class="relative">
              <span class="ghost-number absolute -top-8 -left-12 opacity-5">2020</span>
              <span ref="year1" class="font-display italic text-7xl md:text-9xl text-lime relative z-10">2020</span>
           </div>
-          <p class="font-mono text-xs text-text-primary/40 uppercase tracking-[0.2em] mt-8">Engineering Digital Solutions</p>
+          <p class="font-mono text-xs text-text-primary/40 uppercase tracking-[0.2em] mt-8">{{ $t('about.webCaption') }}</p>
         </div>
         
         <div class="bg-[var(--bg-surface)] p-12 md:p-20 flex flex-col items-center text-center group">
-          <span class="section-label mb-8 group-hover:text-lime transition-colors">Music since</span>
+          <span class="section-label mb-8 group-hover:text-lime transition-colors">{{ $t('about.musicSince') }}</span>
           <div class="relative">
              <span class="ghost-number absolute -top-8 -left-12 opacity-5">2017</span>
              <span ref="year2" class="font-display italic text-7xl md:text-9xl text-lime relative z-10">2017</span>
           </div>
-          <p class="font-mono text-xs text-text-primary/40 uppercase tracking-[0.2em] mt-8">Crafting Sonic Landscapes</p>
+          <p class="font-mono text-xs text-text-primary/40 uppercase tracking-[0.2em] mt-8">{{ $t('about.musicCaption') }}</p>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
     <div class="mt-32 border-y border-[var(--border)] py-10 overflow-hidden whitespace-nowrap flex">
        <div class="flex animate-marquee-fast">
           <span v-for="n in 10" :key="n" class="inline-block font-mono text-xs uppercase tracking-[0.3em] text-text-primary/30 mx-12">
-            OPEN TO FREELANCE · REMOTE FRIENDLY · BASED IN BANJARMASIN · FAST DELIVERY · LET'S TALK ·
+            {{ $t('about.marquee') }}
           </span>
        </div>
     </div>

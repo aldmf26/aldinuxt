@@ -12,8 +12,8 @@
                 <span class="font-mono text-lg text-[var(--accent)]">&lt;/&gt;</span>
               </div>
               <div>
-                <h3 class="font-display text-2xl font-bold text-[var(--text-primary)]">Software Engineer</h3>
-                <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]/70">Logical Architecture</p>
+                <h3 class="font-display text-2xl font-bold text-[var(--text-primary)]">{{ $t('identity.engineer') }}</h3>
+                <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]/70">{{ $t('identity.architecture') }}</p>
               </div>
             </div>
 
@@ -39,8 +39,8 @@
                 <span class="font-mono text-lg text-[var(--accent)]">♪</span>
               </div>
               <div>
-                <h3 class="font-display text-2xl font-bold text-[var(--text-primary)]">Music Producer</h3>
-                <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]/70">Sonic Sculpting</p>
+                <h3 class="font-display text-2xl font-bold text-[var(--text-primary)]">{{ $t('identity.producer') }}</h3>
+                <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)]/70">{{ $t('identity.sculpting') }}</p>
               </div>
             </div>
 

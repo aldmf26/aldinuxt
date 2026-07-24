@@ -2,22 +2,22 @@
   <section id="contact" class="relative py-32 md:py-64 px-6 md:px-16 min-h-screen flex flex-col justify-end overflow-hidden">
     <!-- Background Ghost Word -->
     <div class="absolute top-20 left-0 z-0 pointer-events-none select-none opacity-[0.03] text-text-muted font-black tracking-tighter leading-none ghost-hello">
-      HELLO
+      {{ $t('contact.label') }}
     </div>
 
     <div class="max-w-[1800px] mx-auto w-full relative z-10">
       <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-20 items-end">
         <!-- Giant Editorial Headline -->
         <div ref="headlineRef">
-          <span class="section-label block mb-12">Get in touch</span>
+          <span class="section-label block mb-12">{{ $t('contact.label') }}</span>
           <a
             href="mailto:aldimf26@gmail.com?subject=Let's%20Talk!"
             class="group block transition-colors duration-500"
             data-cursor-hover
           >
             <h2 class="font-display font-black leading-[0.8] tracking-tighter text-text-primary group-hover:text-lime transition-colors duration-700 contact-title">
-              LET'S <br/>
-              TALK.
+              {{ $t('contact.title') }} <br/>
+              {{ $t('contact.accent') }}
             </h2>
           </a>
         </div>
@@ -25,7 +25,7 @@
         <!-- Contact Details -->
         <div ref="detailsRef" class="space-y-16 pb-10">
            <div class="space-y-4">
-              <span class="font-mono text-[10px] text-text-secondary/70 uppercase tracking-[0.3em] block">Email</span>
+              <span class="font-mono text-[10px] text-text-secondary/70 uppercase tracking-[0.3em] block">{{ $t('contact.emailLabel') }}</span>
               <a 
                 href="mailto:aldimf26@gmail.com" 
                 class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-[var(--border)] pb-2 inline-block"
@@ -45,7 +45,7 @@
 
            <div class="grid grid-cols-2 gap-12">
               <div class="space-y-4">
-                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Social</span>
+                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">{{ $t('contact.social') }}</span>
                  <ul class="space-y-3">
                    <li v-for="social in socialLinks" :key="social.name">
                      <a
@@ -61,7 +61,7 @@
                  </ul>
               </div>
               <div class="space-y-4">
-                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">Location</span>
+                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">{{ $t('contact.location') }}</span>
                  <p class="font-mono text-xs text-text-primary/60 uppercase tracking-widest leading-relaxed">
                    Banjarmasin, ID <br/>
                    {{ localTime }}
@@ -86,7 +86,7 @@
           class="font-mono text-[10px] text-lime uppercase tracking-[0.3em] hover:opacity-70 transition-opacity"
           data-cursor-hover
         >
-          Back to top ↑
+          {{ $t('contact.backTop') }} ↑
         </button>
       </div>
     </div>

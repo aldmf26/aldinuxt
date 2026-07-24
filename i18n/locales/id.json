@@ -1,0 +1,251 @@
+{
+  "nav": {
+    "work": "Karya",
+    "beats": "Musik",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "hire": "Rekrut Saya",
+    "menu": "Menu",
+    "close": "Tutup",
+    "tagline": "kode & suara"
+  },
+  "hero": {
+    "availability": "Menerima project pilihan · 2026",
+    "line1": "Saya membuat",
+    "line2": "hal berguna untuk",
+    "accent": "web.",
+    "intro": "Aldi Fahrizaldi—web developer dan music producer. Saya membangun produk digital dengan Nuxt dan Laravel, memakai ketelitian yang sama saat menyusun musik.",
+    "workCta": "Lihat karya saya",
+    "musicCta": "Putar musik saya",
+    "toolsNote": "dua sisi, satu proses",
+    "toolsTitle": "Alat untuk berkarya.",
+    "toolsHelp": "Tekan tombol. Buat suara.\nKeduanya interaktif.",
+    "code": "Kode",
+    "keyboard": "Keyboard mekanikal",
+    "sound": "Suara",
+    "piano": "Piano MIDI"
+  },
+  "works": {
+    "ghost": "KARYA",
+    "title": "Portofolio",
+    "description": "Sembilan project. Masing-masing dibangun untuk menyelesaikan kebutuhan nyata."
+  },
+  "identity": {
+    "engineer": "Software Engineer",
+    "architecture": "Arsitektur Logis",
+    "producer": "Music Producer",
+    "sculpting": "Merancang Suara"
+  },
+  "about": {
+    "label": "SATU PROSES",
+    "code": "Menyusun perangkat lunak.",
+    "sound": "Menyusun suara.",
+    "note": "Lima tahun berjalan. Dua studio. Satu sumber kafein.",
+    "webSince": "Web developer sejak",
+    "musicSince": "Bermusik sejak",
+    "webCaption": "Membangun Solusi Digital",
+    "musicCaption": "Merancang Lanskap Suara",
+    "marquee": "TERBUKA UNTUK FREELANCE · SIAP REMOTE · BERBASIS DI BANJARMASIN · PENGERJAAN CEPAT · MARI BICARA ·"
+  },
+  "contact": {
+    "label": "MARI BICARA",
+    "title": "Punya ide?",
+    "accent": "Mari kita wujudkan.",
+    "description": "Terbuka untuk project freelance, kolaborasi, dan percakapan menarik tentang web atau musik.",
+    "email": "Kirim Email",
+    "whatsapp": "Chat WhatsApp",
+    "emailLabel": "Email",
+    "social": "Sosial",
+    "location": "Lokasi",
+    "backTop": "Kembali ke atas"
+  },
+  "music": {
+    "ghost": "MUSIK",
+    "label": "Laboratorium Suara",
+    "title": "Beat & Produksi",
+    "description": "Trap, EDM, dan paket FLP gratis—semuanya diproduksi di FL Studio. Tersedia untuk lisensi, kebutuhan konten, atau sekadar didengarkan.",
+    "youtube": "Tonton di YouTube",
+    "showAll": "Tampilkan Semua Track"
+  },
+  "project": {
+    "caseStudy": "Studi Kasus",
+    "role": "Peran",
+    "year": "Tahun",
+    "stack": "Teknologi",
+    "impact": "Dampak",
+    "challenge": "Tantangan",
+    "problem": "Masalah",
+    "solution": "Solusi",
+    "outcome": "Hasil",
+    "more": "Project Lainnya"
+  },
+  "projects": {
+    "laporku": {
+      "short": "Aplikasi laporan keuangan untuk pemilik usaha kecil—memahami angka tanpa harus menguasai akuntansi.",
+      "subtitle": "SaaS Pengelolaan Keuangan untuk UMKM Indonesia",
+      "description": "Laporku mengubah data keuangan rumit menjadi informasi yang mudah dipahami pemilik usaha kecil.",
+      "problem": "Pemilik usaha kecil sering tidak tahu apakah usahanya benar-benar untung. Aplikasi akuntansi yang ada terlalu rumit bagi pengguna tanpa latar belakang keuangan.",
+      "solution": "Dashboard mengubah transaksi menjadi ringkasan pendapatan, pengeluaran, dan laba dengan bahasa sederhana.",
+      "role": "Full Stack Developer & Product Designer",
+      "impact": "Pengguna aktif mencatat transaksi bulanan Rp 50 juta+ · Waktu pembukuan berkurang 70%",
+      "screenshots": [
+        {"title":"Landing Page dengan Nilai Jelas","description":"Landing page menjelaskan laporan sederhana, insight cerdas, dan paket terjangkau bagi pemilik UMKM."},
+        {"title":"Dashboard Insight Keuangan","description":"Laporan mingguan dan bulanan otomatis menampilkan tren laba, pengeluaran terbesar, dan kondisi arus kas."},
+        {"title":"Dashboard Admin","description":"Panel admin memantau aktivitas pengguna, langganan, dan performa sistem secara real-time."}
+      ]
+    },
+    "agrika-gatya-arum": {
+      "short": "Landing page premium perusahaan ekspor sarang burung walet untuk meyakinkan pembeli internasional sejak kunjungan pertama.",
+      "subtitle": "Landing Page dan Katalog Produk Perusahaan Ekspor",
+      "role": "Full Stack Developer & UI Designer",
+      "impact": "Kehadiran web profesional untuk transaksi B2B internasional · SEO untuk jangkauan global",
+      "problem": "Perusahaan ekspor sarang burung walet membutuhkan situs yang langsung membangun kepercayaan pembeli internasional.",
+      "solution": "Landing page premium dengan hierarki visual jelas, fokus produk, kredibilitas perusahaan, dan kemampuan ekspor.",
+      "screenshots": [
+        {"title":"Landing Page Ekspor Premium","description":"Menampilkan produk sarang burung walet Indonesia, kredensial perusahaan, sertifikasi kualitas, dan kemampuan ekspor global."}
+      ]
+    },
+    "agafood": {
+      "short": "Satu sistem POS untuk dua restoran—Takemori dan Soondobu—di Banjarmasin.",
+      "subtitle": "POS untuk Restoran Jepang dan Korea",
+      "role": "Full Stack Developer",
+      "impact": "Kasir, dapur, payroll, dan laporan dua restoran dikelola dari satu codebase",
+      "problem": "Dua restoran dengan menu, brand, dan staf berbeda membutuhkan POS masing-masing tanpa menggandakan biaya pemeliharaan.",
+      "solution": "Satu sistem POS dengan konfigurasi terpisah untuk tiap restoran, mencakup kasir, dapur, payroll, dan laporan.",
+      "screenshots": [
+        {"title":"Halaman Pemesanan","description":"Antarmuka cepat untuk menerima dan mengelola pesanan secara akurat dalam operasional restoran yang sibuk."},
+        {"title":"Halaman Detail Restoran","description":"Informasi lengkap mengenai menu, harga, dan detail masing-masing restoran."},
+        {"title":"Halaman Admin","description":"Pemilik dapat mengelola pesanan, menu, dan informasi operasional restoran."}
+      ]
+    },
+    "jenerymf-tools": {
+      "short": "Kalkulator pengukuran tubuh untuk kebutuhan industri. Cepat, akurat, dan siap dipakai di lapangan.",
+      "subtitle": "Kalkulator Pengukuran Tubuh Profesional",
+      "role": "Frontend Developer & UX Designer",
+      "impact": "Proses pengukuran lebih cepat · Riwayat pelanggan · Optimal untuk perangkat mobile",
+      "problem": "Perhitungan ukuran industri dilakukan manual sehingga lambat, rawan kesalahan, dan sulit dibagikan di lapangan.",
+      "solution": "Aplikasi utilitas sederhana: masukkan diameter tiang dan dapatkan ukuran tubuh secara instan.",
+      "screenshots": [
+        {"title":"Kalkulator Pengukuran Cepat","description":"Antarmuka mobile untuk memasukkan diameter dan memperoleh hasil ukuran tubuh secara instan."},
+        {"title":"Dashboard Pelanggan","description":"Menyimpan profil, riwayat pengukuran, dan hasil kalkulasi pelanggan berulang."}
+      ]
+    },
+    "aldi-teori": {
+      "short": "Basis pengetahuan tokoh dan peradaban sejarah yang terstruktur, mudah dicari, dan dibuat untuk pembelajar.",
+      "subtitle": "Platform Basis Pengetahuan Sejarah",
+      "role": "Full Stack Developer",
+      "impact": "Sumber belajar gratis · Platform pembelajaran responsif",
+      "problem": "Pengetahuan sejarah berbahasa Indonesia tersebar di berbagai situs berkualitas rendah tanpa pencarian dan struktur yang baik.",
+      "solution": "Basis pengetahuan berkategori dengan pencarian bersih untuk tokoh, peradaban, dan linimasa sejarah.",
+      "screenshots": [
+        {"title":"Beranda Edukasi","description":"Konten teori, tokoh, peristiwa, dan peradaban disusun agar mudah dijelajahi."},
+        {"title":"Halaman Konten Lengkap","description":"Artikel berisi teks, gambar, referensi, konteks sejarah, dan interpretasi modern."}
+      ]
+    },
+    "translation-app": {
+      "short": "Penerjemah Bahasa Indonesia ↔ Dayak untuk membantu menjaga bahasa yang masih minim kehadiran digital.",
+      "subtitle": "Pelestarian Budaya Melalui Teknologi",
+      "role": "Full Stack Developer",
+      "impact": "Membantu pelestarian bahasa lokal · Media belajar sekolah · Sumber daya komunitas",
+      "problem": "Bahasa Dayak hampir tidak memiliki kehadiran digital dan belum tersedia alat terjemahan yang mudah diakses.",
+      "solution": "Aplikasi terjemahan dua arah dengan kamus Indonesia-Dayak yang dikurasi.",
+      "screenshots": [
+        {"title":"Antarmuka Terjemahan Sederhana","description":"Pengguna dapat berpindah antara Bahasa Indonesia dan Dayak dengan satu klik."}
+      ]
+    },
+    "circle-english-course": {
+      "short": "Platform pendaftaran dan pembelajaran untuk kursus Bahasa Inggris di Muara Teweh, Kalimantan Tengah.",
+      "subtitle": "Platform Belajar Online untuk Kalimantan Tengah",
+      "role": "Full Stack Developer",
+      "impact": "Transformasi digital lembaga kursus lokal · Pelacakan progres siswa · Pendaftaran otomatis",
+      "problem": "Kursus Bahasa Inggris lokal di Muara Teweh terbatas pada kelas tatap muka. Pendaftaran dan materi belum bisa dikelola secara online.",
+      "solution": "Platform pembelajaran lengkap untuk pendaftaran, materi pelajaran, pelacakan progres, dan dashboard pengajar.",
+      "screenshots": [
+        {
+          "title": "Dashboard Pembelajaran Siswa",
+          "description": "Dashboard personal menampilkan kursus, progres pelajaran, tugas mendatang, dan analitik performa. Materi dapat diakses kapan saja."
+        }
+      ]
+    },
+    "english-for-wetlands": {
+      "short": "Aplikasi kosakata lahan basah bilingual untuk peneliti dan pegiat konservasi di Kalimantan.",
+      "subtitle": "Alat Kosakata Lingkungan Khusus",
+      "role": "Full Stack Developer",
+      "impact": "Sumber kosakata khusus · Alat riset akademik · Dukungan pendidikan lingkungan",
+      "problem": "Peneliti dan pekerja lapangan di lahan basah Kalimantan belum memiliki alat kosakata bilingual khusus ekologi.",
+      "solution": "Aplikasi terjemahan dengan kamus khusus lahan basah untuk ilmuwan dan pegiat konservasi.",
+      "screenshots": [
+        {"title":"Penerjemah Kosakata Lahan Basah","description":"Kamus istilah lingkungan, konsep ekosistem, dan kosakata konservasi untuk penelitian lahan basah."}
+      ]
+    },
+    "kasir-ok": {
+      "short": "POS lokal untuk usaha kecil—transaksi cepat, kontrol stok, laporan laba, dan backup toko dalam satu aplikasi.",
+      "subtitle": "Point of Sale Sederhana untuk Usaha Kecil Indonesia",
+      "description": "Kasir OK menyatukan operasional toko harian dalam satu ruang kerja sederhana: transaksi, stok, produk, laporan penjualan, dan laba.",
+      "problem": "Pemilik toko kecil sering memakai alat terpisah untuk transaksi, catatan stok, dan perhitungan laba sehingga pekerjaan berulang dan performa harian sulit dipahami.",
+      "solution": "POS fokus dengan pemilihan produk cepat, barcode, peringatan stok, perhitungan laba otomatis, laporan fleksibel, dan backup data lokal.",
+      "role": "Full Stack Developer & Product Designer",
+      "impact": "Kasir, inventaris, laporan, dan backup toko menyatu dalam satu aplikasi responsif",
+      "screenshots": [
+        {"title":"Dashboard Operasional Harian","description":"Menampilkan posisi uang hari ini dan akses cepat menuju kasir, penambahan barang, dan catatan keuntungan."},
+        {"title":"Alur Kasir Cepat","description":"Katalog produk, barcode, keranjang, diskon otomatis, dan pembayaran berada dalam satu layar."},
+        {"title":"Pengelolaan Produk dan Stok","description":"Tabel produk dengan pencarian, filter kategori, peringatan restock, harga, laba, dan aksi pengelolaan."},
+        {"title":"Ringkasan Performa Penjualan","description":"Filter tanggal dan pembayaran menampilkan omzet, transaksi, rata-rata belanja, jumlah item, tren, dan produk teratas."},
+        {"title":"Laporan Laba Rugi","description":"Omzet, modal, pengeluaran, laba kotor, dan laba bersih dirangkum bersama margin tiap produk."},
+        {"title":"Profil Toko dan Backup Data","description":"Pemilik dapat mengatur identitas toko dan menjaga data produk serta transaksi melalui backup perangkat."}
+      ]
+    }
+  },
+  "service": {
+    "label": "Layanan",
+    "title": "Mari membangun sesuatu.",
+    "intro": "Saya menerima project web freelance—landing page, web app, sistem POS, dan alat khusus. Remote. Cepat. Tanpa proses berbelit.",
+    "for": "Untuk",
+    "includes": "Termasuk",
+    "timeline": "Durasi",
+    "price": "Harga",
+    "how": "Cara kerja",
+    "ready": "Siap mulai?",
+    "whatsapp": "Chat lewat WhatsApp →",
+    "email": "atau email ke aldimf26{'@'}gmail.com",
+    "services": [
+      {
+        "title": "Landing Page / Company Profile",
+        "for": "Bisnis yang membutuhkan kehadiran web profesional",
+        "includes": "Desain, development, layout responsif, dan setup SEO dasar",
+        "timeline": "1–2 minggu",
+        "price": "Mulai Rp 1.500.000"
+      },
+      {
+        "title": "Web App / Sistem Internal",
+        "for": "Bisnis yang membutuhkan software khusus—POS, inventaris, dashboard, atau alat manajemen",
+        "includes": "Analisis kebutuhan, full-stack development, desain database, dan pelatihan pengguna",
+        "timeline": "3–8 minggu, sesuai scope",
+        "price": "Mulai Rp 5.000.000"
+      },
+      {
+        "title": "Lisensi Beat / Musik Kustom",
+        "for": "Content creator, brand, film pendek, dan iklan",
+        "includes": "Lisensi non-eksklusif dari katalog atau beat khusus sesuai permintaan",
+        "timeline": "3–7 hari untuk musik kustom",
+        "price": "Hubungi untuk harga"
+      }
+    ],
+    "steps": [
+      {"title": "Diskusi", "desc": "Ceritakan kebutuhan lewat WhatsApp. Gratis, tanpa komitmen."},
+      {"title": "Proposal", "desc": "Saya kirim scope, durasi, dan harga yang jelas."},
+      {"title": "Pengerjaan", "desc": "Update diberikan setiap 2–3 hari agar progres selalu terlihat."},
+      {"title": "Peluncuran", "desc": "Deploy, pengujian, dan serah terima. Termasuk dukungan 30 hari."}
+    ]
+  },
+  "musicPage": {
+    "back": "KEMBALI KE BERANDA",
+    "copyright": "SEMUA BEAT DILINDUNGI HAK CIPTA."
+  },
+  "meta": {
+    "homeTitle": "Aldi Fahrizaldi — Web Developer & Music Producer",
+    "homeDescription": "Web developer dan music producer dari Banjarmasin. Membangun aplikasi web dengan Nuxt, Laravel, dan Tailwind.",
+    "serviceTitle": "Rekrut Saya — Aldi Fahrizaldi",
+    "serviceDescription": "Layanan freelance untuk landing page, web app, sistem POS, dan alat digital khusus."
+  }
+}

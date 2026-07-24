@@ -18,19 +18,18 @@
       class="absolute top-16 left-1/2 -translate-x-1/2 font-display italic text-text-primary opacity-[0.02] select-none pointer-events-none z-0 whitespace-nowrap"
       style="font-size: clamp(100px, 12vw, 200px)"
     >
-      BEATS
+      {{ $t('music.ghost') }}
     </div>
 
     <div class="max-w-[1600px] mx-auto relative z-10">
       <!-- Section header -->
       <div ref="sectionHeader" class="mb-16">
-        <span class="font-mono text-xs text-lime tracking-[0.3em] uppercase block mb-4">Sound Lab</span>
+        <span class="font-mono text-xs text-lime tracking-[0.3em] uppercase block mb-4">{{ $t('music.label') }}</span>
         <h2 class="font-display italic text-text-primary leading-none mb-6" style="font-size: clamp(48px, 7vw, 120px)">
-          Beats &<br/>Productions
+          {{ $t('music.title') }}
         </h2>
         <p class="text-text-secondary font-body text-base md:text-lg max-w-2xl mb-8 leading-relaxed" style="font-weight: 500;">
-          Trap, EDM, and free FLP packs — all produced in FL Studio. 
-          Available for licensing, content use, or just listening.
+          {{ $t('music.description') }}
         </p>
         
         <!-- Animated waveform SVG divider -->
@@ -120,7 +119,7 @@
               target="_blank"
               class="yt-link"
             >
-              Watch on YouTube ↗
+              {{ $t('music.youtube') }} ↗
             </a>
             <a 
               v-else-if="item.ytLink"
@@ -128,7 +127,7 @@
               target="_blank"
               class="yt-link"
             >
-              Watch on YouTube ↗
+              {{ $t('music.youtube') }} ↗
             </a>
           </div>
         </div>
@@ -140,7 +139,7 @@
           @click="showAllItems = true"
           class="px-10 py-5 bg-[var(--bg-surface)] border border-[var(--border)] text-text-primary font-mono text-xs uppercase tracking-widest rounded-full hover:bg-white/[0.03] transition-all duration-300"
         >
-          Show All Tracks ({{ filteredItems.length }})
+          {{ $t('music.showAll') }} ({{ filteredItems.length }})
         </button>
       </div>
     </div>

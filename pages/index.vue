@@ -38,12 +38,12 @@ onMounted(() => {
   })
 })
 
-useHead({
-  title: 'Aldi Fahrizaldi — Web Developer & Music Producer',
-  meta: [
-    { name: 'description', content: 'Web developer (Nuxt, Laravel, Tailwind) and music producer (FL Studio) based in Banjarmasin, Indonesia. Building web apps and producing beats.' },
-  ],
-})
+const { t, locale } = useI18n()
+useHead(() => ({
+  title: t('meta.homeTitle'),
+  htmlAttrs: { lang: locale.value },
+  meta: [{ name: 'description', content: t('meta.homeDescription') }],
+}))
 </script>
 
 <style scoped>

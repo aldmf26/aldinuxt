@@ -35,9 +35,10 @@ module.exports = {
         dark: { DEFAULT: 'var(--bg-primary)', surface: 'var(--bg-surface)', elevated: 'var(--bg-elevated)' },
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
-        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        body: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
+        hand: ['"Rockabye"', 'cursive'],
       },
       fontSize: {
         'hero': 'clamp(80px, 12vw, 180px)',

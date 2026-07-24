@@ -2,17 +2,17 @@
   <section id="works" class="relative py-32 md:py-48 px-4 md:px-10 overflow-hidden">
     <!-- Giant Ghost Word -->
     <div class="absolute top-12 md:top-0 -left-4 z-0 pointer-events-none select-none opacity-[0.08] text-text-muted font-black tracking-tighter leading-none" style="font-size: clamp(120px, 18vw, 260px); letter-spacing: -0.04em;">
-      WORKS
+      {{ $t('works.ghost') }}
     </div>
 
     <div class="max-w-[1800px] mx-auto relative z-10">
       <!-- Section header -->
       <div ref="header" class="mb-24 px-4">
         <h2 class="font-display italic text-text-primary leading-none mb-8" style="font-size: clamp(64px, 8vw, 120px)">
-          Portfolio
+          {{ $t('works.title') }}
         </h2>
         <p class="text-text-secondary font-body text-base md:text-xl max-w-2xl leading-relaxed" style="font-weight: 500;">
-          Eight projects. Each one built around a real constraint.
+          {{ $t('works.description') }}
         </p>
       </div>
 

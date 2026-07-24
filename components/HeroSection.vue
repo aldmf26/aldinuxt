@@ -1,193 +1,103 @@
 <template>
-  <section
-    ref="heroRef"
-    id="hero"
-    class="relative min-h-screen overflow-hidden bg-[var(--bg-primary)]"
-    style="min-height: 100dvh"
-  >
-    <div class="parallax-grid absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.015)_1px,transparent_1px)] bg-[size:56px_56px] opacity-40 will-change-transform"></div>
-
-    <div class="relative z-10 flex min-h-screen flex-col px-4 py-6 sm:px-8 sm:py-10 lg:px-12">
-      <!-- <div class="hero-kicker shrink-0 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-primary)]/45">
-        Banjarmasin&nbsp;&nbsp;/&nbsp;&nbsp;Code &amp;&nbsp;Beats&nbsp;&nbsp;/&nbsp;&nbsp;Est.&nbsp;2020
-      </div> -->
-
-      <h1 class="sr-only">Aldi Fahrizaldi — Web Developer & Music Producer</h1>
-
-      <div class="flex min-h-0 flex-col py-4 lg:flex-1 lg:justify-center lg:py-6">
-        <div class="mx-auto grid w-full max-w-[1400px] items-center gap-4 lg:grid-cols-2 lg:gap-12" style="perspective: 1500px; transform-style: preserve-3d;">
-          <div ref="codePanel" class="parallax-code flex flex-col items-center gap-2 will-change-transform" style="transform-style: preserve-3d;">
-            <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--accent)]/60">code</div>
-            <CodeKeyboard />
-          </div>
-
-          <div ref="musicPanel" class="parallax-music flex flex-col items-center gap-2 will-change-transform" style="transform-style: preserve-3d;">
-            <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--accent-dim)]/60">music</div>
-            <PianoVisual />
-          </div>
+  <section ref="heroRef" id="hero" class="hero relative overflow-hidden">
+    <div class="mx-auto max-w-[1480px] px-5 pb-16 pt-10 sm:px-8 md:pb-24 md:pt-16 lg:px-12">
+      <div class="hero-copy relative z-10">
+        <div class="mb-8 flex items-center justify-between gap-5 border-b border-[var(--border-strong)] pb-3">
+          <p class="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--text-secondary)]">Banjarmasin, Indonesia</p>
+          <p class="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-secondary)] sm:block">{{ $t('hero.availability') }}</p>
         </div>
-      </div>
-      <div ref="headlineRef" class="mx-auto w-full max-w-[1400px] shrink-0 pb-8 lg:pb-10">
-        <p class="hero-headline font-display text-[clamp(32px,7vw,110px)] font-black leading-[0.9] tracking-[-0.06em] text-[var(--text-primary)]" aria-hidden="true">
-          <span class="hero-word block">I build</span>
-          <span class="hero-word block">
-            <span class="text-[var(--accent)]">websites</span>
-            <span class="text-[var(--text-primary)]/70 mx-4 inline-block" style="font-size: 0.5em; vertical-align: middle;">&</span>
-            <span class="italic text-[var(--accent-dim)]">beats.</span>
+
+        <h1 class="max-w-[1300px] font-display text-[clamp(3.4rem,9.5vw,9.6rem)] font-extrabold leading-[0.87] tracking-[-0.075em] text-[var(--text-primary)]">
+          {{ $t('hero.line1') }}
+          <span class="block">
+            {{ $t('hero.line2') }}
+            <span class="relative inline-block text-[var(--accent)]">
+              {{ $t('hero.accent') }}
+              <svg class="absolute -bottom-2 left-0 h-3 w-full text-[var(--accent)]" viewBox="0 0 420 18" fill="none" aria-hidden="true">
+                <path d="M2 10C48 2 69 17 110 9C151 1 177 17 218 9C259 1 293 17 335 9C369 3 392 9 418 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </span>
           </span>
-        </p>
+        </h1>
 
-        <div class="hero-cta mt-4 flex flex-wrap items-center gap-3 sm:mt-6">
-          <a
-            href="#works"
-            class="inline-flex items-center gap-3 rounded-full bg-[var(--accent)] px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--bg-primary)] shadow-lg shadow-[var(--accent)]/20 transition hover:-translate-y-0.5 hover:brightness-110"
-            data-cursor-hover
-          >
-            View Projects
-            <span aria-hidden="true">-></span>
-          </a>
-          <a
-            href="#music"
-            class="inline-flex items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]/80 transition hover:-translate-y-0.5 hover:bg-[var(--bg-elevated)]"
-            data-cursor-hover
-          >
-            Listen Beats
-          </a>
+        <div class="mt-10 grid gap-8 md:grid-cols-12 md:items-end">
+          <p class="max-w-xl text-base font-medium leading-relaxed text-[var(--text-secondary)] md:col-span-6 md:text-lg">
+            {{ $t('hero.intro') }}
+          </p>
+          <div class="flex flex-wrap gap-3 md:col-span-6 md:justify-end">
+            <a href="#works" class="hero-button hero-button-primary" data-cursor-hover>{{ $t('hero.workCta') }} <span aria-hidden="true">↘</span></a>
+            <a href="#music" class="hero-button hero-button-secondary" data-cursor-hover>{{ $t('hero.musicCta') }}</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div ref="scrollIndicator" class="scroll-indicator pointer-events-none absolute bottom-5 left-1/2 z-20 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.35em] text-[var(--text-primary)]/25">
-      scroll
+      <div class="tools-heading mt-20 flex items-end justify-between gap-6 md:mt-28">
+        <div>
+          <p class="font-hand text-xl text-[var(--accent)] md:text-2xl">{{ $t('hero.toolsNote') }}</p>
+          <h2 class="mt-1 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--text-primary)] md:text-4xl">{{ $t('hero.toolsTitle') }}</h2>
+        </div>
+        <p class="hidden max-w-xs text-right font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-[var(--text-muted)] md:block">
+          {{ $t('hero.toolsHelp') }}
+        </p>
+      </div>
+
+      <div class="tools-grid mt-7 grid gap-4 lg:grid-cols-2 lg:gap-6">
+        <article class="tool-card">
+          <div class="tool-card-meta"><span>01 / {{ $t('hero.code') }}</span><span>{{ $t('hero.keyboard') }}</span></div>
+          <CodeKeyboard />
+        </article>
+        <article class="tool-card">
+          <div class="tool-card-meta"><span>02 / {{ $t('hero.sound') }}</span><span>{{ $t('hero.piano') }}</span></div>
+          <PianoVisual />
+        </article>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const heroRef = ref(null)
-const codePanel = ref(null)
-const musicPanel = ref(null)
-const headlineRef = ref(null)
-const scrollIndicator = ref(null)
 
 onMounted(() => {
   const hero = heroRef.value
   if (!hero) return
 
   const ctx = gsap.context(() => {
-    const mm = gsap.matchMedia()
-
-    mm.add('(min-width: 1024px)', () => {
-      // Pinned master timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: '+=180%',
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      })
-
-      tl.to('.parallax-grid', {
-        y: '15%',
-        ease: 'none',
-      }, 0)
-
-      tl.to(hero.querySelector('.hero-headline'), {
-        y: '50px',
-        opacity: 0,
-        scale: 0.98,
-        ease: 'power1.out',
-      }, 0)
-
-      tl.to('.hero-cta', {
-        y: '30px',
-        opacity: 0,
-        ease: 'power1.out',
-      }, 0)
-
-      tl.to(codePanel.value, {
-        x: '-2vw', // shift slightly outward to prevent center collision
-        y: '-4vh', // shift upward to avoid the text area
-        scale: 1.15, // scale slightly less to fit screens perfectly
-        rotateX: 12,
-        rotateY: -8,
-        ease: 'power1.inOut',
-      }, 0.1)
-
-      tl.to(musicPanel.value, {
-        x: '2vw', // shift slightly outward to prevent center collision
-        y: '-4vh', // shift upward to avoid the text area
-        scale: 1.15, // scale slightly less to fit screens perfectly
-        rotateX: 12,
-        rotateY: 8,
-        ease: 'power1.inOut',
-      }, 0.1)
-    })
-
-    gsap.to(scrollIndicator.value, {
-      opacity: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: hero,
-        start: 'top top',
-        end: '+=50%',
-        scrub: true,
-      },
-    })
+    gsap.from('.hero-copy > *', { y: 28, opacity: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out' })
   }, hero)
+
+  onUnmounted(() => ctx.revert())
 })
 </script>
 
 <style scoped>
-.hero-word,
-.hero-cta,
-.hero-kicker {
-  animation: heroRise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+.hero {
+  min-height: 100dvh;
+  background: radial-gradient(circle at 80% 14%, rgba(var(--accent-rgb), 0.10), transparent 24rem), var(--bg-primary);
 }
-
-.hero-word:nth-child(1) { animation-delay: 0.12s; }
-.hero-word:nth-child(2) { animation-delay: 0.32s; }
-.hero-kicker { animation-delay: 0.05s; }
-.hero-cta { animation-delay: 0.6s; }
-
-.scroll-indicator {
-  animation: fadeIn 1.5s ease 1.5s both;
+.hero-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: .75rem;
+  min-height: 3.25rem; border-radius: 9999px; padding: .75rem 1.35rem;
+  font-family: var(--font-body); font-size: .86rem; font-weight: 750;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
 }
-
-@keyframes heroRise {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-    filter: blur(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+.hero-button:hover { transform: translateY(-2px); }
+.hero-button:active { transform: translateY(1px) scale(.98); }
+.hero-button-primary { background: var(--accent); color: var(--bg-primary); }
+.hero-button-secondary { border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-primary); }
+.tool-card {
+  overflow: hidden; border: 1px solid var(--border-strong); border-radius: 2rem;
+  background: var(--bg-surface); padding: .8rem;
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.tool-card-meta {
+  display: flex; justify-content: space-between; gap: 1rem; padding: .3rem .55rem .9rem;
+  font-family: var(--font-mono); font-size: .58rem; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--text-secondary);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-word,
-  .hero-cta,
-  .hero-kicker {
-    animation: none;
-  }
-  .parallax-grid,
-  .parallax-code,
-  .parallax-music {
-    will-change: auto;
-  }
+.tool-card :deep(.kb-shell), .tool-card :deep(.piano-shell) {
+  max-width: none; border-radius: 1.35rem; border-color: var(--border); box-shadow: none;
 }
+@media (prefers-reduced-motion: reduce) { .hero-button { transition: none; } }
 </style>
