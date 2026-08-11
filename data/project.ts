@@ -38,13 +38,13 @@ export const projects = [
   {
     number: '04',
     name: 'JeneryMF Tools',
-    shortDesc: "Body measurement calculator for industrial sizing. Fast, accurate, built for field use.",
-    description: 'Smart body measurement tool for fitness tracking with visual progress charts and biometric data analysis.',
-    stack: ['Nuxt JS', 'Supabase', 'Chart.js'],
+    shortDesc: "Tailoring measurement tools built for Jenery—faster sizing, cleaner client records, and fewer manual calculations.",
+    description: 'Body measurement and pattern calculation tools used by Jenery to prepare accurate measurements before making custom clothing.',
+    stack: ['Nuxt JS', 'Nuxt UI', 'Supabase'],
     image: '/projects/jenerymf.png',
     slug: 'jenerymf-tools',
     color: '#7EB3F0',
-    type: 'Health Tools',
+    type: 'Fashion / Tailoring',
     private: false,
   },
   {

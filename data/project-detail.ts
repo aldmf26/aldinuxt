@@ -151,28 +151,28 @@ export const projectsData = {
     logoUrl: "/projects/jenerymf.png",
     width: "150",
     title: "JeneryMF Tools",
-    subtitle: "Professional Body Measurement Calculator",
+    subtitle: "Tailoring Measurement & Pattern Calculator",
     description:
-      "Specialized measurement tool for fashion/tailoring professionals. Calculates precise body dimensions based on standardized pole diameter measurements.",
+      "A practical toolkit built for Jenery, my wife's tailoring work. It records client body measurements and calculates pattern details such as armhole, bust, waist, sleeves, and other dimensions needed before making custom clothing.",
     techs: ["Nuxt JS", "Nuxt UI", "Supabase"],
     link: "https://jenerym.vercel.app/",
     year: "2024",
-    role: "Frontend Developer & UX Designer",
-    impact: "Streamlined measurement process • Customer history tracking • Mobile-optimized for field use",
-    problem: "An industrial sizing calculation that was being done manually — slow, error-prone, and hard to share in the field.",
-    solution: "A clean utility app: input pole diameter, get body size immediately. Shareable results, works on mobile, no login needed.",
+    role: "Full Stack Developer & Product Designer",
+    impact: "Faster tailoring measurements • Organized client records • Consistent pattern calculations",
+    problem: "Jenery relied on handwritten measurements and repeated manual calculations before making clothes. Client records were easy to lose, while formulas such as armhole, bicep, and sleeve calculations took extra time.",
+    solution: "Built a focused tailoring toolkit that stores each client's measurements, keeps their history, and calculates pattern dimensions instantly. It works on desktop and mobile during client fittings.",
     screenshots: [
       {
         image: "/detail/jenerym/landing.png",
-        title: "Quick Measurement Calculator",
+        title: "Tailoring and Armhole Calculators",
         description:
-          "Fast, mobile-optimized interface for taking measurements on-site. Input pole diameter and instantly get accurate body size calculations.",
+          "Quick tools for body measurements and armhole calculations. Jenery can enter one measurement and instantly receive the related pattern dimensions for TP, bicep, and sleeve opening.",
       },
       {
         image: "/detail/jenerym/dashboard.png",
-        title: "Customer Management Dashboard",
+        title: "Client Measurement Records",
         description:
-          "Track customer measurement history, manage profiles, and access previous calculations. Helps professionals maintain consistency across repeat customers.",
+          "Stores each client's full body measurements, fitting notes, custom fields, and activity history so repeat orders remain accurate and easy to review.",
       },
     ],
   },
@@ -302,10 +302,58 @@ export const projectsData = {
     solution: "Created a focused translation app with a wetlands-specific dictionary — built for scientists and conservationists, not tourists.",
     screenshots: [
       {
-        image: "https://placehold.co/1200x800/d1fae5/10b981?text=EFW+Translator",
-        title: "Wetlands Vocabulary Translator",
+        image: "/detail/efw/01-home.png",
+        title: "Wetland Dictionary Home",
         description:
-          "Specialized translator with curated environmental terminology. Includes technical terms, ecosystem concepts, and conservation vocabulary specific to wetlands research.",
+          "Public landing page for translating wetland vocabulary from Indonesian to English, with direct access to the complete word list.",
+      },
+      {
+        image: "/detail/efw/02-student-dashboard.png",
+        title: "Student Learning Dashboard",
+        description:
+          "Personalized dashboard summarizing available quizzes, completed activities, total points, word scramble performance, and leaderboard ranking.",
+      },
+      {
+        image: "/detail/efw/03-multiple-choice.png",
+        title: "Timed Multiple-Choice Quiz",
+        description:
+          "Focused quiz interface with question navigation, answer choices, and a countdown timer for structured wetland vocabulary practice.",
+      },
+      {
+        image: "/detail/efw/04-matching-quiz.png",
+        title: "Interactive Matching Quiz",
+        description:
+          "Image-based matching activity where students pair wetland animals with their English names before time runs out.",
+      },
+      {
+        image: "/detail/efw/05-quiz-result.png",
+        title: "Quiz Results and Breakdown",
+        description:
+          "Detailed result page showing overall score, correct answers by question type, and access to each answer history.",
+      },
+      {
+        image: "/detail/efw/06-admin-dashboard.png",
+        title: "Administration Dashboard",
+        description:
+          "Central workspace for monitoring participants, quizzes, scramble words, translation records, and recent learning activity.",
+      },
+      {
+        image: "/detail/efw/07-translation-management.png",
+        title: "Translation Data Management",
+        description:
+          "Searchable bilingual vocabulary catalog with supporting images and controls for adding, editing, or deleting translation entries.",
+      },
+      {
+        image: "/detail/efw/08-quiz-management.png",
+        title: "Quiz Management",
+        description:
+          "Admin table for organizing wetland learning topics and opening each quiz to manage its question collection.",
+      },
+      {
+        image: "/detail/efw/09-question-management.png",
+        title: "Question Type Management",
+        description:
+          "Question editor supporting multiple choice, true or false, fill-in-the-blank, and matching formats from one workspace.",
       },
     ],
   },

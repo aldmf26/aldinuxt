@@ -119,15 +119,16 @@
       ]
     },
     "jenerymf-tools": {
-      "short": "Kalkulator pengukuran tubuh untuk kebutuhan industri. Cepat, akurat, dan siap dipakai di lapangan.",
-      "subtitle": "Kalkulator Pengukuran Tubuh Profesional",
-      "role": "Frontend Developer & UX Designer",
-      "impact": "Proses pengukuran lebih cepat · Riwayat pelanggan · Optimal untuk perangkat mobile",
-      "problem": "Perhitungan ukuran industri dilakukan manual sehingga lambat, rawan kesalahan, dan sulit dibagikan di lapangan.",
-      "solution": "Aplikasi utilitas sederhana: masukkan diameter tiang dan dapatkan ukuran tubuh secara instan.",
+      "short": "Alat pengukuran jahit untuk Jenery—mengukur lebih cepat, menyimpan data pelanggan, dan mengurangi hitungan manual.",
+      "subtitle": "Alat Ukur Jahit dan Kalkulator Pola",
+      "description": "Toolkit praktis untuk membantu pekerjaan menjahit Jenery, istri saya. Aplikasi menyimpan ukuran tubuh pelanggan dan menghitung detail pola seperti lingkar lengan, dada, pinggang, lengan, serta ukuran lain sebelum membuat pakaian pesanan.",
+      "role": "Full Stack Developer & Product Designer",
+      "impact": "Pengukuran jahit lebih cepat · Data pelanggan tersusun · Perhitungan pola lebih konsisten",
+      "problem": "Jenery masih mencatat ukuran dengan tulisan tangan dan mengulang perhitungan sebelum membuat baju. Data pelanggan mudah tercecer, sedangkan rumus lingkar lengan, bisep, dan lengan membutuhkan waktu tambahan.",
+      "solution": "Saya membuat toolkit jahit yang menyimpan ukuran setiap pelanggan, menjaga riwayat pengukuran, dan menghitung ukuran pola secara instan. Aplikasi dapat digunakan saat fitting melalui desktop maupun ponsel.",
       "screenshots": [
-        {"title":"Kalkulator Pengukuran Cepat","description":"Antarmuka mobile untuk memasukkan diameter dan memperoleh hasil ukuran tubuh secara instan."},
-        {"title":"Dashboard Pelanggan","description":"Menyimpan profil, riwayat pengukuran, dan hasil kalkulasi pelanggan berulang."}
+        {"title":"Kalkulator Ukuran Jahit dan Lingkar Lengan","description":"Alat cepat untuk mengukur tubuh dan menghitung lingkar lengan. Jenery cukup memasukkan satu ukuran untuk memperoleh ukuran pola TP, bisep, dan kerung."},
+        {"title":"Data Pengukuran Pelanggan","description":"Menyimpan ukuran tubuh lengkap, catatan fitting, kolom khusus, dan riwayat aktivitas agar pesanan berikutnya tetap akurat dan mudah diperiksa."}
       ]
     },
     "aldi-teori": {
@@ -175,7 +176,15 @@
       "problem": "Peneliti dan pekerja lapangan di lahan basah Kalimantan belum memiliki alat kosakata bilingual khusus ekologi.",
       "solution": "Aplikasi terjemahan dengan kamus khusus lahan basah untuk ilmuwan dan pegiat konservasi.",
       "screenshots": [
-        {"title":"Penerjemah Kosakata Lahan Basah","description":"Kamus istilah lingkungan, konsep ekosistem, dan kosakata konservasi untuk penelitian lahan basah."}
+        {"title":"Halaman Utama Wetland Dictionary","description":"Halaman publik untuk menerjemahkan kosakata lahan basah dari bahasa Indonesia ke bahasa Inggris serta membuka daftar kata lengkap."},
+        {"title":"Dashboard Pembelajaran Peserta","description":"Dashboard personal berisi jumlah kuis, aktivitas selesai, total poin, performa word scramble, dan posisi leaderboard."},
+        {"title":"Kuis Pilihan Ganda Berwaktu","description":"Antarmuka kuis dengan navigasi soal, pilihan jawaban, dan penghitung waktu untuk latihan kosakata lahan basah."},
+        {"title":"Kuis Mencocokkan Interaktif","description":"Aktivitas berbasis gambar untuk memasangkan hewan lahan basah dengan nama bahasa Inggrisnya sebelum waktu habis."},
+        {"title":"Hasil dan Rincian Kuis","description":"Halaman hasil yang menampilkan nilai keseluruhan, jawaban benar per tipe soal, dan akses menuju riwayat jawaban."},
+        {"title":"Dashboard Administrasi","description":"Pusat pengelolaan peserta, kuis, kata scramble, data terjemahan, dan aktivitas pembelajaran terbaru."},
+        {"title":"Manajemen Data Terjemahan","description":"Katalog kosakata bilingual dengan pencarian, gambar pendukung, serta aksi tambah, edit, dan hapus data."},
+        {"title":"Manajemen Kuis","description":"Tabel admin untuk mengatur topik pembelajaran lahan basah dan membuka kumpulan pertanyaan setiap kuis."},
+        {"title":"Manajemen Tipe Pertanyaan","description":"Editor soal untuk format pilihan ganda, benar atau salah, isian, dan mencocokkan dalam satu ruang kerja."}
       ]
     },
     "kasir-ok": {
