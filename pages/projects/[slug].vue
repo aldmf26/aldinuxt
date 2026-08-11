@@ -10,6 +10,19 @@
 
       <div class="max-w-[1600px] mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
         <div class="lg:col-span-8">
+           <div
+             v-if="projectLogos.length"
+             class="inline-flex items-center gap-4 mb-8 p-3 md:p-4 rounded-2xl bg-white border border-black/10 shadow-sm animate-fade-up"
+             :aria-label="`${project.title} logo`"
+           >
+             <img
+               v-for="(logo, index) in projectLogos"
+               :key="logo"
+               :src="logo"
+               :alt="projectLogos.length > 1 ? `${project.title} brand ${index + 1}` : `${project.title} logo`"
+               class="h-10 md:h-14 w-auto max-w-[120px] md:max-w-[180px] object-contain"
+             />
+           </div>
            <span class="section-label block mb-8 animate-fade-up">{{ $t('project.caseStudy') }}</span>
            <h1 class="font-display italic leading-[0.85] tracking-tighter mb-8" style="font-size: clamp(64px, 12vw, 180px)">
               {{ project.title }}
@@ -140,6 +153,17 @@ const project = computed(() => {
     return { ...basic, ...detail }
   }
   return null
+})
+
+const projectLogos = computed<string[]>(() => {
+  if (!project.value) return []
+  if ('logoUrls' in project.value && Array.isArray(project.value.logoUrls)) {
+    return [...project.value.logoUrls]
+  }
+  if ('logoUrl' in project.value && typeof project.value.logoUrl === 'string') {
+    return [project.value.logoUrl]
+  }
+  return []
 })
 
 const localized = (field: string) => {

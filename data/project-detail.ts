@@ -114,8 +114,8 @@ export const projectsData = {
     ],
   },
   agafood: {
-    logoUrl: "/projects/laporku.png",
-    width: "120",
+    logoUrls: ["/projects/tkmr.png", "/projects/sdb.png"],
+    width: "260",
     title: "AgaFood",
     subtitle: "POS for Japanese & Korean Restaurants",
     description:
