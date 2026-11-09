@@ -18,7 +18,7 @@ import { projects } from '~/data/project'
 import { projectsData } from '~/data/project-detail'
 
 // Cards show the product itself: first case-study screenshot, falling back to the cover image (often a logo).
-const cards = projects.map(p => ({ ...p, image: p.cover || projectsData[p.slug]?.screenshots?.[0]?.image || p.image }))
+const cards = projects.map(p => ({ ...p, link: projectsData[p.slug]?.link, image: p.cover || projectsData[p.slug]?.screenshots?.[0]?.image || p.image }))
 </script>
 
 <style scoped>

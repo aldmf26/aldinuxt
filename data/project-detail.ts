@@ -7,7 +7,7 @@ export const projectsData = {
     description:
       "Kasir OK runs a small shop from one phone: checkout, stock, customer debt, and profit reports. It installs like an app and keeps recording sales when the connection drops.",
     techs: ["Nuxt 3", "Nuxt UI", "Supabase", "PWA"],
-    link: "",
+    link: "https://kasirok.vercel.app/",
     year: "2026",
     role: "Full Stack Developer & Product Designer",
     impact: "Sales keep recording offline and sync later, so a weak signal never loses a transaction",

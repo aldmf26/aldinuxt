@@ -6,7 +6,11 @@
       {{ side === 'dev' ? $t('hero.lineDev') : $t('hero.lineProducer') }}
     </p>
 
-    <DuoDevice />
+    <!-- Dev: 3D mechanical coding keyboard -->
+    <DuoDevice v-if="side === 'dev'" />
+
+    <!-- Producer: Separated Drum Pads 24 & Piano Studio -->
+    <ProducerStudio v-else />
 
     <div class="hero-controls">
       <div class="side-switch" role="group" :aria-label="$t('hero.sideLabel')">
