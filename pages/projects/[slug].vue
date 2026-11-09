@@ -32,6 +32,7 @@
            <p class="font-body text-xl md:text-2xl text-text-primary/60 leading-relaxed animate-fade-up delay-100">
              {{ localized('subtitle') }}
            </p>
+           <a v-if="project.link" :href="project.link" target="_blank" rel="noopener" class="btn btn-primary mt-8">{{ $t('project.live') }} ↗</a>
         </div>
       </div>
     </section>
@@ -79,7 +80,7 @@
           <!-- Showcase Screenshots -->
           <div v-for="(img, i) in project.screenshots" :key="i" class="space-y-6">
             <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-white/5 bg-[var(--bg-surface)]">
-              <img :src="img.image" :alt="localizedScreenshot(i, 'title', img.title)" class="w-full h-auto" />
+              <img :src="img.image" :alt="localizedScreenshot(i, 'title', img.title)" class="w-full h-auto" :loading="i ? 'lazy' : 'eager'" decoding="async" width="1600" height="1000" />
             </div>
             <div class="max-w-2xl">
               <h4 class="text-xl font-bold text-text-primary mb-3">{{ localizedScreenshot(i, 'title', img.title) }}</h4>

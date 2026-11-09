@@ -42,17 +42,19 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Web developer (Nuxt, Laravel, Tailwind) and music producer (FL Studio) based in Banjarmasin, Indonesia. Building web apps and producing beats.' },
-        { name: 'theme-color', content: '#080808' },
+        { name: 'theme-color', content: '#dfe1e3' },
         { property: 'og:title', content: 'Aldi Fahrizaldi - Web Developer x Music Producer' },
-        { property: 'og:description', content: 'Crafting digital code & sonic rhythms.' },
+        { property: 'og:description', content: 'Web apps for small businesses and trap beats, from Banjarmasin.' },
         { property: 'og:type', content: 'website' },
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,800&display=swap' },
       ],
       script: [
+        // paint the saved side + accent before first render so the page never flashes the wrong theme
+        { innerHTML: "try{var d=document.documentElement;d.dataset.side=localStorage.getItem('aldi-side')||'dev';d.dataset.accent=localStorage.getItem('aldi-accent')||'oranye'}catch(e){}" },
         { src: '/_vercel/insights/script.js', defer: true },
       ],
     },

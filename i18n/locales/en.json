@@ -7,7 +7,8 @@
     "hire": "Hire Me",
     "menu": "Menu",
     "close": "Close",
-    "tagline": "code & sound"
+    "tagline": "code & sound",
+    "accent": "Accent colour"
   },
   "hero": {
     "availability": "Available for selected projects · 2026",
@@ -15,19 +16,29 @@
     "line2": "things for",
     "accent": "the web.",
     "intro": "Aldi Fahrizaldi—web developer and music producer. I build clear digital products with Nuxt and Laravel, with the same care I bring to composing beats.",
-    "workCta": "Explore my work",
-    "musicCta": "Play my beats",
+    "workCta": "See my work",
+    "musicCta": "Hear the beats",
     "toolsNote": "two sides, one practice",
     "toolsTitle": "Tools I think with.",
     "toolsHelp": "Press keys. Make noise.\nBoth are interactive.",
     "code": "Code",
     "keyboard": "Mechanical keyboard",
     "sound": "Sound",
-    "piano": "MIDI piano"
+    "piano": "MIDI piano",
+    "roleDev": "Web developer.",
+    "lineDev": "Apps for small businesses.",
+    "roleProducer": "Music producer.",
+    "lineProducer": "Trap and lo-fi beats.",
+    "sideLabel": "Choose a side",
+    "sideDev": "Developer",
+    "sideProducer": "Producer",
+    "hintDev": "Type or tap the keys",
+    "hintProducer": "Piano: Q = C · Pads: A S D F / Z X C V · hold Z for a hi-hat roll",
+    "hintProducerTouch": "Tap the pads & keys · hold HAT for a hi-hat roll"
   },
   "works": {
     "ghost": "WORKS",
-    "title": "Portfolio",
+    "title": "Work",
     "description": "Nine projects. Each one built around a real constraint."
   },
   "identity": {
@@ -49,8 +60,8 @@
   },
   "contact": {
     "label": "LET'S TALK",
-    "title": "Have an idea?",
-    "accent": "Let's make it real.",
+    "title": "Got an idea?",
+    "accent": "Just message me.",
     "description": "Open to freelance projects, collaborations, and interesting conversations about web or music.",
     "email": "Send Email",
     "whatsapp": "Chat on WhatsApp",
@@ -62,10 +73,12 @@
   "music": {
     "ghost": "BEATS",
     "label": "Sound Lab",
-    "title": "Beats & Productions",
+    "title": "Beats",
     "description": "Trap, EDM, and free FLP packs—all produced in FL Studio. Available for licensing, content use, or just listening.",
-    "youtube": "Watch on YouTube",
-    "showAll": "Show All Tracks"
+    "youtube": "Open YouTube",
+    "showAll": "Show All Tracks",
+    "loading": "Loading beats…",
+    "empty": "The full catalogue lives on my YouTube channel."
   },
   "project": {
     "caseStudy": "Case Study",
@@ -77,18 +90,37 @@
     "problem": "The Problem",
     "solution": "Solution",
     "outcome": "The Outcome",
-    "more": "More Projects"
+    "more": "More Projects",
+    "live": "View live"
   },
   "projects": {
-    "laporku": {"short": "Financial reporting app for small business owners—understand your numbers without knowing accounting."},
-    "agrika-gatya-arum": {"short": "Premium landing page for a birdnest export company, built to convert international buyers on first visit."},
-    "agafood": {"short": "One POS system running two restaurants—Takemori and Soondobu—in Banjarmasin."},
-    "jenerymf-tools": {"short": "Tailoring measurement tools built for Jenery—faster sizing, cleaner client records, and fewer manual calculations."},
-    "aldi-teori": {"short": "A knowledge base for historical figures and civilizations. Structured, searchable, built for learners."},
-    "translation-app": {"short": "Indonesian ↔ Dayak language translator, preserving a language with almost no digital presence."},
-    "circle-english-course": {"short": "Enrollment and learning platform for an English course in Muara Teweh, Central Kalimantan."},
-    "english-for-wetlands": {"short": "Bilingual wetlands vocabulary app for researchers and conservationists working in Kalimantan."},
-    "kasir-ok": {"short": "Local-first POS for small shops—fast checkout, stock control, profit reports, and store backup in one app."}
+    "laporku": {
+      "short": "Financial reporting app for small business owners—understand your numbers without knowing accounting."
+    },
+    "agrika-gatya-arum": {
+      "short": "Premium landing page for a birdnest export company, built to convert international buyers on first visit."
+    },
+    "agafood": {
+      "short": "One POS system running two restaurants—Takemori and Soondobu—in Banjarmasin."
+    },
+    "jenerymf-tools": {
+      "short": "Tailoring measurement tools built for Jenery—faster sizing, cleaner client records, and fewer manual calculations."
+    },
+    "aldi-teori": {
+      "short": "A knowledge base for historical figures and civilizations. Structured, searchable, built for learners."
+    },
+    "translation-app": {
+      "short": "Indonesian ↔ Dayak language translator, preserving a language with almost no digital presence."
+    },
+    "circle-english-course": {
+      "short": "Enrollment and learning platform for an English course in Muara Teweh, Central Kalimantan."
+    },
+    "english-for-wetlands": {
+      "short": "Bilingual wetlands vocabulary app for researchers and conservationists working in Kalimantan."
+    },
+    "kasir-ok": {
+      "short": "POS for small shops that keeps selling when the internet drops. Stock, customer debt, and profit reports on one phone."
+    }
   },
   "service": {
     "label": "Service",
@@ -103,15 +135,45 @@
     "whatsapp": "Chat on WhatsApp →",
     "email": "or email aldimf26{'@'}gmail.com",
     "services": [
-      {"title":"Landing Page / Company Profile","for":"Businesses that need a professional web presence","includes":"Design, development, responsive layout, basic SEO setup","timeline":"1–2 weeks","price":"Starting from Rp 1.500.000"},
-      {"title":"Web App / Internal System","for":"Businesses that need custom software—POS, inventory, dashboards, management tools","includes":"Requirement analysis, full-stack development, database design, user training","timeline":"3–8 weeks depending on scope","price":"Starting from Rp 5.000.000"},
-      {"title":"Beat Licensing / Custom Music","for":"Content creators, brands, short films, ads","includes":"Non-exclusive license from existing catalog, or custom beat on request","timeline":"3–7 days for custom","price":"Contact for pricing"}
+      {
+        "title": "Landing Page / Company Profile",
+        "for": "Businesses that need a professional web presence",
+        "includes": "Design, development, responsive layout, basic SEO setup",
+        "timeline": "1–2 weeks",
+        "price": "Starting from Rp 1.500.000"
+      },
+      {
+        "title": "Web App / Internal System",
+        "for": "Businesses that need custom software—POS, inventory, dashboards, management tools",
+        "includes": "Requirement analysis, full-stack development, database design, user training",
+        "timeline": "3–8 weeks depending on scope",
+        "price": "Starting from Rp 5.000.000"
+      },
+      {
+        "title": "Beat Licensing / Custom Music",
+        "for": "Content creators, brands, short films, ads",
+        "includes": "Non-exclusive license from existing catalog, or custom beat on request",
+        "timeline": "3–7 days for custom",
+        "price": "Contact for pricing"
+      }
     ],
     "steps": [
-      {"title":"Chat","desc":"Tell me what you need via WhatsApp. Free, no commitment."},
-      {"title":"Proposal","desc":"I'll send a clear scope, timeline, and price. No surprises."},
-      {"title":"Build","desc":"I keep you updated every 2–3 days. You always know where we are."},
-      {"title":"Launch","desc":"Deploy, test, hand over. Includes 30 days of post-launch support."}
+      {
+        "title": "Chat",
+        "desc": "Tell me what you need via WhatsApp. Free, no commitment."
+      },
+      {
+        "title": "Proposal",
+        "desc": "I'll send a clear scope, timeline, and price. No surprises."
+      },
+      {
+        "title": "Build",
+        "desc": "I keep you updated every 2–3 days. You always know where we are."
+      },
+      {
+        "title": "Launch",
+        "desc": "Deploy, test, hand over. Includes 30 days of post-launch support."
+      }
     ]
   },
   "musicPage": {

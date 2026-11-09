@@ -1,179 +1,45 @@
 <template>
-  <section id="contact" class="relative py-32 md:py-64 px-6 md:px-16 min-h-screen flex flex-col justify-end overflow-hidden">
-    <!-- Background Ghost Word -->
-    <div class="absolute top-20 left-0 z-0 pointer-events-none select-none opacity-[0.03] text-text-muted font-black tracking-tighter leading-none ghost-hello">
-      {{ $t('contact.label') }}
+  <section id="contact" class="contact">
+    <h2 class="title">{{ $t('contact.title') }}<br>{{ $t('contact.accent') }}</h2>
+    <div class="cta">
+      <a class="btn btn-primary" :href="WA" target="_blank" rel="noopener">{{ $t('contact.whatsapp') }}</a>
+      <a class="btn btn-ghost" :href="`mailto:${EMAIL}`">{{ EMAIL }}</a>
     </div>
-
-    <div class="max-w-[1800px] mx-auto w-full relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-20 items-end">
-        <!-- Giant Editorial Headline -->
-        <div ref="headlineRef">
-          <span class="section-label block mb-12">{{ $t('contact.label') }}</span>
-          <a
-            href="mailto:aldimf26@gmail.com?subject=Let's%20Talk!"
-            class="group block transition-colors duration-500"
-            data-cursor-hover
-          >
-            <h2 class="font-display font-black leading-[0.8] tracking-tighter text-text-primary group-hover:text-lime transition-colors duration-700 contact-title">
-              {{ $t('contact.title') }} <br/>
-              {{ $t('contact.accent') }}
-            </h2>
-          </a>
-        </div>
-
-        <!-- Contact Details -->
-        <div ref="detailsRef" class="space-y-16 pb-10">
-           <div class="space-y-4">
-              <span class="font-mono text-[10px] text-text-secondary/70 uppercase tracking-[0.3em] block">{{ $t('contact.emailLabel') }}</span>
-              <a 
-                href="mailto:aldimf26@gmail.com" 
-                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-[var(--border)] pb-2 inline-block"
-                data-cursor-hover
-              >
-                → aldimf26@gmail.com
-              </a>
-              <a 
-                href="https://wa.me/6289541311053" 
-                target="_blank"
-                class="font-mono text-xl md:text-2xl text-text-primary hover:text-lime transition-colors border-b border-[var(--border)] pb-2 flex items-center gap-4 mt-4"
-                data-cursor-hover
-              >
-                → +62 895-413111-053
-              </a>
-           </div>
-
-           <div class="grid grid-cols-2 gap-12">
-              <div class="space-y-4">
-                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">{{ $t('contact.social') }}</span>
-                 <ul class="space-y-3">
-                   <li v-for="social in socialLinks" :key="social.name">
-                     <a
-                        :href="social.url"
-                        target="_blank"
-                        class="font-mono text-xs uppercase tracking-widest text-text-primary/60 hover:text-lime transition-colors flex items-center gap-2"
-                        data-cursor-hover
-                      >
-                       <i :class="getSocialIcon(social.url)" class="text-lg"></i>
-                       {{ social.name }}
-                     </a>
-                   </li>
-                 </ul>
-              </div>
-              <div class="space-y-4">
-                 <span class="font-mono text-[10px] text-text-primary/40 uppercase tracking-[0.3em] block">{{ $t('contact.location') }}</span>
-                 <p class="font-mono text-xs text-text-primary/60 uppercase tracking-widest leading-relaxed">
-                   Banjarmasin, ID <br/>
-                   {{ localTime }}
-                 </p>
-              </div>
-           </div>
-        </div>
-      </div>
-
-      <!-- Footer Bottom -->
-      <div class="mt-32 pt-12 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="text-center md:text-left">
-          <p class="font-mono text-[10px] text-text-primary/30 uppercase tracking-[0.2em]">
-            © 2025 Muhammad Fahrizaldi · Banjarmasin, Indonesia
-          </p>
-          <p class="font-mono text-[8px] text-text-primary/20 uppercase tracking-[0.3em] mt-2">
-            Code &amp; Beats · One Human, Two Obsessions
-          </p>
-        </div>
-        <button 
-          @click="scrollToTop"
-          class="font-mono text-[10px] text-lime uppercase tracking-[0.3em] hover:opacity-70 transition-opacity"
-          data-cursor-hover
-        >
-          {{ $t('contact.backTop') }} ↑
-        </button>
-      </div>
-    </div>
+    <ul class="social">
+      <li v-for="s in SOCIAL" :key="s.url">
+        <a :href="s.url" target="_blank" rel="noopener" :aria-label="s.label">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path :d="s.icon" /></svg>
+          <span>{{ s.label }}</span>
+        </a>
+      </li>
+    </ul>
+    <footer class="foot">© {{ year }} Aldi Fahrizaldi · Banjarmasin</footer>
   </section>
 </template>
 
 <script setup>
-import { gsap } from 'gsap'
-
-const headlineRef = ref(null)
-const detailsRef = ref(null)
-const localTime = ref('')
-
-const socialLinks = [
-  { name: '@aldiiimf', url: 'https://www.instagram.com/aldiiimf' },
-  { name: 'aldmf26', url: 'https://github.com/aldmf26' },
-  { name: '@ALdMFbeat', url: 'https://www.youtube.com/@ALdMFbeat' },
+const WA = 'https://wa.me/6289541311053'
+const EMAIL = 'aldimf26@gmail.com'
+const year = new Date().getFullYear()
+// simple-icons paths (CC0)
+const SOCIAL = [
+  { label: 'Instagram', url: 'https://www.instagram.com/aldiiimf', icon: 'M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z' },
+  { label: 'YouTube', url: 'https://www.youtube.com/@ALdMFbeat', icon: 'M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z' },
+  { label: 'GitHub', url: 'https://github.com/aldmf26', icon: 'M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3' },
 ]
-
-const updateTime = () => {
-  const now = new Date()
-  localTime.value = now.toLocaleTimeString('en-US', { 
-    hour: '2-digit', 
-    minute: '2-digit', 
-    timeZoneName: 'short' 
-  })
-}
-
-const scrollToTop = () => {
-  if (process.client) {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-}
-
-const getSocialIcon = (url) => {
-  const u = url.toLowerCase()
-  if (u.includes('instagram.com')) return 'ri-instagram-line'
-  if (u.includes('github.com')) return 'ri-github-line'
-  if (u.includes('youtube.com')) return 'ri-youtube-line'
-  return 'ri-share-line'
-}
-
-onMounted(() => {
-  if (typeof window === 'undefined') return
-  updateTime()
-  setInterval(updateTime, 60000)
-
-  gsap.fromTo(
-    headlineRef.value,
-    { y: 60, opacity: 0 },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.9,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: headlineRef.value,
-        start: 'top 90%',
-        once: true,
-      },
-    }
-  )
-
-  gsap.fromTo(
-    detailsRef.value,
-    { y: 40, opacity: 0 },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      delay: 0.15,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: detailsRef.value,
-        start: 'top 90%',
-        once: true,
-      },
-    }
-  )
-})
 </script>
 
 <style scoped>
-.contact-title {
-  font-size: clamp(80px, 15vw, 220px);
+.contact { max-width: 1100px; margin: 0 auto; padding: 120px 16px 40px; text-align: center; }
+.title {
+  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.04em;
+  font-size: clamp(3rem, 9vw, 6rem); line-height: 0.9; text-wrap: balance;
 }
-.ghost-hello {
-  font-size: clamp(120px, 20vw, 300px);
-}
+.cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+.social { list-style: none; display: flex; justify-content: center; gap: 28px; margin-top: 48px; }
+.social a { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.social a:hover { color: var(--text-primary); }
+.social svg { width: 20px; height: 20px; fill: currentColor; }
+.foot { margin-top: 96px; color: var(--text-muted); font-size: 0.95rem; }
+@media (max-width: 480px) { .social span { display: none; } .social svg { width: 26px; height: 26px; } }
 </style>

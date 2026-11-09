@@ -7,7 +7,8 @@
     "hire": "Rekrut Saya",
     "menu": "Menu",
     "close": "Tutup",
-    "tagline": "kode & suara"
+    "tagline": "kode & suara",
+    "accent": "Warna aksen"
   },
   "hero": {
     "availability": "Menerima project pilihan · 2026",
@@ -15,19 +16,29 @@
     "line2": "hal berguna untuk",
     "accent": "web.",
     "intro": "Aldi Fahrizaldi—web developer dan music producer. Saya membangun produk digital dengan Nuxt dan Laravel, memakai ketelitian yang sama saat menyusun musik.",
-    "workCta": "Lihat karya saya",
-    "musicCta": "Putar musik saya",
+    "workCta": "Lihat karya",
+    "musicCta": "Dengar beat",
     "toolsNote": "dua sisi, satu proses",
     "toolsTitle": "Alat untuk berkarya.",
     "toolsHelp": "Tekan tombol. Buat suara.\nKeduanya interaktif.",
     "code": "Kode",
     "keyboard": "Keyboard mekanikal",
     "sound": "Suara",
-    "piano": "Piano MIDI"
+    "piano": "Piano MIDI",
+    "roleDev": "Web developer.",
+    "lineDev": "Aplikasi untuk usaha kecil.",
+    "roleProducer": "Music producer.",
+    "lineProducer": "Beat trap dan lo-fi.",
+    "sideLabel": "Pilih sisi",
+    "sideDev": "Developer",
+    "sideProducer": "Producer",
+    "hintDev": "Ketik atau tekan tutsnya",
+    "hintProducer": "Piano: Q = do · Pad: A S D F / Z X C V · tahan Z untuk hi-hat roll",
+    "hintProducerTouch": "Tekan pad & tuts · tahan HAT untuk hi-hat roll"
   },
   "works": {
     "ghost": "KARYA",
-    "title": "Portofolio",
+    "title": "Karya",
     "description": "Sembilan project. Masing-masing dibangun untuk menyelesaikan kebutuhan nyata."
   },
   "identity": {
@@ -50,7 +61,7 @@
   "contact": {
     "label": "MARI BICARA",
     "title": "Punya ide?",
-    "accent": "Mari kita wujudkan.",
+    "accent": "Chat saja.",
     "description": "Terbuka untuk project freelance, kolaborasi, dan percakapan menarik tentang web atau musik.",
     "email": "Kirim Email",
     "whatsapp": "Chat WhatsApp",
@@ -62,10 +73,12 @@
   "music": {
     "ghost": "MUSIK",
     "label": "Laboratorium Suara",
-    "title": "Beat & Produksi",
+    "title": "Beat",
     "description": "Trap, EDM, dan paket FLP gratis—semuanya diproduksi di FL Studio. Tersedia untuk lisensi, kebutuhan konten, atau sekadar didengarkan.",
-    "youtube": "Tonton di YouTube",
-    "showAll": "Tampilkan Semua Track"
+    "youtube": "Buka YouTube",
+    "showAll": "Tampilkan Semua Track",
+    "loading": "Memuat beat…",
+    "empty": "Beat lengkap ada di channel YouTube saya."
   },
   "project": {
     "caseStudy": "Studi Kasus",
@@ -77,7 +90,8 @@
     "problem": "Masalah",
     "solution": "Solusi",
     "outcome": "Hasil",
-    "more": "Project Lainnya"
+    "more": "Project Lainnya",
+    "live": "Lihat live"
   },
   "projects": {
     "laporku": {
@@ -89,9 +103,18 @@
       "role": "Full Stack Developer & Product Designer",
       "impact": "Pengguna aktif mencatat transaksi bulanan Rp 50 juta+ · Waktu pembukuan berkurang 70%",
       "screenshots": [
-        {"title":"Landing Page dengan Nilai Jelas","description":"Landing page menjelaskan laporan sederhana, insight cerdas, dan paket terjangkau bagi pemilik UMKM."},
-        {"title":"Dashboard Insight Keuangan","description":"Laporan mingguan dan bulanan otomatis menampilkan tren laba, pengeluaran terbesar, dan kondisi arus kas."},
-        {"title":"Dashboard Admin","description":"Panel admin memantau aktivitas pengguna, langganan, dan performa sistem secara real-time."}
+        {
+          "title": "Landing Page dengan Nilai Jelas",
+          "description": "Landing page menjelaskan laporan sederhana, insight cerdas, dan paket terjangkau bagi pemilik UMKM."
+        },
+        {
+          "title": "Dashboard Insight Keuangan",
+          "description": "Laporan mingguan dan bulanan otomatis menampilkan tren laba, pengeluaran terbesar, dan kondisi arus kas."
+        },
+        {
+          "title": "Dashboard Admin",
+          "description": "Panel admin memantau aktivitas pengguna, langganan, dan performa sistem secara real-time."
+        }
       ]
     },
     "agrika-gatya-arum": {
@@ -102,7 +125,10 @@
       "problem": "Perusahaan ekspor sarang burung walet membutuhkan situs yang langsung membangun kepercayaan pembeli internasional.",
       "solution": "Landing page premium dengan hierarki visual jelas, fokus produk, kredibilitas perusahaan, dan kemampuan ekspor.",
       "screenshots": [
-        {"title":"Landing Page Ekspor Premium","description":"Menampilkan produk sarang burung walet Indonesia, kredensial perusahaan, sertifikasi kualitas, dan kemampuan ekspor global."}
+        {
+          "title": "Landing Page Ekspor Premium",
+          "description": "Menampilkan produk sarang burung walet Indonesia, kredensial perusahaan, sertifikasi kualitas, dan kemampuan ekspor global."
+        }
       ]
     },
     "agafood": {
@@ -113,9 +139,18 @@
       "problem": "Dua restoran dengan menu, brand, dan staf berbeda membutuhkan POS masing-masing tanpa menggandakan biaya pemeliharaan.",
       "solution": "Satu sistem POS dengan konfigurasi terpisah untuk tiap restoran, mencakup kasir, dapur, payroll, dan laporan.",
       "screenshots": [
-        {"title":"Halaman Pemesanan","description":"Antarmuka cepat untuk menerima dan mengelola pesanan secara akurat dalam operasional restoran yang sibuk."},
-        {"title":"Halaman Detail Restoran","description":"Informasi lengkap mengenai menu, harga, dan detail masing-masing restoran."},
-        {"title":"Halaman Admin","description":"Pemilik dapat mengelola pesanan, menu, dan informasi operasional restoran."}
+        {
+          "title": "Halaman Pemesanan",
+          "description": "Antarmuka cepat untuk menerima dan mengelola pesanan secara akurat dalam operasional restoran yang sibuk."
+        },
+        {
+          "title": "Halaman Detail Restoran",
+          "description": "Informasi lengkap mengenai menu, harga, dan detail masing-masing restoran."
+        },
+        {
+          "title": "Halaman Admin",
+          "description": "Pemilik dapat mengelola pesanan, menu, dan informasi operasional restoran."
+        }
       ]
     },
     "jenerymf-tools": {
@@ -127,8 +162,14 @@
       "problem": "Jenery masih mencatat ukuran dengan tulisan tangan dan mengulang perhitungan sebelum membuat baju. Data pelanggan mudah tercecer, sedangkan rumus lingkar lengan, bisep, dan lengan membutuhkan waktu tambahan.",
       "solution": "Saya membuat toolkit jahit yang menyimpan ukuran setiap pelanggan, menjaga riwayat pengukuran, dan menghitung ukuran pola secara instan. Aplikasi dapat digunakan saat fitting melalui desktop maupun ponsel.",
       "screenshots": [
-        {"title":"Kalkulator Ukuran Jahit dan Lingkar Lengan","description":"Alat cepat untuk mengukur tubuh dan menghitung lingkar lengan. Jenery cukup memasukkan satu ukuran untuk memperoleh ukuran pola TP, bisep, dan kerung."},
-        {"title":"Data Pengukuran Pelanggan","description":"Menyimpan ukuran tubuh lengkap, catatan fitting, kolom khusus, dan riwayat aktivitas agar pesanan berikutnya tetap akurat dan mudah diperiksa."}
+        {
+          "title": "Kalkulator Ukuran Jahit dan Lingkar Lengan",
+          "description": "Alat cepat untuk mengukur tubuh dan menghitung lingkar lengan. Jenery cukup memasukkan satu ukuran untuk memperoleh ukuran pola TP, bisep, dan kerung."
+        },
+        {
+          "title": "Data Pengukuran Pelanggan",
+          "description": "Menyimpan ukuran tubuh lengkap, catatan fitting, kolom khusus, dan riwayat aktivitas agar pesanan berikutnya tetap akurat dan mudah diperiksa."
+        }
       ]
     },
     "aldi-teori": {
@@ -139,8 +180,14 @@
       "problem": "Pengetahuan sejarah berbahasa Indonesia tersebar di berbagai situs berkualitas rendah tanpa pencarian dan struktur yang baik.",
       "solution": "Basis pengetahuan berkategori dengan pencarian bersih untuk tokoh, peradaban, dan linimasa sejarah.",
       "screenshots": [
-        {"title":"Beranda Edukasi","description":"Konten teori, tokoh, peristiwa, dan peradaban disusun agar mudah dijelajahi."},
-        {"title":"Halaman Konten Lengkap","description":"Artikel berisi teks, gambar, referensi, konteks sejarah, dan interpretasi modern."}
+        {
+          "title": "Beranda Edukasi",
+          "description": "Konten teori, tokoh, peristiwa, dan peradaban disusun agar mudah dijelajahi."
+        },
+        {
+          "title": "Halaman Konten Lengkap",
+          "description": "Artikel berisi teks, gambar, referensi, konteks sejarah, dan interpretasi modern."
+        }
       ]
     },
     "translation-app": {
@@ -151,7 +198,10 @@
       "problem": "Bahasa Dayak hampir tidak memiliki kehadiran digital dan belum tersedia alat terjemahan yang mudah diakses.",
       "solution": "Aplikasi terjemahan dua arah dengan kamus Indonesia-Dayak yang dikurasi.",
       "screenshots": [
-        {"title":"Antarmuka Terjemahan Sederhana","description":"Pengguna dapat berpindah antara Bahasa Indonesia dan Dayak dengan satu klik."}
+        {
+          "title": "Antarmuka Terjemahan Sederhana",
+          "description": "Pengguna dapat berpindah antara Bahasa Indonesia dan Dayak dengan satu klik."
+        }
       ]
     },
     "circle-english-course": {
@@ -176,32 +226,77 @@
       "problem": "Peneliti dan pekerja lapangan di lahan basah Kalimantan belum memiliki alat kosakata bilingual khusus ekologi.",
       "solution": "Aplikasi terjemahan dengan kamus khusus lahan basah untuk ilmuwan dan pegiat konservasi.",
       "screenshots": [
-        {"title":"Halaman Utama Wetland Dictionary","description":"Halaman publik untuk menerjemahkan kosakata lahan basah dari bahasa Indonesia ke bahasa Inggris serta membuka daftar kata lengkap."},
-        {"title":"Dashboard Pembelajaran Peserta","description":"Dashboard personal berisi jumlah kuis, aktivitas selesai, total poin, performa word scramble, dan posisi leaderboard."},
-        {"title":"Kuis Pilihan Ganda Berwaktu","description":"Antarmuka kuis dengan navigasi soal, pilihan jawaban, dan penghitung waktu untuk latihan kosakata lahan basah."},
-        {"title":"Kuis Mencocokkan Interaktif","description":"Aktivitas berbasis gambar untuk memasangkan hewan lahan basah dengan nama bahasa Inggrisnya sebelum waktu habis."},
-        {"title":"Hasil dan Rincian Kuis","description":"Halaman hasil yang menampilkan nilai keseluruhan, jawaban benar per tipe soal, dan akses menuju riwayat jawaban."},
-        {"title":"Dashboard Administrasi","description":"Pusat pengelolaan peserta, kuis, kata scramble, data terjemahan, dan aktivitas pembelajaran terbaru."},
-        {"title":"Manajemen Data Terjemahan","description":"Katalog kosakata bilingual dengan pencarian, gambar pendukung, serta aksi tambah, edit, dan hapus data."},
-        {"title":"Manajemen Kuis","description":"Tabel admin untuk mengatur topik pembelajaran lahan basah dan membuka kumpulan pertanyaan setiap kuis."},
-        {"title":"Manajemen Tipe Pertanyaan","description":"Editor soal untuk format pilihan ganda, benar atau salah, isian, dan mencocokkan dalam satu ruang kerja."}
+        {
+          "title": "Halaman Utama Wetland Dictionary",
+          "description": "Halaman publik untuk menerjemahkan kosakata lahan basah dari bahasa Indonesia ke bahasa Inggris serta membuka daftar kata lengkap."
+        },
+        {
+          "title": "Dashboard Pembelajaran Peserta",
+          "description": "Dashboard personal berisi jumlah kuis, aktivitas selesai, total poin, performa word scramble, dan posisi leaderboard."
+        },
+        {
+          "title": "Kuis Pilihan Ganda Berwaktu",
+          "description": "Antarmuka kuis dengan navigasi soal, pilihan jawaban, dan penghitung waktu untuk latihan kosakata lahan basah."
+        },
+        {
+          "title": "Kuis Mencocokkan Interaktif",
+          "description": "Aktivitas berbasis gambar untuk memasangkan hewan lahan basah dengan nama bahasa Inggrisnya sebelum waktu habis."
+        },
+        {
+          "title": "Hasil dan Rincian Kuis",
+          "description": "Halaman hasil yang menampilkan nilai keseluruhan, jawaban benar per tipe soal, dan akses menuju riwayat jawaban."
+        },
+        {
+          "title": "Dashboard Administrasi",
+          "description": "Pusat pengelolaan peserta, kuis, kata scramble, data terjemahan, dan aktivitas pembelajaran terbaru."
+        },
+        {
+          "title": "Manajemen Data Terjemahan",
+          "description": "Katalog kosakata bilingual dengan pencarian, gambar pendukung, serta aksi tambah, edit, dan hapus data."
+        },
+        {
+          "title": "Manajemen Kuis",
+          "description": "Tabel admin untuk mengatur topik pembelajaran lahan basah dan membuka kumpulan pertanyaan setiap kuis."
+        },
+        {
+          "title": "Manajemen Tipe Pertanyaan",
+          "description": "Editor soal untuk format pilihan ganda, benar atau salah, isian, dan mencocokkan dalam satu ruang kerja."
+        }
       ]
     },
     "kasir-ok": {
-      "short": "POS lokal untuk usaha kecil—transaksi cepat, kontrol stok, laporan laba, dan backup toko dalam satu aplikasi.",
-      "subtitle": "Point of Sale Sederhana untuk Usaha Kecil Indonesia",
-      "description": "Kasir OK menyatukan operasional toko harian dalam satu ruang kerja sederhana: transaksi, stok, produk, laporan penjualan, dan laba.",
-      "problem": "Pemilik toko kecil sering memakai alat terpisah untuk transaksi, catatan stok, dan perhitungan laba sehingga pekerjaan berulang dan performa harian sulit dipahami.",
-      "solution": "POS fokus dengan pemilihan produk cepat, barcode, peringatan stok, perhitungan laba otomatis, laporan fleksibel, dan backup data lokal.",
+      "short": "Kasir untuk toko kecil yang tetap jalan walau internet putus. Stok, hutang pelanggan, dan laporan laba di satu HP.",
+      "subtitle": "Aplikasi Kasir Tahan Offline untuk Toko Kecil Indonesia",
+      "description": "Kasir OK menjalankan toko kecil dari satu HP: jualan, stok, hutang pelanggan, dan laporan laba. Bisa dipasang seperti aplikasi dan tetap mencatat penjualan saat sinyal hilang.",
+      "problem": "Toko kecil sering jualan dengan sinyal yang naik-turun, mencatat hutang pelanggan di buku, dan menghitung laba pakai kalkulator. Sekali koneksi putus saat bayar, transaksi bisa tidak tercatat.",
+      "solution": "PWA yang menyimpan setiap transaksi secara utuh dan mengantrekannya di HP saat offline, lalu sinkron otomatis. Penjualan yang belum lunas jadi hutang pelanggan lengkap dengan cicilan. Ditambah peringatan stok menipis, perbandingan periode di laporan, zona waktu toko (WIB/WITA/WIT), cetak struk Bluetooth, shift kasir, dan PIN pemilik.",
       "role": "Full Stack Developer & Product Designer",
-      "impact": "Kasir, inventaris, laporan, dan backup toko menyatu dalam satu aplikasi responsif",
+      "impact": "Penjualan tetap tercatat saat offline lalu sinkron sendiri, jadi sinyal lemah tidak bikin transaksi hilang",
       "screenshots": [
-        {"title":"Dashboard Operasional Harian","description":"Menampilkan posisi uang hari ini dan akses cepat menuju kasir, penambahan barang, dan catatan keuntungan."},
-        {"title":"Alur Kasir Cepat","description":"Katalog produk, barcode, keranjang, diskon otomatis, dan pembayaran berada dalam satu layar."},
-        {"title":"Pengelolaan Produk dan Stok","description":"Tabel produk dengan pencarian, filter kategori, peringatan restock, harga, laba, dan aksi pengelolaan."},
-        {"title":"Ringkasan Performa Penjualan","description":"Filter tanggal dan pembayaran menampilkan omzet, transaksi, rata-rata belanja, jumlah item, tren, dan produk teratas."},
-        {"title":"Laporan Laba Rugi","description":"Omzet, modal, pengeluaran, laba kotor, dan laba bersih dirangkum bersama margin tiap produk."},
-        {"title":"Profil Toko dan Backup Data","description":"Pemilik dapat mengatur identitas toko dan menjaga data produk serta transaksi melalui backup perangkat."}
+        {
+          "title": "Dashboard Operasional Harian",
+          "description": "Menampilkan posisi uang hari ini dan akses cepat menuju kasir, penambahan barang, dan catatan keuntungan."
+        },
+        {
+          "title": "Alur Kasir Cepat",
+          "description": "Katalog produk, barcode, keranjang, diskon otomatis, dan pembayaran berada dalam satu layar."
+        },
+        {
+          "title": "Pengelolaan Produk dan Stok",
+          "description": "Tabel produk dengan pencarian, filter kategori, peringatan restock, harga, laba, dan aksi pengelolaan."
+        },
+        {
+          "title": "Ringkasan Performa Penjualan",
+          "description": "Filter tanggal dan pembayaran menampilkan omzet, transaksi, rata-rata belanja, jumlah item, tren, dan produk teratas."
+        },
+        {
+          "title": "Laporan Laba Rugi",
+          "description": "Omzet, modal, pengeluaran, laba kotor, dan laba bersih dirangkum bersama margin tiap produk."
+        },
+        {
+          "title": "Profil Toko dan Backup Data",
+          "description": "Pemilik dapat mengatur identitas toko dan menjaga data produk serta transaksi melalui backup perangkat."
+        }
       ]
     }
   },
@@ -241,10 +336,22 @@
       }
     ],
     "steps": [
-      {"title": "Diskusi", "desc": "Ceritakan kebutuhan lewat WhatsApp. Gratis, tanpa komitmen."},
-      {"title": "Proposal", "desc": "Saya kirim scope, durasi, dan harga yang jelas."},
-      {"title": "Pengerjaan", "desc": "Update diberikan setiap 2–3 hari agar progres selalu terlihat."},
-      {"title": "Peluncuran", "desc": "Deploy, pengujian, dan serah terima. Termasuk dukungan 30 hari."}
+      {
+        "title": "Diskusi",
+        "desc": "Ceritakan kebutuhan lewat WhatsApp. Gratis, tanpa komitmen."
+      },
+      {
+        "title": "Proposal",
+        "desc": "Saya kirim scope, durasi, dan harga yang jelas."
+      },
+      {
+        "title": "Pengerjaan",
+        "desc": "Update diberikan setiap 2–3 hari agar progres selalu terlihat."
+      },
+      {
+        "title": "Peluncuran",
+        "desc": "Deploy, pengujian, dan serah terima. Termasuk dukungan 30 hari."
+      }
     ]
   },
   "musicPage": {

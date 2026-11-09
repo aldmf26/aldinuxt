@@ -15,7 +15,7 @@
     </div>
 
     <!-- Main Content -->
-    <MusicSection />
+    <BeatsSection />
     
     <!-- Custom Footer for Music Page -->
     <footer class="py-20 px-6 md:px-16 border-t border-white/5 bg-[var(--bg-primary)] text-center">

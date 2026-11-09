@@ -1,124 +1,31 @@
 <template>
-  <section id="works" class="relative py-32 md:py-48 px-4 md:px-10 overflow-hidden">
-    <!-- Giant Ghost Word -->
-    <div class="absolute top-12 md:top-0 -left-4 z-0 pointer-events-none select-none opacity-[0.08] text-text-muted font-black tracking-tighter leading-none" style="font-size: clamp(120px, 18vw, 260px); letter-spacing: -0.04em;">
-      {{ $t('works.ghost') }}
-    </div>
-
-    <div class="max-w-[1800px] mx-auto relative z-10">
-      <!-- Section header -->
-      <div ref="header" class="mb-24 px-4">
-        <h2 class="font-display italic text-text-primary leading-none mb-8" style="font-size: clamp(64px, 8vw, 120px)">
-          {{ $t('works.title') }}
-        </h2>
-        <p class="text-text-secondary font-body text-base md:text-xl max-w-2xl leading-relaxed" style="font-weight: 500;">
-          {{ $t('works.description') }}
-        </p>
-      </div>
-
-      <!-- Asymmetric Grid -->
-      <div ref="gridRef" class="works-grid">
-        <ProjectCard 
-          v-for="(project, index) in projects" 
-          :key="project.slug || index" 
-          :project="project" 
-          :index="index"
-          class="project-card-item"
-        />
-      </div>
+  <section id="works" class="works">
+    <h2 class="section-title">{{ $t('works.title') }}</h2>
+    <div class="grid">
+      <ProjectCard
+        v-for="(project, i) in cards"
+        :key="project.slug"
+        :project="project"
+        :lead="i === 0"
+        :class="{ 'span-all': i === 0 }"
+      />
     </div>
   </section>
 </template>
 
 <script setup>
 import { projects } from '~/data/project'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { projectsData } from '~/data/project-detail'
 
-const header = ref(null)
-const gridRef = ref(null)
-
-onMounted(() => {
-  if (typeof window === 'undefined') return
-
-  // Reveal header
-  gsap.fromTo(
-    header.value,
-    { y: 40, opacity: 0 },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.9,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: header.value,
-        start: 'top 90%',
-        once: true,
-      },
-    }
-  )
-
-  // Stagger project cards
-  nextTick(() => {
-    const cards = gridRef.value?.querySelectorAll('.project-card-item')
-    if (!cards?.length) return
-
-    gsap.fromTo(
-      cards,
-      { y: 32, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: 'power3.out',
-        stagger: 0.09,
-        scrollTrigger: {
-          trigger: gridRef.value,
-          start: 'top 88%',
-          once: true,
-        },
-      }
-    )
-  })
-})
+// Cards show the product itself: first case-study screenshot, falling back to the cover image (often a logo).
+const cards = projects.map(p => ({ ...p, image: p.cover || projectsData[p.slug]?.screenshots?.[0]?.image || p.image }))
 </script>
 
 <style scoped>
-/* Mobile: single column */
-.works-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  background: transparent;
-}
-
-/* Reset all nth-child spanning on mobile */
-@media (max-width: 767px) {
-  .project-card-item:nth-child(n) {
-    grid-column: 1 !important;
-    grid-row: auto !important;
-  }
-}
-
-/* Tablet: 2 columns */
+.works { max-width: 1200px; margin: 0 auto; padding: 48px 16px 120px; }
+.grid { display: grid; gap: 56px 32px; }
 @media (min-width: 768px) {
-  .works-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-}
-
-/* Desktop: asymmetric */
-@media (min-width: 1024px) {
-  .works-grid {
-    grid-template-columns: 1.5fr 1fr;
-    gap: 32px;
-  }
-
-  .project-card-item:nth-child(1) { grid-column: 1 / -1; }
-  .project-card-item:nth-child(2) { grid-column: 1; grid-row: 2 / 4; }
-  .project-card-item:nth-child(3) { grid-column: 2; }
-  .project-card-item:nth-child(4) { grid-column: 2; }
-  .project-card-item:nth-child(5) { grid-column: 1 / -1; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  .span-all { grid-column: 1 / -1; }
 }
 </style>

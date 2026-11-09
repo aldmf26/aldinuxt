@@ -1,53 +1,53 @@
 export const projectsData = {
   'kasir-ok': {
-    logoUrl: "/projects/kasir-ok.png",
+    logoUrl: "/projects/kasir-ok.webp",
     width: "180",
     title: "Kasir OK",
-    subtitle: "Simple Point of Sale for Indonesian Small Businesses",
+    subtitle: "Offline-ready Point of Sale for Indonesian Small Shops",
     description:
-      "Kasir OK brings daily store operations into one straightforward workspace. Cashiers can process sales, owners can control stock and products, and every transaction flows into readable sales and profit reports.",
-    techs: ["Nuxt JS", "Tailwind CSS", "Local Storage"],
+      "Kasir OK runs a small shop from one phone: checkout, stock, customer debt, and profit reports. It installs like an app and keeps recording sales when the connection drops.",
+    techs: ["Nuxt 3", "Nuxt UI", "Supabase", "PWA"],
     link: "",
     year: "2026",
     role: "Full Stack Developer & Product Designer",
-    impact: "Cashier, inventory, reporting, and store backup unified in one responsive application",
+    impact: "Sales keep recording offline and sync later, so a weak signal never loses a transaction",
     problem:
-      "Small shop owners often use separate tools for checkout, stock notes, and profit calculations. This creates duplicated work and makes it difficult to understand actual daily performance.",
+      "Small shops often sell on unstable mobile data, keep customer debts in a notebook, and work out profit with a calculator. A dropped connection at checkout can mean a sale that never gets recorded.",
     solution:
-      "Built a focused POS with quick product selection, barcode support, stock warnings, automatic profit calculations, flexible reports, and local data backup. The interface stays approachable for owners without technical or accounting experience.",
+      "Built an installable PWA that saves every sale atomically and queues it on the device when offline, then syncs automatically. Unpaid sales become customer debts with installment tracking. Low-stock warnings, period comparison reports, store time zones (WIB/WITA/WIT), Bluetooth receipt printing, cashier shifts, and an owner PIN cover the rest of the day.",
     screenshots: [
       {
-        image: "/detail/kasir-ok/dashboard.png",
+        image: "/detail/kasir-ok/dashboard.webp",
         title: "Daily Operations Dashboard",
         description:
           "Clear starting point for daily work, showing today's cash position and direct shortcuts to checkout, product entry, and profit records.",
       },
       {
-        image: "/detail/kasir-ok/cashier.png",
+        image: "/detail/kasir-ok/cashier.webp",
         title: "Fast Cashier Workflow",
         description:
           "Product catalog, barcode scanning, cart controls, automatic discounts, and payment actions share one screen to keep checkout fast.",
       },
       {
-        image: "/detail/kasir-ok/product-management.png",
+        image: "/detail/kasir-ok/product-management.webp",
         title: "Product and Stock Management",
         description:
           "Searchable product table with category and stock filters, restock warnings, pricing, profit visibility, and direct management actions.",
       },
       {
-        image: "/detail/kasir-ok/sales-analytics.png",
+        image: "/detail/kasir-ok/sales-analytics.webp",
         title: "Sales Performance Overview",
         description:
           "Date and payment filters reveal sales totals, transaction count, average basket value, item volume, trends, and top products.",
       },
       {
-        image: "/detail/kasir-ok/profit-report.png",
+        image: "/detail/kasir-ok/profit-report.webp",
         title: "Profit and Loss Reporting",
         description:
           "Revenue, cost of goods, expenses, gross profit, and net profit are summarized with product-level margins for practical decisions.",
       },
       {
-        image: "/detail/kasir-ok/store-settings.png",
+        image: "/detail/kasir-ok/store-settings.webp",
         title: "Store Profile and Data Backup",
         description:
           "Owners can configure store identity and business type while device backup guidance helps protect product and transaction data.",
@@ -55,7 +55,7 @@ export const projectsData = {
     ],
   },
   laporku: {
-    logoUrl: "/projects/laporku.png",
+    logoUrl: "/projects/laporku.webp",
     width: "180",
     title: "Laporku",
     subtitle: "Financial Management SaaS for Indonesian SMEs",
@@ -70,19 +70,19 @@ export const projectsData = {
     solution: "Built a dashboard that turns raw transaction data into plain-language financial summaries — revenue, expenses, and profit at a glance. No accounting degree required.",
     screenshots: [
       {
-        image: "/detail/laporku/landing.jpg",
+        image: "/detail/laporku/landing.webp",
         title: "Landing Page - Clear Value Proposition",
         description:
           "Landing page highlighting key benefits: simple reports, smart tips, and affordable plans. Designed to convert SME owners struggling with manual bookkeeping.",
       },
       {
-        image: "/detail/laporku/detail.png",
+        image: "/detail/laporku/detail.webp",
         title: "Smart Financial Insights Dashboard",
         description:
           "Automated weekly & monthly reports with actionable tips. Users can see profit trends, top expenses, and cash flow health at a glance - no accounting knowledge required.",
       },
       {
-        image: "/detail/laporku/dashboard.png",
+        image: "/detail/laporku/dashboard.webp",
         title: "Admin Dashboard - Real-time Monitoring",
         description:
           "Comprehensive admin panel tracking user activities, subscription metrics, and system performance. Enables data-driven product improvements and customer success monitoring.",
@@ -106,7 +106,7 @@ export const projectsData = {
     solution: "Designed a clean, premium landing page with strong visual hierarchy and product-focused content. Every section is built to answer a buyer's question before they ask it.",
     screenshots: [
       {
-        image: "/detail/agrika/landing.png",
+        image: "/detail/agrika/landing.webp",
         title: "Premium Export Landing Page",
         description:
           "Professional landing page showcasing Agrika's premium Indonesian bird's nest products. Features company credentials, product quality certifications, and global export capabilities.",
@@ -114,7 +114,7 @@ export const projectsData = {
     ],
   },
   agafood: {
-    logoUrls: ["/projects/tkmr.png", "/projects/sdb.png"],
+    logoUrls: ["/projects/tkmr.webp", "/projects/sdb.webp"],
     width: "260",
     title: "AgaFood",
     subtitle: "POS for Japanese & Korean Restaurants",
@@ -128,19 +128,19 @@ export const projectsData = {
     solution: "Built one unified POS system with separate configurations per restaurant. Cashier, kitchen, payroll, and reporting — all in one codebase, deployed twice.",
     screenshots: [
       {
-        image: "/detail/resto/home.png",
+        image: "/detail/resto/home.webp",
         title: "Landing Page",
         description:
           "The order screen provides an intuitive interface for staff to quickly take and manage customer orders, ensuring accuracy and efficiency in a fast-paced restaurant environment.",
       },
       {
-        image: "/detail/resto/landing.png",
+        image: "/detail/resto/landing.webp",
         title: "Detail Page",
         description:
           "The detail page provides comprehensive information about each restaurant, including menu items, pricing, and location details.",
       },
       {
-        image: "/detail/resto/kasir.png",
+        image: "/detail/resto/kasir.webp",
         title: "Admin Page",
         description:
         "The admin page allows restaurant owners to manage orders, menu items, and other restaurant details.",
@@ -148,7 +148,7 @@ export const projectsData = {
     ],
   },
   'jenerymf-tools': {
-    logoUrl: "/projects/jenerymf.png",
+    logoUrl: "/projects/jenerymf.webp",
     width: "150",
     title: "JeneryMF Tools",
     subtitle: "Tailoring Measurement & Pattern Calculator",
@@ -163,13 +163,13 @@ export const projectsData = {
     solution: "Built a focused tailoring toolkit that stores each client's measurements, keeps their history, and calculates pattern dimensions instantly. It works on desktop and mobile during client fittings.",
     screenshots: [
       {
-        image: "/detail/jenerym/landing.png",
+        image: "/detail/jenerym/landing.webp",
         title: "Tailoring and Armhole Calculators",
         description:
           "Quick tools for body measurements and armhole calculations. Jenery can enter one measurement and instantly receive the related pattern dimensions for TP, bicep, and sleeve opening.",
       },
       {
-        image: "/detail/jenerym/dashboard.png",
+        image: "/detail/jenerym/dashboard.webp",
         title: "Client Measurement Records",
         description:
           "Stores each client's full body measurements, fitting notes, custom fields, and activity history so repeat orders remain accurate and easy to review.",
@@ -192,13 +192,13 @@ export const projectsData = {
     solution: "Built a categorized knowledge base with clean search — historical figures, civilizations, and timelines in one place.",
     screenshots: [
       {
-        image: "/detail/teory/landing.png",
+        image: "/detail/teory/landing.webp",
         title: "Educational Home Page",
         description:
           "Comprehensive theory platform exploring the fundamental questions about world civilizations. Features organized content on historical figures, events, and philosophical concepts.",
       },
       {
-        image: "/detail/teory/detail.png",
+        image: "/detail/teory/detail.webp",
         title: "Rich Content Pages",
         description:
           "Detailed articles with text, images, and references. Each theory entry includes historical context, key figures, and modern interpretations.",
@@ -221,7 +221,7 @@ export const projectsData = {
     solution: "Built a bilingual translation app with a curated Indonesian–Dayak dictionary. Small step toward preserving a language at risk of disappearing.",
     screenshots: [
       {
-        image: "/detail/terjemahan/home.png",
+        image: "/detail/terjemahan/home.webp",
         title: "Simple Translation Interface",
         description:
           "Clean bidirectional translator. Users switch between Indonesian and Dayak with one click. Built with cultural sensitivity for authentic preservation.",
@@ -264,7 +264,7 @@ export const projectsData = {
     ],
   },
   'circle-english-course': {
-    logoUrl: "/projects/circle.png",
+    logoUrl: "/projects/circle.webp",
     width: "120",
     title: "Circle English Course",
     subtitle: "Online Learning Platform for Central Kalimantan",
@@ -279,7 +279,7 @@ export const projectsData = {
     solution: "Built a full learning platform: enrollment, lesson materials, progress tracking, and an instructor dashboard.",
     screenshots: [
       {
-        image: "/detail/circle/dash.png",
+        image: "/detail/circle/dash.webp",
         title: "Student Learning Dashboard",
         description:
           "Personalized dashboard showing enrolled courses, lesson progress, upcoming assignments, and performance analytics. Students can access materials anytime, anywhere.",
@@ -287,7 +287,7 @@ export const projectsData = {
     ],
   },
   'english-for-wetlands': {
-    logoUrl: "/projects/efw.png",
+    logoUrl: "/projects/efw.webp",
     width: "120",
     title: "English for Wetlands",
     subtitle: "Specialized Environmental Vocabulary Tool",
@@ -302,55 +302,55 @@ export const projectsData = {
     solution: "Created a focused translation app with a wetlands-specific dictionary — built for scientists and conservationists, not tourists.",
     screenshots: [
       {
-        image: "/detail/efw/01-home.png",
+        image: "/detail/efw/01-home.webp",
         title: "Wetland Dictionary Home",
         description:
           "Public landing page for translating wetland vocabulary from Indonesian to English, with direct access to the complete word list.",
       },
       {
-        image: "/detail/efw/02-student-dashboard.png",
+        image: "/detail/efw/02-student-dashboard.webp",
         title: "Student Learning Dashboard",
         description:
           "Personalized dashboard summarizing available quizzes, completed activities, total points, word scramble performance, and leaderboard ranking.",
       },
       {
-        image: "/detail/efw/03-multiple-choice.png",
+        image: "/detail/efw/03-multiple-choice.webp",
         title: "Timed Multiple-Choice Quiz",
         description:
           "Focused quiz interface with question navigation, answer choices, and a countdown timer for structured wetland vocabulary practice.",
       },
       {
-        image: "/detail/efw/04-matching-quiz.png",
+        image: "/detail/efw/04-matching-quiz.webp",
         title: "Interactive Matching Quiz",
         description:
           "Image-based matching activity where students pair wetland animals with their English names before time runs out.",
       },
       {
-        image: "/detail/efw/05-quiz-result.png",
+        image: "/detail/efw/05-quiz-result.webp",
         title: "Quiz Results and Breakdown",
         description:
           "Detailed result page showing overall score, correct answers by question type, and access to each answer history.",
       },
       {
-        image: "/detail/efw/06-admin-dashboard.png",
+        image: "/detail/efw/06-admin-dashboard.webp",
         title: "Administration Dashboard",
         description:
           "Central workspace for monitoring participants, quizzes, scramble words, translation records, and recent learning activity.",
       },
       {
-        image: "/detail/efw/07-translation-management.png",
+        image: "/detail/efw/07-translation-management.webp",
         title: "Translation Data Management",
         description:
           "Searchable bilingual vocabulary catalog with supporting images and controls for adding, editing, or deleting translation entries.",
       },
       {
-        image: "/detail/efw/08-quiz-management.png",
+        image: "/detail/efw/08-quiz-management.webp",
         title: "Quiz Management",
         description:
           "Admin table for organizing wetland learning topics and opening each quiz to manage its question collection.",
       },
       {
-        image: "/detail/efw/09-question-management.png",
+        image: "/detail/efw/09-question-management.webp",
         title: "Question Type Management",
         description:
           "Question editor supporting multiple choice, true or false, fill-in-the-blank, and matching formats from one workspace.",
