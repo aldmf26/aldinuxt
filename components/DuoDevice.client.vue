@@ -87,8 +87,6 @@ onMounted(async () => {
   /* back: mini pad controller — knobs, 8 backlit pads, 2-octave keybed (built upright, flipped under) */
   const back = new THREE.Group(); back.rotation.x = Math.PI; back.position.y = -H / 2; device.add(back)
   const plate = new THREE.Mesh(new RoundedBoxGeometry(5.8, 0.08, 5.6, 2, 0.04), M.plate); plate.position.set(-4.9, 0.04, 0); back.add(plate)
-  const PADS: PadName[] = ['808', 'kick', 'snare', 'clap', 'hat', 'open', 'rim', 'perc']
-  const PAD_KEYS = ['a', 's', 'd', 'f', 'z', 'x', 'c', 'v'] // pad grid mirrors the keyboard: ASDF over ZXCV
   const FL = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']'] // FL Studio typing keyboard: Q = C
   const label = (txt: string, bg: string, fg: string, sz = 40) => {
     const c = document.createElement('canvas'); c.width = 64; c.height = 256
@@ -104,17 +102,48 @@ onMounted(async () => {
     const c = new THREE.Mesh(capGeo, M.knobCap); c.position.set(0, 0.01, -0.22)
     k.add(b, c); k.rotation.y = (i - 1.5) * 0.6; back.add(k); knobs.push(k)
   }
-  const padGeo = new RoundedBoxGeometry(1.2, 0.32, 1.2, 3, 0.1)
+  /* back: drum pad grid 3x3 seperti drum pad controller — baris bawah = kick · hat · snare */
+  const PAD_ROWS: PadName[][] = [
+    ['clap', 'open', 'rim'],   // baris atas
+    ['808', 'perc', 'clap'],   // baris tengah
+    ['kick', 'hat', 'snare']   // baris bawah
+  ]
+  const PAD_KEYS: string[][] = [
+    ['a', 's', 'd'],
+    ['z', 'x', 'c'],
+    ['q', 'w', 'e']
+  ]
+  const padByKey: Record<string, PadName> = {}
+  PAD_ROWS.forEach((row, ri) => row.forEach((name, ci) => { padByKey[PAD_KEYS[ri][ci]] = name }))
+  const padGeo = new RoundedBoxGeometry(1.5, 0.36, 1.5, 3, 0.12)
   const padSide = new THREE.MeshStandardMaterial({ color: 0x2c2e33, roughness: 0.9 })
-  PADS.forEach((name, i) => {
-    const c = document.createElement('canvas'); c.width = c.height = 128
-    const x = c.getContext('2d')!
-    x.fillStyle = '#3a3d42'; x.fillRect(0, 0, 128, 128); x.fillStyle = '#d9dbde'; x.font = `800 32px ${font}`; x.textAlign = 'center'; x.fillText(name.toUpperCase(), 64, 60)
-    x.fillStyle = '#9a9ea6'; x.font = `600 26px ${font}`; x.fillText(PAD_KEYS[i].toUpperCase(), 64, 102)
-    const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace
-    const top = glowable(new THREE.MeshPhysicalMaterial({ map: tex, roughness: 0.85 }))
-    const p = add(back, new THREE.Mesh(padGeo, [padSide, padSide, top, padSide, padSide, padSide]), { kind: 'pad', name, rest: 0.24, depth: 0.13, glowMax: 2.6, mats: [top] })
-    p.position.set(-7.05 + (i % 4) * 1.42, 0.24, 0.05 + Math.floor(i / 4) * 1.45)
+  const padColors: Record<string, number> = { kick: 0x2ecc40, hat: 0x1abc9c, snare: 0xe74c3c, clap: 0x9b59b6, open: 0x3498db, '808': 0xf1c40f, perc: 0xe67e22, rim: 0x95a5a6 }
+  PAD_ROWS.forEach((row, ri) => {
+    const z = 0.05 + ri * 1.75
+    const cx = -(row.length - 1) * 1.75 / 2
+    row.forEach((name, ci) => {
+      const key = PAD_KEYS[ri][ci]
+      const c = document.createElement('canvas'); c.width = c.height = 200
+      const x = c.getContext('2d')!
+      const base = padColors[name] ?? 0x3a3d42
+      const grd = x.createRadialGradient(100, 100, 10, 100, 100, 100)
+      grd.addColorStop(0, '#fff')
+      grd.addColorStop(0.45, '#' + base.toString(16).padStart(6, '0'))
+      grd.addColorStop(1, '#' + Math.floor(base * 0.6).toString(16).padStart(6, '0'))
+      x.fillStyle = grd
+      x.fillRect(0, 0, 200, 200)
+      x.fillStyle = '#fff'
+      x.font = `800 52px ${font}`
+      x.textAlign = 'center'
+      x.fillText(name.toUpperCase(), 100, 128)
+      x.fillStyle = 'rgba(255,255,255,0.85)'
+      x.font = `600 30px ${font}`
+      x.fillText(key.toUpperCase(), 100, 170)
+      const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace
+      const top = glowable(new THREE.MeshPhysicalMaterial({ map: tex, roughness: 0.75 }))
+      const p = add(back, new THREE.Mesh(padGeo, [padSide, padSide, top, padSide, padSide, padSide]), { kind: 'pad', name, rest: 0.24, depth: 0.16, glowMax: 3.2, mats: [top] })
+      p.position.set(cx + ci * 1.75, 0.24, z)
+    })
   })
   const WHITE = [0, 2, 4, 5, 7, 9, 11], BASE = 261.63 // C4
   const wn = 14, ww = 0.66, px = -1.6
@@ -193,8 +222,8 @@ onMounted(async () => {
     const k = e.key.toLowerCase(); let m
     if (side.value === 'dev') m = codeKeys[(k.charCodeAt(0) * 7 + k.length) % codeKeys.length]
     else {
-      const pi = FL.indexOf(k), di = PAD_KEYS.indexOf(k)
-      m = pi > -1 ? pianoKeys[pi] : di > -1 ? padKeys[di] : null
+      const pi = FL.indexOf(k), pname = padByKey[k]
+      m = pi > -1 ? pianoKeys[pi] : pname ? padKeys.find(p => p.userData.name === pname) ?? null : null
       if (m) e.preventDefault()
     }
     if (!m) return
