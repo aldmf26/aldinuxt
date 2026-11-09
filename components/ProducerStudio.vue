@@ -27,16 +27,24 @@
       </button>
     </div>
 
-    <!-- ACTIVE INSTRUMENT VIEW -->
+    <!-- ACTIVE INSTRUMENT VIEW — ClientOnly prevents SSR from touching Web Audio API -->
     <div class="instrument-view">
-      <transition name="instrument-fade" mode="out-in">
-        <div v-if="currentInstrument === 'drumpad'" key="drumpad" class="instrument-pane">
-          <DrumPadMachine />
-        </div>
-        <div v-else key="piano" class="instrument-pane">
-          <PianoKeyboard />
-        </div>
-      </transition>
+      <ClientOnly>
+        <template #fallback>
+          <div class="instrument-loading">
+            <span class="loading-icon">🎵</span>
+            <span>Loading instrument...</span>
+          </div>
+        </template>
+        <transition name="instrument-fade" mode="out-in">
+          <div v-if="currentInstrument === 'drumpad'" key="drumpad" class="instrument-pane">
+            <DrumPadMachine />
+          </div>
+          <div v-else key="piano" class="instrument-pane">
+            <PianoKeyboard />
+          </div>
+        </transition>
+      </ClientOnly>
     </div>
 
     <!-- HINT FOR USER (Desktop vs Touch) -->
@@ -121,6 +129,26 @@ const currentInstrument = ref<'drumpad' | 'piano'>('drumpad')
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.instrument-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 60px 20px;
+  color: var(--text-muted, #8b8e97);
+  font-size: 14px;
+}
+
+.loading-icon {
+  font-size: 32px;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.9); }
 }
 
 .instrument-pane {

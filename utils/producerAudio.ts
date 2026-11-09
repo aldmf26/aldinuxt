@@ -80,17 +80,10 @@ export function unlockMobileAudio() {
   }
 }
 
-// Global user interaction listener to wake audio up on any first touch
-if (typeof window !== 'undefined') {
-  const onFirstTouch = () => {
-    unlockMobileAudio()
-  }
-  window.addEventListener('touchstart', onFirstTouch, { passive: true })
-  window.addEventListener('touchend', onFirstTouch, { passive: true })
-  window.addEventListener('pointerdown', onFirstTouch, { passive: true })
-  window.addEventListener('click', onFirstTouch, { passive: true })
-  window.addEventListener('keydown', onFirstTouch, { passive: true })
-}
+// NOTE: Global user interaction listeners are registered in plugins/audioUnlock.client.ts
+// to avoid SSR module evaluation issues on Vercel and other SSR platforms.
+// This module is safe to import server-side — no window access at top level.
+
 
 /* ==========================================================
    SAFE AUDIO ENVELOPES (Never fails or throws on mobile)
