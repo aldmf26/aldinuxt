@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=390">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--nila:#211c5a;--nila2:#2d2778;--kunyit:#e3a52a;--merah:#b5322b;--daun:#2f7a4f;--benang:#f1e6cf}
+*{box-sizing:border-box;margin:0}
+body{width:390px;height:844px;overflow:hidden;background:var(--nila);color:var(--benang);font-family:'Bricolage Grotesque',sans-serif;position:relative}
+/* dye bleed field */
+.bleed{position:absolute;inset:0;background:
+ radial-gradient(120% 60% at 50% 118%,var(--kunyit) 0 18%,transparent 38%),
+ radial-gradient(70% 40% at -10% 40%,var(--merah) 0 10%,transparent 34%),
+ radial-gradient(60% 35% at 112% 30%,var(--daun) 0 8%,transparent 30%);opacity:.9;filter:blur(2px)}
+nav{position:relative;display:flex;justify-content:space-between;padding:18px 20px;font-size:15px}
+.stitch{position:absolute;left:20px;right:20px;border-top:3px dashed var(--benang);opacity:.8}
+h1{position:relative;text-align:center;font-weight:800;font-size:96px;line-height:.85;letter-spacing:-.04em;margin-top:70px}
+.sub{position:relative;text-align:center;font-size:18px;margin-top:14px;opacity:.85}
+/* gigi haruan zigzag = waveform */
+svg.wave{position:relative;display:block;margin:30px auto 0}
+.keys{position:relative;display:flex;justify-content:center;gap:4px;margin-top:22px}
+.k{width:30px;height:120px;background:var(--benang);border-radius:0 0 6px 6px}
+.k.on{background:var(--kunyit)}
+.k.b{background:#120f33;width:20px;height:76px;margin:0 -12px;z-index:2;border-radius:0 0 4px 4px}
+.tags{position:relative;display:flex;justify-content:center;gap:10px;margin-top:40px}
+.tag{border:2px dashed var(--benang);padding:12px 14px;font-size:16px;font-weight:500}
+.tag.p{background:var(--kunyit);color:var(--nila);border-style:solid;border-color:var(--kunyit)}
+</style></head><body>
+<div class="bleed"></div>
+<nav><b>aldmf</b><span>ID / EN</span></nav>
+<div class="stitch" style="top:60px"></div>
+<h1>Aldi<br>Fahri</h1>
+<p class="sub">Bikin aplikasi. Bikin beat.</p>
+<svg class="wave" width="330" height="40" viewBox="0 0 330 40"><polyline fill="none" stroke="#e3a52a" stroke-width="4" points="0,20 15,6 30,34 45,6 60,34 75,10 90,30 105,14 120,26 135,20 150,20 165,4 180,36 195,4 210,36 225,12 240,28 255,18 270,22 285,20 300,20 315,20 330,20"/></svg>
+<div class="keys"><div class="k"></div><div class="k b"></div><div class="k on"></div><div class="k b"></div><div class="k"></div><div class="k"></div><div class="k b"></div><div class="k"></div><div class="k b"></div><div class="k"></div><div class="k b"></div><div class="k"></div><div class="k"></div></div>
+<div class="tags"><span class="tag p">Dengar beat</span><span class="tag">Lihat app</span><span class="tag">Chat WA</span></div>
+<div class="stitch" style="bottom:28px"></div>
+</body></html>

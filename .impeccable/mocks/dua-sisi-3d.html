@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dua Sisi 3D — prototipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#dfe1e3;--ink:#16171a;--muted:#5d6168;--chip:#c9ccd0;--accent:#ff5a1f}
+[data-side=producer]{--bg:#121315;--ink:#eef0f2;--muted:#9a9ea6;--chip:#25272b}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;overflow-x:hidden;min-height:100svh;display:flex;flex-direction:column}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px clamp(16px,4vw,40px);font-weight:600;position:relative;z-index:2}
+nav .r{display:flex;gap:18px;align-items:center;color:var(--muted)}
+.finish{display:flex;gap:8px}
+.finish button{width:18px;height:18px;border-radius:50%;border:2px solid var(--chip);cursor:pointer}
+header{text-align:center;position:relative;z-index:1;padding:0 16px}
+h1{font-weight:800;font-size:clamp(52px,10vw,140px);line-height:.86;letter-spacing:-.045em}
+.line{font-size:clamp(17px,2vw,22px);color:var(--muted);margin-top:12px}
+.line b{color:var(--ink);font-weight:600}
+#stage{position:relative;width:100%;height:clamp(300px,52vh,620px);margin-top:-2vh;touch-action:manipulation}
+#stage canvas{display:block;width:100%!important;height:100%!important}
+.hint{position:absolute;left:0;right:0;bottom:6px;text-align:center;font-size:14px;color:var(--muted);pointer-events:none}
+.controls{text-align:center;padding:0 16px 40px;position:relative;z-index:1}
+.switch{display:inline-flex;background:var(--chip);border-radius:999px;padding:5px}
+.switch button{border:0;background:transparent;color:var(--muted);font:600 17px 'Bricolage Grotesque';padding:12px 22px;border-radius:999px;cursor:pointer}
+.switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.cta{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.cta a{font-weight:600;font-size:17px;padding:15px 24px;border-radius:12px;text-decoration:none;color:var(--ink);border:2px solid var(--ink)}
+.cta a.p{background:var(--accent);border-color:var(--accent);color:#16171a}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"}}</script>
+</head>
+<body data-side="dev">
+<nav><span>aldmf</span><span class="r"><span class="finish" aria-label="Warna aksen"><button data-c="#ff5a1f" style="background:#ff5a1f" aria-label="Oranye"></button><button data-c="#2f6bff" style="background:#2f6bff" aria-label="Biru"></button><button data-c="#2fbf71" style="background:#2fbf71" aria-label="Hijau"></button><button data-c="#ffc21f" style="background:#ffc21f" aria-label="Kuning"></button></span>ID / EN</span></nav>
+<header><h1>Aldi<br>Fahrizaldi</h1><p class="line" id="line"><b>Web developer.</b> Aplikasi untuk usaha kecil.</p></header>
+<div id="stage"><p class="hint" id="hint">Ketik atau tekan tutsnya</p></div>
+<div class="controls">
+ <div class="switch" role="group" aria-label="Sisi"><button aria-pressed="true" data-s="dev">Developer</button><button aria-pressed="false" data-s="producer">Producer</button></div>
+ <div class="cta" id="cta"><a class="p" href="#">Lihat karya</a><a href="#">Chat WhatsApp</a></div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+/* ---------- audio (all synthesized, no files) ---------- */
+let ac, master, noiseBuf;
+function audio(){
+  if(ac) return ac;
+  ac = new AudioContext();
+  master = ac.createDynamicsCompressor(); master.connect(ac.destination);
+  noiseBuf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate);
+  const d = noiseBuf.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+  return ac;
+}
+const env=(g,t,peak,dec)=>{g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+0.004);g.gain.exponentialRampToValueAtTime(0.0001,t+dec)};
+function noise(t,dur,filterType,freq,peak,q=1){
+  const s=ac.createBufferSource();s.buffer=noiseBuf;const f=ac.createBiquadFilter();f.type=filterType;f.frequency.value=freq;f.Q.value=q;
+  const g=ac.createGain();env(g,t,peak,dur);s.connect(f).connect(g).connect(master);s.start(t,Math.random()*0.5);s.stop(t+dur+0.05);
+}
+function tone(t,type,f0,f1,glide,peak,dec,dest=master){
+  const o=ac.createOscillator();o.type=type;o.frequency.setValueAtTime(f0,t);if(f1)o.frequency.exponentialRampToValueAtTime(f1,t+glide);
+  const g=ac.createGain();env(g,t,peak,dec);o.connect(g).connect(dest);o.start(t);o.stop(t+dec+0.05);
+}
+const sfx={
+  click(){const t=audio().currentTime;const v=0.85+Math.random()*0.3;
+    noise(t,0.025,'bandpass',3200*v,0.5,1.2);           // switch click
+    tone(t,'sine',260*v,90,0.035,0.35,0.06);            // thock bottom-out
+    noise(t+0.045,0.02,'bandpass',2200*v,0.15,1.5);},    // release clack
+  piano(f){const t=audio().currentTime;const lp=ac.createBiquadFilter();lp.type='lowpass';
+    lp.frequency.setValueAtTime(Math.min(9000,f*12),t);lp.frequency.exponentialRampToValueAtTime(Math.max(400,f*2),t+1.2);lp.connect(master);
+    [[1,0.5,1.8],[2,0.22,1.1],[3,0.1,0.7],[4,0.06,0.45],[5.02,0.03,0.3]].forEach(([h,a,d])=>tone(t,'sine',f*h,0,0,a,d,lp));
+    tone(t,'triangle',f*1.003,0,0,0.12,1.4,lp);
+    noise(t,0.015,'highpass',2500,0.05);},               // hammer
+  kick(){const t=audio().currentTime;tone(t,'sine',160,42,0.11,1,0.38);noise(t,0.01,'highpass',4000,0.15);},
+  '808'(){const t=audio().currentTime;const ws=ac.createWaveShaper();const c=new Float32Array(256);for(let i=0;i<256;i++){const x=i/128-1;c[i]=Math.tanh(2.4*x)}ws.curve=c;ws.connect(master);
+    tone(t,'sine',90,49,0.06,0.9,1.6,ws);},
+  snare(){const t=audio().currentTime;noise(t,0.2,'highpass',1600,0.55);tone(t,'triangle',200,160,0.05,0.4,0.11);},
+  clap(){const t=audio().currentTime;[0,0.011,0.023].forEach(o=>noise(t+o,0.012,'bandpass',1300,0.5,0.9));noise(t+0.03,0.18,'bandpass',1300,0.45,0.9);},
+  hat(){const t=audio().currentTime;noise(t,0.045,'highpass',8000,0.32);},
+  open(){const t=audio().currentTime;noise(t,0.32,'highpass',7500,0.28);},
+  rim(){const t=audio().currentTime;tone(t,'square',1700,0,0,0.12,0.03);noise(t,0.02,'bandpass',2500,0.2,3);},
+  perc(){const t=audio().currentTime;tone(t,'square',540,0,0,0.12,0.25);tone(t,'square',800,0,0,0.1,0.25);}
+};
+
+/* ---------- scene ---------- */
+const stage=document.getElementById('stage');
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.outputColorSpace=THREE.SRGBColorSpace;
+stage.prepend(renderer.domElement);
+const scene=new THREE.Scene();
+scene.environment=new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(),0.04).texture;
+const camera=new THREE.PerspectiveCamera(28,1,0.1,200);
+const sun=new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(-6,14,8);sun.castShadow=true;
+sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-12,right:12,top:8,bottom:-8});sun.shadow.radius=6;scene.add(sun);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(60,40),new THREE.ShadowMaterial({opacity:0.22}));
+ground.rotation.x=-Math.PI/2;ground.position.y=-1.4;ground.receiveShadow=true;scene.add(ground);
+
+const accent=new THREE.Color('#ff5a1f');
+const M={
+  body:new THREE.MeshPhysicalMaterial({color:0x9ea3aa,metalness:0.85,roughness:0.3,clearcoat:0.3}),
+  key:new THREE.MeshPhysicalMaterial({color:0xf3f4f5,roughness:0.55,clearcoat:0.2}),
+  keyAccent:new THREE.MeshPhysicalMaterial({color:accent,roughness:0.5,clearcoat:0.2}),
+  ivory:new THREE.MeshPhysicalMaterial({color:0xf7f6f2,roughness:0.35,clearcoat:0.6}),
+  ebony:new THREE.MeshPhysicalMaterial({color:0x0e0f10,roughness:0.3,clearcoat:0.8}),
+  plate:new THREE.MeshStandardMaterial({color:0x17181b,roughness:0.6,metalness:0.2}),
+  knob:new THREE.MeshPhysicalMaterial({color:0x1a1b1e,roughness:0.4,clearcoat:0.5}),
+  knobCap:new THREE.MeshStandardMaterial({color:0xd9dbde,roughness:0.3,metalness:0.8})
+};
+const BODY={dev:0x9ea3aa,producer:0x2a2c30};
+const rim=new THREE.DirectionalLight(0xffffff,0.9);rim.position.set(8,4,-10);scene.add(rim);
+const accentMats=[];   // everything that must follow the accent swatch
+const glowable=m=>{const c=m.clone();c.emissive=accent.clone();c.emissiveIntensity=0;accentMats.push(c);return c;};
+
+const device=new THREE.Group();scene.add(device);
+const W=16.6,D=6.6,H=0.9;
+const body=new THREE.Mesh(new RoundedBoxGeometry(W,H,D,6,0.35),M.body);body.castShadow=true;body.receiveShadow=true;device.add(body);
+const pressables=[];
+const add=(parent,mesh,u)=>{mesh.castShadow=true;mesh.userData={...u,down:0,glow:0};parent.add(mesh);pressables.push(mesh);return mesh;};
+
+/* front: mechanical coding keyboard, 15u wide */
+const front=new THREE.Group();front.position.y=H/2;device.add(front);
+const U=1,GAP=0.1,ROWS=[[...Array(15).fill(1)],[1.5,...Array(12).fill(1),1.5],[1.75,...Array(11).fill(1),2.25],[2.25,...Array(10).fill(1),2.75],[1.25,1.25,1.25,6.25,1.25,1.25,1.25,1.25]];
+const keyGeo={};
+ROWS.forEach((row,r)=>{let x=-7.5;row.forEach((w,i)=>{
+  const g=keyGeo[w]??=new RoundedBoxGeometry(w*U-GAP,0.5,U-GAP,3,0.12);
+  const acc=(r===0&&i===0)||(r===2&&i===row.length-1);
+  const mat=glowable(acc?M.keyAccent:M.key);if(acc)mat.userData.isAccentBody=true;
+  const k=add(front,new THREE.Mesh(g,mat),{kind:'key',rest:0.25,depth:0.2,glowMax:0.9,mats:[mat]});k.position.set(x+w/2,0.25,-2+r);x+=w;});});
+
+/* back: MIDI controller in the spirit of a mini pad controller — knobs, 8 backlit pads, 2-octave keybed */
+const back=new THREE.Group();back.rotation.x=Math.PI;back.position.y=-H/2;device.add(back);
+const plate=new THREE.Mesh(new RoundedBoxGeometry(5.8,0.08,5.6,2,0.04),M.plate);plate.position.set(-4.9,0.04,0);back.add(plate);
+const PADS=['808','kick','snare','clap','hat','open','rim','perc'];
+const PAD_KEYS=['a','s','d','f','z','x','c','v'];            // pad grid mirrors the keyboard: ASDF over ZXCV
+// FL Studio typing keyboard, upper row: Q = C (do), number row = sharps
+const FL=['q','2','w','3','e','r','5','t','6','y','7','u','i','9','o','0','p','[','=',']'];
+const label=(txt,bg,fg,sz=40)=>{const c=document.createElement('canvas');c.width=64;c.height=256;const x=c.getContext('2d');
+  x.fillStyle=bg;x.fillRect(0,0,64,256);x.fillStyle=fg;x.font=`800 ${sz}px Bricolage Grotesque, sans-serif`;x.textAlign='center';x.fillText(txt.toUpperCase(),32,236);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;};
+// knobs
+const knobGeo=new THREE.CylinderGeometry(0.34,0.38,0.42,32),capGeo=new THREE.CylinderGeometry(0.05,0.05,0.44,8);
+const knobs=[];
+for(let i=0;i<4;i++){const k=new THREE.Group();k.position.set(-7.05+i*1.42,0.29,-1.9);
+  const b=new THREE.Mesh(knobGeo,M.knob);b.castShadow=true;const c=new THREE.Mesh(capGeo,M.knobCap);c.position.set(0,0.01,-0.22);
+  k.add(b,c);k.rotation.y=(i-1.5)*0.6;back.add(k);knobs.push(k);}
+// pads
+const padGeo=new RoundedBoxGeometry(1.2,0.32,1.2,3,0.1);
+const padSide=new THREE.MeshStandardMaterial({color:0x2c2e33,roughness:0.9});
+PADS.forEach((name,i)=>{
+  const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');
+  x.fillStyle='#3a3d42';x.fillRect(0,0,128,128);x.fillStyle='#d9dbde';x.font='800 32px Bricolage Grotesque, sans-serif';x.textAlign='center';x.fillText(name.toUpperCase(),64,60);
+  x.fillStyle='#9a9ea6';x.font='600 26px Bricolage Grotesque, sans-serif';x.fillText(PAD_KEYS[i].toUpperCase(),64,102);
+  const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;
+  const top=glowable(new THREE.MeshPhysicalMaterial({map:tex,roughness:0.85}));
+  const p=add(back,new THREE.Mesh(padGeo,[padSide,padSide,top,padSide,padSide,padSide]),{kind:'pad',name,rest:0.24,depth:0.13,glowMax:2.6,mats:[top]});
+  p.position.set(-7.05+(i%4)*1.42,0.24,0.05+Math.floor(i/4)*1.45);});
+// keybed
+const WHITE=[0,2,4,5,7,9,11],BASE=261.63; // C4
+const wn=14,ww=0.66,px=-1.6;
+const wGeo=new RoundedBoxGeometry(ww-0.05,0.45,4.6,2,0.05),bGeo=new RoundedBoxGeometry(0.4,0.6,2.8,2,0.05);
+function pianoKey(semi,geo,base,pos,rest){
+  const b=glowable(base);const mats=[b];let mat=b;
+  if(FL[semi]){const top=glowable(new THREE.MeshPhysicalMaterial({map:label(FL[semi],'#'+base.color.getHexString(),'#8a8d92',base===M.ebony?30:40),roughness:base.roughness,clearcoat:base.clearcoat}));
+    mats.push(top);mat=[b,b,top,b,b,b];}
+  // pivot at the back edge so the key tips down like a real keybed
+  const pivot=new THREE.Group();pivot.position.set(pos.x,rest,pos.z-geo.parameters.depth/2);back.add(pivot);
+  const k=new THREE.Mesh(geo,mat);k.castShadow=true;k.position.z=geo.parameters.depth/2;pivot.add(k);
+  k.userData={kind:'piano',semi,f:BASE*2**(semi/12),rest,depth:0,tilt:0.11,glowMax:1.1,mats,pivot,down:0,glow:0};pressables.push(k);}
+for(let i=0;i<wn;i++){const semi=Math.floor(i/7)*12+WHITE[i%7];pianoKey(semi,wGeo,M.ivory,{x:px+i*ww+ww/2,z:0.2},0.22);}
+for(let i=0;i<wn-1;i++){const n=i%7;if(n===2||n===6)continue;pianoKey(Math.floor(i/7)*12+WHITE[n]+1,bGeo,M.ebony,{x:px+(i+1)*ww,z:-0.7},0.42);}
+// hit feedback: one moving flash light + a pool of ripple rings
+const flash=new THREE.PointLight(accent,0,6,2);back.add(flash);
+const ringGeo=new THREE.RingGeometry(0.62,0.74,48);
+const rings=[...Array(6)].map(()=>{const m=new THREE.Mesh(ringGeo,new THREE.MeshBasicMaterial({color:accent,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));
+  m.rotation.x=-Math.PI/2;m.userData.t0=-1;back.add(m);accentMats.push(m.material);return m;});
+let ringI=0;
+
+/* ---------- interaction ---------- */
+function press(m){
+  const u=m.userData;u.down=1;u.glow=u.glowMax;
+  if(u.kind==='pad'){sfx[u.name]();
+    flash.position.set(m.position.x,1.4,m.position.z);flash.intensity=40;
+    const r=rings[ringI++%rings.length];r.position.set(m.position.x,0.45,m.position.z);r.userData.t0=performance.now();
+    knobs.forEach((k,i)=>k.rotation.y+=(i%2?-1:1)*0.15);}           // knobs nudge with the groove
+  else if(u.kind==='piano')sfx.piano(u.f); else sfx.click();
+}
+const release=m=>{if(m)m.userData.down=0;};
+const tap=m=>{press(m);setTimeout(()=>release(m),70);};
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2(),look=new THREE.Vector2();
+function hit(e){const r=renderer.domElement.getBoundingClientRect();ptr.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
+  ray.setFromCamera(ptr,camera);const h=ray.intersectObjects(pressables,false)[0];
+  // only the face turned toward the camera is playable
+  return h&&((h.object.parent===front)===(side==='dev'))?h.object:null;}
+let roll,holding=null;
+const startRoll=m=>{clearInterval(roll);roll=setInterval(()=>tap(m),70);};   // hold HAT = trap hi-hat roll
+renderer.domElement.addEventListener('pointerdown',e=>{const m=hit(e);if(!m)return;renderer.domElement.setPointerCapture(e.pointerId);
+  holding=m;press(m);if(m.userData.name==='hat')startRoll(m);});
+renderer.domElement.addEventListener('pointermove',e=>{
+  const r=renderer.domElement.getBoundingClientRect();look.set(((e.clientX-r.left)/r.width)*2-1,((e.clientY-r.top)/r.height)*2-1);
+  const m=hit(e);renderer.domElement.style.cursor=m?'pointer':'default';
+  if(holding&&m&&m!==holding){release(holding);clearInterval(roll);holding=m;press(m);if(m.userData.name==='hat')startRoll(m);}});   // slide = glissando
+const end=()=>{release(holding);holding=null;clearInterval(roll);};
+['pointerup','pointercancel'].forEach(t=>renderer.domElement.addEventListener(t,end));
+renderer.domElement.addEventListener('pointerleave',()=>look.set(0,0));
+const pianoKeys=pressables.filter(m=>m.userData.kind==='piano').sort((a,b)=>a.userData.semi-b.userData.semi);
+const padKeys=pressables.filter(m=>m.userData.kind==='pad');
+const codeKeys=pressables.filter(m=>m.userData.kind==='key');
+const keyHeld=new Map();
+addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey||e.altKey)return;const k=e.key.toLowerCase();let m;
+  if(side==='dev')m=codeKeys[(k.charCodeAt(0)*7+k.length)%codeKeys.length];
+  else{const pi=FL.indexOf(k),di=PAD_KEYS.indexOf(k);m=pi>-1?pianoKeys[pi]:di>-1?padKeys[di]:null;if(m)e.preventDefault();}
+  if(!m)return;keyHeld.set(k,m);press(m);if(m.userData.name==='hat')startRoll(m);});   // hold Z = hi-hat roll
+addEventListener('keyup',e=>{const k=e.key.toLowerCase();const m=keyHeld.get(k);if(!m)return;keyHeld.delete(k);release(m);if(m.userData.name==='hat')clearInterval(roll);});
+
+/* ---------- layout, flip, loop ---------- */
+let side='dev',flipFrom=0,flipTo=0,flipStart=-1,curFlip=0;
+function fit(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;
+  const target=W*(camera.aspect<1?1.18:1.1);const dist=target/2/Math.tan(THREE.MathUtils.degToRad(camera.fov/2))/camera.aspect;
+  const d=Math.max(dist,18);camera.position.set(0,d*0.62,d*0.78);camera.lookAt(0,-0.2,0);camera.updateProjectionMatrix();}
+addEventListener('resize',fit);fit();
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const tilt=new THREE.Vector2();
+function loop(now){
+  let f=flipTo,lift=0;curFlip=f;
+  if(flipStart>=0){const t=Math.min(1,(now-flipStart)/1100);f=flipFrom+(flipTo-flipFrom)*ease(t);curFlip=f;lift=Math.sin(Math.PI*t)*1.8;if(t>=1)flipStart=-1;}
+  // float + lean toward the pointer
+  tilt.lerp(look,0.06);
+  const bob=reduce?0:Math.sin(now/1500)*0.22;
+  device.position.y=0.7+bob+lift;
+  device.rotation.set(f+(reduce?0:tilt.y*0.10), reduce?0:tilt.x*0.16+Math.sin(now/2600)*0.05, reduce?0:-tilt.x*0.04);
+  // keys, pads: ease toward pressed/rest, glow decays after release
+  for(const m of pressables){const u=m.userData;
+    if(u.pivot)u.pivot.rotation.x+=(u.down*u.tilt-u.pivot.rotation.x)*0.45;
+    else m.position.y+=(u.rest-u.down*u.depth-m.position.y)*0.45;
+    const g=u.down?u.glowMax:u.glow*0.9;u.glow=g;for(const mt of u.mats)mt.emissiveIntensity=g;}
+  flash.intensity*=0.86;
+  for(const r of rings){if(r.userData.t0<0)continue;const t=(now-r.userData.t0)/480;
+    if(t>=1){r.material.opacity=0;r.userData.t0=-1;continue;}r.scale.setScalar(1+t*1.6);r.material.opacity=0.9*(1-t);}
+  renderer.render(scene,camera);requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);document.addEventListener('visibilitychange',()=>{ if(!document.hidden) fit(); });
+
+/* ---------- side switch + accent ---------- */
+const copy={dev:['<b>Web developer.</b> Aplikasi untuk usaha kecil.',['Lihat karya','Chat WhatsApp'],'Ketik atau tekan tutsnya'],
+            producer:['<b>Music producer.</b> Beat trap dan lo-fi.',['Dengar beat','Chat WhatsApp'],'Piano: Q = do (ala FL Studio) · Pad: A S D F / Z X C V · tahan Z untuk hi-hat roll']};
+function swap(fn,x,y){if(!document.startViewTransition||reduce)return fn();
+  const r=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+  document.startViewTransition(fn).ready.then(()=>document.documentElement.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${r}px at ${x}px ${y}px)`]},{duration:750,easing:'cubic-bezier(.7,0,.2,1)',pseudoElement:'::view-transition-new(root)'}));}
+document.querySelectorAll('.switch button').forEach(b=>b.onclick=e=>{const s=b.dataset.s;if(side===s)return;audio();side=s;
+  swap(()=>{document.body.dataset.side=s;M.body.color.setHex(BODY[s]);
+    document.querySelectorAll('.switch button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    document.getElementById('line').innerHTML=copy[s][0];const a=document.querySelectorAll('#cta a');a[0].textContent=copy[s][1][0];a[1].textContent=copy[s][1][1];
+    document.getElementById('hint').textContent=copy[s][2];},e.clientX,e.clientY);
+  flipFrom=curFlip;flipTo=s==='producer'?Math.PI:0;flipStart=reduce?-1:performance.now();});
+document.querySelectorAll('.finish button').forEach(b=>b.onclick=e=>swap(()=>{const c=b.dataset.c;document.documentElement.style.setProperty('--accent',c);
+  accent.set(c);flash.color.set(c);
+  for(const m of accentMats){if(m.emissive)m.emissive.set(c);else m.color.set(c);if(m.userData.isAccentBody)m.color.set(c);}},e.clientX,e.clientY));
+</script>
+</body></html>

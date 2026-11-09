@@ -1,0 +1,33 @@
+
+[41m[30m ERROR [39m[49m (node:26588) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use [36mnode --trace-deprecation ...[39m to show where the warning was created)
+
+
+[41m[30m ERROR [39m[49m (node:18260) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use [36mnode --trace-deprecation ...[39m to show where the warning was created)
+
+
+[90m[[90m@nuxtjs/i18n[90m][39m [43m[30m WARN [39m[49m Route localization features (e.g. custom name, prefixed aliases) require Nuxt's [36mexperimental.scanPageMeta[39m to be enabled.
+This feature will be enabled in future Nuxt versions (https://github.com/nuxt/nuxt/pull/27134), check out the docs for more details: https://nuxt.com/docs/guide/going-further/experimental-features#scanpagemeta
+
+
+[43m[30m WARN [39m[49m Locales id-ID, en-US uses deprecated [36miso[39m property, this will be replaced with [36mlanguage[39m in v9
+
+
+[90m[[90mnitro[90m][39m [43m[30m WARN [39m[49m Please add [36mcompatibilityDate: '2026-08-11'[39m to the config file. Using [36m2024-04-03[39m as fallback.
+       More info: [4mhttps://nitro.build/deploy#compatibility-date[24m
+
+
+[41m[30m ERROR [39m[49m Cannot start nuxt:  ENOENT: no such file or directory, open 'C:\laragon\www\aldinuxt\.nuxt\schema\nuxt.schema.d.ts'
+
+  [90mat [39masync open ([36mnode:internal/fs/promises:641:25[39m)
+  [90mat [39masync writeFile ([36mnode:internal/fs/promises:1215:14[39m)
+  [90mat [39masync writeSchema ([36m/C:/laragon/www/aldinuxt/node_modules/nuxt/dist/index.mjs:3487:7[39m)
+  [90mat [39masync build ([36m/C:/laragon/www/aldinuxt/node_modules/nuxt/dist/index.mjs:4772:5[39m)
+  [90mat [39masync Promise.all ([36mindex 1[39m)
+  [90mat [39masync NuxtDevServer._load ([36m/C:/laragon/www/aldinuxt/node_modules/nuxi/dist/chunks/dev2.mjs:279:5[39m)
+  [90mat [39masync NuxtDevServer.load ([36m/C:/laragon/www/aldinuxt/node_modules/nuxi/dist/chunks/dev2.mjs:184:7[39m)
+  [90mat [39masync NuxtDevServer.init ([36m/C:/laragon/www/aldinuxt/node_modules/nuxi/dist/chunks/dev2.mjs:179:5[39m)
+  [90mat [39masync Object.run ([36m/C:/laragon/www/aldinuxt/node_modules/nuxi/dist/chunks/dev-child.mjs:100:5[39m)
+  [90mat [39masync runCommand$1 ([36m/C:/laragon/www/aldinuxt/node_modules/nuxi/dist/shared/nuxi.a9f3bca7.mjs:1648:16[39m)
+

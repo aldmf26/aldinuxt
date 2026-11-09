@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dua Sisi — prototipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#dfe1e3;--ink:#16171a;--muted:#5d6168;--body:#c9ccd0;--edge:#a9adb3;--key:#f4f5f6;--keyedge:#b8bcc2;--accent:#ff5a1f;--accent-ink:#16171a}
+[data-side=producer]{--bg:#141517;--ink:#eef0f2;--muted:#9a9ea6;--body:#26282c;--edge:#3a3d42;--key:#ecedef;--keyedge:#55595f;--accent:#ff5a1f}
+[data-finish=biru]{--accent:#2f6bff}[data-finish=hijau]{--accent:#2fbf71}[data-finish=kuning]{--accent:#ffc21f}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;overflow-x:hidden}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px clamp(16px,4vw,40px);font-weight:600}
+nav .r{display:flex;gap:18px;align-items:center;color:var(--muted)}
+.finish{display:flex;gap:8px}
+.finish button{width:18px;height:18px;border-radius:50%;border:2px solid var(--edge);cursor:pointer}
+main{min-height:calc(100svh - 70px);display:grid;place-items:center;text-align:center;padding:0 16px 40px}
+h1{font-weight:800;font-size:clamp(56px,11vw,150px);line-height:.86;letter-spacing:-.045em}
+.line{font-size:clamp(18px,2.2vw,24px);color:var(--muted);margin-top:14px;min-height:1.3em}
+.line b{color:var(--ink);font-weight:600}
+/* the device: one slab, two faces */
+.stage{perspective:1400px;margin:clamp(28px,5vh,56px) auto 0;width:min(560px,92vw);aspect-ratio:2.4}
+.slab{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.7,0,.2,1);transform:rotateX(38deg) rotateZ(-8deg)}
+[data-side=producer] .slab{transform:rotateX(38deg) rotateZ(-8deg) rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;background:var(--body);backface-visibility:hidden;padding:4.5%;
+ box-shadow:inset 0 2px 0 #ffffff55,0 1px 0 var(--edge),0 18px 0 -2px var(--edge),0 50px 60px -20px #0006}
+.back{transform:rotateY(180deg)}
+.grid{display:grid;gap:5px;height:100%}
+.code .grid{grid-template-columns:repeat(14,1fr);grid-auto-rows:1fr}
+.k{background:var(--key);border-radius:5px;box-shadow:0 3px 0 var(--keyedge);transition:transform .08s,box-shadow .08s}
+.k.w2{grid-column:span 2}.k.w6{grid-column:span 6}.k.a{background:var(--accent)}
+.k.down{transform:translateY(3px);box-shadow:0 0 0 var(--keyedge)}
+.midi{display:grid;grid-template-columns:28% 1fr;gap:5%;height:100%}
+.pads{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pad{border-radius:6px;background:#3a3d42;box-shadow:inset 0 -3px 0 #0005}.pad.on{background:var(--accent)}
+.piano{position:relative;display:flex;gap:3px}
+.w{flex:1;background:var(--key);border-radius:0 0 5px 5px;box-shadow:0 3px 0 var(--keyedge)}
+.w.down{background:var(--accent)}
+.b{position:absolute;top:0;width:7%;height:60%;background:#0c0d0e;border-radius:0 0 4px 4px}
+/* side switch */
+.switch{display:inline-flex;margin-top:clamp(28px,5vh,48px);background:var(--body);border-radius:999px;padding:5px;box-shadow:inset 0 1px 0 #ffffff33}
+.switch button{border:0;background:transparent;color:var(--muted);font:600 17px 'Bricolage Grotesque';padding:12px 22px;border-radius:999px;cursor:pointer}
+.switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.cta{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+.cta a{font-weight:600;font-size:17px;padding:15px 24px;border-radius:12px;text-decoration:none;color:var(--ink);border:2px solid var(--ink)}
+.cta a.p{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+@media (prefers-reduced-motion:reduce){.slab{transition:none}}
+</style></head>
+<body data-side="dev">
+<nav><span>aldmf</span><span class="r"><span class="finish" aria-label="Warna aksen"><button data-f="oranye" style="background:#ff5a1f" aria-label="Oranye"></button><button data-f="biru" style="background:#2f6bff" aria-label="Biru"></button><button data-f="hijau" style="background:#2fbf71" aria-label="Hijau"></button><button data-f="kuning" style="background:#ffc21f" aria-label="Kuning"></button></span>ID / EN</span></nav>
+<main><div>
+ <h1>Aldi<br>Fahrizaldi</h1>
+ <p class="line" id="line"><b>Web developer.</b> Aplikasi untuk usaha kecil.</p>
+ <div class="stage"><div class="slab">
+  <div class="face code"><div class="grid" id="code"></div></div>
+  <div class="face back"><div class="midi"><div class="pads"><i class="pad on"></i><i class="pad"></i><i class="pad"></i><i class="pad on"></i></div><div class="piano" id="piano"></div></div></div>
+ </div></div>
+ <div class="switch" role="group" aria-label="Sisi"><button aria-pressed="true" data-s="dev">Developer</button><button aria-pressed="false" data-s="producer">Producer</button></div>
+ <div class="cta" id="cta"><a class="p" href="#">Lihat karya</a><a href="#">Chat WhatsApp</a></div>
+</div></main>
+<script>
+const code=document.getElementById('code');
+const rows=[[14],[1,...Array(12).fill(1),1],[1,...Array(12).fill(1),1],[2,...Array(10).fill(1),2],[2,1,1,6,1,1,2]];
+rows.forEach(r=>r.forEach((w,i)=>{const k=document.createElement('i');k.className='k'+(w===2?' w2':w===6?' w6':'')+(Math.random()<.06?' a':'');code.append(k)}));
+const piano=document.getElementById('piano');
+for(let i=0;i<10;i++){const w=document.createElement('i');w.className='w';piano.append(w)}
+[0,1,3,4,5,7,8].forEach(i=>{const b=document.createElement('i');b.className='b';b.style.left=`calc(${(i+1)*10}% - 3.5%)`;piano.append(b)});
+const copy={dev:['<b>Web developer.</b> Aplikasi untuk usaha kecil.',['Lihat karya','Chat WhatsApp']],producer:['<b>Music producer.</b> Beat trap dan lo-fi.',['Dengar beat','Chat WhatsApp']]};
+function swap(fn,x,y){if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches)return fn();
+ const r=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+ document.startViewTransition(fn).ready.then(()=>document.documentElement.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${r}px at ${x}px ${y}px)`]},{duration:700,easing:'cubic-bezier(.7,0,.2,1)',pseudoElement:'::view-transition-new(root)'}))}
+document.querySelectorAll('.switch button').forEach(b=>b.onclick=e=>{const s=b.dataset.s;if(document.body.dataset.side===s)return;
+ swap(()=>{document.body.dataset.side=s;document.querySelectorAll('.switch button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+ document.getElementById('line').innerHTML=copy[s][0];const a=document.querySelectorAll('#cta a');a[0].textContent=copy[s][1][0];a[1].textContent=copy[s][1][1]},e.clientX,e.clientY)});
+document.querySelectorAll('.finish button').forEach(b=>b.onclick=e=>swap(()=>document.body.dataset.finish=b.dataset.f,e.clientX,e.clientY));
+addEventListener('keydown',e=>{const ks=[...code.children];const k=ks[(e.key.charCodeAt(0)*7)%ks.length];k?.classList.add('down');setTimeout(()=>k?.classList.remove('down'),120)});
+</script>
+</body></html>
