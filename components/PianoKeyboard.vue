@@ -4,6 +4,12 @@
     class="piano-wrapper"
     :class="{ 'is-fullscreen': isFullscreen }"
   >
+    <!-- Landscape Prompt when mobile in portrait fullscreen -->
+    <div v-if="isFullscreen" class="landscape-hint-banner" aria-hidden="true">
+      <span class="rotate-icon">🔄</span>
+      <span>Miringkan HP ke posisi Landscape untuk bermain full-screen dengan 2 tangan</span>
+    </div>
+
     <div class="piano-console">
       <!-- TOP CONTROL BAR -->
       <header class="piano-header">
@@ -227,9 +233,19 @@ const keys = computed<KeyDef[]>(() => {
 let isPointerActive = false
 
 function playKey(key: KeyDef) {
-  getAudioContext()
-  pressedNotes.value.add(key.note)
-  playPianoNote(key.freq, currentVoice.value)
+  const c = getAudioContext()
+  if (c.state === 'suspended') {
+    c.resume().then(() => {
+      pressedNotes.value.add(key.note)
+      playPianoNote(key.freq, currentVoice.value, key.note)
+    }).catch(() => {
+      pressedNotes.value.add(key.note)
+      playPianoNote(key.freq, currentVoice.value, key.note)
+    })
+  } else {
+    pressedNotes.value.add(key.note)
+    playPianoNote(key.freq, currentVoice.value, key.note)
+  }
 
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
     try { navigator.vibrate(10) } catch {}
@@ -306,15 +322,25 @@ function toggleFullscreen() {
 
   if (!isFullscreen.value) {
     if (el.requestFullscreen) {
-      el.requestFullscreen().catch(() => {
+      el.requestFullscreen().then(() => {
+        if (typeof screen !== 'undefined' && screen.orientation && (screen.orientation as any).lock) {
+          ;(screen.orientation as any).lock('landscape').catch(() => {})
+        }
+      }).catch(() => {
         isFullscreen.value = true
       })
     } else {
       isFullscreen.value = true
     }
+    if (typeof screen !== 'undefined' && screen.orientation && (screen.orientation as any).lock) {
+      ;(screen.orientation as any).lock('landscape').catch(() => {})
+    }
   } else {
     if (document.fullscreenElement && document.exitFullscreen) {
       document.exitFullscreen().catch(() => {})
+    }
+    if (typeof screen !== 'undefined' && screen.orientation && (screen.orientation as any).unlock) {
+      ;(screen.orientation as any).unlock()
     }
     isFullscreen.value = false
   }
@@ -349,7 +375,7 @@ onBeforeUnmount(() => {
   touch-action: manipulation;
 }
 
-/* FULLSCREEN OVERLAY */
+/* FULLSCREEN OVERLAY (Designed for mobile landscape & desktop) */
 .piano-wrapper.is-fullscreen {
   position: fixed !important;
   inset: 0 !important;
@@ -358,17 +384,62 @@ onBeforeUnmount(() => {
   height: 100vh !important;
   height: 100dvh !important;
   z-index: 99999 !important;
-  background: #111316 !important;
+  background: #0f1013 !important;
   display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: env(safe-area-inset-top, 16px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 16px) env(safe-area-inset-left, 16px) !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  padding: env(safe-area-inset-top, 4px) env(safe-area-inset-right, 10px) env(safe-area-inset-bottom, 4px) env(safe-area-inset-left, 10px) !important;
   margin: 0 !important;
+}
+
+.landscape-hint-banner {
+  background: linear-gradient(90deg, #ff9800, #ffb300);
+  color: #111;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media (orientation: landscape) {
+  .landscape-hint-banner {
+    display: none !important;
+  }
 }
 
 .piano-wrapper.is-fullscreen .piano-console {
   width: 100% !important;
-  max-width: 900px !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: #141519 !important;
+}
+
+.piano-wrapper.is-fullscreen .piano-header {
+  padding: 6px 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.piano-wrapper.is-fullscreen .piano-keybed {
+  flex: 1 1 0% !important;
+  height: 100% !important;
+  max-height: calc(100dvh - 52px) !important;
+  padding: 4px 6px 0 !important;
+}
+
+.piano-wrapper.is-fullscreen .piano-footer {
+  display: none !important;
 }
 
 /* CONSOLE CHASSIS */

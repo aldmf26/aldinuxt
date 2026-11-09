@@ -210,8 +210,12 @@ function toggleBank() {
 const holdingPads = new Map<number, { timer?: any }>()
 
 function triggerPad(pad: PadItem) {
-  getAudioContext()
-  pad.action(currentPreset.value.id)
+  const c = getAudioContext()
+  if (c.state === 'suspended') {
+    c.resume().then(() => pad.action(currentPreset.value.id)).catch(() => pad.action(currentPreset.value.id))
+  } else {
+    pad.action(currentPreset.value.id)
+  }
 
   // Record pad hit if recording
   if (isRecording.value) {
@@ -490,15 +494,56 @@ onBeforeUnmount(() => {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: env(safe-area-inset-top, 12px) env(safe-area-inset-right, 12px) env(safe-area-inset-bottom, 12px) env(safe-area-inset-left, 12px) !important;
+  padding: env(safe-area-inset-top, 6px) env(safe-area-inset-right, 8px) env(safe-area-inset-bottom, 6px) env(safe-area-inset-left, 8px) !important;
   margin: 0 !important;
 }
 
 .drumpad-wrapper.is-fullscreen .drumpads24-machine {
+  width: 100% !important;
   height: 100% !important;
-  max-width: 540px !important;
+  max-height: 100dvh !important;
+  max-width: 480px !important;
   box-shadow: none !important;
-  border-radius: 18px !important;
+  border-radius: 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.drumpad-wrapper.is-fullscreen .machine-header {
+  padding: 6px 10px !important;
+  flex-shrink: 0 !important;
+}
+
+.drumpad-wrapper.is-fullscreen .pads-grid {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  grid-template-rows: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(4px, 1.2vw, 8px) !important;
+  padding: clamp(4px, 1.2vw, 8px) !important;
+}
+
+.drumpad-wrapper.is-fullscreen .drum-pad {
+  aspect-ratio: auto !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.drumpad-wrapper.is-fullscreen .pad-surface {
+  padding: 4px !important;
+}
+
+.drumpad-wrapper.is-fullscreen .pad-label {
+  font-size: clamp(11px, 2.8vw, 15px) !important;
+}
+
+.drumpad-wrapper.is-fullscreen .pad-sublabel {
+  font-size: clamp(8px, 1.8vw, 10px) !important;
+}
+
+.drumpad-wrapper.is-fullscreen .machine-footer {
+  padding: 4px 10px !important;
+  flex-shrink: 0 !important;
 }
 
 /* CHASSIS / MACHINE */

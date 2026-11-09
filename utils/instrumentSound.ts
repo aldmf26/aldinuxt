@@ -1,82 +1,144 @@
-// Every sound is synthesized with Web Audio: no sample files to download.
+// Audio engine for mechanical keyboard sound effects (Developer tab)
 let ac: AudioContext | undefined
-let master: DynamicsCompressorNode
-let noiseBuf: AudioBuffer
+let master: DynamicsCompressorNode | undefined
+let masterGain: GainNode | undefined
+let noiseBuf: AudioBuffer | undefined
 
-function audio() {
-  if (ac) return ac
-  ac = new AudioContext()
-  master = ac.createDynamicsCompressor()
-  master.connect(ac.destination)
-  noiseBuf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate)
-  const d = noiseBuf.getChannelData(0)
-  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1
-  return ac
+export function getDevAudio(): AudioContext {
+  if (!ac && typeof window !== 'undefined') {
+    const AudioCtx = window.AudioContext || (window as any).webkitAudioContext
+    ac = new AudioCtx()
+    master = ac.createDynamicsCompressor()
+    master.threshold.setValueAtTime(-15, ac.currentTime)
+    master.knee.setValueAtTime(24, ac.currentTime)
+    master.ratio.setValueAtTime(8, ac.currentTime)
+
+    masterGain = ac.createGain()
+    masterGain.gain.setValueAtTime(1.0, ac.currentTime)
+
+    master.connect(masterGain)
+    masterGain.connect(ac.destination)
+
+    noiseBuf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate)
+    const d = noiseBuf.getChannelData(0)
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1
+  }
+
+  if (ac && ac.state === 'suspended') {
+    ac.resume().catch(() => {})
+  }
+
+  return ac!
 }
 
-const env = (g: GainNode, t: number, peak: number, dec: number) => {
-  g.gain.setValueAtTime(0.0001, t)
-  g.gain.exponentialRampToValueAtTime(peak, t + 0.004)
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dec)
+if (typeof window !== 'undefined') {
+  const unlock = () => {
+    if (ac && ac.state === 'suspended') ac.resume()
+  }
+  window.addEventListener('pointerdown', unlock, { passive: true })
+  window.addEventListener('keydown', unlock, { passive: true })
+}
+
+const safeEnv = (g: GainNode, t: number, peak: number, dec: number) => {
+  g.gain.cancelScheduledValues(t)
+  g.gain.setValueAtTime(0.001, t)
+  g.gain.linearRampToValueAtTime(peak, t + 0.003)
+  g.gain.exponentialRampToValueAtTime(0.001, t + Math.max(0.02, dec))
 }
 
 function noise(t: number, dur: number, type: BiquadFilterType, freq: number, peak: number, q = 1) {
-  const s = ac!.createBufferSource(); s.buffer = noiseBuf
-  const f = ac!.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q
-  const g = ac!.createGain(); env(g, t, peak, dur)
-  s.connect(f).connect(g).connect(master); s.start(t, Math.random() * 0.5); s.stop(t + dur + 0.05)
+  const c = getDevAudio()
+  if (!c || !noiseBuf) return
+  const s = c.createBufferSource(); s.buffer = noiseBuf
+  const f = c.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q
+  const g = c.createGain(); safeEnv(g, t, peak, dur)
+  s.connect(f).connect(g).connect(master!)
+  s.start(t, Math.random() * 0.4); s.stop(t + dur + 0.06)
 }
 
-function tone(t: number, type: OscillatorType, f0: number, f1: number, glide: number, peak: number, dec: number, dest: AudioNode = master) {
-  const o = ac!.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, t)
-  if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + glide)
-  const g = ac!.createGain(); env(g, t, peak, dec)
-  o.connect(g).connect(dest); o.start(t); o.stop(t + dec + 0.05)
-}
-
-let drive: WaveShaperNode | undefined
-const now = () => {
-  const c = audio()
-  if (c.state === 'suspended') c.resume()
-  return c.currentTime
+function tone(t: number, type: OscillatorType, f0: number, f1: number, glide: number, peak: number, dec: number) {
+  const c = getDevAudio()
+  if (!c) return
+  const o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, t)
+  if (f1 > 0 && glide > 0) o.frequency.exponentialRampToValueAtTime(f1, t + glide)
+  const g = c.createGain(); safeEnv(g, t, peak, dec)
+  o.connect(g).connect(master!)
+  o.start(t); o.stop(t + dec + 0.06)
 }
 
 export const sfx = {
-  unlock: () => { now() },
-  click() { // mechanical switch: click, bottom-out thock, release clack
-    const t = now(), v = 0.85 + Math.random() * 0.3
-    noise(t, 0.025, 'bandpass', 3200 * v, 0.5, 1.2)
-    tone(t, 'sine', 260 * v, 90, 0.035, 0.35, 0.06)
-    noise(t + 0.045, 0.02, 'bandpass', 2200 * v, 0.15, 1.5)
+  unlock: () => { getDevAudio() },
+  // Mechanical switch: sharp blue click + solid bottom-out thock
+  click() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    const v = 0.85 + Math.random() * 0.35
+
+    // 1. Click leaf transient (Cherry MX click)
+    noise(t, 0.022, 'bandpass', 3600 * v, 0.7, 1.4)
+    // 2. Plastic housing bottom-out thock
+    tone(t, 'triangle', 280 * v, 85, 0.03, 0.6, 0.065)
+    tone(t, 'sine', 180 * v, 60, 0.04, 0.45, 0.08)
+    // 3. Slider release clack
+    noise(t + 0.038, 0.02, 'bandpass', 2400 * v, 0.35, 1.6)
   },
-  piano(f: number) { // electric-piano voice: decaying harmonics through a closing low-pass
-    const t = now()
-    const lp = ac!.createBiquadFilter(); lp.type = 'lowpass'
-    lp.frequency.setValueAtTime(Math.min(9000, f * 12), t)
-    lp.frequency.exponentialRampToValueAtTime(Math.max(400, f * 2), t + 1.2)
-    lp.connect(master)
-    for (const [h, a, d] of [[1, 0.5, 1.8], [2, 0.22, 1.1], [3, 0.1, 0.7], [4, 0.06, 0.45], [5.02, 0.03, 0.3]])
-      tone(t, 'sine', f * h, 0, 0, a, d, lp)
-    tone(t, 'triangle', f * 1.003, 0, 0, 0.12, 1.4, lp)
-    noise(t, 0.015, 'highpass', 2500, 0.05)
+  piano(f: number) {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    tone(t, 'triangle', f, 0, 0, 0.5, 0.8)
+    tone(t, 'sine', f * 2, 0, 0, 0.25, 0.5)
   },
-  kick() { const t = now(); tone(t, 'sine', 160, 42, 0.11, 1, 0.38); noise(t, 0.01, 'highpass', 4000, 0.15) },
+  kick() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    tone(t, 'sine', 160, 42, 0.08, 0.9, 0.35)
+  },
+  snare() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    noise(t, 0.18, 'highpass', 1800, 0.6, 1.2)
+    tone(t, 'triangle', 200, 140, 0.04, 0.5, 0.1)
+  },
+  hat() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    noise(t, 0.04, 'highpass', 8500, 0.4, 1.5)
+  },
+  open() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    noise(t, 0.3, 'highpass', 7500, 0.35, 1.2)
+  },
+  clap() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    noise(t, 0.18, 'bandpass', 1400, 0.5)
+  },
   '808'() {
-    const t = now()
-    if (!drive) {
-      drive = ac!.createWaveShaper()
-      const c = new Float32Array(256)
-      for (let i = 0; i < 256; i++) c[i] = Math.tanh(2.4 * (i / 128 - 1))
-      drive.curve = c; drive.connect(master)
-    }
-    tone(t, 'sine', 90, 49, 0.06, 0.9, 1.6, drive)
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    tone(t, 'sine', 90, 45, 0.06, 0.8, 1.4)
   },
-  snare() { const t = now(); noise(t, 0.2, 'highpass', 1600, 0.55); tone(t, 'triangle', 200, 160, 0.05, 0.4, 0.11) },
-  clap() { const t = now(); for (const o of [0, 0.011, 0.023]) noise(t + o, 0.012, 'bandpass', 1300, 0.5, 0.9); noise(t + 0.03, 0.18, 'bandpass', 1300, 0.45, 0.9) },
-  hat() { const t = now(); noise(t, 0.045, 'highpass', 8000, 0.32) },
-  open() { const t = now(); noise(t, 0.32, 'highpass', 7500, 0.28) },
-  rim() { const t = now(); tone(t, 'square', 1700, 0, 0, 0.12, 0.03); noise(t, 0.02, 'bandpass', 2500, 0.2, 3) },
-  perc() { const t = now(); tone(t, 'square', 540, 0, 0, 0.12, 0.25); tone(t, 'square', 800, 0, 0, 0.1, 0.25) },
+  rim() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    tone(t, 'square', 1700, 0, 0, 0.15, 0.035)
+  },
+  perc() {
+    const c = getDevAudio()
+    if (!c) return
+    const t = Math.max(c.currentTime, 0.001) + 0.002
+    tone(t, 'square', 600, 0, 0, 0.15, 0.15)
+  }
 }
 
 export type PadName = '808' | 'kick' | 'snare' | 'clap' | 'hat' | 'open' | 'rim' | 'perc'

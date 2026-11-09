@@ -1,5 +1,11 @@
 <template>
   <div ref="stage" class="duo-stage" :class="{ ready }">
+    <transition name="pop-tag">
+      <div v-if="lastTyped" class="typing-fx-tag" :key="typeCount">
+        <span class="tag-icon">⌨️</span>
+        <span class="tag-char">{{ lastTyped }}</span>
+      </div>
+    </transition>
     <p class="duo-hint">{{ side === 'dev' ? $t('hero.hintDev') : touch ? $t('hero.hintProducerTouch') : $t('hero.hintProducer') }}</p>
   </div>
 </template>
@@ -12,6 +18,8 @@ import { sfx, type PadName } from '~/utils/instrumentSound'
 const { side, accentHex } = useSide()
 const stage = ref<HTMLDivElement>()
 const ready = ref(false)
+const lastTyped = ref('')
+const typeCount = ref(0)
 const touch = matchMedia('(pointer: coarse)').matches // keyboard hints mean nothing on a phone
 let dispose = () => {}
 
@@ -163,25 +171,37 @@ onMounted(async () => {
   for (let i = 0; i < wn; i++) pianoKey(Math.floor(i / 7) * 12 + WHITE[i % 7], wGeo, M.ivory, { x: px + i * ww + ww / 2, z: 0.2 }, 0.22)
   for (let i = 0; i < wn - 1; i++) { const n = i % 7; if (n === 2 || n === 6) continue; pianoKey(Math.floor(i / 7) * 12 + WHITE[n] + 1, bGeo, M.ebony, { x: px + (i + 1) * ww, z: -0.7 }, 0.42) }
 
-  // hit feedback: one moving flash light + a pool of ripple rings
+  // hit feedback: one moving flash light + a pool of ripple rings for back and front
   const flash = new THREE.PointLight(accent, 0, 6, 2); back.add(flash)
+  const frontFlash = new THREE.PointLight(accent, 0, 6, 2); front.add(frontFlash)
   const ringGeo = new THREE.RingGeometry(0.62, 0.74, 48)
   const rings = [...Array(6)].map(() => {
     const m = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }))
     m.rotation.x = -Math.PI / 2; m.userData.t0 = -1; back.add(m); accentMats.push(m.material); return m
   })
+  const frontRings = [...Array(6)].map(() => {
+    const m = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }))
+    m.rotation.x = -Math.PI / 2; m.userData.t0 = -1; front.add(m); accentMats.push(m.material); return m
+  })
   let ringI = 0
+  let frontRingI = 0
 
   /* ---------- interaction ---------- */
   function press(m: any) {
-    const u = m.userData; u.down = 1; u.glow = u.glowMax
+    const u = m.userData; u.down = 1; u.glow = u.glowMax || 2.2
     if (u.kind === 'pad') {
       sfx[u.name as PadName]()
       flash.position.set(m.position.x, 1.4, m.position.z); flash.intensity = 40
       const r = rings[ringI++ % rings.length]; r.position.set(m.position.x, 0.45, m.position.z); r.userData.t0 = performance.now()
       knobs.forEach((k, i) => (k.rotation.y += (i % 2 ? -1 : 1) * 0.15))
-    } else if (u.kind === 'piano') sfx.piano(u.f)
-    else sfx.click()
+    } else if (u.kind === 'piano') {
+      sfx.piano(u.f)
+    } else {
+      // Mechanical Key (Dev tab) - loud switch click + visual shockwave & light flash
+      sfx.click()
+      frontFlash.position.set(m.position.x, 0.8, m.position.z); frontFlash.intensity = 50
+      const fr = frontRings[frontRingI++ % frontRings.length]; fr.position.set(m.position.x, 0.28, m.position.z); fr.userData.t0 = performance.now()
+    }
   }
   const release = (m: any) => { if (m) m.userData.down = 0 }
   const tap = (m: any) => { press(m); setTimeout(() => release(m), 70) }
@@ -200,6 +220,10 @@ onMounted(async () => {
   canvas.addEventListener('pointerdown', e => {
     const m = hit(e); if (!m) return
     canvas.setPointerCapture(e.pointerId); holding = m; press(m)
+    if (side.value === 'dev') {
+      lastTyped.value = 'TAP'
+      typeCount.value++
+    }
     if (m.userData.name === 'hat') startRoll(m)
   })
   canvas.addEventListener('pointermove', e => {
@@ -220,8 +244,11 @@ onMounted(async () => {
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.repeat || e.metaKey || e.ctrlKey || e.altKey || typing(e) || !visible) return
     const k = e.key.toLowerCase(); let m
-    if (side.value === 'dev') m = codeKeys[(k.charCodeAt(0) * 7 + k.length) % codeKeys.length]
-    else {
+    if (side.value === 'dev') {
+      m = codeKeys[(k.charCodeAt(0) * 7 + k.length) % codeKeys.length]
+      lastTyped.value = k.length === 1 ? k.toUpperCase() : k
+      typeCount.value++
+    } else {
       const pi = FL.indexOf(k), pname = padByKey[k]
       m = pi > -1 ? pianoKeys[pi] : pname ? padKeys.find(p => p.userData.name === pname) ?? null : null
       if (m) e.preventDefault()
@@ -279,11 +306,12 @@ onMounted(async () => {
       for (const mt of u.mats) mt.emissiveIntensity = g
     }
     flash.intensity *= 0.86
-    for (const r of rings) {
+    frontFlash.intensity *= 0.86
+    for (const r of [...rings, ...frontRings]) {
       if (r.userData.t0 < 0) continue
       const t = (now - r.userData.t0) / 480
       if (t >= 1) { r.material.opacity = 0; r.userData.t0 = -1; continue }
-      r.scale.setScalar(1 + t * 1.6); r.material.opacity = 0.9 * (1 - t)
+      r.scale.setScalar(1 + t * 1.8); r.material.opacity = 0.95 * (1 - t)
     }
     renderer.render(scene, camera)
     raf = requestAnimationFrame(loop)
@@ -318,6 +346,41 @@ onBeforeUnmount(() => dispose())
 }
 .duo-stage.ready { opacity: 1; }
 .duo-stage :deep(canvas) { display: block; width: 100% !important; height: 100% !important; }
+.typing-fx-tag {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 4px 18px var(--accent-glow);
+  pointer-events: none;
+  z-index: 10;
+}
+.pop-tag-enter-active {
+  animation: pop-bubble 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.pop-tag-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.pop-tag-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -8px);
+}
+@keyframes pop-bubble {
+  0% { transform: translate(-50%, 8px) scale(0.85); opacity: 0; }
+  50% { transform: translate(-50%, 0) scale(1.08); opacity: 1; }
+  100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+}
 .duo-hint {
   position: absolute; left: 0; right: 0; bottom: 4px;
   text-align: center; font-size: 14px; color: var(--text-muted); pointer-events: none;
