@@ -127,10 +127,10 @@
               'is-snare': pad.isSnare
             }
           ]"
-          @pointerdown.prevent="onPadDown(pad, $event)"
-          @pointerup.prevent="onPadUp(pad, $event)"
-          @pointercancel.prevent="onPadUp(pad, $event)"
-          @pointerleave.prevent="onPadLeave(pad, $event)"
+          @pointerdown="onPadDown(pad, $event)"
+          @pointerup="onPadUp(pad, $event)"
+          @pointercancel="onPadUp(pad, $event)"
+          @pointerleave="onPadLeave(pad, $event)"
         >
           <!-- 3D Rubber Pad Surface with Inner Radial Glow -->
           <span class="pad-surface">
@@ -171,7 +171,7 @@
 
 <script setup lang="ts">
 import { PRESETS, type PadItem } from '~/utils/drumpadPresets'
-import { getAudioContext, type PresetId } from '~/utils/producerAudio'
+import { unlockMobileAudio, type PresetId } from '~/utils/producerAudio'
 
 const containerRef = ref<HTMLDivElement>()
 const selectedPresetId = ref<PresetId>('trap')
@@ -193,7 +193,7 @@ const activePads = computed<PadItem[]>(() => {
 function selectPreset(id: PresetId) {
   selectedPresetId.value = id
   presetMenuOpen.value = false
-  getAudioContext() // warm up audio
+  unlockMobileAudio() // warm up audio
 }
 
 function togglePresetMenu() {
@@ -210,12 +210,8 @@ function toggleBank() {
 const holdingPads = new Map<number, { timer?: any }>()
 
 function triggerPad(pad: PadItem) {
-  const c = getAudioContext()
-  if (c.state === 'suspended') {
-    c.resume().then(() => pad.action(currentPreset.value.id)).catch(() => pad.action(currentPreset.value.id))
-  } else {
-    pad.action(currentPreset.value.id)
-  }
+  unlockMobileAudio()
+  pad.action(currentPreset.value.id)
 
   // Record pad hit if recording
   if (isRecording.value) {
@@ -230,6 +226,7 @@ function triggerPad(pad: PadItem) {
 }
 
 function onPadDown(pad: PadItem, e?: PointerEvent) {
+  unlockMobileAudio()
   if (e && e.target && (e.target as HTMLElement).setPointerCapture && e.pointerId !== undefined) {
     try {
       ;(e.target as HTMLElement).setPointerCapture(e.pointerId)

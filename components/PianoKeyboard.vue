@@ -115,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import { getAudioContext, playPianoNote, type PianoVoice } from '~/utils/producerAudio'
+import { unlockMobileAudio, playPianoNote, type PianoVoice } from '~/utils/producerAudio'
 
 const pianoContainerRef = ref<HTMLDivElement>()
 const isFullscreen = ref(false)
@@ -132,7 +132,7 @@ const voices: { id: PianoVoice; name: string; icon: string }[] = [
 
 function setVoice(v: PianoVoice) {
   currentVoice.value = v
-  getAudioContext()
+  unlockMobileAudio()
 }
 
 function changeOctave(delta: number) {
@@ -233,19 +233,9 @@ const keys = computed<KeyDef[]>(() => {
 let isPointerActive = false
 
 function playKey(key: KeyDef) {
-  const c = getAudioContext()
-  if (c.state === 'suspended') {
-    c.resume().then(() => {
-      pressedNotes.value.add(key.note)
-      playPianoNote(key.freq, currentVoice.value, key.note)
-    }).catch(() => {
-      pressedNotes.value.add(key.note)
-      playPianoNote(key.freq, currentVoice.value, key.note)
-    })
-  } else {
-    pressedNotes.value.add(key.note)
-    playPianoNote(key.freq, currentVoice.value, key.note)
-  }
+  unlockMobileAudio()
+  pressedNotes.value.add(key.note)
+  playPianoNote(key.freq, currentVoice.value, key.note)
 
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
     try { navigator.vibrate(10) } catch {}
