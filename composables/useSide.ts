@@ -3,10 +3,10 @@
 export type Side = 'dev' | 'producer'
 
 export const ACCENTS = [
-  { id: 'oranye', hex: '#ff5a1f' },
-  { id: 'biru', hex: '#2f6bff' },
-  { id: 'hijau', hex: '#22b366' },
-  { id: 'kuning', hex: '#ffc21f' },
+  { id: 'oranye', hex: '#ff5a1f', label: 'Dark Mode · Warm Ember' },
+  { id: 'biru', hex: '#2f6bff', label: 'Dark Mode · Cyber Navy' },
+  { id: 'hijau', hex: '#22b366', label: 'Light Mode · Mint Sage' },
+  { id: 'kuning', hex: '#ffc21f', label: 'Light Mode · Daylight Studio' },
 ] as const
 export type AccentId = (typeof ACCENTS)[number]['id']
 

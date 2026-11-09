@@ -10,7 +10,8 @@
           class="swatch"
           :style="{ background: a.hex }"
           :aria-pressed="accent === a.id"
-          :aria-label="a.id"
+          :aria-label="a.label"
+          :title="a.label"
           @click="setAccent(a.id, $event)"
         />
       </div>
