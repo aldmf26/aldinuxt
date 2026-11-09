@@ -46,3 +46,4 @@ export default defineNuxtPlugin(() => {
     window.addEventListener('load', setup, { once: true })
   }
 })
+
