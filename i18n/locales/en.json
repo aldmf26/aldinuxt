@@ -8,7 +8,10 @@
     "menu": "Menu",
     "close": "Close",
     "tagline": "code & sound",
-    "accent": "Accent colour"
+    "accent": "Accent colour",
+    "skip": "Skip to content",
+    "label": "Main",
+    "code": "Code"
   },
   "hero": {
     "availability": "Available for selected projects · 2026",
@@ -33,13 +36,14 @@
     "sideDev": "Developer",
     "sideProducer": "Producer",
     "hintDev": "Type or tap the keys",
-    "hintProducer": "Piano: Q = C · Pads: A S D F / Z X C V · hold Z for a hi-hat roll",
-    "hintProducerTouch": "Tap the pads & keys · hold HAT for a hi-hat roll"
+    "lede": "I build web apps for small businesses in Laravel and Nuxt, then make rap and trap beats in FL Studio.",
+    "play": "Play the timeline",
+    "base": "Base"
   },
   "works": {
     "ghost": "WORKS",
-    "title": "Work",
-    "description": "Nine projects. Each one built around a real constraint."
+    "title": "Code",
+    "description": "Web apps with a real business behind each one: cashiers, stock, payroll, reports, learning tools."
   },
   "identity": {
     "engineer": "Software Engineer",
@@ -56,11 +60,18 @@
     "musicSince": "Music since",
     "webCaption": "Engineering Digital Solutions",
     "musicCaption": "Crafting Sonic Landscapes",
-    "marquee": "OPEN TO FREELANCE · REMOTE FRIENDLY · BASED IN BANJARMASIN · FAST DELIVERY · LET'S TALK ·"
+    "marquee": "OPEN TO FREELANCE · REMOTE FRIENDLY · BASED IN BANJARMASIN · FAST DELIVERY · LET'S TALK ·",
+    "statement": "Same hands, two kinds of session.",
+    "f1": "Bachelor of Information Systems, UNISKA Banjarmasin. GPA 3.60",
+    "f2": "Web developer at Rukita.id, Yogyakarta: WordPress and CodeIgniter with Elasticsearch",
+    "f3": "In-house developer and IT for a bird’s nest exporter, a poultry farm, two restaurants, a salon and a shipping company. Still there.",
+    "f4": "Rap, trap, hybrid trap and remixes. Piano and drum pads.",
+    "cvLine": "Full work history, projects and skills, in a format recruiters’ systems can read.",
+    "cvPage": "Read the CV"
   },
   "contact": {
     "label": "LET'S TALK",
-    "title": "Got an idea?",
+    "title": "Need an app, or a beat?",
     "accent": "Just message me.",
     "description": "Open to freelance projects, collaborations, and interesting conversations about web or music.",
     "email": "Send Email",
@@ -68,17 +79,22 @@
     "emailLabel": "Email",
     "social": "Social",
     "location": "Location",
-    "backTop": "Back to top"
+    "backTop": "Back to top",
+    "marker": "END OF SONG",
+    "colophon": "Set in Archivo and Martian Mono"
   },
   "music": {
     "ghost": "BEATS",
     "label": "Sound Lab",
     "title": "Beats",
-    "description": "Trap, EDM, and free FLP packs—all produced in FL Studio. Available for licensing, content use, or just listening.",
+    "description": "Rap, trap, hybrid trap and remixes, made in FL Studio. Tap a beat to play it from YouTube or SoundCloud.",
     "youtube": "Open YouTube",
     "showAll": "Show All Tracks",
     "loading": "Loading beats…",
-    "empty": "The full catalogue lives on my YouTube channel."
+    "empty": "The full catalogue lives on my YouTube channel.",
+    "play": "Play",
+    "pause": "Pause",
+    "seek": "Seek"
   },
   "project": {
     "caseStudy": "Case Study",
@@ -90,7 +106,7 @@
     "problem": "The Problem",
     "solution": "Solution",
     "outcome": "The Outcome",
-    "more": "More Projects",
+    "more": "Next project",
     "live": "View live"
   },
   "projects": {
@@ -181,9 +197,43 @@
     "copyright": "ALL BEATS ARE COPYRIGHTED."
   },
   "meta": {
-    "homeTitle": "Aldi Fahrizaldi — Web Developer & Music Producer",
-    "homeDescription": "Web developer and music producer from Banjarmasin. Building web apps with Nuxt, Laravel, and Tailwind.",
+    "homeTitle": "Aldi Fahrizaldi · Web developer and beatmaker",
+    "homeDescription": "Web apps for small businesses in Laravel and Nuxt, and rap and trap beats made in FL Studio. Based in Banjarmasin, Indonesia.",
     "serviceTitle": "Hire Me — Aldi Fahrizaldi",
     "serviceDescription": "Freelance landing pages, web apps, POS systems, and custom digital tools."
+  },
+  "timeline": {
+    "title": "One timeline",
+    "sub": "Bars are years. The jobs and apps I shipped sit on the same grid as the beats I made. Scroll to move the playhead.",
+    "solo": "Solo {track}",
+    "rest": "Rest",
+    "m2017": "Information Systems, UNISKA",
+    "m2020": "Rukita, Yogyakarta",
+    "m2021": "Graduated",
+    "m2022": "Banjarmasin, in-house",
+    "inhouse": "Walet, resto, salon, farm & shipping systems",
+    "apps2024": "8 apps"
+  },
+  "rack": {
+    "title": "Play something",
+    "sub": "Type on your keyboard or tap the keys. Pads: 1 2 3 / Q W E / A S D / Z X C, hold X for a hi-hat roll.",
+    "subTouch": "Tap the keys and pads. Hold the hi-hat pad for a roll.",
+    "keys": "Coding keyboard",
+    "pads": "Drum pads",
+    "loading": "Loading instrument"
+  },
+  "cv": {
+    "tag": "CV · EXPORT",
+    "download": "Download CV (PDF)",
+    "back": "Back to the timeline",
+    "meta": "CV of Muhammad Fahrizaldi, web developer in Banjarmasin: Laravel, Nuxt, MySQL, networking, and music production in FL Studio."
+  },
+  "notFound": {
+    "title": "This pattern is empty.",
+    "sub": "Nothing was recorded at this address. The playhead is still looping, though.",
+    "back": "Back to the playlist"
+  },
+  "pads": {
+    "packs": "Sound packs"
   }
 }

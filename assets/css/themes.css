@@ -109,7 +109,6 @@
   --accent-dim: rgba(var(--accent-rgb), 0.85);
   --accent-glow: rgba(var(--accent-rgb), 0.25);
   --border-accent: rgba(var(--accent-rgb), 0.45);
-  --accent2: var(--accent);
 }
 
 /* Smooth circle-reveal view transition when switching themes */
@@ -150,5 +149,5 @@ html {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 2px;
 }

@@ -67,7 +67,6 @@ function tone(t: number, type: OscillatorType, f0: number, f1: number, glide: nu
 }
 
 export const sfx = {
-  unlock: () => { getDevAudio() },
   // Mechanical switch: sharp blue click + solid bottom-out thock
   click() {
     const c = getDevAudio()
@@ -83,62 +82,4 @@ export const sfx = {
     // 3. Slider release clack
     noise(t + 0.038, 0.02, 'bandpass', 2400 * v, 0.35, 1.6)
   },
-  piano(f: number) {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    tone(t, 'triangle', f, 0, 0, 0.5, 0.8)
-    tone(t, 'sine', f * 2, 0, 0, 0.25, 0.5)
-  },
-  kick() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    tone(t, 'sine', 160, 42, 0.08, 0.9, 0.35)
-  },
-  snare() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    noise(t, 0.18, 'highpass', 1800, 0.6, 1.2)
-    tone(t, 'triangle', 200, 140, 0.04, 0.5, 0.1)
-  },
-  hat() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    noise(t, 0.04, 'highpass', 8500, 0.4, 1.5)
-  },
-  open() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    noise(t, 0.3, 'highpass', 7500, 0.35, 1.2)
-  },
-  clap() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    noise(t, 0.18, 'bandpass', 1400, 0.5)
-  },
-  '808'() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    tone(t, 'sine', 90, 45, 0.06, 0.8, 1.4)
-  },
-  rim() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    tone(t, 'square', 1700, 0, 0, 0.15, 0.035)
-  },
-  perc() {
-    const c = getDevAudio()
-    if (!c) return
-    const t = Math.max(c.currentTime, 0.001) + 0.002
-    tone(t, 'square', 600, 0, 0, 0.15, 0.15)
-  }
 }
-
-export type PadName = '808' | 'kick' | 'snare' | 'clap' | 'hat' | 'open' | 'rim' | 'perc'

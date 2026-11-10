@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "cv:pdf": "node scripts/cv-pdf.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",
@@ -22,6 +23,8 @@
   },
   "devDependencies": {
     "@nuxtjs/i18n": "^8.5.6",
-    "@nuxtjs/tailwindcss": "^6.11.4"
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "axe-core": "^4.14.0",
+    "playwright": "^1.65.0"
   }
 }

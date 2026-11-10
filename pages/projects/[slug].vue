@@ -1,142 +1,61 @@
 <template>
-  <main v-if="project" class="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] relative">
-    
-    <!-- Hero Block -->
-    <section class="relative h-[90vh] w-full flex items-center px-6 md:px-16 lg:px-24 overflow-hidden">
-      <!-- Background Ghost Number -->
-      <div class="absolute -bottom-10 -left-10 z-0 opacity-[0.05] pointer-events-none select-none" style="font-size: clamp(200px, 40vw, 600px); line-height: 1; font-weight: 900; font-family: 'JetBrains Mono'; color: var(--accent);">
-        {{ project.number || '01' }}
+  <article v-if="project" class="case">
+    <header class="case-hero wrap">
+      <p class="track-tag"><i />APPS · BAR {{ String(Number(project.year) - FIRST_YEAR + 1).padStart(2, '0') }} · {{ project.year }}</p>
+      <div v-if="projectLogos.length" class="logos">
+        <img
+          v-for="(logo, index) in projectLogos"
+          :key="logo"
+          :src="logo"
+          :alt="projectLogos.length > 1 ? `${project.title} brand ${index + 1}` : `${project.title} logo`"
+          height="56"
+        />
       </div>
+      <h1 class="display">{{ project.title }}</h1>
+      <div class="lede-row">
+        <p class="lede">{{ localized('subtitle') }}</p>
+        <a v-if="project.link" :href="project.link" target="_blank" rel="noopener" class="btn btn-primary"><span>{{ $t('project.live') }} ↗</span></a>
+      </div>
+      <dl class="meta">
+        <div><dt>{{ $t('project.role') }}</dt><dd>{{ localized('role') }}</dd></div>
+        <div><dt>{{ $t('project.year') }}</dt><dd class="num">{{ project.year }}</dd></div>
+        <div><dt>{{ $t('project.stack') }}</dt><dd>{{ project.techs.join(', ') }}</dd></div>
+        <div v-if="localized('impact')"><dt>{{ $t('project.impact') }}</dt><dd>{{ localized('impact') }}</dd></div>
+      </dl>
+    </header>
 
-      <div class="max-w-[1600px] mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-        <div class="lg:col-span-8">
-           <div
-             v-if="projectLogos.length"
-             class="inline-flex items-center gap-4 mb-8 p-3 md:p-4 rounded-2xl bg-white border border-black/10 shadow-sm animate-fade-up"
-             :aria-label="`${project.title} logo`"
-           >
-             <img
-               v-for="(logo, index) in projectLogos"
-               :key="logo"
-               :src="logo"
-               :alt="projectLogos.length > 1 ? `${project.title} brand ${index + 1}` : `${project.title} logo`"
-               class="h-10 md:h-14 w-auto max-w-[120px] md:max-w-[180px] object-contain"
-             />
-           </div>
-           <span class="section-label block mb-8 animate-fade-up">{{ $t('project.caseStudy') }}</span>
-           <h1 class="font-display italic leading-[0.85] tracking-tighter mb-8" style="font-size: clamp(64px, 12vw, 180px)">
-              {{ project.title }}
-           </h1>
-        </div>
-        <div class="lg:col-span-4 pb-6">
-           <p class="font-body text-xl md:text-2xl text-text-primary/60 leading-relaxed animate-fade-up delay-100">
-             {{ localized('subtitle') }}
-           </p>
-           <a v-if="project.link" :href="project.link" target="_blank" rel="noopener" class="btn btn-primary mt-8">{{ $t('project.live') }} ↗</a>
-        </div>
+    <section class="story wrap">
+      <div>
+        <h2>{{ $t('project.problem') }}</h2>
+        <p>{{ localized('problem') }}</p>
+      </div>
+      <div>
+        <h2>{{ $t('project.outcome') }}</h2>
+        <p>{{ localized('solution') }}</p>
       </div>
     </section>
 
-    <!-- Meta Grid -->
-    <section class="py-12 border-y border-text-primary/10 px-6 md:px-16 lg:px-24 bg-text-primary/[0.02]">
-       <div class="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div class="space-y-3">
-             <span class="section-label text-text-primary/40">{{ $t('project.role') }}</span>
-             <p class="font-mono text-sm uppercase tracking-widest">{{ localized('role') || 'Fullstack Dev' }}</p>
-          </div>
-          <div class="space-y-3">
-             <span class="section-label text-text-primary/40">{{ $t('project.year') }}</span>
-             <p class="font-mono text-sm uppercase tracking-widest">{{ project.year || '2024' }}</p>
-          </div>
-          <div class="space-y-3">
-             <span class="section-label text-text-primary/40">{{ $t('project.stack') }}</span>
-             <p class="font-mono text-sm uppercase tracking-widest">{{ project.techs.join(', ') }}</p>
-          </div>
-          <div class="space-y-3">
-             <span class="section-label text-text-primary/40">{{ $t('project.impact') }}</span>
-             <p class="font-mono text-sm uppercase tracking-widest">{{ localized('impact') || 'Delivered' }}</p>
-          </div>
-       </div>
+    <section class="shots wrap">
+      <figure v-for="(img, i) in project.screenshots" :key="i" :class="{ wide: i % 3 === 0 }">
+        <img :src="img.image" :alt="localizedScreenshot(i, 'title', img.title)" :loading="i ? 'lazy' : 'eager'" decoding="async" width="1600" height="1000" />
+        <figcaption>
+          <strong>{{ localizedScreenshot(i, 'title', img.title) }}</strong>
+          {{ localizedScreenshot(i, 'description', img.description) }}
+        </figcaption>
+      </figure>
     </section>
 
-    <!-- Content Area -->
-    <section class="py-20 px-6 md:px-16 lg:px-24">
-       <div class="max-w-[900px] mx-auto space-y-20">
-          
-          <!-- Challenge & Solution -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="space-y-6 p-8 rounded-2xl bg-red-500/5 border border-red-500/10">
-              <span class="font-mono text-xs text-red-500 uppercase tracking-widest">{{ $t('project.challenge') }}</span>
-              <h3 class="text-2xl font-display italic text-text-primary">{{ $t('project.problem') }}</h3>
-              <p class="text-base text-text-primary/75 leading-[1.75]">{{ localized('problem') }}</p>
-            </div>
-            <div class="space-y-6 p-8 rounded-2xl bg-lime/5 border border-lime/10">
-              <span class="font-mono text-xs text-lime uppercase tracking-widest">{{ $t('project.solution') }}</span>
-              <h3 class="text-2xl font-display italic text-text-primary">{{ $t('project.outcome') }}</h3>
-              <p class="text-base text-text-primary/75 leading-[1.75]">{{ localized('solution') }}</p>
-            </div>
-          </div>
-
-          <!-- Showcase Screenshots -->
-          <div v-for="(img, i) in project.screenshots" :key="i" class="space-y-6">
-            <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-white/5 bg-[var(--bg-surface)]">
-              <img :src="img.image" :alt="localizedScreenshot(i, 'title', img.title)" class="w-full h-auto" :loading="i ? 'lazy' : 'eager'" decoding="async" width="1600" height="1000" />
-            </div>
-            <div class="max-w-2xl">
-              <h4 class="text-xl font-bold text-text-primary mb-3">{{ localizedScreenshot(i, 'title', img.title) }}</h4>
-              <p class="text-base text-text-primary/70 leading-[1.75]">{{ localizedScreenshot(i, 'description', img.description) }}</p>
-            </div>
-          </div>
-
-          <!-- Recommended Section -->
-          <section class="mt-20 pt-12 border-t border-white/5">
-            <p class="section-label mb-12">{{ $t('project.more') }}</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <NuxtLink
-                v-for="proj in recommendedProjects"
-                :key="proj.slug"
-                :to="localePath(`/projects/${proj.slug}`)"
-                class="group block no-underline"
-              >
-                <div class="bg-[var(--bg-surface)] border border-white/5 rounded-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[var(--accent)]">
-                  <!-- Mini Visual -->
-                  <div class="h-32 flex items-center justify-center relative overflow-hidden border-b border-white/5"
-                       :style="{ background: `linear-gradient(135deg, var(--bg-surface), ${proj.color}20)` }">
-                    <span class="absolute right-2 -bottom-2 font-mono font-black text-6xl text-text-primary opacity-[0.05]">
-                      {{ proj.number }}
-                    </span>
-                    <div :style="{ width: '100%', height: '2px', background: proj.color, position: 'absolute', top: 0 }" />
-                    <span class="relative z-10 font-mono text-[9px] uppercase tracking-[0.2em] text-text-muted">
-                      {{ proj.type }}
-                    </span>
-                  </div>
-
-                  <!-- Info -->
-                  <div class="p-6">
-                    <p class="font-mono text-[9px] text-text-muted uppercase tracking-widest mb-2">{{ proj.number }}</p>
-                    <h4 class="text-xl font-bold text-text-primary mb-2 leading-tight group-hover:text-[var(--accent)] transition-colors">
-                      {{ proj.name }}
-                    </h4>
-                    <p class="text-xs text-text-muted line-clamp-2 leading-relaxed">
-                      {{ localizedProjectShort(proj) }}
-                    </p>
-                  </div>
-                </div>
-              </NuxtLink>
-            </div>
-          </section>
-
-        </div>
-    </section>
-  </main>
+    <NuxtLink v-if="next" class="next wrap" :to="localePath(`/projects/${next.slug}`)">
+      <span class="track-tag"><i />{{ $t('project.more') }}</span>
+      <span class="next-name display">{{ next.name }}</span>
+    </NuxtLink>
+  </article>
 </template>
 
 <script setup lang="ts">
 import { projects } from '~/data/project'
 import { projectsData } from '~/data/project-detail'
-
-
+import { FIRST_YEAR } from '~/data/timeline'
 
 const route = useRoute()
 const localePath = useLocalePath()
@@ -173,11 +92,6 @@ const localized = (field: string) => {
   return te(key) ? t(key) : (project.value as Record<string, any>)[field]
 }
 
-const localizedProjectShort = (proj: typeof projects[number]) => {
-  const key = `projects.${proj.slug}.short`
-  return te(key) ? t(key) : proj.shortDesc
-}
-
 const localizedScreenshot = (index: number, field: string, fallback: string) => {
   const key = `projects.${route.params.slug}.screenshots.${index}.${field}`
   return te(key) ? t(key) : fallback
@@ -188,17 +102,15 @@ if (!project.value) {
   throw createError({ statusCode: 404, statusMessage: 'Project Not Found', fatal: true })
 }
 
-const recommendedProjects = computed(() => {
-  if (!project.value) return []
-  return projects
-    .filter(p => p.slug !== route.params.slug)
-    .filter(p => !p.private)
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 3)
+// next project in list order, wrapping around, so the reading never dead-ends
+const next = computed(() => {
+  const list = projects.filter(p => !p.private)
+  const i = list.findIndex(p => p.slug === route.params.slug)
+  return list[(i + 1) % list.length]
 })
 
 useHead({
-  title: project.value ? `${project.value.title} — Case Study | Aldi Fahrizaldi` : 'Project Not Found',
+  title: project.value ? `${project.value.title} · Aldi Fahrizaldi` : 'Project Not Found',
   meta: [
     { name: 'description', content: project.value?.subtitle || '' },
   ],
@@ -206,18 +118,37 @@ useHead({
 </script>
 
 <style scoped>
-.animate-fade-up {
-  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.case-hero { display: grid; gap: 22px; padding-top: calc(var(--bar-h) + clamp(48px, 10vh, 120px)); padding-bottom: clamp(40px, 7vh, 80px); }
+.logos { display: flex; gap: 12px; }
+.logos img { height: 56px; width: auto; padding: 8px 12px; background: #fff; border-radius: var(--clip-r); }
+h1 { font-size: var(--t-mega); margin-left: -0.05em; overflow-wrap: anywhere; }
+.lede-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 40px; }
+.lede { font-size: var(--t-m); line-height: 1.35; max-width: 38rem; }
+.meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 32px; padding-top: 20px; border-top: 1px solid var(--line); }
+.meta dt { font: 400 var(--t-xs)/1.6 var(--font-mono); color: var(--text-secondary); }
+.meta dd { font-size: var(--t-s); font-weight: 600; }
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: 32px clamp(32px, 6vw, 96px); padding-block: clamp(48px, 8vh, 96px); }
+.story h2 { font: 800 var(--t-l)/1 var(--font-display); font-variation-settings: 'wdth' 112; letter-spacing: -0.03em; margin-bottom: 16px; }
+.story p { color: var(--text-secondary); max-width: 60ch; }
+.shots { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 48px); padding-bottom: clamp(64px, 10vh, 120px); }
+.shots figure.wide { grid-column: 1 / -1; }
+.shots img { width: 100%; height: auto; border-radius: var(--clip-r); border: 1px solid var(--line); }
+figcaption { margin-top: 12px; font-size: var(--t-s); color: var(--text-secondary); max-width: 60ch; }
+figcaption strong { display: block; color: var(--text-primary); margin-bottom: 2px; }
+.next {
+  position: relative; isolation: isolate; display: grid; gap: 12px; padding-block: clamp(48px, 10vh, 120px);
+  border-top: 1px solid var(--line); text-decoration: none;
 }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+.next::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; background: var(--clip-code);
+  clip-path: inset(0 100% 0 0); transition: clip-path 0.6s var(--ease);
 }
-.delay-100 { animation-delay: 0.1s; }
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.next:hover::before, .next:focus-visible::before { clip-path: inset(0 0 0 0); }
+.next:hover, .next:focus-visible { color: var(--clip-code-ink); }
+.next-name { font-size: var(--t-xl); transition: translate 0.6s var(--ease); }
+.next:hover .next-name { translate: 16px 0; }
+@media (max-width: 760px) {
+  .meta { grid-template-columns: 1fr 1fr; }
+  .story, .shots { grid-template-columns: 1fr; }
 }
 </style>

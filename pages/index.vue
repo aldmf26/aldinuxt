@@ -1,14 +1,16 @@
 <template>
   <div>
     <HeroSection />
-    <WorksGrid v-if="side === 'dev'" />
-    <BeatsSection v-else />
+    <PlaylistSection />
+    <CodeIndex />
+    <BeatsSection />
+    <ChannelRack />
+    <AboutCv />
     <ContactSection />
   </div>
 </template>
 
 <script setup>
-const { side } = useSide()
 const { t, locale } = useI18n()
 useHead(() => ({
   title: t('meta.homeTitle'),

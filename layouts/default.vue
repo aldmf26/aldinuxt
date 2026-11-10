@@ -1,8 +1,14 @@
 <template>
-  <div class="min-h-screen text-[var(--text-primary)] relative overflow-x-hidden bg-[var(--bg-primary)]">
+  <div class="shell">
+    <a class="skip-link" href="#main">{{ $t('nav.skip') }}</a>
     <Nav />
-    <main>
+    <main id="main" tabindex="-1">
       <slot />
     </main>
   </div>
 </template>
+
+<style scoped>
+.shell { min-height: 100svh; overflow-x: clip; background: var(--bg-primary); color: var(--text-primary); }
+main:focus { outline: none; }
+</style>

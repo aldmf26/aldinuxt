@@ -27,3 +27,4 @@ logs
 # public/uploads/
 # public/data/uploaded_beats.json
 
+.shots/

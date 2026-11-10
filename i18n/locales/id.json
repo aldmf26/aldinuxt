@@ -1,14 +1,17 @@
 {
   "nav": {
     "work": "Karya",
-    "beats": "Musik",
+    "beats": "Beat",
     "about": "Tentang",
     "contact": "Kontak",
     "hire": "Rekrut Saya",
     "menu": "Menu",
     "close": "Tutup",
     "tagline": "kode & suara",
-    "accent": "Warna aksen"
+    "accent": "Warna aksen",
+    "skip": "Langsung ke konten",
+    "label": "Utama",
+    "code": "Kode"
   },
   "hero": {
     "availability": "Menerima project pilihan · 2026",
@@ -33,13 +36,14 @@
     "sideDev": "Developer",
     "sideProducer": "Producer",
     "hintDev": "Ketik atau tekan tutsnya",
-    "hintProducer": "Piano: Q = do · Pad: A S D F / Z X C V · tahan Z untuk hi-hat roll",
-    "hintProducerTouch": "Tekan pad & tuts · tahan HAT untuk hi-hat roll"
+    "lede": "Saya bikin aplikasi web untuk usaha kecil pakai Laravel dan Nuxt, lalu bikin beat rap dan trap di FL Studio.",
+    "play": "Putar timeline",
+    "base": "Basis"
   },
   "works": {
     "ghost": "KARYA",
-    "title": "Karya",
-    "description": "Sembilan project. Masing-masing dibangun untuk menyelesaikan kebutuhan nyata."
+    "title": "Kode",
+    "description": "Aplikasi web dengan usaha nyata di belakangnya: kasir, stok, penggajian, laporan, alat belajar."
   },
   "identity": {
     "engineer": "Software Engineer",
@@ -56,11 +60,18 @@
     "musicSince": "Bermusik sejak",
     "webCaption": "Membangun Solusi Digital",
     "musicCaption": "Merancang Lanskap Suara",
-    "marquee": "TERBUKA UNTUK FREELANCE · SIAP REMOTE · BERBASIS DI BANJARMASIN · PENGERJAAN CEPAT · MARI BICARA ·"
+    "marquee": "TERBUKA UNTUK FREELANCE · SIAP REMOTE · BERBASIS DI BANJARMASIN · PENGERJAAN CEPAT · MARI BICARA ·",
+    "statement": "Tangan yang sama, dua jenis sesi.",
+    "f1": "Sarjana Sistem Informasi, UNISKA Banjarmasin. IPK 3,60",
+    "f2": "Web developer di Rukita.id, Yogyakarta: WordPress dan CodeIgniter dengan Elasticsearch",
+    "f3": "Developer dan IT in-house untuk eksportir sarang walet, peternakan ayam, dua restoran, salon dan perusahaan pelayaran. Sampai sekarang.",
+    "f4": "Rap, trap, hybrid trap dan remix. Piano dan drum pad.",
+    "cvLine": "Riwayat kerja, proyek dan keahlian lengkap, dalam format yang bisa dibaca sistem rekrutmen.",
+    "cvPage": "Baca CV"
   },
   "contact": {
     "label": "MARI BICARA",
-    "title": "Punya ide?",
+    "title": "Butuh aplikasi, atau beat?",
     "accent": "Chat saja.",
     "description": "Terbuka untuk project freelance, kolaborasi, dan percakapan menarik tentang web atau musik.",
     "email": "Kirim Email",
@@ -68,17 +79,22 @@
     "emailLabel": "Email",
     "social": "Sosial",
     "location": "Lokasi",
-    "backTop": "Kembali ke atas"
+    "backTop": "Kembali ke atas",
+    "marker": "AKHIR LAGU",
+    "colophon": "Huruf: Archivo dan Martian Mono"
   },
   "music": {
     "ghost": "MUSIK",
     "label": "Laboratorium Suara",
     "title": "Beat",
-    "description": "Trap, EDM, dan paket FLP gratis—semuanya diproduksi di FL Studio. Tersedia untuk lisensi, kebutuhan konten, atau sekadar didengarkan.",
+    "description": "Rap, trap, hybrid trap dan remix, dibuat di FL Studio. Ketuk beat untuk memutarnya dari YouTube atau SoundCloud.",
     "youtube": "Buka YouTube",
     "showAll": "Tampilkan Semua Track",
     "loading": "Memuat beat…",
-    "empty": "Beat lengkap ada di channel YouTube saya."
+    "empty": "Beat lengkap ada di channel YouTube saya.",
+    "play": "Putar",
+    "pause": "Jeda",
+    "seek": "Geser posisi"
   },
   "project": {
     "caseStudy": "Studi Kasus",
@@ -90,7 +106,7 @@
     "problem": "Masalah",
     "solution": "Solusi",
     "outcome": "Hasil",
-    "more": "Project Lainnya",
+    "more": "Proyek berikutnya",
     "live": "Lihat live"
   },
   "projects": {
@@ -359,9 +375,43 @@
     "copyright": "SEMUA BEAT DILINDUNGI HAK CIPTA."
   },
   "meta": {
-    "homeTitle": "Aldi Fahrizaldi — Web Developer & Music Producer",
-    "homeDescription": "Web developer dan music producer dari Banjarmasin. Membangun aplikasi web dengan Nuxt, Laravel, dan Tailwind.",
+    "homeTitle": "Aldi Fahrizaldi · Web developer dan beatmaker",
+    "homeDescription": "Aplikasi web untuk usaha kecil dengan Laravel dan Nuxt, dan beat rap serta trap dari FL Studio. Berbasis di Banjarmasin, Indonesia.",
     "serviceTitle": "Rekrut Saya — Aldi Fahrizaldi",
     "serviceDescription": "Layanan freelance untuk landing page, web app, sistem POS, dan alat digital khusus."
+  },
+  "timeline": {
+    "title": "Satu timeline",
+    "sub": "Bar adalah tahun. Pekerjaan dan aplikasi yang saya rilis ada di grid yang sama dengan beat yang saya buat. Scroll untuk menggerakkan playhead.",
+    "solo": "Solo {track}",
+    "rest": "Jeda",
+    "m2017": "Sistem Informasi, UNISKA",
+    "m2020": "Rukita, Yogyakarta",
+    "m2021": "Lulus",
+    "m2022": "Banjarmasin, in-house",
+    "inhouse": "Sistem walet, resto, salon, peternakan & pelayaran",
+    "apps2024": "8 aplikasi"
+  },
+  "rack": {
+    "title": "Coba mainkan",
+    "sub": "Ketik di keyboard atau ketuk tutsnya. Pad: 1 2 3 / Q W E / A S D / Z X C, tahan X untuk hi-hat roll.",
+    "subTouch": "Ketuk tuts dan pad. Tahan pad hi-hat untuk roll.",
+    "keys": "Keyboard coding",
+    "pads": "Drum pad",
+    "loading": "Memuat instrumen"
+  },
+  "cv": {
+    "tag": "CV · EKSPOR",
+    "download": "Unduh CV (PDF)",
+    "back": "Kembali ke timeline",
+    "meta": "CV Muhammad Fahrizaldi, web developer di Banjarmasin: Laravel, Nuxt, MySQL, jaringan, dan produksi musik di FL Studio."
+  },
+  "notFound": {
+    "title": "Pattern ini kosong.",
+    "sub": "Tidak ada yang direkam di alamat ini. Tapi playhead-nya masih jalan.",
+    "back": "Kembali ke playlist"
+  },
+  "pads": {
+    "packs": "Paket suara"
   }
 }
