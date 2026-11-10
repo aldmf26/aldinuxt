@@ -62,7 +62,6 @@ export default defineNuxtConfig({
       script: [
         // paint the saved side + accent before first render so the page never flashes the wrong theme
         { innerHTML: "try{var d=document.documentElement;d.dataset.side=localStorage.getItem('aldi-side')||'dev';d.dataset.accent=localStorage.getItem('aldi-accent')||'oranye'}catch(e){}" },
-        { src: '/_vercel/insights/script.js', defer: true },
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
