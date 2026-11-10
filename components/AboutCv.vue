@@ -46,7 +46,7 @@ const facts = [
 .cols { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px clamp(32px, 6vw, 96px); align-items: start; }
 .facts { display: grid; border-top: 1px solid var(--line); }
 .facts div { display: grid; grid-template-columns: 9rem 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-.facts dt { font-size: var(--t-s); color: var(--accent); }
+.facts dt { font-size: var(--t-s); color: var(--accent-text); }
 .facts dd { font-size: var(--t-body); }
 .cv { display: grid; gap: 20px; }
 .cv p { font-size: var(--t-m); line-height: 1.35; color: var(--text-secondary); }

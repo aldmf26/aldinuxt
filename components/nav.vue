@@ -85,7 +85,7 @@ onUnmounted(() => st?.kill())
   text-decoration: none; padding: 8px 0;
 }
 .readout { display: flex; gap: 18px; font-size: var(--t-xs); color: var(--text-secondary); }
-.readout b { color: var(--accent); font-weight: 500; }
+.readout b { color: var(--accent-text); font-weight: 500; }
 .links { list-style: none; display: flex; gap: 22px; }
 .links a {
   position: relative; display: inline-block; padding: 8px 4px; min-width: 28px; text-align: center; text-decoration: none; font-weight: 600; font-size: var(--t-s);

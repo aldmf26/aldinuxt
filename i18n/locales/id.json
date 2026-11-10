@@ -43,7 +43,8 @@
   "works": {
     "ghost": "KARYA",
     "title": "Kode",
-    "description": "Aplikasi web dengan usaha nyata di belakangnya: kasir, stok, penggajian, laporan, alat belajar."
+    "description": "Aplikasi web dengan usaha nyata di belakangnya: kasir, stok, penggajian, laporan, alat belajar.",
+    "open": "Buka case study"
   },
   "identity": {
     "engineer": "Software Engineer",
@@ -394,11 +395,15 @@
   },
   "rack": {
     "title": "Coba mainkan",
-    "sub": "Ketik di keyboard atau ketuk tutsnya. Pad: 1 2 3 / Q W E / A S D / Z X C, tahan X untuk hi-hat roll.",
-    "subTouch": "Ketuk tuts dan pad. Tahan pad hi-hat untuk roll.",
     "keys": "Keyboard coding",
     "pads": "Drum pad",
-    "loading": "Memuat instrumen"
+    "loading": "Memuat instrumen",
+    "hint": {
+      "keys": "Ketik di keyboard atau klik tutsnya. Setiap tuts melempar ubin kode ke lantai.",
+      "keysTouch": "Ketuk tutsnya. Setiap ketukan melempar ubin kode ke lantai.",
+      "pads": "Pilih paket, lalu mainkan pad: 1 2 3 / Q W E / A S D / Z X C. Tahan X untuk hi-hat roll.",
+      "padsTouch": "Pilih paket, lalu ketuk pad. Tahan HATS untuk roll."
+    }
   },
   "cv": {
     "tag": "CV · EKSPOR",

@@ -43,7 +43,8 @@
   "works": {
     "ghost": "WORKS",
     "title": "Code",
-    "description": "Web apps with a real business behind each one: cashiers, stock, payroll, reports, learning tools."
+    "description": "Web apps with a real business behind each one: cashiers, stock, payroll, reports, learning tools.",
+    "open": "Open case study"
   },
   "identity": {
     "engineer": "Software Engineer",
@@ -216,11 +217,15 @@
   },
   "rack": {
     "title": "Play something",
-    "sub": "Type on your keyboard or tap the keys. Pads: 1 2 3 / Q W E / A S D / Z X C, hold X for a hi-hat roll.",
-    "subTouch": "Tap the keys and pads. Hold the hi-hat pad for a roll.",
     "keys": "Coding keyboard",
     "pads": "Drum pads",
-    "loading": "Loading instrument"
+    "loading": "Loading instrument",
+    "hint": {
+      "keys": "Type on your keyboard or click the keys. Every key throws a code tile onto the floor.",
+      "keysTouch": "Tap the keys. Every tap throws a code tile onto the floor.",
+      "pads": "Pick a pack, then play the pads: 1 2 3 / Q W E / A S D / Z X C. Hold X for a hi-hat roll.",
+      "padsTouch": "Pick a pack, then tap the pads. Hold HATS for a roll."
+    }
   },
   "cv": {
     "tag": "CV · EXPORT",

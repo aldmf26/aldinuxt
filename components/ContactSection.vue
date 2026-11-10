@@ -39,7 +39,7 @@ const SOCIAL = [
 .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .big {
   margin-top: clamp(64px, 12vh, 140px); margin-left: -0.05em; white-space: nowrap;
-  font-size: 16.5cqi; color: color-mix(in oklab, var(--text-primary) 42%, var(--bg-primary));
+  font-size: 16.5cqi; color: color-mix(in oklab, var(--text-primary) 52%, var(--bg-primary));
 }
 .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 22px 0 28px; border-top: 1px solid var(--line); font-size: var(--t-s); }
 .social { list-style: none; display: flex; gap: 20px; }

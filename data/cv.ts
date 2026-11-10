@@ -4,7 +4,7 @@
 
 export type CvLang = 'id' | 'en'
 
-type Job = { org: string; place: string; role: string; period: string; points: string[] }
+type Job = { org: string; place: string; role: string; period: string; intro?: string; points: string[] }
 type Item = { name: string; url?: string; text: string }
 
 export type Cv = {
@@ -37,7 +37,8 @@ export const cv: Record<CvLang, Cv> = {
       'Web Developer dengan keahlian pengembangan website menggunakan WordPress, CodeIgniter, dan Laravel, serta pengelolaan database seperti MySQL dan Elasticsearch. Berpengalaman mendesain sistem informasi untuk berbagai industri, termasuk restoran, peternakan, pelayaran, dan ekspor sarang burung walet. Mahir dalam pengaturan jaringan menggunakan Mikrotik, instalasi internet (termasuk fiber optik dan Starlink), dan administrasi sistem. Sebagai Music Producer, terampil menciptakan musik elektronik menggunakan FL Studio, bermain piano, dan drumpad.',
     jobs: [
       {
-        org: 'PT Agrika Gatya Arum, CV Agrilaras, Restoran Takemori & Soondobu, Orchard',
+        org: 'PT Agrika Gatya Arum',
+        intro: 'Developer dan IT in-house untuk PT Agrika Gatya Arum dan unit usaha di grupnya: CV Agrilaras (peternakan ayam petelur), Restoran Takemori & Soondobu, Orchard Salon, dan PT Virgo Karya Shipping.',
         place: 'Banjarmasin & Pelaihari, Indonesia',
         role: 'Web Developer, IT Support, Programmer',
         period: '2022 - Sekarang',
@@ -97,7 +98,8 @@ export const cv: Record<CvLang, Cv> = {
       'Web Developer skilled in building websites with WordPress, CodeIgniter and Laravel, and in managing databases such as MySQL and Elasticsearch. Experienced in designing information systems for several industries, including restaurants, livestock farming, shipping and edible bird\'s nest export. Proficient in network setup with Mikrotik, internet installation (including fiber optic and Starlink) and system administration. As a Music Producer, creates electronic music in FL Studio and plays piano and drum pads.',
     jobs: [
       {
-        org: 'PT Agrika Gatya Arum, CV Agrilaras, Takemori & Soondobu Restaurants, Orchard',
+        org: 'PT Agrika Gatya Arum',
+        intro: 'In-house developer and IT for PT Agrika Gatya Arum and the businesses in its group: CV Agrilaras (layer poultry farm), Takemori & Soondobu restaurants, Orchard Salon and PT Virgo Karya Shipping.',
         place: 'Banjarmasin & Pelaihari, Indonesia',
         role: 'Web Developer, IT Support, Programmer',
         period: '2022 - Present',

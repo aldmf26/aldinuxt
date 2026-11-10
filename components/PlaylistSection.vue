@@ -206,7 +206,7 @@ const beat = `${(60 / BPM).toFixed(3)}s`
   display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); align-items: end; gap: 12px clamp(20px, 4vw, 56px);
   padding-top: 16px; border-top: 1px solid var(--line);
 }
-.now-pos { font-size: var(--t-s); color: var(--accent); }
+.now-pos { font-size: var(--t-s); color: var(--accent-text); }
 .now-clip { display: grid; gap: 6px; min-width: 0; }
 .lbl { display: flex; align-items: center; gap: 8px; font: 500 var(--t-xs)/1 var(--font-mono); color: var(--text-secondary); }
 .lbl i { width: 14px; height: 8px; border-radius: 2px; background: var(--clip-code); }
@@ -215,7 +215,7 @@ const beat = `${(60 / BPM).toFixed(3)}s`
   font: 800 var(--t-l)/1 var(--font-display); font-variation-settings: 'wdth' 112; letter-spacing: -0.03em;
   text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-a.now-name:hover { color: var(--accent); }
+a.now-name:hover { color: var(--accent-text); }
 
 @media (max-width: 760px) {
   .stage { --hd: 58px; align-content: start; padding-top: calc(var(--bar-h) + 24px); }

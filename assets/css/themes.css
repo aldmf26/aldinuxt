@@ -50,8 +50,9 @@
   --border-strong: rgba(47, 107, 255, 0.24);
   --shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.75);
 
-  --accent: #2f6bff;
-  --accent-rgb: 47, 107, 255;
+  --accent: #2a62f2;
+  --accent-ink: #ffffff; /* dark ink only reaches 4:1 on this blue */
+  --accent-rgb: 42, 98, 242;
   color-scheme: dark;
 }
 

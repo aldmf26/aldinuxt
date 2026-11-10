@@ -75,6 +75,29 @@ onMounted(async () => {
   const keys: any[] = []
   const ROWS = [[...Array(15).fill(1)], [1.5, ...Array(12).fill(1), 1.5], [1.75, ...Array(11).fill(1), 2.25], [2.25, ...Array(10).fill(1), 2.75], [1.25, 1.25, 1.25, 6.25, 1.25, 1.25, 1.25, 1.25]]
   const keyGeo: Record<number, any> = {}
+  // printed legends, one per key, in the same order as ROWS (key = what KeyboardEvent.key lowercases to)
+  const LEGENDS = [
+    ['escape', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '`', 'backspace'],
+    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+    ['capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'enter'],
+    ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'shift'],
+    ['control', 'alt', 'meta', ' ', 'meta', 'alt', 'contextmenu', 'control'],
+  ]
+  const SHOW: Record<string, string> = { escape: 'esc', backspace: '⌫', tab: 'tab', capslock: 'caps', enter: '⏎', shift: '⇧', control: 'ctrl', alt: 'alt', meta: '⌘', contextmenu: 'fn', ' ': '' }
+  const byKey = new Map<string, any>()
+  const legendTex = new Map<string, any>()
+  const legend = (text: string) => {
+    if (!legendTex.has(text)) {
+      const c = document.createElement('canvas'); c.width = c.height = 128
+      const x = c.getContext('2d')!
+      x.fillStyle = 'rgba(0,0,0,0.62)'; x.textAlign = 'center'; x.textBaseline = 'middle'
+      x.font = `600 ${text.length > 1 ? 34 : 52}px ui-monospace, Consolas, monospace`
+      x.fillText(text.toUpperCase(), 64, 66)
+      const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4
+      legendTex.set(text, t)
+    }
+    return legendTex.get(text)
+  }
   ROWS.forEach((row, r) => {
     let x = -7.5
     row.forEach((w, i) => {
@@ -87,6 +110,14 @@ onMounted(async () => {
       k.userData = { mat, down: 0, glow: 0 }
       k.position.set(x + w / 2, 0.25, -2 + r); x += w
       front.add(k); keys.push(k)
+      const id = LEGENDS[r][i], label = SHOW[id] ?? id
+      if (!byKey.has(id)) byKey.set(id, k)
+      if (label) { // legend decal on the key top; moves with the key
+        const decal = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.62), new THREE.MeshBasicMaterial({ map: legend(label), transparent: true, depthWrite: false }))
+        decal.rotation.x = -Math.PI / 2; decal.position.y = 0.252
+        if (w > 1.2) decal.position.x = -(w - 1) / 2 + 0.05 // wide keys print their legend on the left, like real caps
+        k.add(decal)
+      }
     })
   })
 
@@ -208,7 +239,7 @@ onMounted(async () => {
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.repeat || e.metaKey || e.ctrlKey || e.altKey || typing(e) || !visible) return
     const k = e.key.toLowerCase()
-    const m = keys[(k.charCodeAt(0) * 7 + k.length) % keys.length]
+    const m = byKey.get(k) ?? keys[(k.charCodeAt(0) * 7 + k.length) % keys.length] // the real key if it is printed, else any
     lastTyped.value = k.length === 1 ? k.toUpperCase() : k
     typeCount.value++
     keyHeld.set(k, m); press(m, k.length === 1 ? k : k.slice(0, 5))
@@ -321,7 +352,7 @@ onBeforeUnmount(() => dispose())
   background: var(--bg-surface);
   border: 1.5px solid var(--accent);
   border-radius: 999px;
-  color: var(--accent);
+  color: var(--accent-text);
   font-family: var(--font-mono, monospace);
   font-size: 13px;
   font-weight: 800;

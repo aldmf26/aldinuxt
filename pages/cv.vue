@@ -27,6 +27,7 @@
       <div v-for="j in c.jobs" :key="j.org" class="cv-block">
         <h3>{{ j.role }}</h3>
         <p class="cv-meta">{{ j.org }} · {{ j.place }} · <span class="num">{{ j.period }}</span></p>
+        <p v-if="j.intro" class="cv-intro">{{ j.intro }}</p>
         <ul><li v-for="p in j.points" :key="p">{{ p }}</li></ul>
       </div>
     </section>
@@ -84,6 +85,7 @@ h2 { font: 800 var(--t-l)/1 var(--font-display); font-variation-settings: 'wdth'
 h3 { font-size: 1.1rem; font-weight: 700; }
 .cv-block + .cv-block { margin-top: 22px; }
 .cv-meta { color: var(--text-secondary); font-size: var(--t-s); margin: 4px 0 8px; }
+.cv-intro { margin-bottom: 8px; }
 ul { padding-left: 1.1rem; display: grid; gap: 6px; }
 .cv-skills { list-style: none; padding: 0; }
 p { max-width: 68ch; }

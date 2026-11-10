@@ -24,6 +24,8 @@
   --clip-beat: color-mix(in oklab, var(--text-primary) 82%, var(--accent));
   --clip-beat-ink: var(--bg-primary);
   --clip-r: 6px; /* only clips are rounded */
+  /* accent as TEXT: pulled toward the ink so it keeps 4.5:1 on every theme ground */
+  --accent-text: color-mix(in oklab, var(--accent) 55%, var(--text-primary));
   --line: color-mix(in oklab, var(--text-primary) 13%, transparent);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1); /* expo.out */
@@ -124,7 +126,7 @@ img { max-width: 100%; display: block; }
   text-decoration: underline; text-underline-offset: 4px;
   text-decoration-color: var(--accent); text-decoration-thickness: 2px;
 }
-.link:hover { color: var(--accent); }
+.link:hover { color: var(--accent-text); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

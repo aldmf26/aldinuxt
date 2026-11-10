@@ -3,7 +3,7 @@
     <header class="sec-head">
       <p class="track-tag"><i />CHANNEL RACK</p>
       <h2 class="display">{{ $t('rack.title') }}</h2>
-      <p>{{ touch ? $t('rack.subTouch') : $t('rack.sub') }}</p>
+      <p>{{ $t(`rack.hint.${tab}${touch ? 'Touch' : ''}`) }}</p>
     </header>
 
     <div class="tabs" role="tablist" :aria-label="$t('rack.title')">
