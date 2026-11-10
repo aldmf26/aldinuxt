@@ -88,14 +88,15 @@
     "ghost": "BEATS",
     "label": "Sound Lab",
     "title": "Beats",
-    "description": "Rap, trap, hybrid trap and remixes, made in FL Studio. Tap a beat to play it from YouTube or SoundCloud.",
+    "description": "Rap, trap, hybrid trap and remixes, made in FL Studio. Press play to hear them right here.",
     "youtube": "Open YouTube",
-    "showAll": "Show All Tracks",
-    "loading": "Loading beats…",
-    "empty": "The full catalogue lives on my YouTube channel.",
+    "showAll": "See all beats",
     "play": "Play",
     "pause": "Pause",
-    "seek": "Seek"
+    "seek": "Seek",
+    "sgTitle": "Produced for South Gun",
+    "sgSub": "Hip hop group from Banjarmasin. I made the beats and handled the production.",
+    "mineTitle": "My beats"
   },
   "project": {
     "caseStudy": "Case Study",
@@ -156,7 +157,9 @@
     "m2021": "Graduated",
     "m2022": "Banjarmasin, in-house",
     "inhouse": "Walet, resto, salon, farm & shipping systems",
-    "apps2024": "8 apps"
+    "apps2024": "8 apps",
+    "flpBeats": "12 beats · Free FLP",
+    "southGun": "Producer for South Gun"
   },
   "rack": {
     "title": "Play something",

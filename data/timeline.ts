@@ -1,11 +1,10 @@
 // The playlist: bars are years. Clips sit on the year they started.
-// placeholder: true = year/genre assumed by the redesign, owner must confirm (see DESIGN.md §6).
 
 export const FIRST_YEAR = 2017
 export const BARS = 10 // 2017 … 2026
 export const BPM = 140 // shortcut: fixed tempo for the transport readout, swap for the newest beat's BPM when beats carry dates
 
-export type Clip = { id: string; label: string; key?: string; start: number; len: number; slug?: string; href?: string; placeholder?: boolean }
+export type Clip = { id: string; label: string; key?: string; start: number; len: number; slug?: string; href?: string }
 
 // JOBS track: employment from the CV (real dates)
 export const jobClips: Clip[] = [
@@ -20,12 +19,11 @@ export const appClips: Clip[] = [
   { id: 'kasir', label: 'Kasir OK', start: 2026, len: 0.95, slug: 'kasir-ok' },
 ]
 
-// BEATS track: what he makes in FL Studio
+// BEATS track: YouTube upload dates from data/beats.ts (year + month/12)
 export const beatClips: Clip[] = [
-  { id: 'rap', label: 'Rap beats', start: 2019, len: 2, placeholder: true },
-  { id: 'trap', label: 'Trap', start: 2021, len: 2, placeholder: true },
-  { id: 'hybrid', label: 'Hybrid trap', start: 2023, len: 1.6, placeholder: true },
-  { id: 'remix', label: 'Remix', start: 2024.6, len: 2.3, placeholder: true },
+  { id: 'hanoman', label: 'Hanoman', start: 2021.6, len: 0.4, href: '#beats' }, // uploaded Dec 2021; widened so it can be read
+  { id: 'flp', label: '12 beats · Free FLP', key: 'timeline.flpBeats', start: 2022.17, len: 1.41, href: '#beats' }, // Mar 2022 to Jul 2023
+  { id: 'southgun', label: 'South Gun', key: 'timeline.southGun', start: 2023.78, len: 2.42, href: '#beats' }, // ZAT Selatan Oct 2023 to Better Move Mar 2026
 ]
 
 // Markers above the ruler: real dated facts from the CV

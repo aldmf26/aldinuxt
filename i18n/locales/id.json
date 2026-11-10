@@ -88,14 +88,15 @@
     "ghost": "MUSIK",
     "label": "Laboratorium Suara",
     "title": "Beat",
-    "description": "Rap, trap, hybrid trap dan remix, dibuat di FL Studio. Ketuk beat untuk memutarnya dari YouTube atau SoundCloud.",
+    "description": "Rap, trap, hybrid trap dan remix, dibuat di FL Studio. Tekan play untuk mendengarkan langsung di sini.",
     "youtube": "Buka YouTube",
-    "showAll": "Tampilkan Semua Track",
-    "loading": "Memuat beat…",
-    "empty": "Beat lengkap ada di channel YouTube saya.",
+    "showAll": "Lihat semua beat",
     "play": "Putar",
     "pause": "Jeda",
-    "seek": "Geser posisi"
+    "seek": "Geser posisi",
+    "sgTitle": "Diproduseri untuk South Gun",
+    "sgSub": "Grup hip hop dari Banjarmasin. Beat dan produksinya saya yang buat.",
+    "mineTitle": "Beat saya"
   },
   "project": {
     "caseStudy": "Studi Kasus",
@@ -334,7 +335,9 @@
     "m2021": "Lulus",
     "m2022": "Banjarmasin, in-house",
     "inhouse": "Sistem walet, resto, salon, peternakan & pelayaran",
-    "apps2024": "8 aplikasi"
+    "apps2024": "8 aplikasi",
+    "flpBeats": "12 beat · Free FLP",
+    "southGun": "Produser South Gun"
   },
   "rack": {
     "title": "Coba mainkan",

@@ -6,65 +6,65 @@
       <p>{{ $t('music.description') }}</p>
     </header>
 
-    <p v-if="loading" class="note">{{ $t('music.loading') }}</p>
-
-    <div v-else-if="!beats.length" class="empty">
-      <p>{{ $t('music.empty') }}</p>
-      <a class="btn btn-primary" :href="YT_CHANNEL" target="_blank" rel="noopener"><span>{{ $t('music.youtube') }}</span></a>
-    </div>
-
     <!-- clip deck: our own cards and controls; the real YouTube player appears, framed, only once you press play -->
-    <ol v-else class="deck">
-      <li v-for="(b, i) in beats" :key="i" class="card" :class="{ on: active === i, playing: active === i && playing }">
-        <div class="screen">
-          <template v-if="active !== i || !b.yt">
-            <img v-if="b.yt" class="cover" :src="`https://i.ytimg.com/vi/${b.yt}/hqdefault.jpg`" alt="" loading="lazy" width="480" height="360" />
-            <span v-else class="cover blank" />
-            <span class="tint" aria-hidden="true" />
-          </template>
-          <div v-if="active === i && b.yt" :id="`yt-${i}`" class="yt" />
-          <iframe
-            v-if="active === i && !b.yt && b.sc"
-            class="sc"
-            :src="`https://w.soundcloud.com/player/?url=${encodeURIComponent(b.sc)}&color=${encodeURIComponent(accentHex)}&auto_play=true&hide_related=true&show_comments=false&show_reposts=false&show_teaser=false&visual=false`"
-            :title="b.judul"
-            allow="autoplay"
-          />
-          <audio v-if="active === i && !b.yt && !b.sc && b.src" :src="b.src" controls autoplay class="local" />
-        </div>
-
-        <div class="body">
-          <button type="button" class="play" :aria-label="(active === i && playing ? $t('music.pause') : $t('music.play')) + ': ' + b.judul" @click="toggle(i)">
-            <svg v-if="active === i && playing" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-            <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
-          </button>
-          <div class="meta">
-            <h3 class="title">{{ b.judul }}</h3>
-            <p class="sub">{{ [b.type, b.bpm && `${b.bpm} BPM`].filter(Boolean).join(' · ') || 'Beat' }}</p>
+    <template v-for="g in groups" :key="g.id">
+      <div class="group-head" :class="g.id">
+        <h3 class="group-title">{{ g.title }}</h3>
+        <p v-if="g.sub" class="group-sub">{{ g.sub }}</p>
+      </div>
+      <ol class="deck">
+        <li v-for="b in g.items" :key="b.yt || b.i" class="card" :class="{ on: active === b.i, playing: active === b.i && playing }">
+          <div class="screen">
+            <template v-if="active !== b.i || !b.yt">
+              <img v-if="b.yt" class="cover" :src="`https://i.ytimg.com/vi/${b.yt}/hqdefault.jpg`" alt="" loading="lazy" width="480" height="360" />
+              <span v-else class="cover blank" />
+              <span class="tint" aria-hidden="true" />
+            </template>
+            <div v-if="active === b.i && b.yt" :id="`yt-${b.i}`" class="yt" />
+            <iframe
+              v-if="active === b.i && !b.yt && b.sc"
+              class="sc"
+              :src="`https://w.soundcloud.com/player/?url=${encodeURIComponent(b.sc)}&color=${encodeURIComponent(accentHex)}&auto_play=true&hide_related=true&show_comments=false&show_reposts=false&show_teaser=false&visual=false`"
+              :title="b.judul"
+              allow="autoplay"
+            />
+            <audio v-if="active === b.i && !b.yt && !b.sc && b.src" :src="b.src" controls autoplay class="local" />
           </div>
-          <span class="time num" aria-hidden="true">{{ active === i && duration ? `${fmt(current)} / ${fmt(duration)}` : '' }}</span>
-        </div>
 
-        <!-- waveform doubles as the seek bar while this beat is loaded (shape is decorative, not the real audio) -->
-        <div
-          class="wave"
-          :role="active === i && b.yt ? 'slider' : undefined"
-          :tabindex="active === i && b.yt ? 0 : undefined"
-          :aria-label="active === i && b.yt ? $t('music.seek') : undefined"
-          :aria-valuemin="active === i && b.yt ? 0 : undefined"
-          :aria-valuemax="active === i && b.yt ? Math.round(duration) : undefined"
-          :aria-valuenow="active === i && b.yt ? Math.round(current) : undefined"
-          :style="{ '--prog': active === i && duration ? current / duration : 0 }"
-          @click="active === i && seekAt($event)"
-          @keydown.right.prevent="active === i && nudge(5)"
-          @keydown.left.prevent="active === i && nudge(-5)"
-        >
-          <svg v-for="layer in ['rest', 'done']" :key="layer" :class="layer" viewBox="0 0 64 20" preserveAspectRatio="none" aria-hidden="true">
-            <rect v-for="(h, k) in wave(b.judul)" :key="k" :x="k" :y="10 - h / 2" width="0.6" :height="h" />
-          </svg>
-        </div>
-      </li>
-    </ol>
+          <div class="body">
+            <button type="button" class="play" :aria-label="(active === b.i && playing ? $t('music.pause') : $t('music.play')) + ': ' + b.judul" @click="toggle(b.i)">
+              <svg v-if="active === b.i && playing" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+              <svg v-else viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
+            </button>
+            <div class="meta">
+              <h3 class="title">{{ b.judul }}</h3>
+              <p class="sub">{{ [b.type, b.bpm && `${b.bpm} BPM`].filter(Boolean).join(' · ') || 'Beat' }}</p>
+            </div>
+            <span class="time num" aria-hidden="true">{{ active === b.i && duration ? `${fmt(current)} / ${fmt(duration)}` : '' }}</span>
+          </div>
+
+          <!-- waveform doubles as the seek bar while this beat is loaded (shape is decorative, not the real audio) -->
+          <div
+            class="wave"
+            :role="active === b.i && b.yt ? 'slider' : undefined"
+            :tabindex="active === b.i && b.yt ? 0 : undefined"
+            :aria-label="active === b.i && b.yt ? $t('music.seek') : undefined"
+            :aria-valuemin="active === b.i && b.yt ? 0 : undefined"
+            :aria-valuemax="active === b.i && b.yt ? Math.round(duration) : undefined"
+            :aria-valuenow="active === b.i && b.yt ? Math.round(current) : undefined"
+            :style="{ '--prog': active === b.i && duration ? current / duration : 0 }"
+            @click="active === b.i && seekAt($event)"
+            @keydown.right.prevent="active === b.i && nudge(5)"
+            @keydown.left.prevent="active === b.i && nudge(-5)"
+          >
+            <svg v-for="layer in ['rest', 'done']" :key="layer" :class="layer" viewBox="0 0 64 20" preserveAspectRatio="none" aria-hidden="true">
+              <rect v-for="(h, k) in wave(b.judul)" :key="k" :x="k" :y="10 - h / 2" width="0.6" :height="h" />
+            </svg>
+          </div>
+        </li>
+      </ol>
+    </template>
+    <button v-if="hidden" type="button" class="btn see-all" @click="showAll = true"><span>{{ $t('music.showAll') }} ({{ hidden }})</span></button>
 
     <p class="more">
       <a class="link" :href="YT_CHANNEL" target="_blank" rel="noopener">YouTube @ALdMFbeat</a>
@@ -73,26 +73,48 @@
 </template>
 
 <script setup lang="ts">
+import { beats as myBeats, southGun } from '~/data/beats'
+
 const YT_CHANNEL = 'https://www.youtube.com/@ALdMFbeat'
+const FIRST = 6 // beats shown before 'see all'
 const { accentHex } = useSide()
 
 type Raw = { judul: string; bpm?: number; type?: string; src?: string; platform?: string; ytLink?: string }
 const ytId = (u = '') => u.match(/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/)([\w-]{11})/)?.[1]
 
 const raw = ref<Raw[]>([])
-const loading = ref(true)
 const active = ref<number | null>(null)
 const playing = ref(false)
 const current = ref(0)
 const duration = ref(0)
 
-const beats = computed(() => raw.value.map(b => {
+const { t } = useI18n()
+const showAll = ref(false)
+
+// uploads (from /upload) first, then the built-in list; duplicates by YouTube id dropped
+const uploaded = computed(() => raw.value.map(b => {
   const link = b.ytLink || (b.platform !== 'local' ? b.src : '') || ''
   // older entries stored a bare YouTube id in `src` with a non-local platform
   const yt = ytId(link) || (b.platform && b.platform !== 'local' && /^[\w-]{11}/.test(b.src || '') ? b.src!.slice(0, 11) : undefined)
   const sc = /soundcloud\.com/.test(link) ? link : undefined
   return { ...b, yt, sc }
 }).filter(b => b.yt || b.sc || b.src))
+
+type Card = { judul: string; yt?: string; sc?: string; src?: string; bpm?: number; type?: string; i: number }
+const beats = computed<Card[]>(() => {
+  const seen = new Set<string>()
+  const keep = (b: Omit<Card, 'i'>) => !b.yt || (!seen.has(b.yt) && !!seen.add(b.yt))
+  return [...southGun, ...uploaded.value, ...myBeats].filter(keep).map((b, i) => ({ ...b, i }))
+})
+const groups = computed(() => {
+  const sg = beats.value.slice(0, southGun.length)
+  const mine = beats.value.slice(southGun.length)
+  return [
+    { id: 'sg', title: t('music.sgTitle'), sub: t('music.sgSub'), items: sg },
+    { id: 'mine', title: t('music.mineTitle'), sub: '', items: showAll.value ? mine : mine.slice(0, FIRST) },
+  ]
+})
+const hidden = computed(() => (showAll.value ? 0 : Math.max(0, beats.value.length - southGun.length - FIRST)))
 
 // stable pseudo-waveform per title (64 bars, 2..18 tall)
 function wave(seed: string) {
@@ -192,16 +214,18 @@ onMounted(async () => {
     const res = await fetch('/api/beats')
     if (res.ok) raw.value = await res.json()
   } catch {}
-  loading.value = false
 })
 onBeforeUnmount(destroy)
 </script>
 
 <style scoped>
 .beats { padding-block: clamp(64px, 10vh, 120px); }
-.note { color: var(--text-secondary); }
-.empty { display: grid; justify-items: start; gap: 20px; color: var(--text-secondary); font-size: var(--t-m); }
 
+.group-head { display: grid; gap: 4px; margin: 0 0 16px; }
+.group-head.mine { margin-top: clamp(40px, 6vh, 64px); }
+.group-title { font: 800 var(--t-l)/1 var(--font-display); font-variation-settings: 'wdth' 112; letter-spacing: -0.03em; }
+.group-sub { color: var(--text-secondary); max-width: 52ch; }
+.see-all { margin-top: 20px; }
 .deck { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(12px, 1.6vw, 20px); }
 .card {
   display: grid; border-radius: var(--clip-r); overflow: hidden;
