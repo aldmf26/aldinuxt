@@ -6,10 +6,8 @@
         <span class="tag-char">{{ lastTyped }}</span>
       </div>
     </transition>
-    <!-- code tokens that pop out of the key you hit -->
-    <div class="tokens" aria-hidden="true">
-      <span v-for="t in tokens" :key="t.id" class="token" :style="{ left: `${t.x}px`, top: `${t.y}px` }">{{ t.text }}</span>
-    </div>
+    <!-- code tokens rain in, bounce and pile up on the floor -->
+    <div ref="pile" class="tokens" aria-hidden="true" />
   </div>
 </template>
 
@@ -22,9 +20,8 @@ const stage = ref<HTMLDivElement>()
 const ready = ref(false)
 const lastTyped = ref('')
 const typeCount = ref(0)
-const tokens = ref<{ id: number; x: number; y: number; text: string }[]>([])
-const CODE = ['const', '=>', '{ }', '</>', 'fn()', 'await', 'return', '[]', '::', 'if', '&&', '$', 'php', 'vue', '#']
-let tokenId = 0
+const pile = ref<HTMLDivElement>()
+const CODE = [';', '{ }', '=>', '()', '</>', '[]', '::', '&&', '//', '++', '!=', '$', '#', 'const', 'fn', 'await', 'return', 'if', '<?php', 'vue']
 let dispose = () => {}
 
 onMounted(async () => {
@@ -60,7 +57,7 @@ onMounted(async () => {
   const accent = new THREE.Color(accentHex.value)
   const M = {
     body: new THREE.MeshPhysicalMaterial({ color: 0x9ea3aa, metalness: 0.85, roughness: 0.3, clearcoat: 0.3 }),
-    key: new THREE.MeshPhysicalMaterial({ color: 0xf3f4f5, roughness: 0.55, clearcoat: 0.2 }),
+    key: new THREE.MeshPhysicalMaterial({ roughness: 0.5, clearcoat: 0.35 }),
     keyAccent: new THREE.MeshPhysicalMaterial({ color: accent, roughness: 0.5, clearcoat: 0.2 }),
   }
   const accentMats: any[] = []
@@ -83,6 +80,7 @@ onMounted(async () => {
       const acc = (r === 0 && i === 0) || (r === 2 && i === row.length - 1)
       const mat = glowable(acc ? M.keyAccent : M.key)
       if (acc) mat.userData.isAccentBody = true
+      else mat.userData.spread = (x + w / 2 + 7.5) / 15 + r * 0.04 // 0 (left) to ~1.2 (right): drives the key hue
       const k = new THREE.Mesh(g, mat); k.castShadow = true
       k.userData = { mat, down: 0, glow: 0 }
       k.position.set(x + w / 2, 0.25, -2 + r); x += w
@@ -104,13 +102,55 @@ onMounted(async () => {
   const waves: { x: number; z: number; t0: number }[] = []
   let bounce = 0
   const v3 = new THREE.Vector3()
+  type Tok = { el: HTMLSpanElement; x: number; y: number; vx: number; vy: number; r: number; vr: number; h: number; born: number }
+  const toks: Tok[] = []
+  let tokColors: string[] = []
+  const MAX_TOKS = 45
+  // spawn from the key (pops up), from the sky, or thrown in from a side
   function pop(m: any, text: string) {
+    const box = pile.value!, W = box.clientWidth
     m.getWorldPosition(v3).project(camera)
     const r = canvas.getBoundingClientRect(), s = el!.getBoundingClientRect()
-    const id = ++tokenId
-    tokens.value.push({ id, x: (v3.x + 1) / 2 * r.width + r.left - s.left, y: (1 - v3.y) / 2 * r.height + r.top - s.top, text })
-    if (tokens.value.length > 12) tokens.value.shift()
-    setTimeout(() => { tokens.value = tokens.value.filter(t => t.id !== id) }, 900)
+    const kx = (v3.x + 1) / 2 * r.width + r.left - s.left, ky = (1 - v3.y) / 2 * r.height + r.top - s.top
+    const roll = Math.random()
+    const start = roll < 0.45
+      ? { x: kx, y: ky, vx: (Math.random() - 0.5) * 8, vy: -9 - Math.random() * 5 }
+      : roll < 0.75
+        ? { x: 20 + Math.random() * (W - 40), y: -30, vx: (Math.random() - 0.5) * 2, vy: 2 }
+        : roll < 0.875
+          ? { x: -40, y: 30 + Math.random() * 80, vx: 7 + Math.random() * 6, vy: -3 }
+          : { x: W + 40, y: 30 + Math.random() * 80, vx: -7 - Math.random() * 6, vy: -3 }
+    const span = document.createElement('span')
+    span.className = 'token'
+    span.textContent = text
+    span.style.color = tokColors[Math.floor(Math.random() * tokColors.length)]
+    span.style.fontSize = `${0.9 + Math.random() * 0.9}rem`
+    box.appendChild(span)
+    toks.push({ ...start, el: span, r: (Math.random() - 0.5) * 40, vr: (Math.random() - 0.5) * 14, h: span.offsetHeight, born: performance.now() })
+    if (toks.length > MAX_TOKS) {
+      const old = toks.shift()!
+      old.el.animate([{ opacity: 1 }, { opacity: 0 }], 300).onfinish = () => old.el.remove()
+    }
+  }
+  let lastStep = 0
+  function stepTokens(now: number) {
+    const k = Math.min(3, (now - (lastStep || now)) / 16.67) // frames elapsed at 60 fps, so slow screens fall at the same speed
+    lastStep = now
+    const box = pile.value
+    if (!box || !toks.length) return
+    const W = box.clientWidth, H = box.clientHeight
+    for (const t of toks) {
+      t.vy += 0.55 * k // gravity, px per 60fps-frame squared
+      t.x += t.vx * k; t.y += t.vy * k; t.r += t.vr * k
+      const floor = H - t.h / 2 - 6
+      if (t.y >= floor) { // land: lose energy, slide, settle
+        t.y = floor; t.vy *= -0.38; t.vx *= 0.88; t.vr *= 0.55
+        if (Math.abs(t.vy) < 1.2) t.vy = 0
+      }
+      // side walls, once a thrown token is inside
+      if (now - t.born > 400 && ((t.x < 12 && t.vx < 0) || (t.x > W - 12 && t.vx > 0))) t.vx *= -0.5
+      t.el.style.transform = `translate(${t.x}px, ${t.y}px) translate(-50%, -50%) rotate(${t.r}deg)`
+    }
   }
   function press(m: any, text?: string) {
     m.userData.down = 1
@@ -172,16 +212,30 @@ onMounted(async () => {
   const fit = () => {
     const w = el.clientWidth, h = el.clientHeight
     renderer.setSize(w, h, false); camera.aspect = w / h
-    const target = W * (camera.aspect < 1.2 ? 1.04 : 1.1)
+    const target = W * (camera.aspect < 1.2 ? 1.04 : 1.3)
     const d = Math.max(target / 2 / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / camera.aspect, 18)
-    camera.position.set(0, d * 0.62, d * 0.78); camera.lookAt(0, -0.2, 0); camera.updateProjectionMatrix()
+    camera.position.set(0, d * 0.62, d * 0.78); camera.lookAt(0, -0.2, 0)
+    camera.setViewOffset(w, h, 0, h * 0.14, w, h) // keyboard sits high, the lower part is the floor
+    camera.updateProjectionMatrix()
   }
   const ro = new ResizeObserver(fit); ro.observe(el); fit()
 
-  const stopAccent = watch(accentHex, c => {
+  // keys take hues spread around the theme accent, left to right; the body is a deep tint of it
+  const hsl = { h: 0, s: 0, l: 0 }
+  function paint(c: string) {
     accent.set(c); flash.color.set(c)
-    for (const m of accentMats) { if (m.emissive) m.emissive.set(c); else m.color.set(c); if (m.userData.isAccentBody) m.color.set(c) }
-  })
+    accent.getHSL(hsl)
+    const sat = Math.max(0.55, hsl.s)
+    for (const m of accentMats) {
+      if (m.emissive) m.emissive.set(c); else m.color.set(c)
+      if (m.userData.isAccentBody) m.color.set(c)
+      else if (m.userData.spread !== undefined) m.color.setHSL((hsl.h - 0.12 + m.userData.spread * 0.24 + 1) % 1, Math.min(1, sat * 1.05), 0.5)
+    }
+    M.body.color.setHSL(hsl.h, 0.25, 0.32)
+    tokColors = [-0.1, -0.05, 0, 0.05, 0.1].map(o => '#' + new THREE.Color().setHSL((hsl.h + o + 1) % 1, sat, 0.55).getHexString())
+  }
+  paint(accentHex.value)
+  const stopAccent = watch(accentHex, paint)
 
   const tilt = new THREE.Vector2()
   let visible = true
@@ -211,6 +265,7 @@ onMounted(async () => {
       if (t >= 1) { r.material.opacity = 0; r.userData.t0 = -1; continue }
       r.scale.setScalar(1 + t * 1.8); r.material.opacity = 0.95 * (1 - t)
     }
+    stepTokens(now)
     renderer.render(scene, camera)
   }
   // only animate while the keyboard is on screen
@@ -226,6 +281,7 @@ onMounted(async () => {
     gsap.ticker.remove(frame); io.disconnect(); ro.disconnect()
     removeEventListener('keydown', onKeyDown); removeEventListener('keyup', onKeyUp)
     stopAccent(); pmrem.dispose(); renderer.dispose(); canvas.remove()
+    toks.forEach(t => t.el.remove())
   }
 })
 
@@ -236,7 +292,7 @@ onBeforeUnmount(() => dispose())
 .duo-stage {
   position: relative;
   width: 100%;
-  height: clamp(240px, min(46svh, 70vw), 600px);
+  height: clamp(360px, 64svh, 660px);
   touch-action: manipulation;
   opacity: 0;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -263,17 +319,13 @@ onBeforeUnmount(() => dispose())
   pointer-events: none;
   z-index: 10;
 }
-.tokens { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
-.token {
-  position: absolute; translate: -50% -50%; white-space: nowrap;
-  font: 500 clamp(0.8rem, 0.7rem + 0.5vw, 1.1rem)/1 var(--font-mono); color: var(--accent);
-  text-shadow: 0 0 18px var(--accent-glow);
-  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.tokens {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5;
+  border-bottom: 1px solid var(--line); /* the floor */
 }
-@keyframes rise {
-  0% { opacity: 0; transform: translateY(0) scale(0.6); }
-  15% { opacity: 1; transform: translateY(-14px) scale(1.15); }
-  100% { opacity: 0; transform: translateY(-70px) scale(1); }
+.tokens :deep(.token) {
+  position: absolute; left: 0; top: 0; white-space: nowrap; will-change: transform;
+  font-family: var(--font-mono); font-weight: 500; line-height: 1;
 }
 .pop-tag-enter-active {
   animation: pop-bubble 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
