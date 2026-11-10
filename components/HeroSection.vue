@@ -89,7 +89,7 @@ onBeforeUnmount(() => ctx?.revert())
 .dot.beat { background: var(--clip-beat); }
 
 @media (max-width: 760px) {
-  .hero { align-content: center; }
+  .hero { min-height: auto; align-content: start; padding-top: calc(var(--bar-h) + 40px); padding-bottom: 56px; }
   .name { font-size: 19.5cqi; font-variation-settings: 'wdth' 75; letter-spacing: -0.015em; line-height: 0.88; }
   .under { grid-template-columns: 1fr; }
   .cta .btn { flex: 1 1 100%; }

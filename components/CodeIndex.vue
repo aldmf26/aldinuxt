@@ -30,8 +30,9 @@
         class="strip"
         :class="{ on: i === active }"
         :style="{ '--lvl': p.level, '--d': `${(i % 4) * 0.11}s` }"
+        @click.capture="pick(i, $event)"
       >
-        <NuxtLink :to="localePath(`/projects/${p.slug}`)" class="ch" @pointerenter="active = i" @focus="active = i">
+        <NuxtLink :to="localePath(`/projects/${p.slug}`)" class="ch" @pointerenter="e => e.pointerType === 'mouse' && (active = i)" @focus="e => (e.target as HTMLElement).matches(':focus-visible') && (active = i)">
           <span class="no num">{{ String(i + 1).padStart(2, '0') }}</span>
           <span class="main">
             <span class="meter" aria-hidden="true"><i /><i /></span>
@@ -64,17 +65,24 @@ const active = ref(0)
 const cur = computed(() => rows[active.value])
 const short = (p: (typeof rows)[number]) => (te(`projects.${p.slug}.short`) ? t(`projects.${p.slug}.short`) : p.shortDesc)
 
-// phones: the strip snapped to the middle of the desk goes on the display
+// phones: the strip snapped to the left edge goes on the display; tapping another strip selects it first
 const desk = ref<HTMLOListElement>()
 let io: IntersectionObserver | undefined
 onMounted(() => {
   if (!desk.value || !matchMedia('(max-width: 760px)').matches) return
   io = new IntersectionObserver(es => {
     for (const e of es) if (e.isIntersecting) active.value = Number((e.target as HTMLElement).dataset.i)
-  }, { root: desk.value, rootMargin: '0px -45% 0px -45%' })
+  }, { root: desk.value, rootMargin: '0px -75% 0px 0px' })
   desk.value.querySelectorAll('.strip').forEach(s => io!.observe(s))
 })
 onBeforeUnmount(() => io?.disconnect())
+
+// touch: first tap puts a strip on the display, a second tap on it opens the case study
+function pick(i: number, e: MouseEvent) {
+  if (i === active.value || !matchMedia('(hover: none)').matches) return
+  e.preventDefault()
+  active.value = i
+}
 </script>
 
 <style scoped>
@@ -138,14 +146,14 @@ onBeforeUnmount(() => io?.disconnect())
 }
 .year { font-size: var(--t-xs); color: var(--accent-text); }
 
-/* phones: swipe the desk; the middle strip is the one on the display */
+/* phones: swipe the desk; the strip at the left edge (or the one you tapped) is on the display */
 @media (max-width: 760px) {
   .desk {
     grid-auto-columns: 92px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
-    padding-inline: calc(50% - 46px); scrollbar-width: none;
+    scroll-padding-inline: 10px; scrollbar-width: none;
   }
   .desk::-webkit-scrollbar { display: none; }
-  .strip { scroll-snap-align: center; }
+  .strip { scroll-snap-align: start; }
   .ch { height: 300px; }
   .lcd-body { min-height: 11rem; }
 }

@@ -79,6 +79,7 @@ useHead(() => ({
 .cv-headline { font-size: var(--t-m); color: var(--text-secondary); }
 .cv-contact { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: var(--t-s); }
 .cv-contact span { color: var(--text-secondary); margin-right: 4px; }
+.cv-contact a { display: inline-block; padding-block: 6px; } /* 24px+ tap target on phones */
 .cv-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
 section { padding: 28px 0; border-bottom: 1px solid var(--line); }
 h2 { font: 800 var(--t-l)/1 var(--font-display); font-variation-settings: 'wdth' 112; letter-spacing: -0.03em; margin-bottom: 18px; }
@@ -99,6 +100,7 @@ p { max-width: 68ch; }
   .cv-name { font: 700 22pt/1.1 Arial, Helvetica, sans-serif; letter-spacing: 0; }
   .cv-headline { font-size: 12pt; color: #000; }
   .cv-contact { font-size: 9.5pt; }
+  .cv-contact a { padding-block: 0; }
   .cv-contact span, .cv-meta { color: #333; }
   h2 { font: 700 13pt/1.2 Arial, Helvetica, sans-serif; letter-spacing: 0; margin-bottom: 8px; }
   h3 { font-size: 11pt; }

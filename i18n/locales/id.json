@@ -317,69 +317,12 @@
       ]
     }
   },
-  "service": {
-    "label": "Layanan",
-    "title": "Mari membangun sesuatu.",
-    "intro": "Saya menerima project web freelance—landing page, web app, sistem POS, dan alat khusus. Remote. Cepat. Tanpa proses berbelit.",
-    "for": "Untuk",
-    "includes": "Termasuk",
-    "timeline": "Durasi",
-    "price": "Harga",
-    "how": "Cara kerja",
-    "ready": "Siap mulai?",
-    "whatsapp": "Chat lewat WhatsApp →",
-    "email": "atau email ke aldimf26{'@'}gmail.com",
-    "services": [
-      {
-        "title": "Landing Page / Company Profile",
-        "for": "Bisnis yang membutuhkan kehadiran web profesional",
-        "includes": "Desain, development, layout responsif, dan setup SEO dasar",
-        "timeline": "1–2 minggu",
-        "price": "Mulai Rp 1.500.000"
-      },
-      {
-        "title": "Web App / Sistem Internal",
-        "for": "Bisnis yang membutuhkan software khusus—POS, inventaris, dashboard, atau alat manajemen",
-        "includes": "Analisis kebutuhan, full-stack development, desain database, dan pelatihan pengguna",
-        "timeline": "3–8 minggu, sesuai scope",
-        "price": "Mulai Rp 5.000.000"
-      },
-      {
-        "title": "Lisensi Beat / Musik Kustom",
-        "for": "Content creator, brand, film pendek, dan iklan",
-        "includes": "Lisensi non-eksklusif dari katalog atau beat khusus sesuai permintaan",
-        "timeline": "3–7 hari untuk musik kustom",
-        "price": "Hubungi untuk harga"
-      }
-    ],
-    "steps": [
-      {
-        "title": "Diskusi",
-        "desc": "Ceritakan kebutuhan lewat WhatsApp. Gratis, tanpa komitmen."
-      },
-      {
-        "title": "Proposal",
-        "desc": "Saya kirim scope, durasi, dan harga yang jelas."
-      },
-      {
-        "title": "Pengerjaan",
-        "desc": "Update diberikan setiap 2–3 hari agar progres selalu terlihat."
-      },
-      {
-        "title": "Peluncuran",
-        "desc": "Deploy, pengujian, dan serah terima. Termasuk dukungan 30 hari."
-      }
-    ]
-  },
   "musicPage": {
-    "back": "KEMBALI KE BERANDA",
-    "copyright": "SEMUA BEAT DILINDUNGI HAK CIPTA."
+    "back": "Kembali ke beranda"
   },
   "meta": {
     "homeTitle": "Aldi Fahrizaldi · Web developer dan beatmaker",
-    "homeDescription": "Aplikasi web untuk usaha kecil dengan Laravel dan Nuxt, dan beat rap serta trap dari FL Studio. Berbasis di Banjarmasin, Indonesia.",
-    "serviceTitle": "Rekrut Saya — Aldi Fahrizaldi",
-    "serviceDescription": "Layanan freelance untuk landing page, web app, sistem POS, dan alat digital khusus."
+    "homeDescription": "Aplikasi web untuk usaha kecil dengan Laravel dan Nuxt, dan beat rap serta trap dari FL Studio. Berbasis di Banjarmasin, Indonesia."
   },
   "timeline": {
     "title": "Satu timeline",

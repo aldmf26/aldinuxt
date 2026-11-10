@@ -6,13 +6,16 @@ export default defineNuxtConfig({
   ],
 
   i18n: {
+    baseUrl: 'https://aldimf.vercel.app', // canonical + hreflang links
     strategy: 'prefix_except_default',
     defaultLocale: 'id',
     locales: [
-      { code: 'id', name: 'Indonesia', iso: 'id-ID', file: 'id.json' },
-      { code: 'en', name: 'English', iso: 'en-US', file: 'en.json' },
+      { code: 'id', name: 'Indonesia', language: 'id-ID', file: 'id.json' },
+      { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
     ],
     lazy: true,
+    restructureDir: false, // keep the v8 layout: i18n/locales + ./i18n.config.ts
+    bundle: { optimizeTranslationDirective: false }, // slated for removal in v10
     langDir: 'i18n/locales',
     detectBrowserLanguage: {
       useCookie: true,
@@ -36,7 +39,6 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
       title: 'Aldi Fahrizaldi - Web Developer & Music Producer',
       meta: [
         { charset: 'utf-8' },
@@ -47,6 +49,9 @@ export default defineNuxtConfig({
         { property: 'og:title', content: 'Aldi Fahrizaldi - Web Developer x Music Producer' },
         { property: 'og:description', content: 'Web apps for small businesses and trap beats, from Banjarmasin.' },
         { property: 'og:type', content: 'website' },
+        { property: 'og:image', content: 'https://aldimf.vercel.app/og.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
       ],
       link: [
         { rel: 'icon', href: '/favicon.ico' },
@@ -64,5 +69,5 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2026-06-26',
-  ssr: false
+  ssr: true
 })

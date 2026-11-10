@@ -139,69 +139,12 @@
       "short": "POS for small shops that keeps selling when the internet drops. Stock, customer debt, and profit reports on one phone."
     }
   },
-  "service": {
-    "label": "Service",
-    "title": "Let's build something.",
-    "intro": "I take on freelance web projects—landing pages, web apps, POS systems, and custom tools. Remote. Fast. No nonsense.",
-    "for": "For",
-    "includes": "Includes",
-    "timeline": "Timeline",
-    "price": "Price",
-    "how": "How it works",
-    "ready": "Ready to start?",
-    "whatsapp": "Chat on WhatsApp →",
-    "email": "or email aldimf26{'@'}gmail.com",
-    "services": [
-      {
-        "title": "Landing Page / Company Profile",
-        "for": "Businesses that need a professional web presence",
-        "includes": "Design, development, responsive layout, basic SEO setup",
-        "timeline": "1–2 weeks",
-        "price": "Starting from Rp 1.500.000"
-      },
-      {
-        "title": "Web App / Internal System",
-        "for": "Businesses that need custom software—POS, inventory, dashboards, management tools",
-        "includes": "Requirement analysis, full-stack development, database design, user training",
-        "timeline": "3–8 weeks depending on scope",
-        "price": "Starting from Rp 5.000.000"
-      },
-      {
-        "title": "Beat Licensing / Custom Music",
-        "for": "Content creators, brands, short films, ads",
-        "includes": "Non-exclusive license from existing catalog, or custom beat on request",
-        "timeline": "3–7 days for custom",
-        "price": "Contact for pricing"
-      }
-    ],
-    "steps": [
-      {
-        "title": "Chat",
-        "desc": "Tell me what you need via WhatsApp. Free, no commitment."
-      },
-      {
-        "title": "Proposal",
-        "desc": "I'll send a clear scope, timeline, and price. No surprises."
-      },
-      {
-        "title": "Build",
-        "desc": "I keep you updated every 2–3 days. You always know where we are."
-      },
-      {
-        "title": "Launch",
-        "desc": "Deploy, test, hand over. Includes 30 days of post-launch support."
-      }
-    ]
-  },
   "musicPage": {
-    "back": "BACK TO HOME",
-    "copyright": "ALL BEATS ARE COPYRIGHTED."
+    "back": "Back to home"
   },
   "meta": {
     "homeTitle": "Aldi Fahrizaldi · Web developer and beatmaker",
-    "homeDescription": "Web apps for small businesses in Laravel and Nuxt, and rap and trap beats made in FL Studio. Based in Banjarmasin, Indonesia.",
-    "serviceTitle": "Hire Me — Aldi Fahrizaldi",
-    "serviceDescription": "Freelance landing pages, web apps, POS systems, and custom digital tools."
+    "homeDescription": "Web apps for small businesses in Laravel and Nuxt, and rap and trap beats made in FL Studio. Based in Banjarmasin, Indonesia."
   },
   "timeline": {
     "title": "One timeline",

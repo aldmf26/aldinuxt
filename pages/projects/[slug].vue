@@ -8,6 +8,7 @@
           :key="logo"
           :src="logo"
           :alt="projectLogos.length > 1 ? `${project.title} brand ${index + 1}` : `${project.title} logo`"
+          @error="($event.target as HTMLImageElement).remove()"
           height="56"
         />
       </div>
@@ -120,6 +121,7 @@ useHead({
 <style scoped>
 .case-hero { display: grid; gap: 22px; padding-top: calc(var(--bar-h) + clamp(48px, 10vh, 120px)); padding-bottom: clamp(40px, 7vh, 80px); }
 .logos { display: flex; gap: 12px; }
+.logos:not(:has(img)) { display: none; } /* every logo failed to load (e.g. a dead external host) */
 .logos img { height: 56px; width: auto; padding: 8px 12px; background: #fff; border-radius: var(--clip-r); }
 h1 { font-size: var(--t-mega); margin-left: -0.05em; overflow-wrap: anywhere; }
 .lede-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 40px; }
