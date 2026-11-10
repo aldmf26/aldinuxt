@@ -6,7 +6,7 @@
         <span class="tag-char">{{ lastTyped }}</span>
       </div>
     </transition>
-    <!-- code tokens rain in, bounce and pile up on the floor -->
+    <!-- icon tiles rain in, bounce and stack on the floor -->
     <div ref="pile" class="tokens" aria-hidden="true" />
   </div>
 </template>
@@ -21,7 +21,9 @@ const ready = ref(false)
 const lastTyped = ref('')
 const typeCount = ref(0)
 const pile = ref<HTMLDivElement>()
-const CODE = [';', '{ }', '=>', '()', '</>', '[]', '::', '&&', '//', '++', '!=', '$', '#', 'const', 'fn', 'await', 'return', 'if', '<?php', 'vue']
+// Simple Icons (CC0) in public/icons, plus code and music glyphs
+const ICONS = ['laravel', 'vuedotjs', 'nuxtdotjs', 'php', 'javascript', 'typescript', 'mysql', 'tailwindcss', 'git', 'github', 'supabase', 'html5', 'css3', 'wordpress', 'livewire']
+const GLYPHS = [';', '{ }', '=>', '</>', '[ ]', '&&', '//', '$', '#', '♪', '♫', '808']
 let dispose = () => {}
 
 onMounted(async () => {
@@ -102,54 +104,62 @@ onMounted(async () => {
   const waves: { x: number; z: number; t0: number }[] = []
   let bounce = 0
   const v3 = new THREE.Vector3()
-  type Tok = { el: HTMLSpanElement; x: number; y: number; vx: number; vy: number; r: number; vr: number; h: number; born: number }
-  const toks: Tok[] = []
-  let tokColors: string[] = []
-  const MAX_TOKS = 45
+  // stacking tiles: matter-js boxes, each mirrored by one DOM tile
+  const { Engine, Bodies, Body, Composite } = await import('matter-js')
+  const engine = Engine.create({ gravity: { x: 0, y: 1.1 } })
+  let walls: any[] = []
+  function placeWalls() { // floor + side walls, rebuilt on resize
+    const W = el!.clientWidth, H = el!.clientHeight
+    Composite.remove(engine.world, walls)
+    walls = [Bodies.rectangle(W / 2, H + 50, W * 3, 100, { isStatic: true }), Bodies.rectangle(-50, H / 2, 100, H * 4, { isStatic: true }), Bodies.rectangle(W + 50, H / 2, 100, H * 4, { isStatic: true })]
+    Composite.add(engine.world, walls)
+  }
+  type Tile = { body: any; el: HTMLDivElement }
+  const tiles: Tile[] = []
+  let tileColors: string[] = []
+  const MAX_TILES = 36
   // spawn from the key (pops up), from the sky, or thrown in from a side
-  function pop(m: any, text: string) {
+  function pop(m: any, text?: string) {
     const box = pile.value!, W = box.clientWidth
+    const size = W < 600 ? 52 : 70
     m.getWorldPosition(v3).project(camera)
     const r = canvas.getBoundingClientRect(), s = el!.getBoundingClientRect()
     const kx = (v3.x + 1) / 2 * r.width + r.left - s.left, ky = (1 - v3.y) / 2 * r.height + r.top - s.top
     const roll = Math.random()
-    const start = roll < 0.45
-      ? { x: kx, y: ky, vx: (Math.random() - 0.5) * 8, vy: -9 - Math.random() * 5 }
-      : roll < 0.75
-        ? { x: 20 + Math.random() * (W - 40), y: -30, vx: (Math.random() - 0.5) * 2, vy: 2 }
-        : roll < 0.875
-          ? { x: -40, y: 30 + Math.random() * 80, vx: 7 + Math.random() * 6, vy: -3 }
-          : { x: W + 40, y: 30 + Math.random() * 80, vx: -7 - Math.random() * 6, vy: -3 }
-    const span = document.createElement('span')
-    span.className = 'token'
-    span.textContent = text
-    span.style.color = tokColors[Math.floor(Math.random() * tokColors.length)]
-    span.style.fontSize = `${0.9 + Math.random() * 0.9}rem`
-    box.appendChild(span)
-    toks.push({ ...start, el: span, r: (Math.random() - 0.5) * 40, vr: (Math.random() - 0.5) * 14, h: span.offsetHeight, born: performance.now() })
-    if (toks.length > MAX_TOKS) {
-      const old = toks.shift()!
-      old.el.animate([{ opacity: 1 }, { opacity: 0 }], 300).onfinish = () => old.el.remove()
+    const [x, y, vx, vy] = roll < 0.45 ? [kx, ky, (Math.random() - 0.5) * 8, -12 - Math.random() * 6]
+      : roll < 0.75 ? [size + Math.random() * (W - size * 2), -size, (Math.random() - 0.5) * 3, 2]
+        : roll < 0.875 ? [size / 2 + 2, 40 + Math.random() * 60, 10 + Math.random() * 8, -6]
+          : [W - size / 2 - 2, 40 + Math.random() * 60, -10 - Math.random() * 8, -6]
+    const body = Bodies.rectangle(x, y, size, size, { chamfer: { radius: size * 0.22 }, restitution: 0.35, friction: 0.6, density: 0.002 })
+    Body.setVelocity(body, { x: vx, y: vy })
+    Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.3)
+    Composite.add(engine.world, body)
+
+    const tile = document.createElement('div')
+    tile.className = 'tile'
+    tile.style.width = tile.style.height = `${size}px`
+    tile.style.background = tileColors[Math.floor(Math.random() * tileColors.length)]
+    const icon = !text && Math.random() < 0.6 ? ICONS[Math.floor(Math.random() * ICONS.length)] : null
+    if (icon) tile.style.setProperty('--icon', `url(/icons/${icon}.svg)`), tile.classList.add('icon')
+    else tile.textContent = text ?? GLYPHS[Math.floor(Math.random() * GLYPHS.length)]
+    box.appendChild(tile)
+    tiles.push({ body, el: tile })
+    if (tiles.length > MAX_TILES) {
+      const old = tiles.shift()!
+      Composite.remove(engine.world, old.body)
+      old.el.animate([{ opacity: 1 }, { opacity: 0 }], 250).onfinish = () => old.el.remove()
     }
   }
   let lastStep = 0
-  function stepTokens(now: number) {
-    const k = Math.min(3, (now - (lastStep || now)) / 16.67) // frames elapsed at 60 fps, so slow screens fall at the same speed
+  function stepTiles(now: number) {
+    if (!tiles.length) { lastStep = now; return }
+    // fixed 60 Hz sub-steps, so slow phones fall at real speed (capped so a stalled tab doesn't explode)
+    let dt = Math.min(120, now - (lastStep || now))
     lastStep = now
-    const box = pile.value
-    if (!box || !toks.length) return
-    const W = box.clientWidth, H = box.clientHeight
-    for (const t of toks) {
-      t.vy += 0.55 * k // gravity, px per 60fps-frame squared
-      t.x += t.vx * k; t.y += t.vy * k; t.r += t.vr * k
-      const floor = H - t.h / 2 - 6
-      if (t.y >= floor) { // land: lose energy, slide, settle
-        t.y = floor; t.vy *= -0.38; t.vx *= 0.88; t.vr *= 0.55
-        if (Math.abs(t.vy) < 1.2) t.vy = 0
-      }
-      // side walls, once a thrown token is inside
-      if (now - t.born > 400 && ((t.x < 12 && t.vx < 0) || (t.x > W - 12 && t.vx > 0))) t.vx *= -0.5
-      t.el.style.transform = `translate(${t.x}px, ${t.y}px) translate(-50%, -50%) rotate(${t.r}deg)`
+    for (; dt > 0; dt -= 16.67) Engine.update(engine, Math.min(16.67, dt))
+    for (const t of tiles) {
+      const { x, y } = t.body.position
+      t.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${t.body.angle}rad)`
     }
   }
   function press(m: any, text?: string) {
@@ -159,7 +169,7 @@ onMounted(async () => {
       waves.push({ x: m.position.x, z: m.position.z, t0: performance.now() })
       if (waves.length > 4) waves.shift()
       bounce = 1
-      pop(m, text ?? CODE[Math.floor(Math.random() * CODE.length)])
+      pop(m, text)
     }
     flash.position.set(m.position.x, 0.8, m.position.z); flash.intensity = 50
     const r = rings[ringI++ % rings.length]; r.position.set(m.position.x, 0.28, m.position.z); r.userData.t0 = performance.now()
@@ -218,7 +228,7 @@ onMounted(async () => {
     camera.setViewOffset(w, h, 0, h * 0.14, w, h) // keyboard sits high, the lower part is the floor
     camera.updateProjectionMatrix()
   }
-  const ro = new ResizeObserver(fit); ro.observe(el); fit()
+  const ro = new ResizeObserver(() => { fit(); placeWalls() }); ro.observe(el); fit(); placeWalls()
 
   // keys take hues spread around the theme accent, left to right; the body is a deep tint of it
   const hsl = { h: 0, s: 0, l: 0 }
@@ -232,7 +242,7 @@ onMounted(async () => {
       else if (m.userData.spread !== undefined) m.color.setHSL((hsl.h - 0.12 + m.userData.spread * 0.24 + 1) % 1, Math.min(1, sat * 1.05), 0.5)
     }
     M.body.color.setHSL(hsl.h, 0.25, 0.32)
-    tokColors = [-0.1, -0.05, 0, 0.05, 0.1].map(o => '#' + new THREE.Color().setHSL((hsl.h + o + 1) % 1, sat, 0.55).getHexString())
+    tileColors = [-0.12, -0.06, 0, 0.06, 0.12].map(o => '#' + new THREE.Color().setHSL((hsl.h + o + 1) % 1, sat, 0.5).getHexString())
   }
   paint(accentHex.value)
   const stopAccent = watch(accentHex, paint)
@@ -265,7 +275,7 @@ onMounted(async () => {
       if (t >= 1) { r.material.opacity = 0; r.userData.t0 = -1; continue }
       r.scale.setScalar(1 + t * 1.8); r.material.opacity = 0.95 * (1 - t)
     }
-    stepTokens(now)
+    stepTiles(now)
     renderer.render(scene, camera)
   }
   // only animate while the keyboard is on screen
@@ -281,7 +291,7 @@ onMounted(async () => {
     gsap.ticker.remove(frame); io.disconnect(); ro.disconnect()
     removeEventListener('keydown', onKeyDown); removeEventListener('keyup', onKeyUp)
     stopAccent(); pmrem.dispose(); renderer.dispose(); canvas.remove()
-    toks.forEach(t => t.el.remove())
+    tiles.forEach(t => t.el.remove()); Engine.clear(engine)
   }
 })
 
@@ -323,9 +333,15 @@ onBeforeUnmount(() => dispose())
   position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5;
   border-bottom: 1px solid var(--line); /* the floor */
 }
-.tokens :deep(.token) {
-  position: absolute; left: 0; top: 0; white-space: nowrap; will-change: transform;
-  font-family: var(--font-mono); font-weight: 500; line-height: 1;
+.tokens :deep(.tile) {
+  position: absolute; left: 0; top: 0; will-change: transform;
+  display: grid; place-items: center; border-radius: 22%;
+  color: #fff; font: 700 1.15rem/1 var(--font-mono); white-space: nowrap;
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.18), inset 0 2px 0 rgba(255, 255, 255, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.5);
+}
+.tokens :deep(.tile.icon)::after { /* the logo, knocked out in white */
+  content: ''; width: 56%; height: 56%; background: #fff;
+  -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat;
 }
 .pop-tag-enter-active {
   animation: pop-bubble 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
