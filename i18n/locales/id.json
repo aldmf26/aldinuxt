@@ -96,7 +96,12 @@
     "seek": "Geser posisi",
     "sgTitle": "Diproduseri untuk South Gun",
     "sgSub": "Grup hip hop dari Banjarmasin. Beat dan produksinya saya yang buat.",
-    "mineTitle": "Beat saya"
+    "mineTitle": "Beat saya",
+    "prev": "Lagu sebelumnya",
+    "next": "Lagu berikutnya",
+    "mini": "Pemutar mini",
+    "toDeck": "Kembali ke deck",
+    "close": "Tutup pemutar"
   },
   "project": {
     "caseStudy": "Studi Kasus",

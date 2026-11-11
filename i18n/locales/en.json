@@ -96,7 +96,12 @@
     "seek": "Seek",
     "sgTitle": "Produced for South Gun",
     "sgSub": "Hip hop group from Banjarmasin. I made the beats and handled the production.",
-    "mineTitle": "My beats"
+    "mineTitle": "My beats",
+    "prev": "Previous track",
+    "next": "Next track",
+    "mini": "Mini player",
+    "toDeck": "Back to the deck",
+    "close": "Close player"
   },
   "project": {
     "caseStudy": "Case Study",
