@@ -137,7 +137,3 @@ img { max-width: 100%; display: block; }
   }
 }
 
-/* page transition: the next page is punched in like a region */
-.page-enter-active, .page-leave-active { transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
-.page-enter-from { clip-path: inset(0 0 0 100%); }
-.page-leave-to { clip-path: inset(0 100% 0 0); }

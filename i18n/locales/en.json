@@ -191,5 +191,12 @@
   },
   "pads": {
     "packs": "Sound packs"
+  },
+  "loader": {
+    "label": "Loading",
+    "l1": "booting the dev server…",
+    "l2": "compiling beats…",
+    "l3": "mixing code into the master…",
+    "l4": "bouncing to 44.1 kHz…"
   }
 }

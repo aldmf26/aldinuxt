@@ -40,8 +40,12 @@ function play() {
   lenis ? lenis.scrollTo(el, { duration: 1.2 }) : el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
 }
 
+const loaderDone = useState('loaderDone', () => false)
+
 onMounted(async () => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !root.value) return
+  // the name lands as the loader opens, not underneath it
+  if (!loaderDone.value) await new Promise<void>(r => { const stop = watch(loaderDone, v => { if (v) { stop(); r() } }) })
   const { gsap } = await import('gsap')
   ctx = gsap.context(() => {
     // the name settles onto the grid; the count-in squares keep time below (CSS, on the beat)

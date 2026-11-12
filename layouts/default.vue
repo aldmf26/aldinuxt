@@ -1,6 +1,8 @@
 <template>
   <div class="shell">
     <a class="skip-link" href="#main">{{ $t('nav.skip') }}</a>
+    <AppLoader />
+    <PageCurtain />
     <Nav />
     <main id="main" tabindex="-1">
       <slot />

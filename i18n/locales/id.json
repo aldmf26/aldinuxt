@@ -369,5 +369,12 @@
   },
   "pads": {
     "packs": "Paket suara"
+  },
+  "loader": {
+    "label": "Memuat",
+    "l1": "menyalakan dev server…",
+    "l2": "meng-compile beat…",
+    "l3": "mencampur kode ke master…",
+    "l4": "bounce ke 44,1 kHz…"
   }
 }

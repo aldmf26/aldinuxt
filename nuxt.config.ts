@@ -61,10 +61,10 @@ export default defineNuxtConfig({
       ],
       script: [
         // paint the saved side + accent before first render so the page never flashes the wrong theme
-        { innerHTML: "try{var d=document.documentElement;d.dataset.side=localStorage.getItem('aldi-side')||'dev';d.dataset.accent=localStorage.getItem('aldi-accent')||'oranye'}catch(e){}" },
+        { innerHTML: "try{var d=document.documentElement;d.dataset.side=localStorage.getItem('aldi-side')||'dev';d.dataset.accent=localStorage.getItem('aldi-accent')||'oranye';if(sessionStorage.getItem('aldi-seen'))d.classList.add('seen')}catch(e){}" },
       ],
     },
-    pageTransition: { name: 'page', mode: 'out-in' },
+    pageTransition: false, // PageCurtain.client.vue drives route transitions
   },
 
   compatibilityDate: '2026-06-26',
